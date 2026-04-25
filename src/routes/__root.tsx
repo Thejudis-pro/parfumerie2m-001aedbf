@@ -39,11 +39,14 @@ export const Route = createRootRoute({
       { name: "twitter:site", content: "@2mparfumeriesn" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: appCss,
       },
     ],
+    scripts: [{ children: "<!-- ANALYTICS -->" }],
   }),
   shellComponent: RootShell,
   component: RootComponent,

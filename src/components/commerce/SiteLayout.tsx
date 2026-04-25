@@ -1,10 +1,10 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Instagram, Mail, MapPin, Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { whatsappUrl } from "@/lib/perfume-data";
+import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
 const navItems = [
   { label: "Accueil", to: "/" },
@@ -12,6 +12,15 @@ const navItems = [
   { label: "À Propos", to: "/a-propos" },
   { label: "FAQ", to: "/faq" },
   { label: "Contact", to: "/contact" },
+] as const;
+
+const footerCollections = [
+  { label: "SCENTLAB", collection: "scentlab" },
+  { label: "TAKEOFF FRAGANCE", collection: "takeoff" },
+  { label: "Dubai Perfumes", collection: "dubai" },
+  { label: "Pocket Perfumes", collection: "pocket" },
+  { label: "Authentic Perfumes", collection: "authentic" },
+  { label: "Haqqi", collection: "haqqi" },
 ] as const;
 
 export function SiteLayout({ children }: { children: React.ReactNode }) {
@@ -84,7 +93,71 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
         </Button>
       </div>
 
-      <main>{children}</main>
+      <a href="#main-content" className="skip-link">Aller au contenu</a>
+      <main id="main-content" tabIndex={-1}>{children}</main>
+      <SiteFooter />
+      <FloatingWhatsApp />
     </div>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="border-t border-border bg-footer py-12 md:py-20">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <Link to="/" className="font-display text-2xl font-semibold text-accent">2M Parfumerie</Link>
+          <p className="mt-2 max-w-xs text-[13px] text-muted-foreground">L'authenticité en flacon. Livraison Dakar.</p>
+          <div className="mt-6 flex gap-4">
+            <a href="https://instagram.com/2mparfumeriesn" target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent" aria-label="Instagram 2M Parfumerie"><Instagram className="size-5" aria-hidden="true" /></a>
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-whatsapp hover:text-whatsapp" aria-label="WhatsApp 2M Parfumerie"><MessageCircle className="size-5" aria-hidden="true" /></a>
+          </div>
+        </div>
+        <FooterColumn title="Navigation">
+          {[...navItems, { label: "Mentions légales", to: "/mentions-legales" as const }].map((item) => <FooterLink key={item.to} to={item.to}>{item.label}</FooterLink>)}
+        </FooterColumn>
+        <FooterColumn title="Collections">
+          {footerCollections.map((item) => <Link key={item.collection} to="/boutique" search={{ collection: item.collection, price: "all" }} className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-foreground">{item.label}</Link>)}
+        </FooterColumn>
+        <FooterColumn title="Contact">
+          <a href="tel:+221761923441" className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {displayPhone}</a>
+          <a href="tel:+221781441766" className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {secondPhone}</a>
+          <a href={`mailto:${email}`} className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Mail className="size-4" aria-hidden="true" /> {email}</a>
+          <p className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground"><MapPin className="size-4" aria-hidden="true" /> Dakar, Sénégal</p>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-11 items-center rounded-full bg-whatsapp px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary-foreground hover:bg-whatsapp-hover">Commander maintenant</a>
+        </FooterColumn>
+      </div>
+      <div className="mx-auto mt-8 flex max-w-7xl flex-col justify-between gap-3 border-t border-foreground/5 px-6 pt-8 text-xs text-muted-foreground md:flex-row">
+        <p>© 2026 2M Parfumerie. Tous droits réservés.</p>
+        <p>Fait avec ♥ à Dakar</p>
+      </div>
+    </footer>
+  );
+}
+
+function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
+  return <div><h2 className="caption-luxe mb-4 text-muted-foreground">{title}</h2>{children}</div>;
+}
+
+function FooterLink({ to, children }: { to: "/" | "/boutique" | "/a-propos" | "/faq" | "/contact" | "/mentions-legales"; children: React.ReactNode }) {
+  return <Link to={to} className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-foreground">{children}</Link>;
+}
+
+function FloatingWhatsApp() {
+  const [rippling, setRippling] = useState(false);
+  return (
+    <a
+      href={whatsappUrl("Bonjour 2M Parfumerie 👋 Je souhaite commander un parfum. Pouvez-vous m'aider ?")}
+      target="_blank"
+      rel="noreferrer"
+      role="link"
+      aria-label="Commander sur WhatsApp"
+      onClick={() => { setRippling(true); window.setTimeout(() => setRippling(false), 500); }}
+      className="group fixed bottom-6 right-6 z-50 flex h-[60px] w-[60px] items-center justify-center overflow-visible rounded-full bg-whatsapp text-primary-foreground whatsapp-pulse focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      <span className="pointer-events-none absolute right-[72px] hidden whitespace-nowrap rounded-md border border-border bg-background px-3 py-2 text-xs text-foreground opacity-0 shadow-card transition-opacity group-hover:opacity-100 md:block">Commander sur WhatsApp</span>
+      {rippling && <span className="absolute inset-0 animate-ping rounded-full bg-primary-foreground/30" aria-hidden="true" />}
+      <MessageCircle className="size-7" aria-hidden="true" />
+    </a>
   );
 }
