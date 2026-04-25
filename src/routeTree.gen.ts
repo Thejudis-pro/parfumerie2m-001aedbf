@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as LivraisonRouteImport } from './routes/livraison'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -18,6 +19,11 @@ import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BoutiqueProductSlugRouteImport } from './routes/boutique.$productSlug'
 
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LivraisonRoute = LivraisonRouteImport.update({
   id: '/livraison',
   path: '/livraison',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/livraison': typeof LivraisonRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/livraison': typeof LivraisonRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/livraison': typeof LivraisonRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/livraison'
+    | '/mentions-legales'
     | '/boutique/$productSlug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/livraison'
+    | '/mentions-legales'
     | '/boutique/$productSlug'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/livraison'
+    | '/mentions-legales'
     | '/boutique/$productSlug'
   fileRoutesById: FileRoutesById
 }
@@ -131,10 +143,18 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   LivraisonRoute: typeof LivraisonRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/livraison': {
       id: '/livraison'
       path: '/livraison'
@@ -214,7 +234,17 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   LivraisonRoute: LivraisonRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
