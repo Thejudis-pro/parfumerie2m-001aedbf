@@ -3,7 +3,6 @@ import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
-import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { catalog, collectionFilters, collectionLabel, collectionValues, formatPrice, priceFilters, priceValues, slugifyProduct, type BoutiqueProduct, type Collection, type PriceRange } from "@/lib/catalog-data";
 
@@ -102,7 +101,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <span className="absolute left-3 top-3 z-10 rounded-full bg-surface px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
         {product.placeholder && <span className="absolute right-3 top-3 z-10 rounded-full bg-accent-muted px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">À renseigner</span>}
         <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} aria-label={`Voir ${product.name}`} className="block h-full w-full">
-          <PerfumePlaceholder />
+          <img src={product.image} alt={`${product.name} chez 2M Parfumerie`} className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105" loading="lazy" />
         </Link>
       </div>
       <div className="p-5">
