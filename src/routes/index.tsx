@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { Check, MessageCircle, ShieldCheck, Truck, Wallet, Quote, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { products, whatsappUrl } from "@/lib/perfume-data";
@@ -37,10 +38,10 @@ const collections = [
 ];
 
 const bestSellers = [
-  { image: products[7].image, name: "Creamy Almond", ref: "Hypnotic Poison · SCENTLAB", notes: "Noix de coco · Prune · Vanille", price: "6 000 FCFA" },
-  { image: products[4].image, name: "Vienna", ref: "Delina · Parfums de Marly · SCENTLAB", notes: "Pivoine · Litchi · Musc blanc", price: "12 000 FCFA" },
-  { image: products[3].image, name: "Monaco", ref: "Xerjoff 40 Knots · SCENTLAB", notes: "Bergamote · Iris · Bois de santal", price: "18 000 FCFA" },
-  { image: products[6].image, name: "Rosy Hazelnut", ref: "Amouage Guidance · SCENTLAB", notes: "Rose · Noisette · Ambre", price: "15 000 FCFA" },
+  { id: "creamy-almond", image: products[7].image, name: "Creamy Almond", ref: "Hypnotic Poison · SCENTLAB", notes: "Noix de coco · Prune · Vanille", price: "6 000 FCFA", priceValue: 6000 },
+  { id: "vienna", image: products[4].image, name: "Vienna", ref: "Delina · Parfums de Marly · SCENTLAB", notes: "Pivoine · Litchi · Musc blanc", price: "12 000 FCFA", priceValue: 12000 },
+  { id: "monaco", image: products[3].image, name: "Monaco", ref: "Xerjoff 40 Knots · SCENTLAB", notes: "Bergamote · Iris · Bois de santal", price: "18 000 FCFA", priceValue: 18000 },
+  { id: "rosy-hazelnut", image: products[6].image, name: "Rosy Hazelnut", ref: "Amouage Guidance · SCENTLAB", notes: "Rose · Noisette · Ambre", price: "15 000 FCFA", priceValue: 15000 },
 ];
 
 const promises = [
@@ -110,7 +111,7 @@ function Index() {
             {bestSellers.map((product, index) => (
               <article key={product.name} className="fade-up group overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent" style={{ animationDelay: `${index * 80}ms` }}>
                 <div className="image-zoom relative aspect-square overflow-hidden bg-surface"><span className="absolute left-3 top-3 z-10 rounded-full bg-accent px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">Bestseller</span><img src={product.image} alt={`${product.name} chez 2M Parfumerie`} className="h-full w-full object-cover" loading="lazy" /></div>
-                <div className="p-5"><p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p><h3 className="mb-1 font-display text-[22px] text-foreground">{product.name}</h3><p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p><div className="flex items-center justify-between gap-3"><p className="font-body text-xl font-semibold text-accent">{product.price}</p><Button asChild size="sm"><a href={whatsappUrl(`Bonjour 2M Parfumerie, je souhaite commander ${product.name} à ${product.price}.`)} target="_blank" rel="noreferrer">Commander</a></Button></div></div>
+                <div className="p-5"><p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p><h3 className="mb-1 font-display text-[22px] text-foreground">{product.name}</h3><p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p><p className="mb-4 font-body text-xl font-semibold text-accent">{product.price}</p><AddToCartButton item={{ id: product.id, name: product.name, collection: "SCENTLAB", price: product.priceValue, imageUrl: product.image }} /></div>
               </article>
             ))}
           </div>

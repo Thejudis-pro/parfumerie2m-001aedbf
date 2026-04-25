@@ -1,11 +1,12 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { MessageCircle, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import { useMemo } from "react";
 
 import { Button } from "@/components/ui/button";
+import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { catalog, collectionLabel, findProductBySlug, formatPrice, productOrderUrl, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
+import { catalog, collectionLabel, findProductBySlug, formatPrice, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
 import { displayPhone } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/boutique/$productSlug")({
@@ -59,9 +60,7 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
             <p className="mt-6 font-body text-[32px] font-bold text-accent">{formatPrice(product.price)}</p>
             <p className="mt-2 text-[13px] text-whatsapp">✓ En stock — Livraison Dakar aujourd'hui</p>
 
-            <Button asChild size="lg" className="mt-8 w-full min-h-[52px] py-4">
-              <a href={productOrderUrl(product)} target="_blank" rel="noreferrer"><MessageCircle className="mr-1 size-5" aria-hidden="true" /> Commander ce parfum</a>
-            </Button>
+            <div className="mt-8"><AddToCartButton item={{ id: slugifyProduct(product), name: product.name, collection: label, price: product.price, imageUrl: product.image }} /></div>
             <a href="tel:+221761923441" className="mt-3 flex min-h-11 items-center justify-center gap-2 text-center text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> Ou appeler : {displayPhone}</a>
 
             <div className="my-8 h-px bg-border" />
@@ -114,7 +113,8 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
       <div className="p-5">
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
         <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
-        <div className="mt-4 flex items-center justify-between gap-3"><p className="font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p><Button asChild size="sm"><a href={productOrderUrl(product)} target="_blank" rel="noreferrer">Commander</a></Button></div>
+        <p className="mt-4 font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p>
+        <div className="mt-4"><AddToCartButton item={{ id: slugifyProduct(product), name: product.name, collection: label, price: product.price, imageUrl: product.image }} /></div>
       </div>
     </article>
   );

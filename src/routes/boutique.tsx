@@ -2,9 +2,10 @@ import { Link, Outlet, createFileRoute, useLocation } from "@tanstack/react-rout
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { catalog, collectionFilters, collectionLabel, collectionValues, formatPrice, priceFilters, priceValues, productOrderUrl, slugifyProduct, type BoutiqueProduct, type Collection, type PriceRange } from "@/lib/catalog-data";
+import { catalog, collectionFilters, collectionLabel, collectionValues, formatPrice, priceFilters, priceValues, slugifyProduct, type BoutiqueProduct, type Collection, type PriceRange } from "@/lib/catalog-data";
 
 function validateBoutiqueSearch(search: Record<string, unknown>) {
   const collection = collectionValues.includes(search.collection as Collection) ? (search.collection as Collection) : "all";
@@ -108,12 +109,8 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
         <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="mb-1 block font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
         <p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p>
-        <div className="flex items-center justify-between gap-3">
-          <p className="font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p>
-          <Button asChild size="sm">
-            <a href={productOrderUrl(product)} target="_blank" rel="noreferrer">Commander</a>
-          </Button>
-        </div>
+        <p className="mb-4 font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p>
+        <AddToCartButton item={{ id: slugifyProduct(product), name: product.name, collection: label, price: product.price, imageUrl: product.image }} />
       </div>
     </article>
   );

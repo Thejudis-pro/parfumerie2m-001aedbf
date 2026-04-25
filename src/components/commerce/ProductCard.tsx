@@ -1,7 +1,5 @@
-import { MessageCircle } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { productWhatsappUrl, type Product } from "@/lib/perfume-data";
+import { AddToCartButton } from "@/components/commerce/AddToCartButton";
+import { productPriceValue, type Product } from "@/lib/perfume-data";
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
   return (
@@ -22,12 +20,8 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         </div>
         <div className="flex items-center justify-between gap-3">
           <p className="font-body text-2xl font-bold text-accent">{product.price}</p>
-          <Button asChild variant="whatsapp" size="sm">
-            <a href={productWhatsappUrl(product)} target="_blank" rel="noreferrer" aria-label={`Commander ${product.name} sur WhatsApp`}>
-              <MessageCircle aria-hidden="true" /> Commander
-            </a>
-          </Button>
         </div>
+        <AddToCartButton item={{ id: product.id, name: product.name, collection: product.edition, price: productPriceValue(product.price), imageUrl: product.image }} />
       </div>
     </article>
   );
