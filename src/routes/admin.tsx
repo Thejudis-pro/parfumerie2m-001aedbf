@@ -12,15 +12,16 @@ import { catalog, slugifyProduct } from "@/lib/catalog-data";
 type ProductRow = Database["public"]["Tables"]["products"]["Row"];
 type AdminProduct = ProductRow & { source: "catalog" | "database" };
 type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
+type AdminTab = "orders" | "products" | "blog" | "settings";
 
 const blankProduct = { name: "", subtitle: "", collection: "scentlab", price: 0, notes_top: "", notes_heart: "", notes_base: "", description: "", image_url: "", slug: "", in_stock: true, is_bestseller: false };
 const blankOrder = { customer_name: "", customer_phone: "", customer_address: "", total: 0, status: "nouveau", notes: "", itemsText: "" };
-const statCards = [
-  { icon: BarChart3, label: "CA", key: "revenue" },
-  { icon: Package, label: "Produits", key: "products" },
-  { icon: ShoppingBag, label: "Commandes", key: "orders" },
-  { icon: Package, label: "En stock", key: "inStock" },
-] as const;
+const adminTabs: Array<{ key: AdminTab; label: string }> = [
+  { key: "orders", label: "Commandes" },
+  { key: "products", label: "Produits" },
+  { key: "blog", label: "Blog" },
+  { key: "settings", label: "Paramètres" },
+];
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin — 2M Parfumerie" }, { name: "robots", content: "noindex" }] }),
@@ -37,10 +38,8 @@ function AdminPage() {
   const [productForm, setProductForm] = useState(blankProduct);
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [orderForm, setOrderForm] = useState(blankOrder);
-  const [activeTab, setActiveTab] = useState<"orders" | "products" | "blog" | "settings">("products");
+  const [activeTab, setActiveTab] = useState<AdminTab>("products");
   const [showProductForm, setShowProductForm] = useState(false);
-
-  const stats = useMemo(() => ({ products: products.length, inStock: products.filter((p) => p.in_stock).length, orders: orders.length, revenue: orders.reduce((sum, order) => sum + order.total, 0) }), [products, orders]);
 
   const loadAdminData = async () => {
     setLoading(true);
