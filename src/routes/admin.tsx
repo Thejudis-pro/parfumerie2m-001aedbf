@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BarChart3, LogOut, Package, Plus, Save, ShoppingBag, Trash2 } from "lucide-react";
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { Check, Edit3, Plus, Save, Trash2 } from "lucide-react";
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -37,6 +37,8 @@ function AdminPage() {
   const [productForm, setProductForm] = useState(blankProduct);
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [orderForm, setOrderForm] = useState(blankOrder);
+  const [activeTab, setActiveTab] = useState<"orders" | "products" | "blog" | "settings">("products");
+  const [showProductForm, setShowProductForm] = useState(false);
 
   const stats = useMemo(() => ({ products: products.length, inStock: products.filter((p) => p.in_stock).length, orders: orders.length, revenue: orders.reduce((sum, order) => sum + order.total, 0) }), [products, orders]);
 
@@ -82,7 +84,7 @@ function AdminPage() {
     const payload = { ...productForm, price: Number(productForm.price), slug: productForm.slug || slugify(productForm.name) };
     const query = editingProductId ? supabase.from("products").update(payload).eq("id", editingProductId) : supabase.from("products").insert(payload);
     const { error } = await query;
-    if (error) toast.error(error.message); else { toast.success("Produit enregistré"); setProductForm(blankProduct); setEditingProductId(null); loadAdminData(); }
+    if (error) toast.error(error.message); else { toast.success("Produit enregistré"); setProductForm(blankProduct); setEditingProductId(null); setShowProductForm(false); loadAdminData(); }
   };
 
   const deleteProduct = async (id: string) => {
@@ -126,17 +128,17 @@ function AdminPage() {
 
   return (
     <AdminShell>
-      <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-center"><div><p className="caption-luxe text-accent">Back-office</p><h1 className="font-display text-5xl text-foreground">Administration</h1></div><Button variant="outline" onClick={() => supabase.auth.signOut()}><LogOut /> Déconnexion</Button></div>
-      <div className="grid gap-4 md:grid-cols-4">{statCards.map(({ icon: Icon, label, key }) => <div key={key} className="rounded-lg border border-border bg-card p-5"><Icon className="text-accent" aria-hidden="true" /><p className="mt-4 text-xs uppercase text-muted-foreground">{label}</p><strong className="text-2xl text-foreground">{key === "revenue" ? `${stats.revenue.toLocaleString("fr-FR")} FCFA` : stats[key]}</strong></div>)}</div>
-
-      <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><ProductForm form={productForm} setForm={setProductForm} onSubmit={saveProduct} editing={Boolean(editingProductId)} /><div className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">Produits</h2><div className="space-y-3">{products.map((product) => <div key={product.id} className="flex items-center justify-between gap-3 rounded-md border border-border p-3"><div><strong className="text-foreground">{product.name}</strong><p className="text-xs text-muted-foreground">{product.collection} · {product.price.toLocaleString("fr-FR")} FCFA · {product.in_stock ? "En stock" : "Rupture"} · {product.source === "catalog" ? "Site" : "Admin"}</p></div><div className="flex gap-2"><Button size="sm" variant="outline" onClick={() => { setEditingProductId(product.source === "database" ? product.id : null); setProductForm({ name: product.name, subtitle: product.subtitle ?? "", collection: product.collection, price: product.price, notes_top: product.notes_top ?? "", notes_heart: product.notes_heart ?? "", notes_base: product.notes_base ?? "", description: product.description ?? "", image_url: product.image_url ?? "", slug: product.slug, in_stock: Boolean(product.in_stock), is_bestseller: Boolean(product.is_bestseller) }); }}>Éditer</Button><Button size="icon" variant="ghost" disabled={product.source === "catalog"} onClick={() => deleteProduct(product.id)}><Trash2 className="text-destructive" /></Button></div></div>)}</div></div></section>
-
-      <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><OrderForm form={orderForm} setForm={setOrderForm} onSubmit={saveOrder} /><div className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">Commandes</h2><div className="space-y-3">{orders.map((order) => <div key={order.id} className="rounded-md border border-border p-4"><div className="flex items-center justify-between gap-3"><strong className="text-foreground">Commande #{order.order_number}</strong><select value={order.status ?? "nouveau"} onChange={(e) => updateOrderStatus(order.id, e.target.value)} className="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground"><option value="nouveau">Nouveau</option><option value="confirme">Confirmé</option><option value="prepare">Préparé</option><option value="livre">Livré</option><option value="annule">Annulé</option></select></div><p className="mt-2 text-sm text-muted-foreground">{order.customer_name || "Client"} · {order.customer_phone || "Téléphone à renseigner"}</p><p className="text-accent">{order.total.toLocaleString("fr-FR")} FCFA</p></div>)}</div></div></section>
+      <AdminChrome email={sessionEmail} activeTab={activeTab} setActiveTab={setActiveTab}>
+        {activeTab === "products" && <ProductsPanel products={products} showProductForm={showProductForm} setShowProductForm={setShowProductForm} productForm={productForm} setProductForm={setProductForm} saveProduct={saveProduct} editingProductId={editingProductId} setEditingProductId={setEditingProductId} deleteProduct={deleteProduct} />}
+        {activeTab === "orders" && <OrdersPanel orders={orders} orderForm={orderForm} setOrderForm={setOrderForm} saveOrder={saveOrder} updateOrderStatus={updateOrderStatus} />}
+        {activeTab === "blog" && <EmptyAdminSection title="Blog" />}
+        {activeTab === "settings" && <EmptyAdminSection title="Paramètres" />}
+      </AdminChrome>
     </AdminShell>
   );
 }
 
-function AdminShell({ children }: { children: React.ReactNode }) { return <main className="min-h-screen bg-background px-4 py-24 text-foreground md:px-8"><div className="mx-auto max-w-7xl">{children}</div></main>; }
+function AdminShell({ children }: { children: ReactNode }) { return <main className="min-h-screen bg-background text-foreground">{children}</main>; }
 function slugify(value: string) { return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 
 function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): AdminProduct[] {
