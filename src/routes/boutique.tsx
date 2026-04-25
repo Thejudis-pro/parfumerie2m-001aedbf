@@ -2,9 +2,9 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { whatsappUrl } from "@/lib/perfume-data";
-import { catalog, collectionFilters, collectionLabel, collectionValues, formatPrice, priceFilters, priceValues, slugifyProduct, type BoutiqueProduct, type Collection, type PriceRange } from "@/lib/catalog-data";
+import { catalog, collectionFilters, collectionLabel, collectionValues, formatPrice, priceFilters, priceValues, productOrderUrl, slugifyProduct, type BoutiqueProduct, type Collection, type PriceRange } from "@/lib/catalog-data";
 
 function validateBoutiqueSearch(search: Record<string, unknown>) {
   const collection = collectionValues.includes(search.collection as Collection) ? (search.collection as Collection) : "all";
@@ -95,8 +95,8 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
       <div className="image-zoom relative aspect-square overflow-hidden bg-surface">
         <span className="absolute left-3 top-3 z-10 rounded-full bg-surface px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
         {product.placeholder && <span className="absolute right-3 top-3 z-10 rounded-full bg-accent-muted px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">À renseigner</span>}
-        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} aria-label={`Voir ${product.name}`}>
-          <img src={product.image} alt={`${product.name} — ${label}`} className="h-full w-full object-cover" loading="lazy" />
+        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} aria-label={`Voir ${product.name}`} className="block h-full w-full">
+          <PerfumePlaceholder />
         </Link>
       </div>
       <div className="p-5">
@@ -106,7 +106,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <div className="flex items-center justify-between gap-3">
           <p className="font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p>
           <Button asChild size="sm">
-            <a href={whatsappUrl(`Bonjour 2M Parfumerie, je souhaite commander ${product.name} (${label}) à ${formatPrice(product.price)}.`)} target="_blank" rel="noreferrer">Commander</a>
+            <a href={productOrderUrl(product)} target="_blank" rel="noreferrer">Commander</a>
           </Button>
         </div>
       </div>
