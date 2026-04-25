@@ -109,7 +109,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent">
       <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="image-zoom block aspect-square overflow-hidden bg-surface">
-        <img src={product.image} alt={`${product.name} — ${label}`} className="h-full w-full object-cover" loading="lazy" />
+        <PerfumePlaceholder />
       </Link>
       <div className="p-5">
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
