@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BarChart3, LogOut, Package, Plus, Save, ShoppingBag, Trash2 } from "lucide-react";
-import { useEffect, useMemo, useState, type FormEvent } from "react";
+import { Check, Edit3, Plus, Save, Trash2 } from "lucide-react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -12,15 +12,16 @@ import { catalog, slugifyProduct } from "@/lib/catalog-data";
 type ProductRow = Database["public"]["Tables"]["products"]["Row"];
 type AdminProduct = ProductRow & { source: "catalog" | "database" };
 type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
+type AdminTab = "orders" | "products" | "blog" | "settings";
 
 const blankProduct = { name: "", subtitle: "", collection: "scentlab", price: 0, notes_top: "", notes_heart: "", notes_base: "", description: "", image_url: "", slug: "", in_stock: true, is_bestseller: false };
 const blankOrder = { customer_name: "", customer_phone: "", customer_address: "", total: 0, status: "nouveau", notes: "", itemsText: "" };
-const statCards = [
-  { icon: BarChart3, label: "CA", key: "revenue" },
-  { icon: Package, label: "Produits", key: "products" },
-  { icon: ShoppingBag, label: "Commandes", key: "orders" },
-  { icon: Package, label: "En stock", key: "inStock" },
-] as const;
+const adminTabs: Array<{ key: AdminTab; label: string }> = [
+  { key: "orders", label: "Commandes" },
+  { key: "products", label: "Produits" },
+  { key: "blog", label: "Blog" },
+  { key: "settings", label: "Paramètres" },
+];
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin — 2M Parfumerie" }, { name: "robots", content: "noindex" }] }),
@@ -37,8 +38,8 @@ function AdminPage() {
   const [productForm, setProductForm] = useState(blankProduct);
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
   const [orderForm, setOrderForm] = useState(blankOrder);
-
-  const stats = useMemo(() => ({ products: products.length, inStock: products.filter((p) => p.in_stock).length, orders: orders.length, revenue: orders.reduce((sum, order) => sum + order.total, 0) }), [products, orders]);
+  const [activeTab, setActiveTab] = useState<AdminTab>("products");
+  const [showProductForm, setShowProductForm] = useState(false);
 
   const loadAdminData = async () => {
     setLoading(true);
@@ -82,7 +83,7 @@ function AdminPage() {
     const payload = { ...productForm, price: Number(productForm.price), slug: productForm.slug || slugify(productForm.name) };
     const query = editingProductId ? supabase.from("products").update(payload).eq("id", editingProductId) : supabase.from("products").insert(payload);
     const { error } = await query;
-    if (error) toast.error(error.message); else { toast.success("Produit enregistré"); setProductForm(blankProduct); setEditingProductId(null); loadAdminData(); }
+    if (error) toast.error(error.message); else { toast.success("Produit enregistré"); setProductForm(blankProduct); setEditingProductId(null); setShowProductForm(false); loadAdminData(); }
   };
 
   const deleteProduct = async (id: string) => {
@@ -126,17 +127,34 @@ function AdminPage() {
 
   return (
     <AdminShell>
-      <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-center"><div><p className="caption-luxe text-accent">Back-office</p><h1 className="font-display text-5xl text-foreground">Administration</h1></div><Button variant="outline" onClick={() => supabase.auth.signOut()}><LogOut /> Déconnexion</Button></div>
-      <div className="grid gap-4 md:grid-cols-4">{statCards.map(({ icon: Icon, label, key }) => <div key={key} className="rounded-lg border border-border bg-card p-5"><Icon className="text-accent" aria-hidden="true" /><p className="mt-4 text-xs uppercase text-muted-foreground">{label}</p><strong className="text-2xl text-foreground">{key === "revenue" ? `${stats.revenue.toLocaleString("fr-FR")} FCFA` : stats[key]}</strong></div>)}</div>
-
-      <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><ProductForm form={productForm} setForm={setProductForm} onSubmit={saveProduct} editing={Boolean(editingProductId)} /><div className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">Produits</h2><div className="space-y-3">{products.map((product) => <div key={product.id} className="flex items-center justify-between gap-3 rounded-md border border-border p-3"><div><strong className="text-foreground">{product.name}</strong><p className="text-xs text-muted-foreground">{product.collection} · {product.price.toLocaleString("fr-FR")} FCFA · {product.in_stock ? "En stock" : "Rupture"} · {product.source === "catalog" ? "Site" : "Admin"}</p></div><div className="flex gap-2"><Button size="sm" variant="outline" onClick={() => { setEditingProductId(product.source === "database" ? product.id : null); setProductForm({ name: product.name, subtitle: product.subtitle ?? "", collection: product.collection, price: product.price, notes_top: product.notes_top ?? "", notes_heart: product.notes_heart ?? "", notes_base: product.notes_base ?? "", description: product.description ?? "", image_url: product.image_url ?? "", slug: product.slug, in_stock: Boolean(product.in_stock), is_bestseller: Boolean(product.is_bestseller) }); }}>Éditer</Button><Button size="icon" variant="ghost" disabled={product.source === "catalog"} onClick={() => deleteProduct(product.id)}><Trash2 className="text-destructive" /></Button></div></div>)}</div></div></section>
-
-      <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><OrderForm form={orderForm} setForm={setOrderForm} onSubmit={saveOrder} /><div className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">Commandes</h2><div className="space-y-3">{orders.map((order) => <div key={order.id} className="rounded-md border border-border p-4"><div className="flex items-center justify-between gap-3"><strong className="text-foreground">Commande #{order.order_number}</strong><select value={order.status ?? "nouveau"} onChange={(e) => updateOrderStatus(order.id, e.target.value)} className="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground"><option value="nouveau">Nouveau</option><option value="confirme">Confirmé</option><option value="prepare">Préparé</option><option value="livre">Livré</option><option value="annule">Annulé</option></select></div><p className="mt-2 text-sm text-muted-foreground">{order.customer_name || "Client"} · {order.customer_phone || "Téléphone à renseigner"}</p><p className="text-accent">{order.total.toLocaleString("fr-FR")} FCFA</p></div>)}</div></div></section>
+      <AdminChrome email={sessionEmail} activeTab={activeTab} setActiveTab={setActiveTab}>
+        {activeTab === "products" && <ProductsPanel products={products} showProductForm={showProductForm} setShowProductForm={setShowProductForm} productForm={productForm} setProductForm={setProductForm} saveProduct={saveProduct} editingProductId={editingProductId} setEditingProductId={setEditingProductId} deleteProduct={deleteProduct} />}
+        {activeTab === "orders" && <OrdersPanel orders={orders} orderForm={orderForm} setOrderForm={setOrderForm} saveOrder={saveOrder} updateOrderStatus={updateOrderStatus} />}
+        {activeTab === "blog" && <EmptyAdminSection title="Blog" />}
+        {activeTab === "settings" && <EmptyAdminSection title="Paramètres" />}
+      </AdminChrome>
     </AdminShell>
   );
 }
 
-function AdminShell({ children }: { children: React.ReactNode }) { return <main className="min-h-screen bg-background px-4 py-24 text-foreground md:px-8"><div className="mx-auto max-w-7xl">{children}</div></main>; }
+function AdminShell({ children }: { children: ReactNode }) { return <main className="min-h-screen bg-background text-foreground">{children}</main>; }
+
+function AdminChrome({ email, activeTab, setActiveTab, children }: { email: string; activeTab: AdminTab; setActiveTab: (tab: AdminTab) => void; children: ReactNode }) {
+  return <><header className="border-b border-border bg-card"><div className="flex min-h-20 items-center justify-between gap-6 px-6 md:px-10"><div className="flex items-center gap-8"><div className="whitespace-nowrap font-display text-2xl text-foreground">N'tifafa <span className="italic text-accent">Admin</span></div><nav className="hidden items-center gap-7 md:flex">{adminTabs.map((tab) => <button key={tab.key} type="button" onClick={() => setActiveTab(tab.key)} className={`text-base font-semibold ${activeTab === tab.key ? "text-accent" : "text-foreground"}`}>{tab.label}</button>)}</nav></div><div className="hidden items-center gap-6 text-sm font-medium text-muted-foreground md:flex"><span>{email}</span><button type="button" onClick={() => supabase.auth.signOut()} className="text-foreground">Déconnexion</button></div></div><nav className="flex gap-5 overflow-x-auto border-t border-border px-6 py-3 md:hidden">{adminTabs.map((tab) => <button key={tab.key} type="button" onClick={() => setActiveTab(tab.key)} className={`whitespace-nowrap text-sm font-semibold ${activeTab === tab.key ? "text-accent" : "text-foreground"}`}>{tab.label}</button>)}</nav></header><div className="px-6 py-16 md:px-10">{children}</div></>;
+}
+
+function ProductsPanel({ products, showProductForm, setShowProductForm, productForm, setProductForm, saveProduct, editingProductId, setEditingProductId, deleteProduct }: { products: AdminProduct[]; showProductForm: boolean; setShowProductForm: (show: boolean) => void; productForm: typeof blankProduct; setProductForm: (form: typeof blankProduct) => void; saveProduct: (event: FormEvent) => void; editingProductId: string | null; setEditingProductId: (id: string | null) => void; deleteProduct: (id: string) => void }) {
+  const editProduct = (product: AdminProduct) => { setEditingProductId(product.source === "database" ? product.id : null); setProductForm({ name: product.name, subtitle: product.subtitle ?? "", collection: product.collection, price: product.price, notes_top: product.notes_top ?? "", notes_heart: product.notes_heart ?? "", notes_base: product.notes_base ?? "", description: product.description ?? "", image_url: product.image_url ?? "", slug: product.slug, in_stock: Boolean(product.in_stock), is_bestseller: Boolean(product.is_bestseller) }); setShowProductForm(true); };
+  return <section><div className="mb-9 flex items-center justify-between gap-4"><h1 className="font-display text-5xl text-foreground">Produits</h1><Button className="min-h-16 rounded-full px-8 text-base normal-case tracking-normal" onClick={() => { setEditingProductId(null); setProductForm(blankProduct); setShowProductForm(!showProductForm); }}><Plus /> Nouveau produit</Button></div>{showProductForm && <div className="mb-8 max-w-3xl"><ProductForm form={productForm} setForm={setProductForm} onSubmit={saveProduct} editing={Boolean(editingProductId)} /></div>}<div className="overflow-hidden rounded-md border border-border bg-card"><div className="overflow-x-auto"><table className="w-full min-w-[980px] text-left"><thead className="bg-surface"><tr className="border-b border-border text-sm font-bold uppercase tracking-[0.08em] text-muted-foreground"><th className="px-5 py-5">Image</th><th className="px-5 py-5">Nom</th><th className="px-5 py-5">Catégorie</th><th className="px-5 py-5">Prix</th><th className="px-5 py-5">Stock</th><th className="px-5 py-5">Visible</th><th className="px-5 py-5 text-right">Actions</th></tr></thead><tbody>{products.map((product) => <tr key={product.id} className="border-b border-border last:border-b-0"><td className="px-5 py-5"><div className="h-20 w-20 overflow-hidden rounded-md bg-placeholder">{product.image_url && <img src={product.image_url} alt={product.name} className="h-full w-full object-cover" loading="lazy" />}</div></td><td className="px-5 py-5 text-base font-semibold text-foreground">{product.name}</td><td className="px-5 py-5 text-muted-foreground">{product.collection}</td><td className="px-5 py-5 font-medium text-muted-foreground">{product.price.toLocaleString("fr-FR")} CFA</td><td className="px-5 py-5"><CheckMark active={Boolean(product.in_stock)} /></td><td className="px-5 py-5"><CheckMark active /></td><td className="px-5 py-5"><div className="flex justify-end gap-3"><button type="button" aria-label="Modifier" onClick={() => editProduct(product)} className="text-muted-foreground hover:text-accent"><Edit3 className="size-5" /></button><button type="button" aria-label="Supprimer" disabled={product.source === "catalog"} onClick={() => deleteProduct(product.id)} className="text-destructive disabled:opacity-30"><Trash2 className="size-5" /></button></div></td></tr>)}</tbody></table></div></div></section>;
+}
+
+function CheckMark({ active }: { active: boolean }) { return active ? <span className="inline-flex size-8 items-center justify-center rounded bg-accent text-accent-foreground"><Check className="size-6 stroke-[4]" /></span> : <span className="inline-flex size-8 rounded border border-border" />; }
+
+function OrdersPanel({ orders, orderForm, setOrderForm, saveOrder, updateOrderStatus }: { orders: OrderRow[]; orderForm: typeof blankOrder; setOrderForm: (form: typeof blankOrder) => void; saveOrder: (event: FormEvent) => void; updateOrderStatus: (id: string, status: string) => void }) {
+  return <section className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]"><OrderForm form={orderForm} setForm={setOrderForm} onSubmit={saveOrder} /><div><h1 className="mb-8 font-display text-5xl text-foreground">Commandes</h1><div className="space-y-3">{orders.map((order) => <div key={order.id} className="rounded-md border border-border bg-card p-4"><div className="flex items-center justify-between gap-3"><strong className="text-foreground">Commande #{order.order_number}</strong><select value={order.status ?? "nouveau"} onChange={(e) => updateOrderStatus(order.id, e.target.value)} className="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground"><option value="nouveau">Nouveau</option><option value="confirme">Confirmé</option><option value="prepare">Préparé</option><option value="livre">Livré</option><option value="annule">Annulé</option></select></div><p className="mt-2 text-sm text-muted-foreground">{order.customer_name || "Client"} · {order.customer_phone || "Téléphone à renseigner"}</p><p className="text-accent">{order.total.toLocaleString("fr-FR")} FCFA</p></div>)}</div></div></section>;
+}
+
+function EmptyAdminSection({ title }: { title: string }) { return <section><h1 className="font-display text-5xl text-foreground">{title}</h1><p className="mt-4 text-muted-foreground">Cette section sera ajoutée ici.</p></section>; }
 function slugify(value: string) { return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
 
 function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): AdminProduct[] {
