@@ -39,8 +39,8 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className={cn("fixed inset-x-0 top-0 z-50 border-b border-transparent transition-all duration-300", scrolled && "glass-nav border-border")}>
-        <nav className="section-shell flex h-20 items-center justify-between">
+      <header>
+        <nav className={cn("fixed left-0 top-0 z-50 flex h-20 w-full items-center justify-between border-b border-transparent px-4 transition-all duration-300 md:px-6", scrolled && "glass-nav border-accent/15")}>
           <Link to="/" className="font-display text-[22px] font-semibold text-accent" aria-label="2M Parfumerie accueil">
             2M Parfumerie
           </Link>
