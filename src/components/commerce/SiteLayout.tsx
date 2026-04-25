@@ -1,8 +1,10 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, Menu, MessageCircle, Phone, X } from "lucide-react";
+import { Instagram, Mail, MapPin, Menu, MessageCircle, Phone, ShoppingBag, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { CartDrawer } from "@/components/commerce/CartDrawer";
+import { useCart } from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
@@ -25,7 +27,9 @@ const footerCollections = [
 
 export function SiteLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { itemCount } = useCart();
   const location = useLocation();
 
   useEffect(() => {
@@ -61,6 +65,10 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
           <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
             <a href={whatsappUrl()} target="_blank" rel="noreferrer">Commander</a>
           </Button>
+          <button type="button" onClick={() => setCartOpen(true)} className="relative hidden size-11 items-center justify-center text-muted-foreground hover:text-accent md:flex" aria-label="Ouvrir le panier">
+            <ShoppingBag className="size-[22px]" aria-hidden="true" />
+            {itemCount > 0 && <span className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-primary-foreground">{itemCount}</span>}
+          </button>
           <button
             type="button"
             className="flex h-11 w-11 items-center justify-center text-foreground md:hidden"
@@ -97,6 +105,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
       <main id="main-content" tabIndex={-1}>{children}</main>
       <SiteFooter />
       <FloatingWhatsApp />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </div>
   );
 }
