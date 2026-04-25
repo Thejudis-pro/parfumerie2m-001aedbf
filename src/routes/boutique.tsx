@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { Link, Outlet, createFileRoute, useLocation } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -27,8 +27,13 @@ export const Route = createFileRoute("/boutique")({
 });
 
 function BoutiquePage() {
+  const location = useLocation();
   const { collection, price } = Route.useSearch();
   const [visibleCount, setVisibleCount] = useState(12);
+
+  if (location.pathname !== "/boutique") {
+    return <Outlet />;
+  }
 
   const filteredProducts = useMemo(() => {
     return catalog.filter((product) => {
