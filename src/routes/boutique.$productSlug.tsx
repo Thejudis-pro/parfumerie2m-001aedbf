@@ -4,7 +4,6 @@ import { useMemo } from "react";
 
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
-import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { catalog, collectionLabel, findProductBySlug, formatPrice, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
 import { displayPhone } from "@/lib/perfume-data";
@@ -49,7 +48,7 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
         <div className="section-shell grid gap-12 md:grid-cols-2 md:gap-16">
           <div className="order-1">
             <div className="mx-auto flex aspect-square max-w-lg items-center justify-center overflow-hidden rounded-xl bg-surface p-8 shadow-card">
-              <PerfumePlaceholder className="rounded-lg" />
+              <img src={product.image} alt={`${product.name} chez 2M Parfumerie`} className="h-full w-full rounded-lg object-contain" />
             </div>
           </div>
 
@@ -108,7 +107,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent">
       <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="image-zoom block aspect-square overflow-hidden bg-surface">
-        <PerfumePlaceholder />
+        <img src={product.image} alt={`${product.name} chez 2M Parfumerie`} className="h-full w-full object-contain p-5 transition-transform duration-500 hover:scale-105" loading="lazy" />
       </Link>
       <div className="p-5">
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
