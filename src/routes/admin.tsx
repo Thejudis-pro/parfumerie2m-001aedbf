@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import type { Database, Json } from "@/integrations/supabase/types";
+import { catalog, slugifyProduct } from "@/lib/catalog-data";
 
 type ProductRow = Database["public"]["Tables"]["products"]["Row"];
+type AdminProduct = ProductRow & { source: "catalog" | "database" };
 type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
 
 const blankProduct = { name: "", subtitle: "", collection: "scentlab", price: 0, notes_top: "", notes_heart: "", notes_base: "", description: "", image_url: "", slug: "", in_stock: true, is_bestseller: false };
@@ -29,7 +31,7 @@ function AdminPage() {
   const [sessionEmail, setSessionEmail] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState<ProductRow[]>([]);
+  const [products, setProducts] = useState<AdminProduct[]>([]);
   const [orders, setOrders] = useState<OrderRow[]>([]);
   const [auth, setAuth] = useState({ email: "", password: "" });
   const [productForm, setProductForm] = useState(blankProduct);
@@ -52,7 +54,7 @@ function AdminPage() {
         supabase.from("products").select("*").order("created_at", { ascending: false }),
         supabase.from("orders").select("*").order("created_at", { ascending: false }),
       ]);
-      setProducts(productRows ?? []);
+      setProducts(mergeCatalogWithDatabaseProducts(productRows ?? []));
       setOrders(orderRows ?? []);
     }
     setLoading(false);
@@ -127,7 +129,7 @@ function AdminPage() {
       <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-center"><div><p className="caption-luxe text-accent">Back-office</p><h1 className="font-display text-5xl text-foreground">Administration</h1></div><Button variant="outline" onClick={() => supabase.auth.signOut()}><LogOut /> Déconnexion</Button></div>
       <div className="grid gap-4 md:grid-cols-4">{statCards.map(({ icon: Icon, label, key }) => <div key={key} className="rounded-lg border border-border bg-card p-5"><Icon className="text-accent" aria-hidden="true" /><p className="mt-4 text-xs uppercase text-muted-foreground">{label}</p><strong className="text-2xl text-foreground">{key === "revenue" ? `${stats.revenue.toLocaleString("fr-FR")} FCFA` : stats[key]}</strong></div>)}</div>
 
-      <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><ProductForm form={productForm} setForm={setProductForm} onSubmit={saveProduct} editing={Boolean(editingProductId)} /><div className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">Produits</h2><div className="space-y-3">{products.map((product) => <div key={product.id} className="flex items-center justify-between gap-3 rounded-md border border-border p-3"><div><strong className="text-foreground">{product.name}</strong><p className="text-xs text-muted-foreground">{product.collection} · {product.price.toLocaleString("fr-FR")} FCFA · {product.in_stock ? "En stock" : "Rupture"}</p></div><div className="flex gap-2"><Button size="sm" variant="outline" onClick={() => { setEditingProductId(product.id); setProductForm({ name: product.name, subtitle: product.subtitle ?? "", collection: product.collection, price: product.price, notes_top: product.notes_top ?? "", notes_heart: product.notes_heart ?? "", notes_base: product.notes_base ?? "", description: product.description ?? "", image_url: product.image_url ?? "", slug: product.slug, in_stock: Boolean(product.in_stock), is_bestseller: Boolean(product.is_bestseller) }); }}>Éditer</Button><Button size="icon" variant="ghost" onClick={() => deleteProduct(product.id)}><Trash2 className="text-destructive" /></Button></div></div>)}</div></div></section>
+      <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><ProductForm form={productForm} setForm={setProductForm} onSubmit={saveProduct} editing={Boolean(editingProductId)} /><div className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">Produits</h2><div className="space-y-3">{products.map((product) => <div key={product.id} className="flex items-center justify-between gap-3 rounded-md border border-border p-3"><div><strong className="text-foreground">{product.name}</strong><p className="text-xs text-muted-foreground">{product.collection} · {product.price.toLocaleString("fr-FR")} FCFA · {product.in_stock ? "En stock" : "Rupture"} · {product.source === "catalog" ? "Site" : "Admin"}</p></div><div className="flex gap-2"><Button size="sm" variant="outline" onClick={() => { setEditingProductId(product.source === "database" ? product.id : null); setProductForm({ name: product.name, subtitle: product.subtitle ?? "", collection: product.collection, price: product.price, notes_top: product.notes_top ?? "", notes_heart: product.notes_heart ?? "", notes_base: product.notes_base ?? "", description: product.description ?? "", image_url: product.image_url ?? "", slug: product.slug, in_stock: Boolean(product.in_stock), is_bestseller: Boolean(product.is_bestseller) }); }}>Éditer</Button><Button size="icon" variant="ghost" disabled={product.source === "catalog"} onClick={() => deleteProduct(product.id)}><Trash2 className="text-destructive" /></Button></div></div>)}</div></div></section>
 
       <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><OrderForm form={orderForm} setForm={setOrderForm} onSubmit={saveOrder} /><div className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">Commandes</h2><div className="space-y-3">{orders.map((order) => <div key={order.id} className="rounded-md border border-border p-4"><div className="flex items-center justify-between gap-3"><strong className="text-foreground">Commande #{order.order_number}</strong><select value={order.status ?? "nouveau"} onChange={(e) => updateOrderStatus(order.id, e.target.value)} className="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground"><option value="nouveau">Nouveau</option><option value="confirme">Confirmé</option><option value="prepare">Préparé</option><option value="livre">Livré</option><option value="annule">Annulé</option></select></div><p className="mt-2 text-sm text-muted-foreground">{order.customer_name || "Client"} · {order.customer_phone || "Téléphone à renseigner"}</p><p className="text-accent">{order.total.toLocaleString("fr-FR")} FCFA</p></div>)}</div></div></section>
     </AdminShell>
@@ -136,6 +138,37 @@ function AdminPage() {
 
 function AdminShell({ children }: { children: React.ReactNode }) { return <main className="min-h-screen bg-background px-4 py-24 text-foreground md:px-8"><div className="mx-auto max-w-7xl">{children}</div></main>; }
 function slugify(value: string) { return value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+
+function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): AdminProduct[] {
+  const databaseBySlug = new Map(databaseProducts.map((product) => [product.slug, product]));
+  const catalogSlugs = new Set(catalog.map(slugifyProduct));
+  const catalogProducts: AdminProduct[] = catalog.map((product) => {
+    const slug = slugifyProduct(product);
+    const savedProduct = databaseBySlug.get(slug);
+    if (savedProduct) return { ...savedProduct, source: "database" };
+
+    return {
+      id: `catalog-${slug}`,
+      name: product.name,
+      subtitle: product.ref,
+      collection: product.collection,
+      price: product.price,
+      notes_top: product.headNotes,
+      notes_heart: product.heartNotes,
+      notes_base: product.baseNotes,
+      description: product.description,
+      image_url: product.image,
+      slug,
+      in_stock: true,
+      is_bestseller: false,
+      created_at: null,
+      updated_at: null,
+      source: "catalog",
+    };
+  });
+  const extraDatabaseProducts = databaseProducts.filter((product) => !catalogSlugs.has(product.slug)).map((product) => ({ ...product, source: "database" as const }));
+  return [...catalogProducts, ...extraDatabaseProducts];
+}
 
 function ProductForm({ form, setForm, onSubmit, editing }: { form: typeof blankProduct; setForm: (form: typeof blankProduct) => void; onSubmit: (event: FormEvent) => void; editing: boolean }) {
   return <form onSubmit={onSubmit} className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">{editing ? "Modifier produit" : "Ajouter produit"}</h2><div className="grid gap-3">{["name", "subtitle", "collection", "slug", "image_url", "notes_top", "notes_heart", "notes_base"].map((key) => <input key={key} className="rounded-md border border-border bg-background px-4 py-3 text-sm text-foreground" placeholder={key} value={String(form[key as keyof typeof form])} onChange={(e) => setForm({ ...form, [key]: e.target.value })} required={["name", "collection"].includes(key)} />)}<input className="rounded-md border border-border bg-background px-4 py-3 text-sm text-foreground" type="number" placeholder="price" value={form.price} onChange={(e) => setForm({ ...form, price: Number(e.target.value) })} required /><textarea className="min-h-28 rounded-md border border-border bg-background px-4 py-3 text-sm text-foreground" placeholder="description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /><label className="flex items-center gap-2 text-sm text-muted-foreground"><input type="checkbox" checked={form.in_stock} onChange={(e) => setForm({ ...form, in_stock: e.target.checked })} /> En stock</label><label className="flex items-center gap-2 text-sm text-muted-foreground"><input type="checkbox" checked={form.is_bestseller} onChange={(e) => setForm({ ...form, is_bestseller: e.target.checked })} /> Bestseller</label><Button type="submit"><Save /> Enregistrer</Button></div></form>;
