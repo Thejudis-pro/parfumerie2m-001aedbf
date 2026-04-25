@@ -87,6 +87,12 @@ export function formatPrice(price: number) {
   return `${new Intl.NumberFormat("fr-FR").format(price)} FCFA`;
 }
 
+export function productOrderUrl(product: BoutiqueProduct) {
+  const price = new Intl.NumberFormat("fr-FR").format(product.price);
+  const message = `Bonjour 2M Parfumerie 👋 Je souhaite commander *${product.name}* — ${price} FCFA. Est-il disponible ?`;
+  return `https://wa.me/221761923441?text=${encodeURIComponent(message)}`;
+}
+
 export function collectionLabel(value: Collection) {
   return collectionFilters.find((filter) => filter.value === value)?.label ?? "Collection";
 }
