@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Instagram, Menu, MessageCircle, X } from "lucide-react";
+import { Instagram, Mail, MapPin, Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -120,10 +120,10 @@ function SiteFooter() {
           {footerCollections.map((item) => <Link key={item.collection} to="/boutique" search={{ collection: item.collection, price: "all" }} className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-foreground">{item.label}</Link>)}
         </FooterColumn>
         <FooterColumn title="Contact">
-          <a href="tel:+221761923441" className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-accent">📱 {displayPhone}</a>
-          <a href="tel:+221781441766" className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-accent">📱 {secondPhone}</a>
-          <a href={`mailto:${email}`} className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-accent">✉️ {email}</a>
-          <p className="min-h-11 py-1 text-[13px] text-muted-foreground">📍 Dakar, Sénégal</p>
+          <a href="tel:+221761923441" className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {displayPhone}</a>
+          <a href="tel:+221781441766" className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {secondPhone}</a>
+          <a href={`mailto:${email}`} className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Mail className="size-4" aria-hidden="true" /> {email}</a>
+          <p className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground"><MapPin className="size-4" aria-hidden="true" /> Dakar, Sénégal</p>
           <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-11 items-center rounded-full bg-whatsapp px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary-foreground hover:bg-whatsapp-hover">Commander maintenant</a>
         </FooterColumn>
       </div>
