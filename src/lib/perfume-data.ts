@@ -121,5 +121,5 @@ export function whatsappUrl(message = "Bonjour 2M Parfumerie, je souhaite comman
 }
 
 export function productWhatsappUrl(product: Product) {
-  return whatsappUrl(`Bonjour 2M Parfumerie, je souhaite commander ${product.name} (${product.edition}) à ${product.price}.`);
+  return whatsappUrl(`Bonjour 2M Parfumerie 👋 Je souhaite commander *${product.name}* — ${product.price.replace(/f$/i, "")} FCFA. Est-il disponible ?`);
 }
