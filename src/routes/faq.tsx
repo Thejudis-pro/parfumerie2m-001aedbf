@@ -1,37 +1,130 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { MessageCircle, Plus } from "lucide-react";
+import { useState } from "react";
 
-import { SectionHeader, WhatsAppBand } from "@/components/commerce/PageBlocks";
+import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
+import { whatsappUrl } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/faq")({
-  head: () => ({ meta: [{ title: "FAQ | 2M Parfumerie Dakar" }, { name: "description", content: "Questions fréquentes sur les commandes, prix, disponibilité et livraison chez 2M Parfumerie." }] }),
+  head: () => ({
+    meta: [
+      { title: "FAQ — Questions Fréquentes | 2M Parfumerie Dakar" },
+      {
+        name: "description",
+        content:
+          "Toutes vos questions sur la livraison, l'authenticité, les paiements et les retours chez 2M Parfumerie Dakar.",
+      },
+      { property: "og:title", content: "FAQ — Questions Fréquentes | 2M Parfumerie Dakar" },
+      {
+        property: "og:description",
+        content: "Livraison, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie Dakar.",
+      },
+    ],
+  }),
   component: FaqPage,
 });
 
 const faqs = [
-  ["Comment commander ?", "Cliquez sur Commander sur WhatsApp, envoyez le message pré-rempli, puis nous confirmons disponibilité, livraison et paiement."],
-  ["Les prix sont-ils fixes ?", "Les parfums affichés sont à 25.000f. Toute précision de disponibilité est confirmée avant validation de la commande."],
-  ["Livrez-vous à Dakar ?", "Oui, les détails de livraison sont organisés directement sur WhatsApp selon votre zone et votre disponibilité."],
-  ["Puis-je demander conseil ?", "Oui. Décrivez votre style, l’occasion ou un parfum que vous aimez déjà, et nous vous orientons vers le bon sillage."],
+  {
+    question: "Les parfums sont-ils 100% authentiques ?",
+    answer:
+      "Absolument. Tous nos parfums sont sourcés directement auprès de distributeurs certifiés. Nous ne vendons aucune imitation ou contrefaçon. Si vous avez le moindre doute après réception, contactez-nous immédiatement sur WhatsApp.",
+  },
+  {
+    question: "Comment se passe la livraison à Dakar ?",
+    answer:
+      "Nous livrons à Dakar et dans les banlieues proches. Pour toute commande passée avant 16h, nous faisons le maximum pour livrer le jour même. Passé 16h, livraison garantie le lendemain. Contactez-nous sur WhatsApp pour confirmer votre zone.",
+  },
+  {
+    question: "Quels sont les modes de paiement acceptés ?",
+    answer:
+      "Nous acceptons le paiement à la livraison (espèces), Orange Money, Wave, et Free Money. Vous payez uniquement quand le parfum est entre vos mains — aucun risque de votre côté.",
+  },
+  {
+    question: "Puis-je retourner un produit si je ne suis pas satisfait(e) ?",
+    answer:
+      "Nous sommes fiers de la qualité de nos produits. Si un article arrive endommagé ou ne correspond pas à ce que vous avez commandé, contactez-nous dans les 24h sur WhatsApp avec une photo. Nous trouverons une solution.",
+  },
+  {
+    question: "Comment savoir quel parfum me correspond ?",
+    answer:
+      "C'est notre spécialité. Écrivez-nous sur WhatsApp en décrivant votre style, l'occasion pour laquelle vous cherchez un parfum, et votre budget — nous vous conseillerons personnellement sur 2-3 options parfaites pour vous.",
+  },
+  {
+    question: "Livrez-vous en dehors de Dakar ?",
+    answer:
+      "Nous livrons principalement à Dakar et sa banlieue. Pour les autres villes du Sénégal, contactez-nous sur WhatsApp — nous étudions chaque demande et proposons des solutions via des transporteurs partenaires selon votre localisation.",
+  },
+  {
+    question: "Quelle est la différence entre vos collections ?",
+    answer:
+      "Chaque collection a son univers :\n· SCENTLAB — fragrances contemporaines et épurées\n· TAKEOFF FRAGANCE — signatures audacieuses et marquées\n· Dubai Perfumes — oud, rose, musc — l'Orient en flacon\n· Pocket Perfumes — formats voyage compacts\n· Authentic Perfumes — grandes maisons, originaux certifiés\n· Haqqi — sélection exclusive, qualité premium",
+  },
+  {
+    question: "Comment passer une commande ?",
+    answer:
+      "C'est simple : trouvez votre parfum dans la boutique, cliquez sur 'Commander', et vous serez redirigé(e) vers WhatsApp avec le produit déjà mentionné dans le message. Confirmez votre adresse et c'est parti !",
+  },
 ];
 
 function FaqPage() {
+  const [openIndex, setOpenIndex] = useState(0);
+
   return (
     <SiteLayout>
-      <section className="pt-32 pb-20 md:pt-40">
-        <div className="section-shell space-y-12">
-          <SectionHeader eyebrow="FAQ" title="Des réponses claires avant de commander." />
-          <div className="grid gap-4 md:grid-cols-2">
-            {faqs.map(([question, answer], index) => (
-              <article key={question} className="fade-up rounded-lg border border-border bg-card p-6 shadow-card" style={{ animationDelay: `${index * 80}ms` }}>
-                <h3 className="text-2xl text-foreground">{question}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">{answer}</p>
-              </article>
-            ))}
+      <section className="bg-surface pt-32 pb-16">
+        <div className="section-shell text-center">
+          <p className="caption-luxe text-accent">On a les réponses</p>
+          <h1 className="mt-4 font-display text-4xl font-semibold text-foreground md:text-[56px]">
+            Questions fréquentes
+          </h1>
+        </div>
+      </section>
+
+      <section className="bg-background py-20">
+        <div className="section-shell mx-auto max-w-3xl">
+          <div className="divide-y divide-border border-y border-border">
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+              return (
+                <div key={faq.question} className="py-5">
+                  <button
+                    type="button"
+                    className="flex min-h-11 w-full items-center justify-between gap-6 text-left text-[15px] font-semibold text-foreground hover:text-accent"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${index}`}
+                    onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                  >
+                    <span>{faq.question}</span>
+                    <Plus className={isOpen ? "size-5 shrink-0 rotate-45 text-accent transition-transform duration-300" : "size-5 shrink-0 text-accent transition-transform duration-300"} aria-hidden="true" />
+                  </button>
+                  <div
+                    id={`faq-answer-${index}`}
+                    className={isOpen ? "grid grid-rows-[1fr] opacity-100 transition-all duration-300" : "grid grid-rows-[0fr] opacity-0 transition-all duration-300"}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="whitespace-pre-line pb-2 pt-4 text-sm leading-[1.8] text-muted-foreground">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-16 text-center">
+            <p className="caption-luxe text-accent">Autre question ?</p>
+            <h2 className="mt-3 font-display text-[32px] text-foreground">On est sur WhatsApp.</h2>
+            <Button asChild size="lg" className="mt-6">
+              <a href={whatsappUrl()} target="_blank" rel="noreferrer">
+                <MessageCircle aria-hidden="true" /> Nous écrire →
+              </a>
+            </Button>
           </div>
         </div>
       </section>
-      <WhatsAppBand />
     </SiteLayout>
   );
 }
