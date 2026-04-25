@@ -27,10 +27,10 @@ export function ProductGrid({ limit }: { limit?: number }) {
 export function Ticker() {
   const items = ["✦ Livraison Dakar & banlieue", "✦ +33 collections exclusives", "✦ Paiement à la livraison", "✦ Notes olfactives certifiées", "✦ SCENTLAB · DUBAI · TAKEOFF", "✦ Réponse WhatsApp en moins d'1h", "✦ Haqqi · Pocket · Authentic"];
   return (
-    <div className="flex h-11 items-center overflow-hidden bg-accent md:h-12" aria-hidden="true">
-      <div className="ticker-track flex w-max gap-8">
+    <div className="flex h-11 items-center overflow-hidden whitespace-nowrap bg-accent md:h-12" aria-hidden="true">
+      <div className="ticker-track flex w-max shrink-0 flex-nowrap items-center gap-8">
         {[...items, ...items, ...items, ...items].map((item, index) => (
-          <span key={`${item}-${index}`} className="nav-luxe text-primary-foreground">{item}</span>
+          <span key={`${item}-${index}`} className="nav-luxe shrink-0 whitespace-nowrap text-primary-foreground">{item}</span>
         ))}
       </div>
     </div>
