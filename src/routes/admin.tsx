@@ -13,6 +13,12 @@ type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
 
 const blankProduct = { name: "", subtitle: "", collection: "scentlab", price: 0, notes_top: "", notes_heart: "", notes_base: "", description: "", image_url: "", slug: "", in_stock: true, is_bestseller: false };
 const blankOrder = { customer_name: "", customer_phone: "", customer_address: "", total: 0, status: "nouveau", notes: "", itemsText: "" };
+const statCards = [
+  { icon: BarChart3, label: "CA", key: "revenue" },
+  { icon: Package, label: "Produits", key: "products" },
+  { icon: ShoppingBag, label: "Commandes", key: "orders" },
+  { icon: Package, label: "En stock", key: "inStock" },
+] as const;
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin — 2M Parfumerie" }, { name: "robots", content: "noindex" }] }),
@@ -119,7 +125,7 @@ function AdminPage() {
   return (
     <AdminShell>
       <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-center"><div><p className="caption-luxe text-accent">Back-office</p><h1 className="font-display text-5xl text-foreground">Administration</h1></div><Button variant="outline" onClick={() => supabase.auth.signOut()}><LogOut /> Déconnexion</Button></div>
-      <div className="grid gap-4 md:grid-cols-4">{[[BarChart3, "CA", `${stats.revenue.toLocaleString("fr-FR")} FCFA`], [Package, "Produits", stats.products], [ShoppingBag, "Commandes", stats.orders], [Package, "En stock", stats.inStock]].map(([Icon, label, value]) => <div key={String(label)} className="rounded-lg border border-border bg-card p-5"><Icon className="text-accent" aria-hidden="true" /><p className="mt-4 text-xs uppercase text-muted-foreground">{label}</p><strong className="text-2xl text-foreground">{value}</strong></div>)}</div>
+      <div className="grid gap-4 md:grid-cols-4">{statCards.map(({ icon: Icon, label, key }) => <div key={key} className="rounded-lg border border-border bg-card p-5"><Icon className="text-accent" aria-hidden="true" /><p className="mt-4 text-xs uppercase text-muted-foreground">{label}</p><strong className="text-2xl text-foreground">{key === "revenue" ? `${stats.revenue.toLocaleString("fr-FR")} FCFA` : stats[key]}</strong></div>)}</div>
 
       <section className="mt-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"><ProductForm form={productForm} setForm={setProductForm} onSubmit={saveProduct} editing={Boolean(editingProductId)} /><div className="rounded-lg border border-border bg-card p-6"><h2 className="mb-4 font-display text-3xl text-foreground">Produits</h2><div className="space-y-3">{products.map((product) => <div key={product.id} className="flex items-center justify-between gap-3 rounded-md border border-border p-3"><div><strong className="text-foreground">{product.name}</strong><p className="text-xs text-muted-foreground">{product.collection} · {product.price.toLocaleString("fr-FR")} FCFA · {product.in_stock ? "En stock" : "Rupture"}</p></div><div className="flex gap-2"><Button size="sm" variant="outline" onClick={() => { setEditingProductId(product.id); setProductForm({ name: product.name, subtitle: product.subtitle ?? "", collection: product.collection, price: product.price, notes_top: product.notes_top ?? "", notes_heart: product.notes_heart ?? "", notes_base: product.notes_base ?? "", description: product.description ?? "", image_url: product.image_url ?? "", slug: product.slug, in_stock: Boolean(product.in_stock), is_bestseller: Boolean(product.is_bestseller) }); }}>Éditer</Button><Button size="icon" variant="ghost" onClick={() => deleteProduct(product.id)}><Trash2 className="text-destructive" /></Button></div></div>)}</div></div></section>
 
