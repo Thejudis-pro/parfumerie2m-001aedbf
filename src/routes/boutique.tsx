@@ -1,6 +1,4 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { z } from "zod";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -8,13 +6,15 @@ import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { whatsappUrl } from "@/lib/perfume-data";
 import { catalog, collectionFilters, collectionLabel, collectionValues, formatPrice, priceFilters, priceValues, slugifyProduct, type BoutiqueProduct, type Collection, type PriceRange } from "@/lib/catalog-data";
 
-const boutiqueSearchSchema = z.object({
-  collection: fallback(z.enum(collectionValues), "all").default("all"),
-  price: fallback(z.enum(priceValues), "all").default("all"),
-});
+function validateBoutiqueSearch(search: Record<string, unknown>) {
+  const collection = collectionValues.includes(search.collection as Collection) ? (search.collection as Collection) : "all";
+  const price = priceValues.includes(search.price as PriceRange) ? (search.price as PriceRange) : "all";
+
+  return { collection, price };
+}
 
 export const Route = createFileRoute("/boutique")({
-  validateSearch: zodValidator(boutiqueSearchSchema),
+  validateSearch: validateBoutiqueSearch,
   head: () => ({
     meta: [
       { title: "Boutique — +33 Parfums Authentiques | 2M Parfumerie Dakar" },
