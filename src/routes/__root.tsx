@@ -43,6 +43,7 @@ export const Route = createRootRoute({
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e9feb4a4-80ef-450d-b561-7fe096a8dcc8" },
     ],
     links: [
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -50,7 +51,7 @@ export const Route = createRootRoute({
         href: appCss,
       },
     ],
-    scripts: [{ children: "<!-- ANALYTICS -->" }],
+    scripts: [{ children: "<!-- ANALYTICS: paste GA4 or Vercel Analytics snippet here -->" }],
   }),
   shellComponent: RootShell,
   component: RootComponent,

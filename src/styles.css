@@ -34,6 +34,7 @@
   --color-accent-muted: var(--accent-muted);
   --color-surface: var(--surface);
   --color-surface-alt: var(--surface-alt);
+  --color-placeholder: var(--placeholder);
   --color-whatsapp: var(--whatsapp);
   --color-whatsapp-hover: var(--whatsapp-hover);
   --color-footer: var(--footer);
@@ -83,6 +84,7 @@
   --accent-muted: oklch(0.744 0.118 87.3 / 12%);
   --surface: oklch(0.166 0 0);
   --surface-alt: oklch(0.192 0 0);
+  --placeholder: oklch(0.18 0 0);
   --footer: oklch(0.105 0 0);
   --whatsapp: oklch(0.766 0.174 151.2);
   --whatsapp-hover: oklch(0.649 0.154 151.8);
@@ -206,7 +208,7 @@
   }
 
   .glass-nav {
-    background-color: oklch(0.131 0 0 / 88%);
+    background-color: oklch(0.157 0 0);
     backdrop-filter: blur(12px);
   }
 

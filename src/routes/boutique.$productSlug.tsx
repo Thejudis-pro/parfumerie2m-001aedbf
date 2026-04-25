@@ -1,11 +1,12 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { MessageCircle, Phone } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import { Button } from "@/components/ui/button";
+import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { catalog, collectionLabel, findProductBySlug, formatPrice, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
-import { displayPhone, products, whatsappUrl } from "@/lib/perfume-data";
+import { catalog, collectionLabel, findProductBySlug, formatPrice, productOrderUrl, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
+import { displayPhone } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/boutique/$productSlug")({
   head: ({ params }) => {
@@ -38,11 +39,8 @@ function ProductPage() {
 }
 
 function ProductTemplate({ product }: { product: BoutiqueProduct }) {
-  const [activeImage, setActiveImage] = useState(product.image);
   const label = collectionLabel(product.collection);
-  const thumbnails = useMemo(() => [product.image, products[0].image, products[1].image, products[2].image], [product.image]);
   const similar = catalog.filter((item) => item.collection === product.collection && slugifyProduct(item) !== slugifyProduct(product)).slice(0, 4);
-  const orderMessage = `Bonjour 2M Parfumerie 👋 Je souhaite commander *${product.name} — ${product.ref}* — ${formatPrice(product.price)}. Est-il disponible pour livraison à [votre quartier] ? Merci !`;
 
   return (
     <SiteLayout>
@@ -50,14 +48,7 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
         <div className="section-shell grid gap-12 md:grid-cols-2 md:gap-16">
           <div className="order-1">
             <div className="mx-auto flex aspect-square max-w-lg items-center justify-center overflow-hidden rounded-xl bg-surface p-8 shadow-card">
-              <img src={activeImage} alt={`${product.name} — ${label}`} className="h-full w-full object-contain" />
-            </div>
-            <div className="mx-auto mt-4 flex max-w-lg gap-3">
-              {thumbnails.map((image, index) => (
-                <button key={`${image}-${index}`} type="button" onClick={() => setActiveImage(image)} className={activeImage === image ? "h-20 w-20 overflow-hidden rounded-md border border-accent bg-surface p-1" : "h-20 w-20 overflow-hidden rounded-md border border-border bg-surface p-1 hover:border-accent"} aria-label={`Voir l'image ${index + 1}`}>
-                  <img src={image} alt="" className="h-full w-full object-cover" />
-                </button>
-              ))}
+              <PerfumePlaceholder className="rounded-lg" />
             </div>
           </div>
 
@@ -69,7 +60,7 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
             <p className="mt-2 text-[13px] text-whatsapp">✓ En stock — Livraison Dakar aujourd'hui</p>
 
             <Button asChild size="lg" className="mt-8 w-full min-h-[52px] py-4">
-              <a href={whatsappUrl(orderMessage)} target="_blank" rel="noreferrer"><MessageCircle className="mr-1 size-5" aria-hidden="true" /> Commander ce parfum</a>
+              <a href={productOrderUrl(product)} target="_blank" rel="noreferrer"><MessageCircle className="mr-1 size-5" aria-hidden="true" /> Commander ce parfum</a>
             </Button>
             <a href="tel:+221761923441" className="mt-3 flex min-h-11 items-center justify-center gap-2 text-center text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> Ou appeler : {displayPhone}</a>
 
@@ -118,12 +109,12 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent">
       <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="image-zoom block aspect-square overflow-hidden bg-surface">
-        <img src={product.image} alt={`${product.name} — ${label}`} className="h-full w-full object-cover" loading="lazy" />
+        <PerfumePlaceholder />
       </Link>
       <div className="p-5">
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
         <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
-        <div className="mt-4 flex items-center justify-between gap-3"><p className="font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p><Button asChild size="sm"><a href={whatsappUrl(`Bonjour 2M Parfumerie, je souhaite commander ${product.name} à ${formatPrice(product.price)}.`)} target="_blank" rel="noreferrer">Commander</a></Button></div>
+        <div className="mt-4 flex items-center justify-between gap-3"><p className="font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p><Button asChild size="sm"><a href={productOrderUrl(product)} target="_blank" rel="noreferrer">Commander</a></Button></div>
       </div>
     </article>
   );
