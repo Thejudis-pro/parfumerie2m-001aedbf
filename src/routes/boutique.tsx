@@ -5,10 +5,8 @@ import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { products, whatsappUrl } from "@/lib/perfume-data";
-
-const collectionValues = ["all", "scentlab", "takeoff", "dubai", "pocket", "authentic", "haqqi"] as const;
-const priceValues = ["all", "under-10000", "10000-20000", "over-20000"] as const;
+import { whatsappUrl } from "@/lib/perfume-data";
+import { catalog, collectionFilters, collectionLabel, collectionValues, formatPrice, priceFilters, priceValues, slugifyProduct, type BoutiqueProduct, type Collection, type PriceRange } from "@/lib/catalog-data";
 
 const boutiqueSearchSchema = z.object({
   collection: fallback(z.enum(collectionValues), "all").default("all"),
@@ -27,49 +25,6 @@ export const Route = createFileRoute("/boutique")({
   }),
   component: BoutiquePage,
 });
-
-type Collection = (typeof collectionValues)[number];
-type PriceRange = (typeof priceValues)[number];
-
-type BoutiqueProduct = {
-  name: string;
-  ref: string;
-  notes: string;
-  price: number;
-  collection: Collection;
-  image: string;
-  placeholder?: boolean;
-};
-
-const collectionFilters: { label: string; value: Collection }[] = [
-  { label: "Toutes", value: "all" },
-  { label: "SCENTLAB", value: "scentlab" },
-  { label: "TAKEOFF FRAGANCE", value: "takeoff" },
-  { label: "Dubai Perfumes", value: "dubai" },
-  { label: "Pocket Perfumes", value: "pocket" },
-  { label: "Authentic Perfumes", value: "authentic" },
-  { label: "Haqqi", value: "haqqi" },
-];
-
-const priceFilters: { label: string; value: PriceRange }[] = [
-  { label: "< 10 000 FCFA", value: "under-10000" },
-  { label: "10 000 – 20 000 FCFA", value: "10000-20000" },
-  { label: "> 20 000 FCFA", value: "over-20000" },
-];
-
-const catalog: BoutiqueProduct[] = [
-  { name: "Creamy Almond", ref: "Hypnotic Poison", notes: "Noix de coco · Prune · Abricot", price: 6000, collection: "scentlab", image: products[7].image },
-  { name: "Fruity Gourmand", ref: "La Vie est Belle", notes: "Iris · Praline · Patchouli", price: 8000, collection: "scentlab", image: products[4].image },
-  { name: "Vienna", ref: "Delina Parfums de Marly", notes: "Pivoine · Litchi · Musc", price: 12000, collection: "scentlab", image: products[4].image },
-  { name: "Rosy Hazelnut", ref: "Amouage Guidance", notes: "Rose · Noisette · Ambre", price: 15000, collection: "scentlab", image: products[6].image },
-  { name: "Monaco", ref: "Xerjoff 40 Knots", notes: "Bergamote · Iris · Santal", price: 18000, collection: "scentlab", image: products[3].image },
-  ...Array.from({ length: 9 }, (_, index) => ({ name: `SCENTLAB ${index + 6}`, ref: "Nom à renseigner", notes: "Notes à confirmer par le client", price: 10000 + (index % 4) * 2500, collection: "scentlab" as const, image: products[index % products.length].image, placeholder: true })),
-  ...Array.from({ length: 19 }, (_, index) => ({ name: `TAKEOFF ${index + 1}`, ref: "Fragrance à renseigner", notes: "Notes à confirmer par le client", price: 6000 + (index % 8) * 2000, collection: "takeoff" as const, image: products[(index + 1) % products.length].image, placeholder: true })),
-  { name: "Dubai Oud Rose", ref: "Dubai Perfumes", notes: "Oud · Rose · Musc", price: 22000, collection: "dubai", image: products[2].image },
-  { name: "Pocket Amber", ref: "Pocket Perfumes", notes: "Ambre · Vanille · Musc", price: 7000, collection: "pocket", image: products[0].image },
-  { name: "Authentic Rouge", ref: "Authentic Perfumes", notes: "Safran · Ambre · Bois", price: 25000, collection: "authentic", image: products[1].image },
-  { name: "Haqqi Signature", ref: "Haqqi", notes: "Bois précieux · Musc · Épices", price: 20000, collection: "haqqi", image: products[5].image },
-];
 
 function BoutiquePage() {
   const { collection, price } = Route.useSearch();
@@ -134,29 +89,27 @@ function FilterLink({ active, search, label }: { active: boolean; search: { coll
 }
 
 function CatalogCard({ product, index }: { product: BoutiqueProduct; index: number }) {
-  const collectionLabel = collectionFilters.find((filter) => filter.value === product.collection)?.label ?? "Collection";
+  const label = collectionLabel(product.collection);
   return (
     <article data-collection={product.collection} className="fade-up group overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent" style={{ animationDelay: `${index * 80}ms` }}>
       <div className="image-zoom relative aspect-square overflow-hidden bg-surface">
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-surface px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{collectionLabel}</span>
+        <span className="absolute left-3 top-3 z-10 rounded-full bg-surface px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
         {product.placeholder && <span className="absolute right-3 top-3 z-10 rounded-full bg-accent-muted px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">À renseigner</span>}
-        <img src={product.image} alt={`${product.name} — ${collectionLabel}`} className="h-full w-full object-cover" loading="lazy" />
+        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} aria-label={`Voir ${product.name}`}>
+          <img src={product.image} alt={`${product.name} — ${label}`} className="h-full w-full object-cover" loading="lazy" />
+        </Link>
       </div>
       <div className="p-5">
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
-        <h3 className="mb-1 font-display text-[22px] text-foreground">{product.name}</h3>
+        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="mb-1 block font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
         <p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p>
         <div className="flex items-center justify-between gap-3">
           <p className="font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p>
           <Button asChild size="sm">
-            <a href={whatsappUrl(`Bonjour 2M Parfumerie, je souhaite commander ${product.name} (${collectionLabel}) à ${formatPrice(product.price)}.`)} target="_blank" rel="noreferrer">Commander</a>
+            <a href={whatsappUrl(`Bonjour 2M Parfumerie, je souhaite commander ${product.name} (${label}) à ${formatPrice(product.price)}.`)} target="_blank" rel="noreferrer">Commander</a>
           </Button>
         </div>
       </div>
     </article>
   );
-}
-
-function formatPrice(price: number) {
-  return `${new Intl.NumberFormat("fr-FR").format(price)} FCFA`;
 }
