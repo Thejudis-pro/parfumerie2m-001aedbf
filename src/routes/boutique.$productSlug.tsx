@@ -114,7 +114,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
       <div className="p-5">
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
         <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
-        <div className="mt-4 flex items-center justify-between gap-3"><p className="font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p><Button asChild size="sm"><a href={whatsappUrl(`Bonjour 2M Parfumerie, je souhaite commander ${product.name} à ${formatPrice(product.price)}.`)} target="_blank" rel="noreferrer">Commander</a></Button></div>
+        <div className="mt-4 flex items-center justify-between gap-3"><p className="font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p><Button asChild size="sm"><a href={productOrderUrl(product)} target="_blank" rel="noreferrer">Commander</a></Button></div>
       </div>
     </article>
   );
