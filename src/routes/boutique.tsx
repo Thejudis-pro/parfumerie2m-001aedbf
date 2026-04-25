@@ -31,10 +31,6 @@ function BoutiquePage() {
   const { collection, price } = Route.useSearch();
   const [visibleCount, setVisibleCount] = useState(12);
 
-  if (location.pathname !== "/boutique") {
-    return <Outlet />;
-  }
-
   const filteredProducts = useMemo(() => {
     return catalog.filter((product) => {
       const collectionMatch = collection === "all" || product.collection === collection;
@@ -44,6 +40,10 @@ function BoutiquePage() {
   }, [collection, price]);
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
+
+  if (location.pathname !== "/boutique") {
+    return <Outlet />;
+  }
 
   return (
     <SiteLayout>
