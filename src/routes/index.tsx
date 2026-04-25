@@ -6,6 +6,7 @@ import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { products, whatsappUrl } from "@/lib/perfume-data";
+import { catalog } from "@/lib/catalog-data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,7 +30,7 @@ const heroMessage = "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos colle
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
 
 const collections = [
-  { slug: "scentlab", image: products[7].image, label: "SCENTLAB", sub: "14 fragrances · Épuré & contemporain", badge: "14 parfums" },
+  { slug: "scentlab", image: catalog.find((product) => product.name === "Creamy Almond")?.image ?? products[7].image, label: "SCENTLAB", sub: "14 fragrances · Épuré & contemporain", badge: "14 parfums" },
   { slug: "takeoff", image: products[0].image, label: "TAKEOFF FRAGANCE", sub: "19 fragrances · Signature & audace", badge: "19 parfums" },
   { slug: "dubai", image: products[2].image, label: "DUBAI PERFUMES", sub: "Oud, rose, musc · L'Orient en flacon", badge: "Exclusif" },
   { slug: "pocket", image: products[4].image, label: "POCKET PERFUMES", sub: "Format voyage · Toujours avec vous", badge: "Nomade" },
@@ -38,10 +39,10 @@ const collections = [
 ];
 
 const bestSellers = [
-  { id: "creamy-almond", image: products[7].image, name: "Creamy Almond", ref: "Hypnotic Poison · SCENTLAB", notes: "Noix de coco · Prune · Vanille", price: "6 000 FCFA", priceValue: 6000 },
+  { id: "creamy-almond", image: catalog.find((product) => product.name === "Creamy Almond")?.image ?? products[7].image, name: "Creamy Almond", ref: "Hypnotic Poison · SCENTLAB", notes: "Noix de coco · Prune · Vanille", price: "6 000 FCFA", priceValue: 6000 },
   { id: "vienna", image: products[4].image, name: "Vienna", ref: "Delina · Parfums de Marly · SCENTLAB", notes: "Pivoine · Litchi · Musc blanc", price: "12 000 FCFA", priceValue: 12000 },
   { id: "monaco", image: products[3].image, name: "Monaco", ref: "Xerjoff 40 Knots · SCENTLAB", notes: "Bergamote · Iris · Bois de santal", price: "18 000 FCFA", priceValue: 18000 },
-  { id: "rosy-hazelnut", image: products[6].image, name: "Rosy Hazelnut", ref: "Amouage Guidance · SCENTLAB", notes: "Rose · Noisette · Ambre", price: "15 000 FCFA", priceValue: 15000 },
+  { id: "rosy-hazelnut", image: catalog.find((product) => product.name === "Rosy Hazelnut")?.image ?? products[6].image, name: "Rosy Hazelnut", ref: "Amouage Guidance · SCENTLAB", notes: "Rose · Noisette · Ambre", price: "15 000 FCFA", priceValue: 15000 },
 ];
 
 const promises = [
