@@ -12,15 +12,13 @@ import { catalog, slugifyProduct } from "@/lib/catalog-data";
 type ProductRow = Database["public"]["Tables"]["products"]["Row"];
 type AdminProduct = ProductRow & { source: "catalog" | "database" };
 type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
-type AdminTab = "orders" | "products" | "blog" | "settings";
+type AdminTab = "orders" | "products";
 
 const blankProduct = { name: "", subtitle: "", collection: "scentlab", price: 0, notes_top: "", notes_heart: "", notes_base: "", description: "", image_url: "", slug: "", in_stock: true, is_bestseller: false };
 const blankOrder = { customer_name: "", customer_phone: "", customer_address: "", total: 0, status: "nouveau", notes: "", itemsText: "" };
 const adminTabs: Array<{ key: AdminTab; label: string }> = [
   { key: "orders", label: "Commandes" },
   { key: "products", label: "Produits" },
-  { key: "blog", label: "Blog" },
-  { key: "settings", label: "Paramètres" },
 ];
 
 export const Route = createFileRoute("/admin")({
@@ -130,8 +128,6 @@ function AdminPage() {
       <AdminChrome email={sessionEmail} activeTab={activeTab} setActiveTab={setActiveTab}>
         {activeTab === "products" && <ProductsPanel products={products} showProductForm={showProductForm} setShowProductForm={setShowProductForm} productForm={productForm} setProductForm={setProductForm} saveProduct={saveProduct} editingProductId={editingProductId} setEditingProductId={setEditingProductId} deleteProduct={deleteProduct} />}
         {activeTab === "orders" && <OrdersPanel orders={orders} orderForm={orderForm} setOrderForm={setOrderForm} saveOrder={saveOrder} updateOrderStatus={updateOrderStatus} />}
-        {activeTab === "blog" && <EmptyAdminSection title="Blog" />}
-        {activeTab === "settings" && <EmptyAdminSection title="Paramètres" />}
       </AdminChrome>
     </AdminShell>
   );
