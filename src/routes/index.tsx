@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { Check, MessageCircle, ShieldCheck, Truck, Wallet, Quote, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { products, whatsappUrl } from "@/lib/perfume-data";
 
