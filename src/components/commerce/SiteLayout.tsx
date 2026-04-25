@@ -62,22 +62,22 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
           </div>
-          <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
-            <a href={whatsappUrl()} target="_blank" rel="noreferrer">Commander</a>
-          </Button>
           <button type="button" onClick={() => setCartOpen(true)} className="relative hidden size-11 items-center justify-center text-muted-foreground hover:text-accent md:flex" aria-label="Ouvrir le panier">
             <ShoppingBag className="size-[22px]" aria-hidden="true" />
             {itemCount > 0 && <span className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-primary-foreground">{itemCount}</span>}
           </button>
-          <button
-            type="button"
-            className="flex h-11 w-11 items-center justify-center text-foreground md:hidden"
-            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-            aria-expanded={open}
-            onClick={() => setOpen((value) => !value)}
-          >
-            {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-          </button>
+          <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer">Commander</a>
+          </Button>
+          <div className="flex items-center gap-1 md:hidden">
+            <button type="button" onClick={() => setCartOpen(true)} className="relative flex size-11 items-center justify-center text-muted-foreground hover:text-accent" aria-label="Ouvrir le panier">
+              <ShoppingBag className="size-[22px]" aria-hidden="true" />
+              {itemCount > 0 && <span className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-primary-foreground">{itemCount}</span>}
+            </button>
+            <button type="button" className="flex h-11 w-11 items-center justify-center text-foreground" aria-label={open ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={open} onClick={() => setOpen((value) => !value)}>
+              {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            </button>
+          </div>
         </nav>
       </header>
 
