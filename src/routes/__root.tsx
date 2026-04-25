@@ -29,14 +29,14 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "2M Parfumerie Dakar | Parfums authentiques" },
+      { name: "description", content: "Parfumerie de luxe à Dakar. Commandez des parfums authentiques et accessibles directement sur WhatsApp." },
+      { name: "author", content: "2M Parfumerie" },
+      { property: "og:title", content: "2M Parfumerie Dakar" },
+      { property: "og:description", content: "La référence dakaroise du parfum authentique, disponible sur WhatsApp." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@2mparfumeriesn" },
     ],
     links: [
       {
