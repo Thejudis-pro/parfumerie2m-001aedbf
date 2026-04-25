@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { catalog, collectionLabel, findProductBySlug, formatPrice, productOrderUrl, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
+import { catalog, collectionLabel, findProductBySlug, formatPrice, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
 import { displayPhone } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/boutique/$productSlug")({
