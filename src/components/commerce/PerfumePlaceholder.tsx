@@ -1,6 +1,6 @@
 export function PerfumePlaceholder({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex h-full w-full items-center justify-center bg-[#141414] ${className}`} aria-hidden="true">
+    <div className={`flex h-full w-full items-center justify-center bg-placeholder ${className}`} aria-hidden="true">
       <svg viewBox="0 0 96 96" className="h-1/3 w-1/3 min-h-16 min-w-16 text-accent" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M40 12h16" />
         <path d="M43 12v12h10V12" />
