@@ -3,8 +3,8 @@ import { Gem, MapPin, MessageCircle, Users } from "lucide-react";
 
 import logo from "@/assets/logo-2m-parfumerie.jpg";
 import aboutHero from "@/assets/perfume-la-capitale-moscow.jpg";
-import aboutMood from "@/assets/perfume-baccarat-paris.jpg";
 import { Button } from "@/components/ui/button";
+import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { whatsappUrl } from "@/lib/perfume-data";
 
@@ -69,12 +69,7 @@ function AboutPage() {
       <section className="bg-background py-24">
         <div className="section-shell grid gap-12 md:grid-cols-[40fr_60fr] md:items-center">
           <div className="fade-up overflow-hidden rounded-xl border border-border bg-surface shadow-card">
-            <img
-              src={aboutMood}
-              alt="Ambiance boutique 2M Parfumerie avec flacon de parfum premium"
-              className="aspect-[3/4] w-full object-cover"
-              loading="lazy"
-            />
+            <PerfumePlaceholder className="aspect-[3/4]" />
           </div>
           <div className="fade-up">
             <p className="caption-luxe text-accent">La genèse</p>
