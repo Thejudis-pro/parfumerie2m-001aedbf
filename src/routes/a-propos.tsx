@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Gem, MapPin, MessageCircle, Users } from "lucide-react";
 
-import logo from "@/assets/logo-2m-parfumerie.jpg";
 import aboutHero from "@/assets/perfume-la-capitale-moscow.jpg";
 import { Button } from "@/components/ui/button";
 import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
