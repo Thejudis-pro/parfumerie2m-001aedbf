@@ -66,49 +66,49 @@
   --font-display: "Cormorant Garamond", serif;
   --font-body: "Montserrat", sans-serif;
   --radius: 8px;
-  --background: oklch(0.131 0 0);
-  --foreground: oklch(0.955 0.017 82.5);
-  --card: oklch(0.18 0 0);
-  --card-foreground: oklch(0.955 0.017 82.5);
-  --popover: oklch(0.16 0 0);
-  --popover-foreground: oklch(0.955 0.017 82.5);
-  --primary: oklch(0.744 0.118 87.3);
-  --primary-foreground: oklch(0.131 0 0);
-  --secondary: oklch(0.219 0 0);
-  --secondary-foreground: oklch(0.955 0.017 82.5);
-  --muted: oklch(0.219 0 0);
-  --muted-foreground: oklch(0.681 0.025 76.8);
-  --accent: oklch(0.744 0.118 87.3);
-  --accent-foreground: oklch(0.131 0 0);
-  --accent-hover: oklch(0.793 0.112 86.2);
-  --accent-muted: oklch(0.744 0.118 87.3 / 12%);
-  --surface: oklch(0.166 0 0);
-  --surface-alt: oklch(0.192 0 0);
-  --placeholder: oklch(0.18 0 0);
-  --footer: oklch(0.105 0 0);
+  --background: oklch(0.985 0.008 84);
+  --foreground: oklch(0.22 0.015 75);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.015 75);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.015 75);
+  --primary: oklch(0.62 0.116 82);
+  --primary-foreground: oklch(0.99 0.005 84);
+  --secondary: oklch(0.95 0.016 84);
+  --secondary-foreground: oklch(0.26 0.018 75);
+  --muted: oklch(0.94 0.014 84);
+  --muted-foreground: oklch(0.48 0.026 76);
+  --accent: oklch(0.62 0.116 82);
+  --accent-foreground: oklch(0.99 0.005 84);
+  --accent-hover: oklch(0.55 0.11 82);
+  --accent-muted: oklch(0.76 0.1 84 / 18%);
+  --surface: oklch(0.965 0.012 84);
+  --surface-alt: oklch(0.945 0.016 84);
+  --placeholder: oklch(0.96 0.01 84);
+  --footer: oklch(0.955 0.014 84);
   --whatsapp: oklch(0.766 0.174 151.2);
   --whatsapp-hover: oklch(0.649 0.154 151.8);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.955 0.017 82.5);
-  --border: oklch(0.744 0.118 87.3 / 15%);
-  --input: oklch(0.744 0.118 87.3 / 18%);
-  --ring: oklch(0.744 0.118 87.3);
-  --chart-1: oklch(0.744 0.118 87.3);
+  --destructive-foreground: oklch(0.99 0.005 84);
+  --border: oklch(0.78 0.035 82 / 35%);
+  --input: oklch(0.78 0.035 82 / 35%);
+  --ring: oklch(0.62 0.116 82);
+  --chart-1: oklch(0.62 0.116 82);
   --chart-2: oklch(0.766 0.174 151.2);
   --chart-3: oklch(0.676 0.188 23.6);
   --chart-4: oklch(0.612 0.11 245.8);
-  --chart-5: oklch(0.793 0.112 86.2);
-  --sidebar: oklch(0.166 0 0);
-  --sidebar-foreground: oklch(0.955 0.017 82.5);
-  --sidebar-primary: oklch(0.744 0.118 87.3);
-  --sidebar-primary-foreground: oklch(0.131 0 0);
-  --sidebar-accent: oklch(0.219 0 0);
-  --sidebar-accent-foreground: oklch(0.955 0.017 82.5);
-  --sidebar-border: oklch(0.744 0.118 87.3 / 15%);
-  --sidebar-ring: oklch(0.744 0.118 87.3);
-  --shadow-card: 0 4px 40px oklch(0 0 0 / 50%);
-  --shadow-glow: 0 0 48px oklch(0.744 0.118 87.3 / 8%);
-  --shadow-btn: 0 2px 16px oklch(0.744 0.118 87.3 / 25%);
+  --chart-5: oklch(0.55 0.11 82);
+  --sidebar: oklch(0.965 0.012 84);
+  --sidebar-foreground: oklch(0.22 0.015 75);
+  --sidebar-primary: oklch(0.62 0.116 82);
+  --sidebar-primary-foreground: oklch(0.99 0.005 84);
+  --sidebar-accent: oklch(0.94 0.014 84);
+  --sidebar-accent-foreground: oklch(0.26 0.018 75);
+  --sidebar-border: oklch(0.78 0.035 82 / 35%);
+  --sidebar-ring: oklch(0.62 0.116 82);
+  --shadow-card: 0 10px 34px oklch(0.28 0.04 75 / 10%);
+  --shadow-glow: 0 16px 46px oklch(0.62 0.116 82 / 12%);
+  --shadow-btn: 0 8px 20px oklch(0.62 0.116 82 / 20%);
 }
 
 .dark {
@@ -208,16 +208,16 @@
   }
 
   .glass-nav {
-    background-color: oklch(0.157 0 0);
+    background-color: oklch(0.99 0.006 84 / 92%);
     backdrop-filter: blur(12px);
   }
 
   .hero-image-overlay {
-    background: linear-gradient(90deg, oklch(0.131 0 0 / 30%) 0%, oklch(0.131 0 0 / 85%) 100%);
+    background: linear-gradient(90deg, oklch(0.985 0.008 84 / 12%) 0%, oklch(0.985 0.008 84 / 72%) 100%);
   }
 
   .final-cta-bg {
-    background: linear-gradient(135deg, oklch(0.19 0.04 58) 0%, var(--color-background) 50%, oklch(0.19 0.04 58) 100%);
+    background: linear-gradient(135deg, oklch(0.965 0.025 84) 0%, var(--color-background) 50%, oklch(0.94 0.03 92) 100%);
   }
 
   .skip-link {

@@ -27,7 +27,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
 
   return (
     <>
-      <div className={cn("fixed inset-0 z-[59] bg-black/60 transition-opacity duration-300", open ? "opacity-100" : "pointer-events-none opacity-0")} onClick={onClose} aria-hidden="true" />
+      <div className={cn("fixed inset-0 z-[59] bg-foreground/25 transition-opacity duration-300", open ? "opacity-100" : "pointer-events-none opacity-0")} onClick={onClose} aria-hidden="true" />
       <aside className={cn("fixed right-0 top-0 z-[60] flex h-dvh w-full max-w-[420px] flex-col border-l border-accent/15 bg-placeholder transition-transform duration-300 ease-out", open ? "translate-x-0" : "translate-x-full")} aria-label="Panier">
         <header className="flex items-start justify-between border-b border-accent/15 p-6">
           <div><h2 className="font-display text-2xl text-foreground">Mon Panier</h2><p className="mt-1 text-xs text-muted-foreground">{itemCount} article{itemCount > 1 ? "s" : ""}</p></div>
