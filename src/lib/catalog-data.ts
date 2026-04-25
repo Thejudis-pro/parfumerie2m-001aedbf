@@ -1,4 +1,14 @@
 import { products } from "@/lib/perfume-data";
+import creamyAlmondImage from "@/assets/scentlab-creamy-almond.png";
+import fruityGourmandImage from "@/assets/scentlab-fruity-gourmand.png";
+import spicyCaramelImage from "@/assets/scentlab-spicy-caramel.png";
+import spicyLeatherImage from "@/assets/scentlab-spicy-leather.png";
+import rosyHazelnutImage from "@/assets/scentlab-rosy-hazelnut.png";
+import orientalOudImage from "@/assets/scentlab-oriental-oud.png";
+import vanillaDreamImage from "@/assets/scentlab-vanilla-dream.png";
+import savannaVetiverImage from "@/assets/scentlab-savanna-vetiver.png";
+import cognacWhisperImage from "@/assets/scentlab-cognac-whisper.png";
+import rosyGlowImage from "@/assets/scentlab-rosy-glow.png";
 
 export const collectionValues = ["all", "scentlab", "takeoff", "dubai", "pocket", "authentic", "haqqi"] as const;
 export const priceValues = ["all", "under-10000", "10000-20000", "over-20000"] as const;
@@ -51,16 +61,16 @@ export const catalog: BoutiqueProduct[] = [
     baseNotes: "Vanille · Patchouli · Musc blanc",
     price: 6000,
     collection: "scentlab",
-    image: products[7].image,
+    image: creamyAlmondImage,
     family: "Oriental gourmand",
     concentration: "Eau de parfum",
     volume: "50 ml",
     description:
       "Creamy Almond enveloppe la peau d’une douceur amandée, lactée et sensuelle. Inspiré de Hypnotic Poison, ce parfum associe une ouverture fruitée à un cœur floral crémeux, puis s’installe sur une vanille chaude et un musc blanc confortable. C’est une signature intime, féminine et mémorable, parfaite pour les soirées, les rendez-vous et les moments où votre présence doit rester dans l’air après votre départ.",
   },
-  { name: "Fruity Gourmand", ref: "La Vie est Belle", notes: "Iris · Praline · Patchouli", headNotes: "Poire · Cassis · Accord fruité", heartNotes: "Iris · Jasmin · Fleur d’oranger", baseNotes: "Praline · Vanille · Patchouli", price: 8000, collection: "scentlab", image: products[4].image, family: "Floral gourmand", concentration: "Eau de parfum", volume: "50 ml", description: "Une fragrance lumineuse et gourmande, construite pour celles qui aiment les sillages joyeux, féminins et très remarqués." },
+  { name: "Fruity Gourmand", ref: "La Vie est Belle", notes: "Iris · Praline · Patchouli", headNotes: "Poire · Cassis · Accord fruité", heartNotes: "Iris · Jasmin · Fleur d’oranger", baseNotes: "Praline · Vanille · Patchouli", price: 8000, collection: "scentlab", image: fruityGourmandImage, family: "Floral gourmand", concentration: "Eau de parfum", volume: "50 ml", description: "Une fragrance lumineuse et gourmande, construite pour celles qui aiment les sillages joyeux, féminins et très remarqués." },
   { name: "Vienna", ref: "Delina Parfums de Marly", notes: "Pivoine · Litchi · Musc", headNotes: "Litchi · Rhubarbe · Bergamote", heartNotes: "Pivoine · Rose turque · Vanille", baseNotes: "Musc blanc · Cachemire · Encens doux", price: 12000, collection: "scentlab", image: products[4].image, family: "Floral fruité", concentration: "Eau de parfum", volume: "50 ml", description: "Vienna offre un floral frais et élégant, avec une féminité moderne, propre et très facile à porter à Dakar." },
-  { name: "Rosy Hazelnut", ref: "Amouage Guidance", notes: "Rose · Noisette · Ambre", headNotes: "Poire · Noisette · Encens", heartNotes: "Rose · Jasmin · Safran", baseNotes: "Ambre · Vanille · Bois de santal", price: 15000, collection: "scentlab", image: products[6].image, family: "Floral ambré", concentration: "Eau de parfum", volume: "50 ml", description: "Un parfum riche, velouté et enveloppant, idéal pour les amateurs de signatures raffinées et chaleureuses." },
+  { name: "Rosy Hazelnut", ref: "Amouage Guidance", notes: "Rose · Noisette · Ambre", headNotes: "Poire · Noisette · Encens", heartNotes: "Rose · Jasmin · Safran", baseNotes: "Ambre · Vanille · Bois de santal", price: 15000, collection: "scentlab", image: rosyHazelnutImage, family: "Floral ambré", concentration: "Eau de parfum", volume: "50 ml", description: "Un parfum riche, velouté et enveloppant, idéal pour les amateurs de signatures raffinées et chaleureuses." },
   { name: "Monaco", ref: "Xerjoff 40 Knots", notes: "Bergamote · Iris · Santal", headNotes: "Bergamote · Accord marin · Herbes fraîches", heartNotes: "Iris · Bois sec · Sel minéral", baseNotes: "Santal · Ambre gris · Musc", price: 18000, collection: "scentlab", image: products[3].image, family: "Boisé aromatique", concentration: "Eau de parfum", volume: "50 ml", description: "Monaco évoque une élégance nette, marine et sophistiquée, pensée pour une présence fraîche mais affirmée." },
   ...Array.from({ length: 9 }, (_, index) => ({ name: `SCENTLAB ${index + 6}`, ref: "Nom à renseigner", notes: "Notes à confirmer par le client", headNotes: "Notes à renseigner", heartNotes: "Notes à renseigner", baseNotes: "Notes à renseigner", price: 10000 + (index % 4) * 2500, collection: "scentlab" as const, image: products[index % products.length].image, family: "Famille à renseigner", concentration: "Eau de parfum", volume: "50 ml", description: "Description à compléter par le client pour présenter l’identité, le sillage et le moment idéal de ce parfum.", placeholder: true })),
   ...Array.from({ length: 19 }, (_, index) => ({ name: `TAKEOFF ${index + 1}`, ref: "Fragrance à renseigner", notes: "Notes à confirmer par le client", headNotes: "Notes à renseigner", heartNotes: "Notes à renseigner", baseNotes: "Notes à renseigner", price: 6000 + (index % 8) * 2000, collection: "takeoff" as const, image: products[(index + 1) % products.length].image, family: "Signature & audace", concentration: "Eau de parfum", volume: "50 ml", description: "Description à compléter par le client pour préciser le caractère de cette référence TAKEOFF Fragrance.", placeholder: true })),
