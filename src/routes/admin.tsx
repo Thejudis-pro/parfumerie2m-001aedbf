@@ -56,6 +56,7 @@ const blankOrder = {
   notes: "",
   itemsText: "",
 };
+const DELETED_PRODUCT_MARKER = "__2M_ADMIN_DELETED_PRODUCT__";
 const adminTabs: Array<{ key: AdminTab; label: string; icon: typeof ShoppingBag }> = [
   { key: "orders", label: "Commandes", icon: ShoppingBag },
   { key: "products", label: "Produits", icon: Package },
@@ -177,10 +178,18 @@ function AdminPage() {
   };
 
   const deleteProduct = async (product: AdminProduct) => {
-    if (product.source === "catalog")
-      return toast.info("Ce produit catalogue peut être modifié, mais pas supprimé.");
     if (!window.confirm(`Supprimer ${product.name} ?`)) return;
-    const { error } = await supabase.from("products").delete().eq("id", product.id);
+    const query =
+      product.source === "catalog"
+        ? supabase.from("products").insert({
+            ...productPayloadFromRow(product, {
+              description: DELETED_PRODUCT_MARKER,
+              in_stock: false,
+              is_bestseller: false,
+            }),
+          })
+        : supabase.from("products").delete().eq("id", product.id);
+    const { error } = await query;
     if (error) toast.error(error.message);
     else {
       toast.success("Produit supprimé");
@@ -577,7 +586,6 @@ function ProductsPanel({
                 type="button"
                 variant="outline"
                 onClick={() => deleteProduct(product)}
-                disabled={product.source === "catalog"}
               >
                 <Trash2 /> Supprimer
               </Button>
