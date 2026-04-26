@@ -63,9 +63,9 @@ export function ContactCards() {
   ];
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {cards.map(({ icon: Icon, label, value, href }) => (
+      {cards.map(({ icon: Icon, label, value, href, brand }) => (
         <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="min-h-32 rounded-lg border border-border bg-card p-5 shadow-card transition-all hover:-translate-y-1 hover:border-accent">
-          <Icon className="mb-5 text-accent" aria-hidden="true" />
+          <Icon className={brand ? "mb-5 size-7 text-whatsapp" : "mb-5 text-accent"} aria-hidden="true" />
           <p className="caption-luxe text-muted-foreground">{label}</p>
           <p className="mt-2 font-medium text-foreground">{value}</p>
         </a>
