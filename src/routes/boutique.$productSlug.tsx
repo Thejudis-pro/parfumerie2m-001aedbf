@@ -29,7 +29,7 @@ function ProductPage() {
           <p className="caption-luxe text-accent">Boutique</p>
           <h1 className="mt-4 font-display text-4xl text-foreground">Parfum introuvable</h1>
           <p className="mx-auto mt-4 max-w-md text-muted-foreground">Cette référence n’est pas encore disponible dans la boutique en ligne.</p>
-          <Button asChild variant="outline" size="lg" className="mt-8"><Link to="/boutique">Retour à la boutique</Link></Button>
+          <Button asChild variant="outline" size="lg" className="mt-8"><Link to="/boutique" search={{ collection: "all", price: "all" }}>Retour à la boutique</Link></Button>
         </section>
       </SiteLayout>
     );
@@ -106,12 +106,12 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
   const label = collectionLabel(product.collection);
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent">
-      <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="image-zoom block aspect-square overflow-hidden bg-surface">
+      <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} search={{ collection: "all", price: "all" }} className="image-zoom block aspect-square overflow-hidden bg-surface">
         <img src={product.image} alt={`${product.name} chez 2M Parfumerie`} className="h-full w-full object-contain p-5 transition-transform duration-500 hover:scale-105" loading="lazy" />
       </Link>
       <div className="p-5">
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
-        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
+        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} search={{ collection: "all", price: "all" }} className="font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
         <p className="mt-4 font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p>
         <div className="mt-4"><AddToCartButton item={{ id: slugifyProduct(product), name: product.name, collection: label, price: product.price, imageUrl: product.image }} /></div>
       </div>

@@ -100,13 +100,13 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
       <div className="image-zoom relative aspect-square overflow-hidden bg-surface">
         <span className="absolute left-3 top-3 z-10 rounded-full bg-surface px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">{label}</span>
         {product.placeholder && <span className="absolute right-3 top-3 z-10 rounded-full bg-accent-muted px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">À renseigner</span>}
-        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} aria-label={`Voir ${product.name}`} className="block h-full w-full">
+        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} search={{ collection: "all", price: "all" }} aria-label={`Voir ${product.name}`} className="block h-full w-full">
           <img src={product.image} alt={`${product.name} chez 2M Parfumerie`} className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105" loading="lazy" />
         </Link>
       </div>
       <div className="p-5">
         <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p>
-        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} className="mb-1 block font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
+        <Link to="/boutique/$productSlug" params={{ productSlug: slugifyProduct(product) }} search={{ collection: "all", price: "all" }} className="mb-1 block font-display text-[22px] text-foreground hover:text-accent">{product.name}</Link>
         <p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p>
         <p className="mb-4 font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p>
         <AddToCartButton item={{ id: slugifyProduct(product), name: product.name, collection: label, price: product.price, imageUrl: product.image }} />
