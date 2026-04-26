@@ -48,7 +48,7 @@ function Index() {
     <SiteLayout>
       <section className="relative min-h-screen overflow-hidden bg-background pt-24 md:pt-32">
         <div className="grid min-h-[calc(100vh-96px)] items-center md:grid-cols-[55fr_45fr]">
-          <div className="section-shell z-10 order-2 py-10 md:order-1 md:w-auto md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
+          <div className="section-shell z-10 order-1 py-10 md:w-auto md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
             <div className="max-w-2xl">
               <p className="caption-luxe mb-6 text-accent fade-up">Dakar · Parfumerie Authentique</p>
               <h1 className="fade-up font-display text-[40px] font-semibold leading-[1.1] text-foreground md:text-7xl" style={{ animationDelay: "120ms" }}>Votre signature olfactive, livrée à Dakar.</h1>
@@ -66,7 +66,7 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="relative order-1 h-[50vh] overflow-hidden bg-surface-alt md:order-2 md:h-full md:min-h-[calc(100vh-128px)]">
+          <div className="relative order-2 h-[50vh] overflow-hidden bg-surface-alt md:h-full md:min-h-[calc(100vh-128px)]">
             <img src={catalog[0]?.image} alt="TAKEOFF Los Angeles chez 2M Parfumerie" className="h-full w-full object-contain p-8" />
           </div>
         </div>
