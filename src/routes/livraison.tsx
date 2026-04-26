@@ -17,10 +17,10 @@ function DeliveryPage() {
   ];
   return (
     <SiteLayout>
-      <section className="pt-32 pb-20 md:pt-40">
-        <div className="section-shell space-y-12">
+      <section className="pt-24 pb-16 md:pt-40 md:pb-20">
+        <div className="section-shell space-y-10 md:space-y-12">
           <SectionHeader eyebrow="Livraison" title="Une commande simple, suivie et humaine." text="Chaque détail est confirmé sur WhatsApp pour éviter les surprises et garder l’expérience fluide." />
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3 md:gap-5">
             {steps.map(({ icon: Icon, title, text }, index) => (
               <article key={title} className="fade-up rounded-lg border border-border bg-card p-6 shadow-card" style={{ animationDelay: `${index * 80}ms` }}>
                 <Icon className="mb-8 text-accent" aria-hidden="true" />
