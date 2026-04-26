@@ -28,6 +28,7 @@ export const Route = createFileRoute("/")({
 
 const heroMessage = "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos collections. Pouvez-vous m'aider ?";
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
+const heroProduct = catalog.find((product) => product.name === "Lisbon") ?? catalog[0];
 const featuredProducts = catalog.slice(0, 4);
 
 const promises = [
@@ -67,7 +68,7 @@ function Index() {
             </div>
           </div>
           <div className="relative order-2 h-[50vh] overflow-hidden bg-surface-alt md:h-full md:min-h-[calc(100vh-128px)]">
-            <img src={catalog[0]?.image} alt="TAKEOFF Los Angeles chez 2M Parfumerie" className="h-full w-full object-contain p-8" />
+            <img src={heroProduct.image} alt="TAKEOFF Lisbon chez 2M Parfumerie" className="h-full w-full object-contain p-8" />
           </div>
         </div>
       </section>
