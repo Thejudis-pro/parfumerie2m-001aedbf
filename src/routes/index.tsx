@@ -63,9 +63,8 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="relative order-1 h-[50vh] overflow-hidden md:order-2 md:h-full md:min-h-[calc(100vh-128px)]">
-            <img src={products[2].image} alt="Flacon de parfum oriental doré disponible chez 2M Parfumerie" className="h-full w-full object-cover md:translate-y-[-10px]" />
-            <div className="hero-image-overlay absolute inset-0" aria-hidden="true" />
+          <div className="relative order-1 flex h-[50vh] items-center justify-center overflow-hidden bg-surface-alt md:order-2 md:h-full md:min-h-[calc(100vh-128px)]">
+            <p className="max-w-xs text-center font-display text-4xl text-muted-foreground">Nouvelle sélection bientôt disponible</p>
           </div>
         </div>
       </section>
@@ -73,32 +72,9 @@ function Index() {
       <Ticker />
 
       <section className="bg-background py-24">
-        <div className="section-shell">
-          <HomeHeader title="Nos Collections" subtitle="Six univers olfactifs, un seul endroit." />
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {collections.map((collection, index) => (
-              <Link key={collection.slug} to="/boutique" search={{ collection: collection.slug }} className="fade-up group overflow-hidden rounded-lg border border-border bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:border-accent" style={{ animationDelay: `${index * 80}ms` }}>
-                <div className="image-zoom aspect-[4/3] overflow-hidden"><img src={collection.image} alt={`Collection ${collection.label} chez 2M Parfumerie`} className="h-full w-full object-cover" loading="lazy" /></div>
-                <div className="p-6 pb-4"><span className="rounded-full bg-accent-muted px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent">{collection.badge}</span><h3 className="mt-3 font-display text-2xl text-foreground">{collection.label}</h3><p className="mt-2 text-[13px] text-muted-foreground">{collection.sub}</p></div>
-                <div className="px-6 pb-6"><span className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Explorer →</span></div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-surface-alt py-24">
-        <div className="section-shell">
-          <HomeHeader title="Meilleures Ventes" subtitle="Les parfums que Dakar s'arrache." />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {bestSellers.map((product, index) => (
-              <article key={product.name} className="fade-up group overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent" style={{ animationDelay: `${index * 80}ms` }}>
-                <div className="image-zoom relative aspect-square overflow-hidden bg-surface"><span className="absolute left-3 top-3 z-10 rounded-full bg-accent px-2 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-primary-foreground">Bestseller</span><img src={product.image} alt={`${product.name} chez 2M Parfumerie`} className="h-full w-full object-cover" loading="lazy" /></div>
-                <div className="p-5"><p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p><h3 className="mb-1 font-display text-[22px] text-foreground">{product.name}</h3><p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p><p className="mb-4 font-body text-xl font-semibold text-accent">{product.price}</p><AddToCartButton item={{ id: product.id, name: product.name, collection: "SCENTLAB", price: product.priceValue, imageUrl: product.image }} /></div>
-              </article>
-            ))}
-          </div>
-          <div className="mt-12 text-center"><Link to="/boutique" className="text-[13px] font-semibold uppercase tracking-[0.12em] text-accent underline-offset-4 hover:underline">Voir toutes les collections →</Link></div>
+        <div className="section-shell text-center">
+          <HomeHeader title="Nouvelle boutique en préparation" subtitle="Les produits seront ajoutés dès réception des nouvelles images." />
+          <Button asChild variant="outline" size="lg"><Link to="/boutique" search={{ collection: "all", price: "all" }}>Voir la boutique</Link></Button>
         </div>
       </section>
 
