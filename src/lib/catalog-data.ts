@@ -15,6 +15,15 @@ import newYorkImage from "@/assets/takeoff-new-york.png";
 import moscowImage from "@/assets/takeoff-moscow.png";
 import milanImage from "@/assets/takeoff-milan.png";
 import budapestImage from "@/assets/takeoff-budapest.png";
+import parisImage from "@/assets/takeoff-paris.png";
+import creamyAlmondImage from "@/assets/scentlab-creamy-almond-upload.png";
+import brightMandarinImage from "@/assets/scentlab-bright-mandarin.png";
+import caramelCitrusImage from "@/assets/scentlab-caramel-citrus.png";
+import fruityGourmandImage from "@/assets/scentlab-fruity-gourmand-upload.png";
+import fruityVanillaImage from "@/assets/scentlab-fruity-vanilla.png";
+import leatherVioletImage from "@/assets/scentlab-leather-violet.png";
+import spicyCaramelImage from "@/assets/scentlab-spicy-caramel-upload.png";
+import spicyLeatherImage from "@/assets/scentlab-spicy-leather-upload.png";
 
 export const collectionValues = ["all", "scentlab", "takeoff", "dubai", "pocket", "authentic", "haqqi"] as const;
 export const priceValues = ["all", "under-10000", "10000-20000", "over-20000"] as const;
@@ -74,9 +83,21 @@ const takeoffProducts = [
   { name: "Moscow", image: moscowImage, notes: "Vanille claire · Ambre · Musc", family: "Ambré doux" },
   { name: "Milan", image: milanImage, notes: "Bergamote · Musc · Bois élégants", family: "Chypré frais" },
   { name: "Budapest", image: budapestImage, notes: "Ambre doré · Musc · Bois blonds", family: "Ambré musqué" },
+  { name: "Paris", image: parisImage, notes: "Rose rouge · Ambre · Musc", family: "Floral ambré" },
 ] as const;
 
-export const catalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
+const scentlabProducts = [
+  { name: "Creamy Almond", image: creamyAlmondImage, notes: "Amande crémeuse · Vanille · Musc", family: "Gourmand crémeux" },
+  { name: "Bright Mandarin", image: brightMandarinImage, notes: "Mandarine · Agrumes · Musc propre", family: "Hespéridé frais" },
+  { name: "Caramel Citrus", image: caramelCitrusImage, notes: "Caramel · Agrumes · Ambre", family: "Gourmand hespéridé" },
+  { name: "Fruity Gourmand", image: fruityGourmandImage, notes: "Fruits doux · Praline · Musc", family: "Fruité gourmand" },
+  { name: "Fruity Vanilla", image: fruityVanillaImage, notes: "Fruits rouges · Vanille · Musc", family: "Vanillé fruité" },
+  { name: "Leather Violet", image: leatherVioletImage, notes: "Cuir · Violette · Ambre", family: "Cuir floral" },
+  { name: "Spicy Caramel", image: spicyCaramelImage, notes: "Caramel · Épices · Bois ambrés", family: "Gourmand épicé" },
+  { name: "Spicy Leather", image: spicyLeatherImage, notes: "Cuir · Épices · Résines", family: "Cuir épicé" },
+] as const;
+
+const takeoffCatalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
   name: product.name,
   ref: "TAKEOFF Fragrance",
   notes: product.notes,
@@ -91,6 +112,24 @@ export const catalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
   volume: "100 ml",
   description: `${product.name} par TAKEOFF Fragrance est une eau de parfum 100 ml de la collection Scent of Journey, disponible chez 2M Parfumerie à Dakar.`,
 }));
+
+const scentlabCatalog: BoutiqueProduct[] = scentlabProducts.map((product) => ({
+  name: product.name,
+  ref: "SCENTLAB",
+  notes: product.notes,
+  headNotes: product.notes,
+  heartNotes: "Notes à préciser",
+  baseNotes: "Notes à préciser",
+  price: 10000,
+  collection: "scentlab",
+  image: product.image,
+  family: product.family,
+  concentration: "Eau de parfum",
+  volume: "50 ml",
+  description: `${product.name} par SCENTLAB est une eau de parfum sélectionnée par 2M Parfumerie pour un sillage moderne et facile à porter à Dakar.`,
+}));
+
+export const catalog: BoutiqueProduct[] = [...takeoffCatalog, ...scentlabCatalog];
 
 export function slugifyProduct(product: BoutiqueProduct) {
   return `${product.name}-${product.ref}`
