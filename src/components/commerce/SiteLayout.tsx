@@ -169,7 +169,9 @@ function FloatingWhatsApp() {
     >
       <span className="pointer-events-none absolute right-[72px] hidden whitespace-nowrap rounded-md border border-border bg-background px-3 py-2 text-xs text-foreground opacity-0 shadow-card transition-opacity group-hover:opacity-100 md:block">Commander sur WhatsApp</span>
       {rippling && <span className="absolute inset-0 animate-ping rounded-full bg-primary-foreground/30" aria-hidden="true" />}
-      <MessageCircle className="size-7" aria-hidden="true" />
+      <span className="flex size-10 items-center justify-center rounded-full bg-primary-foreground text-whatsapp">
+        <MessageCircle className="size-7" aria-hidden="true" />
+      </span>
     </a>
   );
 }
