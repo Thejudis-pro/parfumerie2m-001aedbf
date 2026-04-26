@@ -59,8 +59,7 @@ const promises = [
 
 const testimonials = [
   {
-    quote:
-      "J'avais essayé Monaco chez une amie aux Almadies et j'ai commandé le lendemain via WhatsApp. Le flacon est arrivé le soir même. Franchement impeccable.",
+    quote: "Kyoto sent exactement comme Amouage guidance mais sans casser la tirelire. Je l'porte au bureau chaque semaine. On me demande souvent où j'achète.",
     name: "Khalil M.",
     location: "Les Almadies, Sénégal",
     initials: "KM",
