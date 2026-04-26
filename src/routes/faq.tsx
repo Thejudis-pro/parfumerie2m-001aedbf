@@ -119,7 +119,7 @@ function FaqPage() {
             <h2 className="mt-3 font-display text-[32px] text-foreground">On est sur WhatsApp et par téléphone.</h2>
             <Button asChild variant="whatsapp" size="lg" className="mt-6">
               <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-                <MessageCircle className="size-5" aria-hidden="true" /> Nous écrire sur WhatsApp →
+                <span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Nous écrire sur WhatsApp →
               </a>
             </Button>
             <div className="mt-5 flex flex-col items-center justify-center gap-3 text-sm text-muted-foreground sm:flex-row">

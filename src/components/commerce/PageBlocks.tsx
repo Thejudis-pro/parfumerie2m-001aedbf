@@ -48,7 +48,7 @@ export function WhatsAppBand() {
           <h2 className="mt-3 font-display text-[32px] leading-tight text-foreground md:text-5xl">Un parfum choisi, un message envoyé, une réponse humaine.</h2>
         </div>
         <Button asChild variant="whatsapp" size="lg">
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle className="size-5" aria-hidden="true" /> Commander sur WhatsApp</a>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Commander sur WhatsApp</a>
         </Button>
       </div>
     </section>
