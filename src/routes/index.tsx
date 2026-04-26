@@ -29,7 +29,6 @@ export const Route = createFileRoute("/")({
 
 const heroMessage = "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos collections. Pouvez-vous m'aider ?";
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
-const heroProduct = catalog.find((product) => product.name === "Lisbon") ?? catalog[0];
 const featuredProducts = catalog.slice(0, 4);
 
 const promises = [
