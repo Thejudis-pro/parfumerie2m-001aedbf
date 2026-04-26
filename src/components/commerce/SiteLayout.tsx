@@ -122,7 +122,7 @@ function SiteFooter() {
           <div className="mt-6 flex gap-4">
             <a href="https://instagram.com/2mparfumeriesn" target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent" aria-label="Instagram 2M Parfumerie"><Instagram className="size-5" aria-hidden="true" /></a>
             <a href={facebookUrl} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent" aria-label="Facebook 2M Parfumerie"><Facebook className="size-5" aria-hidden="true" /></a>
-            <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-whatsapp text-whatsapp hover:border-whatsapp-hover hover:text-whatsapp-hover" aria-label="WhatsApp 2M Parfumerie"><MessageCircle className="size-5" aria-hidden="true" /></a>
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full bg-whatsapp text-primary-foreground hover:bg-whatsapp-hover" aria-label="WhatsApp 2M Parfumerie"><MessageCircle className="size-5" aria-hidden="true" /></a>
           </div>
         </div>
         <FooterColumn title="Navigation">
