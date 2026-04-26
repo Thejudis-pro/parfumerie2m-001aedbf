@@ -18,7 +18,8 @@ export const Route = createFileRoute("/faq")({
       { property: "og:title", content: "FAQ — Questions Fréquentes | 2M Parfumerie Sénégal" },
       {
         property: "og:description",
-        content: "Livraison partout au Sénégal, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie.",
+        content:
+          "Livraison partout au Sénégal, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie.",
       },
     ],
   }),
@@ -97,11 +98,22 @@ function FaqPage() {
                     onClick={() => setOpenIndex(isOpen ? -1 : index)}
                   >
                     <span>{faq.question}</span>
-                    <Plus className={isOpen ? "size-5 shrink-0 rotate-45 text-accent transition-transform duration-300" : "size-5 shrink-0 text-accent transition-transform duration-300"} aria-hidden="true" />
+                    <Plus
+                      className={
+                        isOpen
+                          ? "size-5 shrink-0 rotate-45 text-accent transition-transform duration-300"
+                          : "size-5 shrink-0 text-accent transition-transform duration-300"
+                      }
+                      aria-hidden="true"
+                    />
                   </button>
                   <div
                     id={`faq-answer-${index}`}
-                    className={isOpen ? "grid grid-rows-[1fr] opacity-100 transition-all duration-300" : "grid grid-rows-[0fr] opacity-0 transition-all duration-300"}
+                    className={
+                      isOpen
+                        ? "grid grid-rows-[1fr] opacity-100 transition-all duration-300"
+                        : "grid grid-rows-[0fr] opacity-0 transition-all duration-300"
+                    }
                   >
                     <div className="overflow-hidden">
                       <p className="whitespace-pre-line pb-2 pt-4 text-sm leading-[1.8] text-muted-foreground">
@@ -116,15 +128,27 @@ function FaqPage() {
 
           <div className="mt-16 text-center">
             <p className="caption-luxe text-accent">Autre question ?</p>
-            <h2 className="mt-3 font-display text-[32px] text-foreground">On est sur WhatsApp et par téléphone.</h2>
+            <h2 className="mt-3 font-display text-[32px] text-foreground">
+              On est sur WhatsApp et par téléphone.
+            </h2>
             <Button asChild variant="whatsapp" size="lg" className="mt-6">
               <a href={whatsappUrl()} target="_blank" rel="noreferrer">
                 <MessageCircle className="size-5" aria-hidden="true" /> Nous écrire sur WhatsApp →
               </a>
             </Button>
             <div className="mt-5 flex flex-col items-center justify-center gap-3 text-sm text-muted-foreground sm:flex-row">
-              <a href="tel:+221761923441" className="inline-flex min-h-11 items-center gap-2 hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {displayPhone}</a>
-              <a href="tel:+221781441766" className="inline-flex min-h-11 items-center gap-2 hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {secondPhone}</a>
+              <a
+                href="tel:+221761923441"
+                className="inline-flex min-h-11 items-center gap-2 hover:text-accent"
+              >
+                <Phone className="size-4" aria-hidden="true" /> {displayPhone}
+              </a>
+              <a
+                href="tel:+221781441766"
+                className="inline-flex min-h-11 items-center gap-2 hover:text-accent"
+              >
+                <Phone className="size-4" aria-hidden="true" /> {secondPhone}
+              </a>
             </div>
           </div>
         </div>

@@ -46,50 +46,109 @@ function ContactPage() {
       <section className="bg-background py-14 md:py-20">
         <div className="section-shell grid gap-10 md:grid-cols-2 md:gap-16">
           <div className="fade-up">
-            <h2 className="mb-6 font-display text-[32px] text-foreground md:mb-8">Comment nous joindre</h2>
+            <h2 className="mb-6 font-display text-[32px] text-foreground md:mb-8">
+              Comment nous joindre
+            </h2>
             <div className="space-y-6 md:space-y-8">
-              <ContactItem icon={<MessageCircle className="size-7 text-whatsapp" aria-hidden="true" />} label="WhatsApp — Disponible 7j/7">
-                <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="text-lg font-semibold text-foreground hover:text-accent">
+              <ContactItem
+                icon={<MessageCircle className="size-7 text-whatsapp" aria-hidden="true" />}
+                label="WhatsApp — Disponible 7j/7"
+              >
+                <a
+                  href={whatsappUrl()}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-lg font-semibold text-foreground hover:text-accent"
+                >
                   {displayPhone}
                 </a>
-                <p className="mt-1 text-sm text-muted-foreground">Réponse en moins d'1h · Lun–Dim</p>
-                <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-[13px] font-semibold text-primary-foreground hover:bg-whatsapp-hover">
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Réponse en moins d'1h · Lun–Dim
+                </p>
+                <a
+                  href={whatsappUrl()}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-[13px] font-semibold text-primary-foreground hover:bg-whatsapp-hover"
+                >
                   <MessageCircle className="size-4" aria-hidden="true" /> Écrire sur WhatsApp →
                 </a>
               </ContactItem>
 
-              <ContactItem icon={<Phone className="size-6 text-accent" aria-hidden="true" />} label="Appel normal — 2 numéros">
+              <ContactItem
+                icon={<Phone className="size-6 text-accent" aria-hidden="true" />}
+                label="Appel normal — 2 numéros"
+              >
                 <div className="flex flex-wrap gap-x-3 gap-y-1 text-foreground">
-                  <a href="tel:+221761923441" className="hover:text-accent">{displayPhone}</a>
+                  <a href="tel:+221761923441" className="hover:text-accent">
+                    {displayPhone}
+                  </a>
                   <span className="text-muted-foreground">·</span>
-                  <a href="tel:+221781441766" className="hover:text-accent">{secondPhone}</a>
+                  <a href="tel:+221781441766" className="hover:text-accent">
+                    {secondPhone}
+                  </a>
                 </div>
               </ContactItem>
 
-              <ContactItem icon={<Mail className="size-6 text-accent" aria-hidden="true" />} label="Email">
-                <a href={`mailto:${email}`} className="text-foreground hover:text-accent">{email}</a>
+              <ContactItem
+                icon={<Mail className="size-6 text-accent" aria-hidden="true" />}
+                label="Email"
+              >
+                <a href={`mailto:${email}`} className="text-foreground hover:text-accent">
+                  {email}
+                </a>
               </ContactItem>
 
-              <ContactItem icon={<Instagram className="size-6 text-accent" aria-hidden="true" />} label="Instagram">
-                <a href="https://instagram.com/2mparfumeriesn" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent">{instagram}</a>
+              <ContactItem
+                icon={<Instagram className="size-6 text-accent" aria-hidden="true" />}
+                label="Instagram"
+              >
+                <a
+                  href="https://instagram.com/2mparfumeriesn"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-foreground hover:text-accent"
+                >
+                  {instagram}
+                </a>
               </ContactItem>
 
-              <ContactItem icon={<Facebook className="size-6 text-accent" aria-hidden="true" />} label="Facebook">
-                <a href={facebookUrl} target="_blank" rel="noreferrer" className="text-foreground hover:text-accent">2MPARFUMERIE-Dk</a>
+              <ContactItem
+                icon={<Facebook className="size-6 text-accent" aria-hidden="true" />}
+                label="Facebook"
+              >
+                <a
+                  href={facebookUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-foreground hover:text-accent"
+                >
+                  2MPARFUMERIE-Dk
+                </a>
               </ContactItem>
 
-              <ContactItem icon={<MapPin className="size-6 text-accent" aria-hidden="true" />} label="Zone de livraison">
+              <ContactItem
+                icon={<MapPin className="size-6 text-accent" aria-hidden="true" />}
+                label="Zone de livraison"
+              >
                 <p className="text-foreground">Partout au Sénégal</p>
-                <p className="mt-1 text-sm text-muted-foreground">Livraison le jour même selon la zone pour commandes avant 21h</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Livraison le jour même selon la zone pour commandes avant 21h
+                </p>
               </ContactItem>
             </div>
           </div>
 
           <aside className="fade-up rounded-lg border border-border bg-surface p-5 shadow-card md:self-start md:p-8">
-            <h2 className="mb-6 font-display text-2xl text-foreground">Horaires de disponibilité</h2>
+            <h2 className="mb-6 font-display text-2xl text-foreground">
+              Horaires de disponibilité
+            </h2>
             <div>
               {schedules.map(([day, time]) => (
-                  <div key={day} className="flex justify-between gap-4 border-b border-border py-3 text-sm">
+                <div
+                  key={day}
+                  className="flex justify-between gap-4 border-b border-border py-3 text-sm"
+                >
                   <span className="text-muted-foreground">{day}</span>
                   <span className="font-medium text-foreground">{time}</span>
                 </div>
@@ -98,9 +157,12 @@ function ContactPage() {
             <div className="my-6 h-px bg-border" />
             <h3 className="mb-4 font-display text-xl text-foreground">Zone de livraison</h3>
             <p className="text-[13px] leading-[1.8] text-muted-foreground">
-              Livraison disponible partout au Sénégal, avec confirmation du délai selon votre ville ou région.
+              Livraison disponible partout au Sénégal, avec confirmation du délai selon votre ville
+              ou région.
             </p>
-            <span className="caption-luxe mt-4 block text-accent">Clients satisfaits dans plusieurs régions du Sénégal</span>
+            <span className="caption-luxe mt-4 block text-accent">
+              Clients satisfaits dans plusieurs régions du Sénégal
+            </span>
           </aside>
         </div>
       </section>
@@ -108,10 +170,20 @@ function ContactPage() {
   );
 }
 
-function ContactItem({ icon, label, children }: { icon: React.ReactNode; label: string; children: React.ReactNode }) {
+function ContactItem({
+  icon,
+  label,
+  children,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex gap-3 md:gap-5">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-muted">{icon}</div>
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-muted">
+        {icon}
+      </div>
       <div>
         <p className="caption-luxe mb-2 text-accent">{label}</p>
         {children}
