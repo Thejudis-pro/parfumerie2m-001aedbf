@@ -44,8 +44,8 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header>
-        <nav className={cn("fixed left-0 top-0 z-50 flex h-20 w-full items-center justify-between border-b border-transparent px-4 transition-all duration-300 md:px-6", scrolled && "glass-nav border-accent/15")}>
-          <Link to="/" className="font-display text-[22px] font-semibold text-accent" aria-label="2M Parfumerie accueil">
+        <nav className={cn("fixed left-0 top-0 z-50 flex h-16 w-full items-center justify-between border-b border-transparent px-3 transition-all duration-300 md:h-20 md:px-6", scrolled && "glass-nav border-accent/15")}>
+          <Link to="/" className="font-display text-xl font-semibold text-accent md:text-[22px]" aria-label="2M Parfumerie accueil">
             2M Parfumerie
           </Link>
           <div className="hidden items-center gap-8 md:flex">
@@ -96,7 +96,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
         </div>
-        <Button asChild size="lg" className="absolute bottom-8 left-6 right-6 h-[52px]">
+        <Button asChild size="lg" className="absolute bottom-6 left-4 right-4 h-[52px] md:bottom-8 md:left-6 md:right-6">
           <a href={whatsappUrl()} target="_blank" rel="noreferrer">Commander sur WhatsApp</a>
         </Button>
       </div>
@@ -112,8 +112,8 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
 
 function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-footer py-12 md:py-20">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-2 lg:grid-cols-4">
+      <footer className="border-t border-border bg-footer py-10 md:py-20">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-2 md:px-6 lg:grid-cols-4">
         <div>
           <Link to="/" className="font-display text-2xl font-semibold text-accent">2M Parfumerie</Link>
           <p className="mt-2 max-w-xs text-[13px] text-muted-foreground">L'authenticité en flacon. Livraison Dakar.</p>
@@ -136,7 +136,7 @@ function SiteFooter() {
           <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-11 items-center rounded-full bg-whatsapp px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary-foreground hover:bg-whatsapp-hover">Commander maintenant</a>
         </FooterColumn>
       </div>
-      <div className="mx-auto mt-8 flex max-w-7xl flex-col justify-between gap-3 border-t border-foreground/5 px-6 pt-8 text-xs text-muted-foreground md:flex-row">
+      <div className="mx-auto mt-8 flex max-w-7xl flex-col justify-between gap-3 border-t border-foreground/5 px-4 pt-8 text-xs text-muted-foreground md:flex-row md:px-6">
         <p>© 2026 2M Parfumerie. Tous droits réservés.</p>
         <p>Fait avec ♥ à Dakar</p>
       </div>
@@ -162,7 +162,7 @@ function FloatingWhatsApp() {
       role="link"
       aria-label="Commander sur WhatsApp"
       onClick={() => { setRippling(true); window.setTimeout(() => setRippling(false), 500); }}
-      className="group fixed bottom-6 right-6 z-50 flex h-[60px] w-[60px] items-center justify-center overflow-visible rounded-full bg-whatsapp text-primary-foreground whatsapp-pulse focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="group fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center overflow-visible rounded-full bg-whatsapp text-primary-foreground whatsapp-pulse focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:bottom-6 md:right-6 md:h-[60px] md:w-[60px]"
     >
       <span className="pointer-events-none absolute right-[72px] hidden whitespace-nowrap rounded-md border border-border bg-background px-3 py-2 text-xs text-foreground opacity-0 shadow-card transition-opacity group-hover:opacity-100 md:block">Commander sur WhatsApp</span>
       {rippling && <span className="absolute inset-0 animate-ping rounded-full bg-primary-foreground/30" aria-hidden="true" />}
