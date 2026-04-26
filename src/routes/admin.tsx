@@ -56,6 +56,7 @@ const blankOrder = {
   notes: "",
   itemsText: "",
 };
+const DELETED_PRODUCT_MARKER = "__2M_ADMIN_DELETED_PRODUCT__";
 const adminTabs: Array<{ key: AdminTab; label: string; icon: typeof ShoppingBag }> = [
   { key: "orders", label: "Commandes", icon: ShoppingBag },
   { key: "products", label: "Produits", icon: Package },
@@ -177,10 +178,18 @@ function AdminPage() {
   };
 
   const deleteProduct = async (product: AdminProduct) => {
-    if (product.source === "catalog")
-      return toast.info("Ce produit catalogue peut être modifié, mais pas supprimé.");
     if (!window.confirm(`Supprimer ${product.name} ?`)) return;
-    const { error } = await supabase.from("products").delete().eq("id", product.id);
+    const query =
+      product.source === "catalog"
+        ? supabase.from("products").insert({
+            ...productPayloadFromRow(product, {
+              description: DELETED_PRODUCT_MARKER,
+              in_stock: false,
+              is_bestseller: false,
+            }),
+          })
+        : supabase.from("products").delete().eq("id", product.id);
+    const { error } = await query;
     if (error) toast.error(error.message);
     else {
       toast.success("Produit supprimé");
@@ -577,7 +586,6 @@ function ProductsPanel({
                 type="button"
                 variant="outline"
                 onClick={() => deleteProduct(product)}
-                disabled={product.source === "catalog"}
               >
                 <Trash2 /> Supprimer
               </Button>
@@ -1023,12 +1031,13 @@ function slugify(value: string) {
 function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): AdminProduct[] {
   const databaseBySlug = new Map(databaseProducts.map((product) => [product.slug, product]));
   const catalogSlugs = new Set(catalog.map(slugifyProduct));
-  const catalogProducts: AdminProduct[] = catalog.map((product) => {
+  const catalogProducts = catalog.flatMap<AdminProduct>((product) => {
     const slug = slugifyProduct(product);
     const savedProduct = databaseBySlug.get(slug);
-    if (savedProduct) return { ...savedProduct, source: "database" };
+    if (savedProduct?.description === DELETED_PRODUCT_MARKER) return [];
+    if (savedProduct) return [{ ...savedProduct, source: "database" as const }];
 
-    return {
+    return [{
       id: `catalog-${slug}`,
       name: product.name,
       subtitle: product.ref,
@@ -1045,10 +1054,10 @@ function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): Admin
       created_at: null,
       updated_at: null,
       source: "catalog",
-    };
+    }];
   });
   const extraDatabaseProducts = databaseProducts
-    .filter((product) => !catalogSlugs.has(product.slug))
+    .filter((product) => !catalogSlugs.has(product.slug) && product.description !== DELETED_PRODUCT_MARKER)
     .map((product) => ({ ...product, source: "database" as const }));
   return [...catalogProducts, ...extraDatabaseProducts];
 }
