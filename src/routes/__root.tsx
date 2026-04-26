@@ -40,8 +40,8 @@ export const Route = createRootRoute({
       { name: "twitter:site", content: "@2mparfumeriesn" },
       { name: "twitter:title", content: "2M Parfumerie Sénégal | Parfums authentiques" },
       { name: "twitter:description", content: "Parfumerie de luxe au Sénégal. Commandez des parfums authentiques et accessibles directement sur WhatsApp." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777170233901-Screenshot_2026-04-26_022328.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777170233901-Screenshot_2026-04-26_022328.webp" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777204414467-Screenshot_2026-04-26_115316.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777204414467-Screenshot_2026-04-26_115316.webp" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
