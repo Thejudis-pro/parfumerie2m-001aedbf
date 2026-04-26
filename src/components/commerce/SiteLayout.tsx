@@ -69,7 +69,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             {itemCount > 0 && <span className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-primary-foreground">{itemCount}</span>}
           </button>
           <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
-            <a href={whatsappUrl()} target="_blank" rel="noreferrer">Commander</a>
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle className="size-4 text-whatsapp" aria-hidden="true" /> Commander</a>
           </Button>
           <div className="flex items-center gap-1 md:hidden">
             <button type="button" onClick={() => setCartOpen(true)} className="relative flex size-11 items-center justify-center text-muted-foreground hover:text-accent" aria-label="Ouvrir le panier">
@@ -99,7 +99,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
           ))}
         </div>
         <Button asChild size="lg" className="absolute bottom-6 left-4 right-4 h-[52px] md:bottom-8 md:left-6 md:right-6">
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer">Commander sur WhatsApp</a>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle className="size-5 text-whatsapp" aria-hidden="true" /> Commander sur WhatsApp</a>
         </Button>
       </div>
 
@@ -122,7 +122,7 @@ function SiteFooter() {
           <div className="mt-6 flex gap-4">
             <a href="https://instagram.com/2mparfumeriesn" target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent" aria-label="Instagram 2M Parfumerie"><Instagram className="size-5" aria-hidden="true" /></a>
             <a href={facebookUrl} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent" aria-label="Facebook 2M Parfumerie"><Facebook className="size-5" aria-hidden="true" /></a>
-            <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-whatsapp hover:text-whatsapp" aria-label="WhatsApp 2M Parfumerie"><MessageCircle className="size-5" aria-hidden="true" /></a>
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-whatsapp text-whatsapp hover:border-whatsapp-hover hover:text-whatsapp-hover" aria-label="WhatsApp 2M Parfumerie"><MessageCircle className="size-5" aria-hidden="true" /></a>
           </div>
         </div>
         <FooterColumn title="Navigation">
@@ -136,7 +136,7 @@ function SiteFooter() {
           <a href="tel:+221781441766" className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {secondPhone}</a>
           <a href={`mailto:${email}`} className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Mail className="size-4" aria-hidden="true" /> {email}</a>
           <p className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground"><MapPin className="size-4" aria-hidden="true" /> Sénégal</p>
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-11 items-center rounded-full bg-whatsapp px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary-foreground hover:bg-whatsapp-hover">Commander maintenant</a>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-whatsapp px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary-foreground hover:bg-whatsapp-hover"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Commander maintenant</a>
         </FooterColumn>
       </div>
       <div className="mx-auto mt-8 flex max-w-7xl flex-col justify-between gap-3 border-t border-foreground/5 px-4 pt-8 text-xs text-muted-foreground md:flex-row md:px-6">
