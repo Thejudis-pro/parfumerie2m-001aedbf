@@ -32,7 +32,7 @@ const schedules = [
 function ContactPage() {
   return (
     <SiteLayout>
-      <section className="bg-surface pt-32 pb-16">
+      <section className="bg-surface pt-24 pb-12 md:pt-32 md:pb-16">
         <div className="section-shell text-center">
           <p className="caption-luxe text-accent">Nous sommes là</p>
           <h1 className="mt-4 font-display text-4xl font-semibold text-foreground md:text-[56px]">
@@ -41,11 +41,11 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-background py-20">
-        <div className="section-shell grid gap-12 md:grid-cols-2 md:gap-16">
+      <section className="bg-background py-14 md:py-20">
+        <div className="section-shell grid gap-10 md:grid-cols-2 md:gap-16">
           <div className="fade-up">
-            <h2 className="mb-8 font-display text-[32px] text-foreground">Comment nous joindre</h2>
-            <div className="space-y-8">
+            <h2 className="mb-6 font-display text-[32px] text-foreground md:mb-8">Comment nous joindre</h2>
+            <div className="space-y-6 md:space-y-8">
               <ContactItem icon={<MessageCircle className="size-7 text-whatsapp" aria-hidden="true" />} label="WhatsApp — Disponible 7j/7">
                 <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="text-lg font-semibold text-foreground hover:text-accent">
                   {displayPhone}
@@ -79,11 +79,11 @@ function ContactPage() {
             </div>
           </div>
 
-          <aside className="fade-up rounded-lg border border-border bg-surface p-8 shadow-card md:self-start">
+          <aside className="fade-up rounded-lg border border-border bg-surface p-5 shadow-card md:self-start md:p-8">
             <h2 className="mb-6 font-display text-2xl text-foreground">Horaires de disponibilité</h2>
             <div>
               {schedules.map(([day, time]) => (
-                <div key={day} className="flex justify-between gap-6 border-b border-border py-3 text-sm">
+                  <div key={day} className="flex justify-between gap-4 border-b border-border py-3 text-sm">
                   <span className="text-muted-foreground">{day}</span>
                   <span className="font-medium text-foreground">{time}</span>
                 </div>
@@ -104,7 +104,7 @@ function ContactPage() {
 
 function ContactItem({ icon, label, children }: { icon: React.ReactNode; label: string; children: React.ReactNode }) {
   return (
-    <div className="flex gap-5">
+    <div className="flex gap-3 md:gap-5">
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-muted">{icon}</div>
       <div>
         <p className="caption-luxe mb-2 text-accent">{label}</p>
