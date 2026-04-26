@@ -19,8 +19,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         whatsapp:
           "bg-whatsapp text-primary-foreground shadow-btn hover:scale-[1.02] hover:bg-whatsapp-hover whatsapp-pulse",
-        luxe:
-          "border border-border bg-surface text-foreground shadow-card hover:-translate-y-1 hover:border-accent hover:bg-surface-alt",
+        luxe: "border border-border bg-surface text-foreground shadow-card hover:-translate-y-1 hover:border-accent hover:bg-surface-alt",
       },
       size: {
         default: "h-12 px-5 py-3",

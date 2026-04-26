@@ -30,20 +30,17 @@ const values = [
   {
     icon: Gem,
     title: "L'authenticité avant tout",
-    body:
-      "Chaque flacon est sourcé directement. Nous ne faisons aucun compromis sur la qualité — c'est notre engagement fondateur.",
+    body: "Chaque flacon est sourcé directement. Nous ne faisons aucun compromis sur la qualité — c'est notre engagement fondateur.",
   },
   {
     icon: Users,
     title: "Le parfum est personnel",
-    body:
-      "Il n'existe pas un parfum universel. C'est pour ça qu'on prend le temps de vous connaître avant de vous conseiller.",
+    body: "Il n'existe pas un parfum universel. C'est pour ça qu'on prend le temps de vous connaître avant de vous conseiller.",
   },
   {
     icon: MapPin,
     title: "Le Sénégal, au cœur de tout",
-    body:
-      "Notre marché, c'est le Sénégal. Notre livraison couvre le pays. Notre équipe accompagne chaque client avec la même exigence, où qu’il se trouve.",
+    body: "Notre marché, c'est le Sénégal. Notre livraison couvre le pays. Notre équipe accompagne chaque client avec la même exigence, où qu’il se trouve.",
   },
 ];
 
@@ -68,7 +65,11 @@ function AboutPage() {
       <section className="bg-background py-16 md:py-24">
         <div className="section-shell grid gap-10 md:grid-cols-[40fr_60fr] md:items-center md:gap-12">
           <div className="fade-up flex min-h-[320px] items-center justify-center overflow-hidden rounded-xl border border-border bg-card p-8 shadow-card">
-            <img src={brandLogo} alt="Logo 2M Parfumerie" className="max-h-[340px] w-full object-contain" />
+            <img
+              src={brandLogo}
+              alt="Logo 2M Parfumerie"
+              className="max-h-[340px] w-full object-contain"
+            />
           </div>
           <div className="fade-up">
             <p className="caption-luxe text-accent">La genèse</p>
@@ -77,20 +78,20 @@ function AboutPage() {
             </h2>
             <div className="mt-6 space-y-6 text-base leading-[1.9] text-muted-foreground">
               <p>
-                À l'origine de 2M Parfumerie, il y a une conviction simple : le parfum de luxe
-                ne devrait pas être réservé à une élite. Chaque Sénégalais mérite de porter une
-                fragrance authentique — celle qui lui ressemble, celle qui laisse une trace dans
-                une pièce, celle dont on se souvient.
+                À l'origine de 2M Parfumerie, il y a une conviction simple : le parfum de luxe ne
+                devrait pas être réservé à une élite. Chaque Sénégalais mérite de porter une
+                fragrance authentique — celle qui lui ressemble, celle qui laisse une trace dans une
+                pièce, celle dont on se souvient.
               </p>
               <p>
-                Nous avons commencé par une passion, une sélection rigoureuse, et l'obsession
-                d'une seule chose : vous livrer exactement ce que vous attendez. Pas des
-                imitations. Pas des approximations. Des parfums vrais.
+                Nous avons commencé par une passion, une sélection rigoureuse, et l'obsession d'une
+                seule chose : vous livrer exactement ce que vous attendez. Pas des imitations. Pas
+                des approximations. Des parfums vrais.
               </p>
               <p>
-                Aujourd'hui, nos collections couvrent six univers olfactifs — du SCENTLAB épuré
-                aux Dubai Perfumes orientaux — et notre équipe est disponible 7j/7 sur WhatsApp
-                pour vous guider vers votre signature personnelle.
+                Aujourd'hui, nos collections couvrent six univers olfactifs — du SCENTLAB épuré aux
+                Dubai Perfumes orientaux — et notre équipe est disponible 7j/7 sur WhatsApp pour
+                vous guider vers votre signature personnelle.
               </p>
             </div>
           </div>
@@ -118,9 +119,15 @@ function AboutPage() {
             ))}
           </div>
           <div className="mt-16 text-center">
-            <Button asChild variant="whatsapp" size="lg" className="w-full max-w-full whitespace-normal px-5 text-center leading-relaxed sm:w-auto sm:whitespace-nowrap sm:px-8">
+            <Button
+              asChild
+              variant="whatsapp"
+              size="lg"
+              className="w-full max-w-full whitespace-normal px-5 text-center leading-relaxed sm:w-auto sm:whitespace-nowrap sm:px-8"
+            >
               <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-                <MessageCircle className="size-5" aria-hidden="true" /> Discuter avec nous sur WhatsApp
+                <MessageCircle className="size-5" aria-hidden="true" /> Discuter avec nous sur
+                WhatsApp
               </a>
             </Button>
           </div>

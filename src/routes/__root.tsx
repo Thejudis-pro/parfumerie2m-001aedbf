@@ -31,17 +31,37 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "2M Parfumerie Sénégal | Parfums authentiques" },
-      { name: "description", content: "Parfumerie de luxe au Sénégal. Commandez des parfums authentiques et accessibles directement sur WhatsApp." },
+      {
+        name: "description",
+        content:
+          "Parfumerie de luxe au Sénégal. Commandez des parfums authentiques et accessibles directement sur WhatsApp.",
+      },
       { name: "author", content: "2M Parfumerie" },
       { property: "og:title", content: "2M Parfumerie Sénégal | Parfums authentiques" },
-      { property: "og:description", content: "Parfumerie de luxe au Sénégal. Commandez des parfums authentiques et accessibles directement sur WhatsApp." },
+      {
+        property: "og:description",
+        content:
+          "Parfumerie de luxe au Sénégal. Commandez des parfums authentiques et accessibles directement sur WhatsApp.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@2mparfumeriesn" },
       { name: "twitter:title", content: "2M Parfumerie Sénégal | Parfums authentiques" },
-      { name: "twitter:description", content: "Parfumerie de luxe au Sénégal. Commandez des parfums authentiques et accessibles directement sur WhatsApp." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777204414467-Screenshot_2026-04-26_115316.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777204414467-Screenshot_2026-04-26_115316.webp" },
+      {
+        name: "twitter:description",
+        content:
+          "Parfumerie de luxe au Sénégal. Commandez des parfums authentiques et accessibles directement sur WhatsApp.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777204414467-Screenshot_2026-04-26_115316.webp",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777204414467-Screenshot_2026-04-26_115316.webp",
+      },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
