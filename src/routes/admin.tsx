@@ -1035,7 +1035,7 @@ function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): Admin
     const slug = slugifyProduct(product);
     const savedProduct = databaseBySlug.get(slug);
     if (savedProduct?.description === DELETED_PRODUCT_MARKER) return [];
-    if (savedProduct) return { ...savedProduct, source: "database" };
+    if (savedProduct) return [{ ...savedProduct, source: "database" as const }];
 
     return [{
       id: `catalog-${slug}`,
