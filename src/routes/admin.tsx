@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   Check,
   Edit3,
+  ImageUp,
   MessageCircle,
   Package,
   Plus,
@@ -785,6 +786,33 @@ function ProductForm({
   editing: boolean;
   saving: boolean;
 }) {
+  const [uploadingImage, setUploadingImage] = useState(false);
+
+  const uploadProductImage = async (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      toast.error("Choisissez un fichier image.");
+      return;
+    }
+
+    setUploadingImage(true);
+    const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
+    const baseName = slugify(form.name || file.name.replace(/\.[^.]+$/, "")) || "produit";
+    const filePath = `public/${baseName}-${Date.now()}.${extension}`;
+    const { error } = await supabase.storage.from("product-images").upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: true,
+    });
+
+    if (error) {
+      toast.error(error.message);
+    } else {
+      const { data } = supabase.storage.from("product-images").getPublicUrl(filePath);
+      setForm({ ...form, image_url: data.publicUrl });
+      toast.success("Image ajoutée");
+    }
+    setUploadingImage(false);
+  };
+
   return (
     <form
       onSubmit={onSubmit}
@@ -838,6 +866,32 @@ function ProductForm({
           value={form.image_url}
           onChange={(value) => setForm({ ...form, image_url: value })}
         />
+        <label className="grid gap-2 text-sm font-medium text-foreground sm:col-span-2">
+          Image produit
+          <div className="grid gap-3 sm:grid-cols-[160px_1fr] sm:items-center">
+            <input
+              className="sr-only"
+              id="product-image-upload"
+              type="file"
+              accept="image/*"
+              onChange={(event) => {
+                const file = event.target.files?.[0];
+                if (file) void uploadProductImage(file);
+                event.target.value = "";
+              }}
+              disabled={uploadingImage}
+            />
+            <label
+              htmlFor="product-image-upload"
+              className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground shadow-btn transition-all duration-300 hover:scale-[1.02] hover:bg-accent-hover"
+            >
+              <ImageUp className="size-4" /> {uploadingImage ? "Envoi…" : "Uploader"}
+            </label>
+            <span className="break-all rounded-md border border-border bg-background px-4 py-3 text-sm font-normal text-muted-foreground">
+              {form.image_url || "Aucune image sélectionnée"}
+            </span>
+          </div>
+        </label>
         <Field
           label="Notes de tête"
           value={form.notes_top}
