@@ -114,17 +114,20 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
                       key={image}
                       type="button"
                       onClick={() => setSelectedImage(image)}
-                      className={`aspect-square overflow-hidden rounded-md border bg-surface p-1.5 transition-all hover:border-accent ${
+                      className={`group relative aspect-square overflow-hidden rounded-md border bg-surface p-1.5 transition-all hover:border-accent ${
                         isSelected ? "border-accent shadow-card" : "border-border"
                       }`}
                       aria-label={`Afficher la photo ${index + 1} de ${product.name}`}
                     >
-                    <img
-                      src={image}
-                      alt={`${product.name} vue ${index + 1}`}
-                      className="h-full w-full object-contain"
-                      loading="lazy"
-                    />
+                      <img
+                        src={image}
+                        alt={`${product.name} vue ${index + 1}`}
+                        className="h-full w-full object-contain"
+                        loading="lazy"
+                      />
+                      {!isSelected && (
+                        <span className="pointer-events-none absolute inset-0 bg-background/55 transition-opacity group-hover:opacity-0" />
+                      )}
                     </button>
                   );
                 })}
