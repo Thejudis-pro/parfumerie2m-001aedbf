@@ -388,7 +388,7 @@ function OrdersPanel({ orders, orderForm, setOrderForm, saveOrder, updateOrderSt
             </div>
             {order.notes && <p className="mt-3 text-sm text-muted-foreground">Note : {order.notes}</p>}
             <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-              {order.customer_phone || "" && <Button type="button" variant="outline" className="flex-1" onClick={() => window.open(`https://wa.me/${normalizePhone(order.customer_phone || "")}`, "_blank")}>WhatsApp</Button>}
+               {order.customer_phone && <Button type="button" variant="outline" className="flex-1" onClick={() => window.open(`https://wa.me/${normalizePhone(order.customer_phone)}`, "_blank")}>WhatsApp</Button>}
               <Button type="button" variant="outline" className="flex-1" onClick={() => deleteOrder(order)}><Trash2 /> Supprimer</Button>
             </div>
           </article>
