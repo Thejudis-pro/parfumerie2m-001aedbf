@@ -10,6 +10,7 @@ import {
   collectionLabel,
   findProductBySlug,
   formatPrice,
+  productImages,
   slugifyProduct,
   type BoutiqueProduct,
 } from "@/lib/catalog-data";
@@ -64,6 +65,7 @@ function ProductPage() {
 
 function ProductTemplate({ product }: { product: BoutiqueProduct }) {
   const label = collectionLabel(product.collection);
+  const images = productImages(product);
   const similar = catalog
     .filter(
       (item) =>
@@ -78,11 +80,25 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
           <div className="order-1">
             <div className="mx-auto flex aspect-square max-w-lg items-center justify-center overflow-hidden rounded-xl bg-surface p-5 shadow-card md:p-8">
               <img
-                src={product.image}
+                src={images[0]}
                 alt={`${product.name} chez 2M Parfumerie`}
                 className="h-full w-full rounded-lg object-contain"
               />
             </div>
+            {images.length > 1 && (
+              <div className="mx-auto mt-4 grid max-w-lg grid-cols-4 gap-3">
+                {images.slice(1).map((image, index) => (
+                  <div key={image} className="aspect-square overflow-hidden rounded-md bg-surface p-2">
+                    <img
+                      src={image}
+                      alt={`${product.name} vue ${index + 2}`}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <aside className="order-2 md:sticky md:top-24 md:self-start">
