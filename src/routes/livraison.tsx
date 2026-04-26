@@ -5,7 +5,7 @@ import { SectionHeader, WhatsAppBand } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 
 export const Route = createFileRoute("/livraison")({
-  head: () => ({ meta: [{ title: "Livraison | 2M Parfumerie Dakar" }, { name: "description", content: "Informations de livraison et confirmation WhatsApp pour vos commandes 2M Parfumerie à Dakar." }] }),
+  head: () => ({ meta: [{ title: "Livraison | 2M Parfumerie Sénégal" }, { name: "description", content: "Informations de livraison et confirmation WhatsApp pour vos commandes 2M Parfumerie partout au Sénégal." }] }),
   component: DeliveryPage,
 });
 
@@ -13,7 +13,7 @@ function DeliveryPage() {
   const steps = [
     { icon: MessageCircle, title: "Commande", text: "Envoyez votre choix sur WhatsApp avec le parfum, l’édition et vos coordonnées." },
     { icon: Clock, title: "Confirmation", text: "Nous confirmons disponibilité, prix, délai et zone avant toute validation." },
-    { icon: MapPinned, title: "Réception", text: "La remise est organisée selon votre localisation à Dakar et votre disponibilité." },
+    { icon: MapPinned, title: "Réception", text: "La remise est organisée selon votre localisation au Sénégal et votre disponibilité." },
   ];
   return (
     <SiteLayout>

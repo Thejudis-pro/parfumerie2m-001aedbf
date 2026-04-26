@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, Instagram, Mail, MapPin, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { displayPhone, email, instagram, products, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 import { ProductCard } from "./ProductCard";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function SectionHeader({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (
@@ -25,7 +26,7 @@ export function ProductGrid({ limit }: { limit?: number }) {
 }
 
 export function Ticker() {
-  const items = ["✦ Livraison Dakar & banlieue", "✦ +100 collections exclusives", "✦ Paiement à la livraison", "✦ Notes olfactives certifiées", "✦ SCENTLAB · DUBAI · TAKEOFF", "✦ Réponse WhatsApp en moins d'1h", "✦ Haqqi · Pocket · Authentic"];
+  const items = ["✦ Livraison partout au Sénégal", "✦ +100 collections exclusives", "✦ Paiement à la livraison", "✦ Notes olfactives certifiées", "✦ SCENTLAB · DUBAI · TAKEOFF", "✦ Réponse WhatsApp en moins d'1h", "✦ Haqqi · Pocket · Authentic"];
   return (
     <div className="flex h-11 items-center overflow-hidden whitespace-nowrap bg-accent md:h-12" aria-hidden="true">
       <div className="ticker-track flex w-max shrink-0 flex-nowrap items-center gap-8">
@@ -46,7 +47,7 @@ export function WhatsAppBand() {
           <h2 className="mt-3 font-display text-[32px] leading-tight text-foreground md:text-5xl">Un parfum choisi, un message envoyé, une réponse humaine.</h2>
         </div>
         <Button asChild variant="whatsapp" size="lg">
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Commander sur WhatsApp</a>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><WhatsAppIcon className="size-5" aria-hidden="true" /> Commander sur WhatsApp</a>
         </Button>
       </div>
     </section>
@@ -55,16 +56,16 @@ export function WhatsAppBand() {
 
 export function ContactCards() {
   const cards = [
-    { icon: MessageCircle, label: "WhatsApp", value: displayPhone, href: whatsappUrl() },
+    { icon: WhatsAppIcon, label: "WhatsApp", value: displayPhone, href: whatsappUrl(), brand: true },
     { icon: Phone, label: "Téléphone", value: secondPhone, href: "tel:+221781441766" },
     { icon: Instagram, label: "Instagram", value: instagram, href: "https://instagram.com/2mparfumeriesn" },
     { icon: Mail, label: "Email", value: email, href: `mailto:${email}` },
   ];
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {cards.map(({ icon: Icon, label, value, href }) => (
+      {cards.map(({ icon: Icon, label, value, href, brand }) => (
         <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="min-h-32 rounded-lg border border-border bg-card p-5 shadow-card transition-all hover:-translate-y-1 hover:border-accent">
-          <Icon className="mb-5 text-accent" aria-hidden="true" />
+          <Icon className={brand ? "mb-5 size-7 text-whatsapp" : "mb-5 text-accent"} aria-hidden="true" />
           <p className="caption-luxe text-muted-foreground">{label}</p>
           <p className="mt-2 font-medium text-foreground">{value}</p>
         </a>
@@ -72,7 +73,7 @@ export function ContactCards() {
       <div className="rounded-lg border border-border bg-card p-5 shadow-card sm:col-span-2 lg:col-span-4">
         <MapPin className="mb-5 text-accent" aria-hidden="true" />
         <p className="caption-luxe text-muted-foreground">Zone</p>
-        <p className="mt-2 font-display text-2xl text-foreground">Dakar, Sénégal — commandes et livraisons coordonnées sur WhatsApp.</p>
+        <p className="mt-2 font-display text-2xl text-foreground">Sénégal — commandes et livraisons coordonnées partout au pays sur WhatsApp ou par appel.</p>
       </div>
     </div>
   );

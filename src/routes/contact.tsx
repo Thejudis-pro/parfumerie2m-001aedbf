@@ -1,22 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Instagram, Mail, MapPin, Phone } from "lucide-react";
 
 import { SiteLayout } from "@/components/commerce/SiteLayout";
+import { WhatsAppIcon } from "@/components/commerce/WhatsAppIcon";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — 2M Parfumerie Dakar | WhatsApp & Téléphone" },
+      { title: "Contact — 2M Parfumerie Sénégal | WhatsApp & Téléphone" },
       {
         name: "description",
         content:
-          "Contactez 2M Parfumerie à Dakar. WhatsApp disponible 7j/7. Livraison Dakar et banlieue. commande@2mparfumerie.com",
+          "Contactez 2M Parfumerie au Sénégal. WhatsApp et appels disponibles 7j/7. Livraison partout au Sénégal. commande@2mparfumerie.com",
       },
-      { property: "og:title", content: "Contact — 2M Parfumerie Dakar" },
+      { property: "og:title", content: "Contact — 2M Parfumerie Sénégal" },
       {
         property: "og:description",
-        content: "WhatsApp disponible 7j/7. Livraison Dakar et banlieue proche.",
+        content: "WhatsApp et appels disponibles 7j/7. Livraison partout au Sénégal.",
       },
     ],
   }),
@@ -46,7 +47,7 @@ function ContactPage() {
           <div className="fade-up">
             <h2 className="mb-6 font-display text-[32px] text-foreground md:mb-8">Comment nous joindre</h2>
             <div className="space-y-6 md:space-y-8">
-              <ContactItem icon={<MessageCircle className="size-7 text-whatsapp" aria-hidden="true" />} label="WhatsApp — Disponible 7j/7">
+              <ContactItem icon={<WhatsAppIcon className="size-7 text-whatsapp" aria-hidden="true" />} label="WhatsApp — Disponible 7j/7">
                 <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="text-lg font-semibold text-foreground hover:text-accent">
                   {displayPhone}
                 </a>
@@ -56,7 +57,7 @@ function ContactPage() {
                 </a>
               </ContactItem>
 
-              <ContactItem icon={<Phone className="size-6 text-accent" aria-hidden="true" />} label="Téléphone">
+              <ContactItem icon={<Phone className="size-6 text-accent" aria-hidden="true" />} label="Appel normal — 2 numéros">
                 <div className="flex flex-wrap gap-x-3 gap-y-1 text-foreground">
                   <a href="tel:+221761923441" className="hover:text-accent">{displayPhone}</a>
                   <span className="text-muted-foreground">·</span>
@@ -73,8 +74,8 @@ function ContactPage() {
               </ContactItem>
 
               <ContactItem icon={<MapPin className="size-6 text-accent" aria-hidden="true" />} label="Zone de livraison">
-                <p className="text-foreground">Dakar et banlieue proche</p>
-                <p className="mt-1 text-sm text-muted-foreground">Livraison le jour même pour commandes avant 16h</p>
+                <p className="text-foreground">Partout au Sénégal</p>
+                <p className="mt-1 text-sm text-muted-foreground">Livraison le jour même selon la zone pour commandes avant 21h</p>
               </ContactItem>
             </div>
           </div>
@@ -92,9 +93,9 @@ function ContactPage() {
             <div className="my-6 h-px bg-border" />
             <h3 className="mb-4 font-display text-xl text-foreground">Zone de livraison</h3>
             <p className="text-[13px] leading-[1.8] text-muted-foreground">
-              Dakar centre · Plateau · Almadies · Sacré-Cœur · Mermoz Point E · Ouakam · Yoff · Parcelles Assainies et environs
+              Livraison disponible partout au Sénégal, avec confirmation du délai selon votre ville ou région.
             </p>
-            <span className="caption-luxe mt-4 block text-accent">Livraison possible au-delà — nous contacter</span>
+            <span className="caption-luxe mt-4 block text-accent">Clients satisfaits dans plusieurs régions du Sénégal</span>
           </aside>
         </div>
       </section>

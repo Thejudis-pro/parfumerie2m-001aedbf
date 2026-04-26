@@ -10,16 +10,16 @@ import { whatsappUrl } from "@/lib/perfume-data";
 export const Route = createFileRoute("/a-propos")({
   head: () => ({
     meta: [
-      { title: "Notre Histoire — 2M Parfumerie | Parfums Authentiques à Dakar" },
+      { title: "Notre Histoire — 2M Parfumerie | Parfums Authentiques au Sénégal" },
       {
         name: "description",
         content:
-          "L'histoire derrière 2M Parfumerie — une mission dakaroise : rendre les parfums authentiques accessibles à tous.",
+          "L'histoire derrière 2M Parfumerie — une mission sénégalaise : rendre les parfums authentiques accessibles à tous.",
       },
       { property: "og:title", content: "Notre Histoire — 2M Parfumerie" },
       {
         property: "og:description",
-        content: "Une mission dakaroise : rendre les parfums authentiques accessibles à tous.",
+        content: "Une mission sénégalaise : rendre les parfums authentiques accessibles à tous.",
       },
     ],
   }),
@@ -41,9 +41,9 @@ const values = [
   },
   {
     icon: MapPin,
-    title: "Dakar, au cœur de tout",
+    title: "Le Sénégal, au cœur de tout",
     body:
-      "Notre marché, c'est ici. Notre livraison, c'est ici. Notre équipe, c'est ici. Nous sommes un business dakarois, fiers de l'être.",
+      "Notre marché, c'est le Sénégal. Notre livraison couvre le pays. Notre équipe accompagne chaque client avec la même exigence, où qu’il se trouve.",
   },
 ];
 
@@ -53,7 +53,7 @@ function AboutPage() {
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-48 md:pb-24">
         <img
           src={aboutHero}
-          alt="Flacon précieux tenu dans une lumière dorée à Dakar"
+          alt="Flacon précieux tenu dans une lumière dorée au Sénégal"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-background/75" aria-hidden="true" />
@@ -73,12 +73,12 @@ function AboutPage() {
           <div className="fade-up">
             <p className="caption-luxe text-accent">La genèse</p>
             <h2 className="mt-4 font-display text-[32px] font-medium leading-tight text-foreground md:text-[40px]">
-              Né d'une passion, construit pour Dakar.
+              Né d'une passion, construit pour le Sénégal.
             </h2>
             <div className="mt-6 space-y-6 text-base leading-[1.9] text-muted-foreground">
               <p>
                 À l'origine de 2M Parfumerie, il y a une conviction simple : le parfum de luxe
-                ne devrait pas être réservé à une élite. Chaque Dakarois mérite de porter une
+                ne devrait pas être réservé à une élite. Chaque Sénégalais mérite de porter une
                 fragrance authentique — celle qui lui ressemble, celle qui laisse une trace dans
                 une pièce, celle dont on se souvient.
               </p>

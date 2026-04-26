@@ -1,24 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MessageCircle, Plus } from "lucide-react";
+import { Phone, Plus } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { whatsappUrl } from "@/lib/perfume-data";
+import { WhatsAppIcon } from "@/components/commerce/WhatsAppIcon";
+import { displayPhone, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — Questions Fréquentes | 2M Parfumerie Dakar" },
+      { title: "FAQ — Questions Fréquentes | 2M Parfumerie Sénégal" },
       {
         name: "description",
         content:
-          "Toutes vos questions sur la livraison, l'authenticité, les paiements et les retours chez 2M Parfumerie Dakar.",
+          "Toutes vos questions sur la livraison partout au Sénégal, l'authenticité, les paiements et les retours chez 2M Parfumerie.",
       },
-      { property: "og:title", content: "FAQ — Questions Fréquentes | 2M Parfumerie Dakar" },
+      { property: "og:title", content: "FAQ — Questions Fréquentes | 2M Parfumerie Sénégal" },
       {
         property: "og:description",
-        content: "Livraison, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie Dakar.",
+        content: "Livraison partout au Sénégal, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie.",
       },
     ],
   }),
@@ -32,14 +33,14 @@ const faqs = [
       "Absolument. Tous nos parfums sont sourcés directement auprès de distributeurs certifiés. Nous ne vendons aucune imitation ou contrefaçon. Si vous avez le moindre doute après réception, contactez-nous immédiatement sur WhatsApp.",
   },
   {
-    question: "Comment se passe la livraison à Dakar ?",
+    question: "Comment se passe la livraison au Sénégal ?",
     answer:
-      "Nous livrons à Dakar et dans les banlieues proches. Pour toute commande passée avant 21h, nous faisons le maximum pour livrer le jour même. Passé 21h, livraison garantie le lendemain. Contactez-nous sur WhatsApp pour confirmer votre zone.",
+      "Nous livrons partout au Sénégal. Pour toute commande passée avant 21h, nous faisons le maximum pour livrer le jour même selon votre zone. Passé 21h, livraison garantie le lendemain ou selon les délais de transport vers votre région. Contactez-nous sur WhatsApp ou par appel pour confirmer votre localité.",
   },
   {
     question: "Quels sont les modes de paiement acceptés ?",
     answer:
-      "Nous acceptons le paiement à la livraison (espèces), Orange Money, Wave, et Free Money. Vous payez uniquement quand le parfum est entre vos mains — aucun risque de votre côté.",
+      "Nous acceptons le paiement à la livraison (espèces), Orange Money et Wave. Nous n’acceptons pas Free Money. Vous payez uniquement quand le parfum est entre vos mains — aucun risque de votre côté.",
   },
   {
     question: "Puis-je retourner un produit si je ne suis pas satisfait(e) ?",
@@ -52,9 +53,9 @@ const faqs = [
       "C'est notre spécialité. Écrivez-nous sur WhatsApp en décrivant votre style, l'occasion pour laquelle vous cherchez un parfum, et votre budget — nous vous conseillerons personnellement sur 2-3 options parfaites pour vous.",
   },
   {
-    question: "Livrez-vous en dehors de Dakar ?",
+    question: "Livrez-vous dans les régions du Sénégal ?",
     answer:
-      "Nous livrons principalement à Dakar et sa banlieue. Pour les autres villes du Sénégal, contactez-nous sur WhatsApp — nous étudions chaque demande et proposons des solutions via des transporteurs partenaires selon votre localisation.",
+      "Oui, nous livrons partout dans les régions du Sénégal. Nous avons déjà des clients satisfaits de nos produits dans plusieurs régions ; contactez-nous sur WhatsApp ou par appel pour confirmer le délai et le mode de livraison adaptés à votre localité.",
   },
   {
     question: "Quelle est la différence entre vos collections ?",
@@ -64,7 +65,7 @@ const faqs = [
   {
     question: "Comment passer une commande ?",
     answer:
-      "C'est simple : trouvez votre parfum dans la boutique, cliquez sur 'Commander', et vous serez redirigé(e) vers WhatsApp avec le produit déjà mentionné dans le message. Confirmez votre adresse et c'est parti !",
+      "C'est simple : trouvez votre parfum dans la boutique, cliquez sur 'Commander', et vous serez redirigé(e) vers WhatsApp avec le produit déjà mentionné dans le message. Vous pouvez aussi nous appeler directement via nos deux numéros pour commander ou poser vos questions.",
   },
 ];
 
@@ -116,12 +117,16 @@ function FaqPage() {
 
           <div className="mt-16 text-center">
             <p className="caption-luxe text-accent">Autre question ?</p>
-            <h2 className="mt-3 font-display text-[32px] text-foreground">On est sur WhatsApp.</h2>
-            <Button asChild size="lg" className="mt-6">
+            <h2 className="mt-3 font-display text-[32px] text-foreground">On est sur WhatsApp et par téléphone.</h2>
+            <Button asChild variant="whatsapp" size="lg" className="mt-6">
               <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-                <MessageCircle aria-hidden="true" /> Nous écrire →
+                <WhatsAppIcon className="size-5" aria-hidden="true" /> Nous écrire sur WhatsApp →
               </a>
             </Button>
+            <div className="mt-5 flex flex-col items-center justify-center gap-3 text-sm text-muted-foreground sm:flex-row">
+              <a href="tel:+221761923441" className="inline-flex min-h-11 items-center gap-2 hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {displayPhone}</a>
+              <a href="tel:+221781441766" className="inline-flex min-h-11 items-center gap-2 hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {secondPhone}</a>
+            </div>
           </div>
         </div>
       </section>
