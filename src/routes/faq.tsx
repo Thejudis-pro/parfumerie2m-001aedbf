@@ -73,7 +73,7 @@ function FaqPage() {
 
   return (
     <SiteLayout>
-      <section className="bg-surface pt-32 pb-16">
+      <section className="bg-surface pt-24 pb-12 md:pt-32 md:pb-16">
         <div className="section-shell text-center">
           <p className="caption-luxe text-accent">On a les réponses</p>
           <h1 className="mt-4 font-display text-4xl font-semibold text-foreground md:text-[56px]">
@@ -82,7 +82,7 @@ function FaqPage() {
         </div>
       </section>
 
-      <section className="bg-background py-20">
+      <section className="bg-background py-14 md:py-20">
         <div className="section-shell mx-auto max-w-3xl">
           <div className="divide-y divide-border border-y border-border">
             {faqs.map((faq, index) => {
