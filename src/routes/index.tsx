@@ -1,12 +1,15 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Check, MessageCircle, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import homeHeroBottle from "@/assets/home-white-bottle.png";
-import { catalog, formatPrice, slugifyProduct } from "@/lib/catalog-data";
+import { catalog, formatPrice, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
+import { supabase } from "@/integrations/supabase/client";
+import { mergeLiveCatalog } from "@/lib/live-catalog";
 import { whatsappUrl } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/")({
@@ -32,7 +35,7 @@ export const Route = createFileRoute("/")({
 const heroMessage =
   "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos collections. Pouvez-vous m'aider ?";
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
-const featuredProducts = catalog.slice(0, 4);
+const fallbackFeaturedProducts = catalog.slice(0, 4);
 
 const promises = [
   {
@@ -80,6 +83,16 @@ const testimonials = [
 ];
 
 function Index() {
+  const [featuredProducts, setFeaturedProducts] = useState<BoutiqueProduct[]>(fallbackFeaturedProducts);
+
+  useEffect(() => {
+    const loadFeaturedProducts = async () => {
+      const { data } = await supabase.from("products").select("*");
+      setFeaturedProducts(mergeLiveCatalog(data ?? []).slice(0, 4));
+    };
+    void loadFeaturedProducts();
+  }, []);
+
   return (
     <SiteLayout>
       <section className="relative overflow-hidden bg-background pt-24 md:min-h-screen md:pt-32">
