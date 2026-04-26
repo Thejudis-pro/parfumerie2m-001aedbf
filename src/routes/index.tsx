@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
+import homeHeroBottle from "@/assets/home-white-bottle.png";
 import { catalog, formatPrice, slugifyProduct } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
@@ -28,7 +29,6 @@ export const Route = createFileRoute("/")({
 
 const heroMessage = "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos collections. Pouvez-vous m'aider ?";
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
-const heroProduct = catalog.find((product) => product.name === "Lisbon") ?? catalog[0];
 const featuredProducts = catalog.slice(0, 4);
 
 const promises = [
@@ -55,8 +55,8 @@ function Index() {
               <h1 className="fade-up font-display text-4xl font-semibold leading-[1.1] text-foreground md:text-7xl" style={{ animationDelay: "120ms" }}>Votre signature olfactive, livrée au Sénégal.</h1>
                <p className="fade-up mt-6 max-w-lg text-base text-muted-foreground md:text-lg" style={{ animationDelay: "240ms" }}>Le parfum n'est pas un luxe — c'est votre identité. +100 collections authentiques, disponibles maintenant.</p>
               <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "360ms" }}>
-                <Button asChild size="lg">
-                  <a href={whatsappUrl(heroMessage)} target="_blank" rel="noreferrer"><MessageCircle className="size-5 text-whatsapp" aria-hidden="true" /> Commander sur WhatsApp</a>
+                <Button asChild variant="whatsapp" size="lg">
+                  <a href={whatsappUrl(heroMessage)} target="_blank" rel="noreferrer"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Commander sur WhatsApp</a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link to="/boutique" search={{ collection: "all", price: "all" }}>Explorer la boutique</Link>
@@ -68,7 +68,7 @@ function Index() {
             </div>
           </div>
           <div className="relative order-2 h-[42vh] min-h-[300px] overflow-hidden bg-surface-alt md:h-full md:min-h-[calc(100vh-128px)]">
-            <img src={heroProduct.image} alt="TAKEOFF Lisbon chez 2M Parfumerie" className="h-full w-full object-contain p-6 md:p-8" />
+            <img src={homeHeroBottle} alt="Flacon blanc SCENTLAB chez 2M Parfumerie" className="h-full w-full object-cover" />
           </div>
         </div>
       </section>
@@ -109,7 +109,7 @@ function Index() {
       </section>
 
       <section className="final-cta-bg border-t border-border py-16 md:py-20">
-        <div className="section-shell mx-auto max-w-2xl text-center"><p className="caption-luxe mb-4 text-accent">Trouvez votre signature</p><h2 className="font-display text-[32px] leading-[1.2] text-foreground md:text-5xl">Votre parfum parfait est à un message WhatsApp.</h2><p className="mt-4 text-muted-foreground">Décrivez-nous votre style, votre occasion, votre budget — on s'occupe du reste.</p><Button asChild size="lg" className="mt-8 min-h-14 px-10 py-5 text-[15px]"><a href={whatsappUrl(finalMessage)} target="_blank" rel="noreferrer"><MessageCircle className="mr-1 size-5 text-whatsapp" aria-hidden="true" /> Démarrer sur WhatsApp</a></Button></div>
+        <div className="section-shell mx-auto max-w-2xl text-center"><p className="caption-luxe mb-4 text-accent">Trouvez votre signature</p><h2 className="font-display text-[32px] leading-[1.2] text-foreground md:text-5xl">Votre parfum parfait est à un message WhatsApp.</h2><p className="mt-4 text-muted-foreground">Décrivez-nous votre style, votre occasion, votre budget — on s'occupe du reste.</p><Button asChild variant="whatsapp" size="lg" className="mt-8 min-h-14 px-10 py-5 text-[15px]"><a href={whatsappUrl(finalMessage)} target="_blank" rel="noreferrer"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Démarrer sur WhatsApp</a></Button></div>
       </section>
     </SiteLayout>
   );

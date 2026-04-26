@@ -47,7 +47,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-background text-foreground">
       <header>
         <nav className={cn("fixed left-0 top-0 z-50 flex h-16 w-full items-center justify-between border-b border-transparent px-3 transition-all duration-300 md:h-20 md:px-6", scrolled && "glass-nav border-accent/15")}>
-          <Link to="/" className="font-display text-xl font-semibold text-accent md:text-[22px]" aria-label="2M Parfumerie accueil">
+          <Link to="/" className="brand-wordmark text-xl font-bold text-accent md:text-[24px]" aria-label="2M Parfumerie accueil">
             2M Parfumerie
           </Link>
           <div className="hidden items-center gap-8 md:flex">
@@ -68,8 +68,8 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             <ShoppingBag className="size-[22px]" aria-hidden="true" />
             {itemCount > 0 && <span className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-primary-foreground">{itemCount}</span>}
           </button>
-          <Button asChild variant="outline" size="sm" className="hidden md:inline-flex">
-            <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle className="size-4 text-whatsapp" aria-hidden="true" /> Commander</a>
+          <Button asChild variant="whatsapp" size="sm" className="hidden md:inline-flex">
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Commander</a>
           </Button>
           <div className="flex items-center gap-1 md:hidden">
             <button type="button" onClick={() => setCartOpen(true)} className="relative flex size-11 items-center justify-center text-muted-foreground hover:text-accent" aria-label="Ouvrir le panier">
@@ -98,8 +98,8 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             </Link>
           ))}
         </div>
-        <Button asChild size="lg" className="absolute bottom-6 left-4 right-4 h-[52px] md:bottom-8 md:left-6 md:right-6">
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle className="size-5 text-whatsapp" aria-hidden="true" /> Commander sur WhatsApp</a>
+        <Button asChild variant="whatsapp" size="lg" className="absolute bottom-6 left-4 right-4 h-[52px] md:bottom-8 md:left-6 md:right-6">
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Commander sur WhatsApp</a>
         </Button>
       </div>
 
@@ -117,7 +117,7 @@ function SiteFooter() {
       <footer className="border-t border-border bg-footer py-10 md:py-20">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-2 md:px-6 lg:grid-cols-4">
         <div>
-          <Link to="/" className="font-display text-2xl font-semibold text-accent">2M Parfumerie</Link>
+          <Link to="/" className="brand-wordmark text-2xl font-bold text-accent">2M Parfumerie</Link>
           <p className="mt-2 max-w-xs text-[13px] text-muted-foreground">L'authenticité en flacon. Livraison partout au Sénégal.</p>
           <div className="mt-6 flex gap-4">
             <a href="https://instagram.com/2mparfumeriesn" target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent" aria-label="Instagram 2M Parfumerie"><Instagram className="size-5" aria-hidden="true" /></a>

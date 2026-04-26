@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Gem, MapPin, MessageCircle, Users } from "lucide-react";
 
-import aboutHero from "@/assets/perfume-la-capitale-moscow.jpg";
+import aboutHero from "@/assets/about-perfume-grid.png";
+import brandLogo from "@/assets/2m-parfumerie-logo.png";
 import { Button } from "@/components/ui/button";
-import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { whatsappUrl } from "@/lib/perfume-data";
 
@@ -53,7 +53,7 @@ function AboutPage() {
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-48 md:pb-24">
         <img
           src={aboutHero}
-          alt="Flacon précieux tenu dans une lumière dorée au Sénégal"
+          alt="Collection de parfums 2M Parfumerie"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-background/75" aria-hidden="true" />
@@ -67,8 +67,8 @@ function AboutPage() {
 
       <section className="bg-background py-16 md:py-24">
         <div className="section-shell grid gap-10 md:grid-cols-[40fr_60fr] md:items-center md:gap-12">
-          <div className="fade-up overflow-hidden rounded-xl border border-border bg-surface shadow-card">
-            <PerfumePlaceholder className="aspect-[3/4]" />
+          <div className="fade-up flex min-h-[320px] items-center justify-center overflow-hidden rounded-xl border border-border bg-card p-8 shadow-card">
+            <img src={brandLogo} alt="Logo 2M Parfumerie" className="max-h-[340px] w-full object-contain" />
           </div>
           <div className="fade-up">
             <p className="caption-luxe text-accent">La genèse</p>
@@ -118,9 +118,9 @@ function AboutPage() {
             ))}
           </div>
           <div className="mt-16 text-center">
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="whatsapp" size="lg">
               <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-                <MessageCircle className="size-5 text-whatsapp" aria-hidden="true" /> Discuter avec nous sur WhatsApp
+                <span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Discuter avec nous sur WhatsApp
               </a>
             </Button>
           </div>
