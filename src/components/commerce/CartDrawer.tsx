@@ -70,7 +70,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             <ShoppingBag className="size-12 text-muted-foreground" aria-hidden="true" />
             <p className="mt-6 font-display text-2xl text-foreground">Votre panier est vide.</p>
             <Button asChild variant="outline" className="mt-8" onClick={onClose}>
-              <Link to="/boutique" search={{ collection: "all", price: "all" }}>
+              <Link to="/boutique" search={{ collection: "all" }}>
                 Explorer la boutique
               </Link>
             </Button>

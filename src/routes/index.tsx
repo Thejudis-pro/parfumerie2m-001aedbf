@@ -35,7 +35,14 @@ export const Route = createFileRoute("/")({
 const heroMessage =
   "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos collections. Pouvez-vous m'aider ?";
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
-const fallbackFeaturedProducts = catalog.slice(0, 4);
+
+function pickFeaturedProducts(products: BoutiqueProduct[]) {
+  const takeoffProducts = products.filter((product) => product.collection === "takeoff").slice(0, 2);
+  const scentlabProducts = products.filter((product) => product.collection === "scentlab").slice(0, 2);
+  return [...takeoffProducts, ...scentlabProducts];
+}
+
+const fallbackFeaturedProducts = pickFeaturedProducts(catalog);
 
 const promises = [
   {
@@ -88,7 +95,8 @@ function Index() {
   useEffect(() => {
     const loadFeaturedProducts = async () => {
       const { data } = await supabase.from("products").select("*");
-      setFeaturedProducts(mergeLiveCatalog(data ?? []).slice(0, 4));
+      const liveProducts = mergeLiveCatalog(data ?? []);
+      setFeaturedProducts(pickFeaturedProducts(liveProducts));
     };
     void loadFeaturedProducts();
   }, []);
@@ -125,7 +133,7 @@ function Index() {
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link to="/boutique" search={{ collection: "all", price: "all" }}>
+                  <Link to="/boutique" search={{ collection: "all" }}>
                     Explorer la boutique
                   </Link>
                 </Button>
@@ -159,8 +167,8 @@ function Index() {
       <section className="bg-background py-16 md:py-24">
         <div className="section-shell text-center">
           <HomeHeader
-            title="TAKEOFF Fragrance"
-            subtitle="La nouvelle sélection Scent of Journey est disponible."
+            title="Nos parfums du moment"
+            subtitle="Deux signatures TAKEOFF et deux essentiels SCENTLAB, choisis pour vous."
           />
           <div className="grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.map((product, index) => (
@@ -172,7 +180,7 @@ function Index() {
                 <Link
                   to="/boutique/$productSlug"
                   params={{ productSlug: slugifyProduct(product) }}
-                  search={{ collection: "all", price: "all" }}
+                  search={{ collection: "all" }}
                   aria-label={`Voir la fiche produit de ${product.name}`}
                   className="image-zoom relative block aspect-square overflow-hidden bg-surface"
                 >
@@ -206,7 +214,7 @@ function Index() {
             ))}
           </div>
           <Button asChild variant="outline" size="lg" className="mt-12">
-            <Link to="/boutique" search={{ collection: "takeoff", price: "all" }}>
+            <Link to="/boutique" search={{ collection: "takeoff" }}>
               Voir toute la sélection
             </Link>
           </Button>

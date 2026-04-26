@@ -145,7 +145,7 @@ export function ContactCards() {
 export function BoutiqueLink() {
   return (
     <Button asChild variant="outline" size="lg">
-      <Link to="/boutique" search={{ collection: "all", price: "all" }}>
+      <Link to="/boutique" search={{ collection: "all" }}>
         Voir la boutique <ArrowRight aria-hidden="true" />
       </Link>
     </Button>

@@ -7,27 +7,22 @@ import { SiteLayout } from "@/components/commerce/SiteLayout";
 import {
   collectionFilters,
   collectionLabel,
-  collectionValues,
   formatPrice,
-  priceFilters,
-  priceValues,
+  normalizeCollectionValue,
   slugifyProduct,
   type BoutiqueProduct,
   type Collection,
-  type PriceRange,
 } from "@/lib/catalog-data";
 import { supabase } from "@/integrations/supabase/client";
 import { mergeLiveCatalog } from "@/lib/live-catalog";
 
 function validateBoutiqueSearch(search: Record<string, unknown>) {
-  const collection = collectionValues.includes(search.collection as Collection)
-    ? (search.collection as Collection)
-    : "all";
-  const price = priceValues.includes(search.price as PriceRange)
-    ? (search.price as PriceRange)
-    : "all";
+  const collection =
+    typeof search.collection === "string" && search.collection.trim()
+      ? normalizeCollectionValue(search.collection)
+      : "all";
 
-  return { collection, price };
+  return { collection };
 }
 
 export const Route = createFileRoute("/boutique")({
@@ -56,13 +51,13 @@ export const Route = createFileRoute("/boutique")({
 
 function BoutiquePage() {
   const location = useLocation();
-  const { collection, price } = Route.useSearch();
+  const { collection } = Route.useSearch();
   const [visibleCount, setVisibleCount] = useState(12);
   const [products, setProducts] = useState<BoutiqueProduct[]>([]);
 
   useEffect(() => {
     setVisibleCount(12);
-  }, [collection, price]);
+  }, [collection]);
 
   useEffect(() => {
     void loadProducts();
@@ -76,14 +71,9 @@ function BoutiquePage() {
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const collectionMatch = collection === "all" || product.collection === collection;
-      const priceMatch =
-        price === "all" ||
-        (price === "under-10000" && product.price < 10000) ||
-        (price === "10000-25000" && product.price >= 10000 && product.price <= 25000) ||
-        (price === "over-25000" && product.price > 25000);
-      return collectionMatch && priceMatch;
+      return collectionMatch;
     });
-  }, [products, collection, price]);
+  }, [products, collection]);
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
 
@@ -111,16 +101,7 @@ function BoutiquePage() {
             <FilterLink
               key={filter.value}
               active={collection === filter.value}
-              search={{ collection: filter.value, price }}
-              label={filter.label}
-            />
-          ))}
-          <span className="mx-2 hidden h-10 w-px bg-border md:block" aria-hidden="true" />
-          {priceFilters.map((filter) => (
-            <FilterLink
-              key={filter.value}
-              active={price === filter.value}
-              search={{ collection, price: filter.value }}
+              search={{ collection: filter.value }}
               label={filter.label}
             />
           ))}
@@ -129,6 +110,21 @@ function BoutiquePage() {
 
       <section className="bg-background py-8 md:py-12">
         <div className="mx-auto max-w-7xl px-3 md:px-6">
+          <div className="mb-4 flex items-center justify-between gap-3 text-sm text-muted-foreground">
+            <p>
+              {filteredProducts.length} résultat{filteredProducts.length > 1 ? "s" : ""}
+              {collection !== "all" ? " filtré(s)" : ""}
+            </p>
+            {collection !== "all" && (
+              <Link
+                to="/boutique"
+                search={{ collection: "all" }}
+                className="font-medium text-accent hover:underline"
+              >
+                Réinitialiser les filtres
+              </Link>
+            )}
+          </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {visibleProducts.map((product, index) => (
               <CatalogCard
@@ -138,6 +134,11 @@ function BoutiquePage() {
               />
             ))}
           </div>
+          {visibleProducts.length === 0 && (
+            <div className="rounded-lg border border-dashed border-border bg-surface px-6 py-12 text-center text-muted-foreground">
+              Aucun produit ne correspond à cette collection.
+            </div>
+          )}
           {visibleCount < filteredProducts.length && (
             <div className="mt-12 text-center">
               <Button

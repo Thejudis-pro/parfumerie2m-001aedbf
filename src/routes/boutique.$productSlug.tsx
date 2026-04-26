@@ -73,7 +73,7 @@ function ProductPage() {
             Cette référence n’est pas encore disponible dans la boutique en ligne.
           </p>
           <Button asChild variant="outline" size="lg" className="mt-8">
-            <Link to="/boutique" search={{ collection: "all", price: "all" }}>
+            <Link to="/boutique" search={{ collection: "all" }}>
               Retour à la boutique
             </Link>
           </Button>
@@ -246,7 +246,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
       <Link
         to="/boutique/$productSlug"
         params={{ productSlug: slugifyProduct(product) }}
-        search={{ collection: "all", price: "all" }}
+        search={{ collection: "all" }}
         className="image-zoom block aspect-square overflow-hidden bg-surface"
       >
         <img
@@ -263,7 +263,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
-          search={{ collection: "all", price: "all" }}
+          search={{ collection: "all" }}
           className="font-display text-[22px] text-foreground hover:text-accent"
         >
           {product.name}

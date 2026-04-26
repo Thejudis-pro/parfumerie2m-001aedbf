@@ -228,7 +228,7 @@ function SiteFooter() {
             <Link
               key={item.collection}
               to="/boutique"
-              search={{ collection: item.collection, price: "all" }}
+              search={{ collection: item.collection }}
               className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-foreground"
             >
               {item.label}

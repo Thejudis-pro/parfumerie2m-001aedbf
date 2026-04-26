@@ -2,6 +2,7 @@ import type { Database } from "@/integrations/supabase/types";
 import {
   catalog,
   collectionValues,
+  normalizeCollectionValue,
   slugifyProduct,
   type BoutiqueProduct,
   type Collection,
@@ -29,9 +30,7 @@ export function mergeLiveCatalog(productRows: ProductRow[]) {
 }
 
 function productFromRow(product: ProductRow, fallback?: BoutiqueProduct): BoutiqueProduct {
-  const collection = collectionValues.includes(product.collection as Collection)
-    ? (product.collection as Collection)
-    : "scentlab";
+  const collection = normalizeCollectionValue(product.collection);
   const image = product.image_url || product.image_urls?.[0] || fallback?.image || "";
   const notes = product.notes_top || fallback?.notes || "Notes à préciser";
 

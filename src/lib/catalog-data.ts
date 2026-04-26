@@ -75,6 +75,28 @@ export const collectionFilters: { label: string; value: Collection }[] = [
   { label: "Haqqi", value: "haqqi" },
 ];
 
+const collectionAliases: Record<string, Collection> = {
+  all: "all",
+  scentlab: "scentlab",
+  "scent lab": "scentlab",
+  takeoff: "takeoff",
+  "takeoff fragrance": "takeoff",
+  "takeoff fragance": "takeoff",
+  dubai: "dubai",
+  "dubai perfumes": "dubai",
+  pocket: "pocket",
+  "pocket perfumes": "pocket",
+  authentic: "authentic",
+  "authentic perfumes": "authentic",
+  haqqi: "haqqi",
+};
+
+export function normalizeCollectionValue(value: string | null | undefined): Collection {
+  if (!value) return "scentlab";
+  const normalized = value.trim().toLowerCase();
+  return collectionAliases[normalized] ?? (collectionValues.includes(normalized as Collection) ? (normalized as Collection) : "scentlab");
+}
+
 export const priceFilters: { label: string; value: PriceRange }[] = [
   { label: "Tous les prix", value: "all" },
   { label: "< 10 000 FCFA", value: "under-10000" },
