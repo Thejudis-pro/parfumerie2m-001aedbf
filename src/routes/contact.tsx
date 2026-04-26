@@ -54,7 +54,7 @@ function ContactPage() {
                 </a>
                 <p className="mt-1 text-sm text-muted-foreground">Réponse en moins d'1h · Lun–Dim</p>
                 <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-[13px] font-semibold text-primary-foreground hover:bg-whatsapp-hover">
-                  <span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Écrire sur WhatsApp →
+                  <MessageCircle className="size-4" aria-hidden="true" /> Écrire sur WhatsApp →
                 </a>
               </ContactItem>
 
