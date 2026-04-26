@@ -44,6 +44,7 @@ const blankProduct = {
   notes_base: "",
   description: "",
   image_url: "",
+  image_urls: [] as string[],
   slug: "",
   in_stock: true,
   is_bestseller: false,
@@ -464,6 +465,7 @@ function ProductsPanel({
       notes_base: product.notes_base ?? "",
       description: product.description ?? "",
       image_url: product.image_url ?? "",
+      image_urls: product.image_urls ?? imageListFromPrimary(product.image_url),
       slug: product.slug,
       in_stock: Boolean(product.in_stock),
       is_bestseller: Boolean(product.is_bestseller),
@@ -535,9 +537,9 @@ function ProductsPanel({
           >
             <div className="flex gap-4">
               <div className="h-24 w-24 shrink-0 overflow-hidden rounded-md bg-placeholder">
-                {product.image_url && (
+                {primaryImage(product) && (
                   <img
-                    src={product.image_url}
+                    src={primaryImage(product)}
                     alt={product.name}
                     className="h-full w-full object-cover"
                     loading="lazy"
