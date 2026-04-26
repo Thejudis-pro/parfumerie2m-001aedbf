@@ -65,8 +65,7 @@ const testimonials = [
     initials: "KM",
   },
   {
-    quote:
-      "Vienna sent exactement comme Delina mais sans casser la tirelire. Je l'porte au bureau chaque semaine. On me demande souvent où j'achète.",
+    quote: "J'ai essayé Takeoff Paris qui a la même senteur que Baccarat Rouge chez une amie. Je l'ai commandé le lendemain via Whatsapp et le flacon est arrivé le soir même. Franchement impeccable!",
     name: "Rokhaya S.",
     location: "Plateau, Sénégal",
     initials: "RS",
