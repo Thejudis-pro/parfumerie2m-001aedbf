@@ -169,14 +169,20 @@ function Index() {
                 className="fade-up group overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent"
                 style={{ animationDelay: `${index * 80}ms` }}
               >
-                <div className="image-zoom relative aspect-square overflow-hidden bg-surface">
+                <Link
+                  to="/boutique/$productSlug"
+                  params={{ productSlug: slugifyProduct(product) }}
+                  search={{ collection: "all", price: "all" }}
+                  aria-label={`Voir la fiche produit de ${product.name}`}
+                  className="image-zoom relative block aspect-square overflow-hidden bg-surface"
+                >
                   <img
                     src={product.image}
                     alt={`${product.name} TAKEOFF Fragrance chez 2M Parfumerie`}
                     className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
-                </div>
+                </Link>
                 <div className="p-5">
                   <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
                     {product.ref}
