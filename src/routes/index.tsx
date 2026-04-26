@@ -14,12 +14,12 @@ export const Route = createFileRoute("/")({
       { title: "2M Parfumerie — Parfums Authentiques à Dakar | Livraison Rapide" },
       {
         name: "description",
-        content: "Découvrez +33 collections de parfums authentiques à Dakar. SCENTLAB, Dubai Perfumes, TAKEOFF Fragrance. Livraison le jour même, paiement à la livraison.",
+         content: "Découvrez +100 collections de parfums authentiques à Dakar. SCENTLAB, Dubai Perfumes, TAKEOFF Fragrance. Livraison le jour même, paiement à la livraison.",
       },
       { property: "og:title", content: "2M Parfumerie — Parfums Authentiques à Dakar" },
       {
         property: "og:description",
-        content: "Découvrez +33 collections de parfums authentiques à Dakar. Livraison le jour même, paiement à la livraison.",
+         content: "Découvrez +100 collections de parfums authentiques à Dakar. Livraison le jour même, paiement à la livraison.",
       },
     ],
   }),
@@ -52,7 +52,7 @@ function Index() {
             <div className="max-w-2xl">
               <p className="caption-luxe mb-6 text-accent fade-up">Dakar · Parfumerie Authentique</p>
               <h1 className="fade-up font-display text-[40px] font-semibold leading-[1.1] text-foreground md:text-7xl" style={{ animationDelay: "120ms" }}>Votre signature olfactive, livrée à Dakar.</h1>
-              <p className="fade-up mt-6 max-w-lg text-base text-muted-foreground md:text-lg" style={{ animationDelay: "240ms" }}>Le parfum n'est pas un luxe — c'est votre identité. +33 collections authentiques, disponibles maintenant.</p>
+               <p className="fade-up mt-6 max-w-lg text-base text-muted-foreground md:text-lg" style={{ animationDelay: "240ms" }}>Le parfum n'est pas un luxe — c'est votre identité. +100 collections authentiques, disponibles maintenant.</p>
               <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "360ms" }}>
                 <Button asChild size="lg">
                   <a href={whatsappUrl(heroMessage)} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Commander sur WhatsApp</a>
