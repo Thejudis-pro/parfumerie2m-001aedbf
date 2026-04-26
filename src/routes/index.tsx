@@ -2,8 +2,10 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { Check, MessageCircle, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
+import { catalog, formatPrice, slugifyProduct } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/")({
@@ -26,6 +28,7 @@ export const Route = createFileRoute("/")({
 
 const heroMessage = "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos collections. Pouvez-vous m'aider ?";
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
+const featuredProducts = catalog.slice(0, 4);
 
 const promises = [
   { icon: MessageCircle, title: "Réponse en moins d'1h", body: "Notre équipe WhatsApp est disponible 7j/7 pour vous aider à trouver votre fragrance." },
@@ -63,8 +66,8 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="relative order-1 flex h-[50vh] items-center justify-center overflow-hidden bg-surface-alt md:order-2 md:h-full md:min-h-[calc(100vh-128px)]">
-            <p className="max-w-xs text-center font-display text-4xl text-muted-foreground">Nouvelle sélection bientôt disponible</p>
+          <div className="relative order-1 h-[50vh] overflow-hidden bg-surface-alt md:order-2 md:h-full md:min-h-[calc(100vh-128px)]">
+            <img src={catalog[0]?.image} alt="TAKEOFF Los Angeles chez 2M Parfumerie" className="h-full w-full object-contain p-8" />
           </div>
         </div>
       </section>
@@ -73,8 +76,16 @@ function Index() {
 
       <section className="bg-background py-24">
         <div className="section-shell text-center">
-          <HomeHeader title="Nouvelle boutique en préparation" subtitle="Les produits seront ajoutés dès réception des nouvelles images." />
-          <Button asChild variant="outline" size="lg"><Link to="/boutique" search={{ collection: "all", price: "all" }}>Voir la boutique</Link></Button>
+          <HomeHeader title="TAKEOFF Fragrance" subtitle="La nouvelle sélection Scent of Journey est disponible." />
+          <div className="grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
+            {featuredProducts.map((product, index) => (
+              <article key={product.name} className="fade-up group overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent" style={{ animationDelay: `${index * 80}ms` }}>
+                <div className="image-zoom relative aspect-square overflow-hidden bg-surface"><img src={product.image} alt={`${product.name} TAKEOFF Fragrance chez 2M Parfumerie`} className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105" loading="lazy" /></div>
+                <div className="p-5"><p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">{product.ref}</p><h3 className="mb-1 font-display text-[22px] text-foreground">{product.name}</h3><p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p><p className="mb-4 font-body text-xl font-semibold text-accent">{formatPrice(product.price)}</p><AddToCartButton item={{ id: slugifyProduct(product), name: product.name, collection: "TAKEOFF FRAGANCE", price: product.price, imageUrl: product.image }} /></div>
+              </article>
+            ))}
+          </div>
+          <Button asChild variant="outline" size="lg" className="mt-12"><Link to="/boutique" search={{ collection: "takeoff", price: "all" }}>Voir toute la sélection</Link></Button>
         </div>
       </section>
 
