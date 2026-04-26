@@ -47,12 +47,12 @@ const testimonials = [
 function Index() {
   return (
     <SiteLayout>
-      <section className="relative min-h-screen overflow-hidden bg-background pt-24 md:pt-32">
-        <div className="grid min-h-[calc(100vh-96px)] items-center md:grid-cols-[55fr_45fr]">
-          <div className="section-shell z-10 order-1 py-10 md:w-auto md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
+      <section className="relative overflow-hidden bg-background pt-24 md:min-h-screen md:pt-32">
+        <div className="grid items-center md:min-h-[calc(100vh-96px)] md:grid-cols-[55fr_45fr]">
+          <div className="section-shell z-10 order-1 py-8 md:w-auto md:py-10 md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
             <div className="max-w-2xl">
               <p className="caption-luxe mb-6 text-accent fade-up">Dakar · Parfumerie Authentique</p>
-              <h1 className="fade-up font-display text-[40px] font-semibold leading-[1.1] text-foreground md:text-7xl" style={{ animationDelay: "120ms" }}>Votre signature olfactive, livrée à Dakar.</h1>
+              <h1 className="fade-up font-display text-4xl font-semibold leading-[1.1] text-foreground md:text-7xl" style={{ animationDelay: "120ms" }}>Votre signature olfactive, livrée à Dakar.</h1>
                <p className="fade-up mt-6 max-w-lg text-base text-muted-foreground md:text-lg" style={{ animationDelay: "240ms" }}>Le parfum n'est pas un luxe — c'est votre identité. +100 collections authentiques, disponibles maintenant.</p>
               <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "360ms" }}>
                 <Button asChild size="lg">
@@ -67,15 +67,15 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="relative order-2 h-[50vh] overflow-hidden bg-surface-alt md:h-full md:min-h-[calc(100vh-128px)]">
-            <img src={heroProduct.image} alt="TAKEOFF Lisbon chez 2M Parfumerie" className="h-full w-full object-contain p-8" />
+          <div className="relative order-2 h-[42vh] min-h-[300px] overflow-hidden bg-surface-alt md:h-full md:min-h-[calc(100vh-128px)]">
+            <img src={heroProduct.image} alt="TAKEOFF Lisbon chez 2M Parfumerie" className="h-full w-full object-contain p-6 md:p-8" />
           </div>
         </div>
       </section>
 
       <Ticker />
 
-      <section className="bg-background py-24">
+      <section className="bg-background py-16 md:py-24">
         <div className="section-shell text-center">
           <HomeHeader title="TAKEOFF Fragrance" subtitle="La nouvelle sélection Scent of Journey est disponible." />
           <div className="grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
@@ -90,8 +90,8 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-background py-24">
-        <div className="section-shell grid gap-12 md:grid-cols-[0.8fr_1.2fr]">
+      <section className="bg-background py-16 md:py-24">
+        <div className="section-shell grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-12">
           <div className="fade-up"><h2 className="font-display text-[32px] font-medium text-foreground md:text-5xl">Notre Promesse</h2><p className="mt-6 max-w-sm text-muted-foreground">Chez 2M Parfumerie, chaque commande est une rencontre entre votre identité et le parfum parfait. Nous ne vendons pas des flacons — nous livrons des émotions.</p><Button asChild variant="outline" size="lg" className="mt-8"><Link to="/contact">Nous contacter</Link></Button></div>
           <div className="grid gap-4 sm:grid-cols-2">
             {promises.map(({ icon: Icon, title, body }, index) => <article key={title} className="fade-up rounded-lg border border-border bg-surface p-6 transition-all hover:border-accent" style={{ animationDelay: `${index * 80}ms` }}><Icon className="mb-6 text-accent" aria-hidden="true" /><h3 className="font-display text-2xl text-foreground">{title}</h3><p className="mt-3 text-sm text-muted-foreground">{body}</p></article>)}
@@ -99,7 +99,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-surface-alt py-24">
+      <section className="bg-surface-alt py-16 md:py-24">
         <div className="section-shell">
           <HomeHeader title="Ce que Dakar dit de nous" subtitle="Des vraies personnes, de vraies fragrances." />
           <div className="flex snap-x gap-5 overflow-x-auto pb-4 md:grid md:grid-cols-3 md:overflow-visible">
@@ -108,7 +108,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="final-cta-bg border-t border-border py-20">
+      <section className="final-cta-bg border-t border-border py-16 md:py-20">
         <div className="section-shell mx-auto max-w-2xl text-center"><p className="caption-luxe mb-4 text-accent">Trouvez votre signature</p><h2 className="font-display text-[32px] leading-[1.2] text-foreground md:text-5xl">Votre parfum parfait est à un message WhatsApp.</h2><p className="mt-4 text-muted-foreground">Décrivez-nous votre style, votre occasion, votre budget — on s'occupe du reste.</p><Button asChild size="lg" className="mt-8 min-h-14 px-10 py-5 text-[15px]"><a href={whatsappUrl(finalMessage)} target="_blank" rel="noreferrer"><MessageCircle className="mr-1 size-5" aria-hidden="true" /> Démarrer sur WhatsApp</a></Button></div>
       </section>
     </SiteLayout>
