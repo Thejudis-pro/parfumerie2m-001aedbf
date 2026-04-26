@@ -1,9 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { MessageCircle, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
-import { WhatsAppIcon } from "@/components/commerce/WhatsAppIcon";
 import { useCart } from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
 
@@ -62,7 +61,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             </div>
             <footer className="sticky bottom-0 border-t border-accent/15 bg-placeholder p-4 md:p-6">
               <div className="mb-5 flex items-center justify-between text-sm"><span className="text-muted-foreground">Sous-total</span><strong className="text-lg text-accent">{formatCartPrice(total)} FCFA</strong></div>
-              <Button type="button" onClick={checkout} className="w-full bg-whatsapp py-4 text-primary-foreground hover:bg-whatsapp-hover"><WhatsAppIcon className="size-[18px]" /> Commander sur WhatsApp</Button>
+              <Button type="button" onClick={checkout} className="w-full bg-whatsapp py-4 text-primary-foreground hover:bg-whatsapp-hover"><MessageCircle className="size-[18px]" /> Commander sur WhatsApp</Button>
               <Button type="button" variant="outline" onClick={onClose} className="mt-3 w-full py-3">Continuer mes achats</Button>
             </footer>
           </>

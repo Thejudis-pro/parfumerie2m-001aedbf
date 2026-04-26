@@ -1,8 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { WhatsAppIcon } from "@/components/commerce/WhatsAppIcon";
 import { displayPhone, email, instagram, products, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 import { ProductCard } from "./ProductCard";
 
@@ -47,7 +46,7 @@ export function WhatsAppBand() {
           <h2 className="mt-3 font-display text-[32px] leading-tight text-foreground md:text-5xl">Un parfum choisi, un message envoyé, une réponse humaine.</h2>
         </div>
         <Button asChild variant="whatsapp" size="lg">
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><WhatsAppIcon className="size-5" aria-hidden="true" /> Commander sur WhatsApp</a>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle className="size-5" aria-hidden="true" /> Commander sur WhatsApp</a>
         </Button>
       </div>
     </section>
@@ -56,7 +55,7 @@ export function WhatsAppBand() {
 
 export function ContactCards() {
   const cards = [
-    { icon: WhatsAppIcon, label: "WhatsApp", value: displayPhone, href: whatsappUrl(), brand: true },
+    { icon: MessageCircle, label: "WhatsApp", value: displayPhone, href: whatsappUrl(), brand: true },
     { icon: Phone, label: "Téléphone", value: secondPhone, href: "tel:+221781441766" },
     { icon: Instagram, label: "Instagram", value: instagram, href: "https://instagram.com/2mparfumeriesn" },
     { icon: Mail, label: "Email", value: email, href: `mailto:${email}` },
