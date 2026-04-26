@@ -1031,7 +1031,7 @@ function slugify(value: string) {
 function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): AdminProduct[] {
   const databaseBySlug = new Map(databaseProducts.map((product) => [product.slug, product]));
   const catalogSlugs = new Set(catalog.map(slugifyProduct));
-  const catalogProducts: AdminProduct[] = catalog.flatMap((product) => {
+  const catalogProducts = catalog.flatMap<AdminProduct>((product) => {
     const slug = slugifyProduct(product);
     const savedProduct = databaseBySlug.get(slug);
     if (savedProduct?.description === DELETED_PRODUCT_MARKER) return [];
