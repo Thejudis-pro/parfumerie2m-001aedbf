@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { displayPhone, email, instagram, products, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 import { ProductCard } from "./ProductCard";
+
+const facebookUrl = "https://www.facebook.com/profile.php?id=61551806734713";
 
 export function SectionHeader({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (
@@ -58,6 +60,7 @@ export function ContactCards() {
     { icon: MessageCircle, label: "WhatsApp", value: displayPhone, href: whatsappUrl(), brand: true },
     { icon: Phone, label: "Téléphone", value: secondPhone, href: "tel:+221781441766" },
     { icon: Instagram, label: "Instagram", value: instagram, href: "https://instagram.com/2mparfumeriesn" },
+    { icon: Facebook, label: "Facebook", value: "2MPARFUMERIE-Dk", href: facebookUrl },
     { icon: Mail, label: "Email", value: email, href: `mailto:${email}` },
   ];
   return (
