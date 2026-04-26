@@ -44,17 +44,17 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
 
   return (
     <SiteLayout>
-      <section className="bg-background pt-32 pb-16">
-        <div className="section-shell grid gap-12 md:grid-cols-2 md:gap-16">
+      <section className="bg-background pt-24 pb-12 md:pt-32 md:pb-16">
+        <div className="section-shell grid gap-8 md:grid-cols-2 md:gap-16">
           <div className="order-1">
-            <div className="mx-auto flex aspect-square max-w-lg items-center justify-center overflow-hidden rounded-xl bg-surface p-8 shadow-card">
+            <div className="mx-auto flex aspect-square max-w-lg items-center justify-center overflow-hidden rounded-xl bg-surface p-5 shadow-card md:p-8">
               <img src={product.image} alt={`${product.name} chez 2M Parfumerie`} className="h-full w-full rounded-lg object-contain" />
             </div>
           </div>
 
           <aside className="order-2 md:sticky md:top-24 md:self-start">
             <span className="caption-luxe mb-4 inline-block rounded-full bg-accent-muted px-3 py-1 text-accent">{label}</span>
-            <h1 className="font-display text-5xl font-medium leading-tight text-foreground">{product.name}</h1>
+            <h1 className="font-display text-4xl font-medium leading-tight text-foreground md:text-5xl">{product.name}</h1>
             <p className="mt-3 text-sm italic text-muted-foreground">Inspiré de {product.ref}{product.inspiration ? ` · ${product.inspiration}` : ""}</p>
             <p className="mt-6 font-body text-[32px] font-bold text-accent">{formatPrice(product.price)}</p>
             <p className="mt-2 text-[13px] text-whatsapp">✓ En stock — Livraison Dakar aujourd'hui</p>
@@ -74,7 +74,7 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
               ))}
             </div>
 
-            <div className="mt-8 grid grid-cols-3 gap-3">
+            <div className="mt-8 grid grid-cols-1 gap-3 min-[380px]:grid-cols-3">
               {[['Contenance', product.volume], ['Concentration', product.concentration], ['Famille', product.family]].map(([title, value]) => (
                 <div key={title} className="rounded-md bg-surface p-4 text-center"><p className="caption-luxe text-muted-foreground">{title}</p><p className="mt-2 text-xs text-foreground">{value}</p></div>
               ))}
@@ -83,14 +83,14 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
         </div>
       </section>
 
-      <section className="bg-surface-alt py-16">
+      <section className="bg-surface-alt py-12 md:py-16">
         <div className="section-shell mx-auto max-w-3xl">
           <h2 className="mb-6 font-display text-[32px] text-foreground md:text-5xl">À propos de ce parfum</h2>
           <p className="text-base leading-[1.9] text-muted-foreground">{product.description}</p>
         </div>
       </section>
 
-      <section className="bg-background py-20">
+      <section className="bg-background py-16 md:py-20">
         <div className="section-shell">
           <h2 className="mb-12 text-center font-display text-[32px] text-foreground md:text-5xl">De la même collection</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
