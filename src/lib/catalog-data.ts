@@ -1,3 +1,13 @@
+import losAngelesImage from "@/assets/takeoff-los-angeles.png";
+import amsterdamImage from "@/assets/takeoff-amsterdam.png";
+import zurichImage from "@/assets/takeoff-zurich.png";
+import berlinImage from "@/assets/takeoff-berlin.png";
+import dubaiImage from "@/assets/takeoff-dubai.png";
+import riyadhImage from "@/assets/takeoff-riyadh.png";
+import viennaImage from "@/assets/takeoff-vienna.png";
+import lisbonImage from "@/assets/takeoff-lisbon.png";
+import capriImage from "@/assets/takeoff-capri.png";
+
 export const collectionValues = ["all", "scentlab", "takeoff", "dubai", "pocket", "authentic", "haqqi"] as const;
 export const priceValues = ["all", "under-10000", "10000-20000", "over-20000"] as const;
 
@@ -38,7 +48,33 @@ export const priceFilters: { label: string; value: PriceRange }[] = [
   { label: "> 20 000 FCFA", value: "over-20000" },
 ];
 
-export const catalog: BoutiqueProduct[] = [];
+const takeoffProducts = [
+  { name: "Los Angeles", image: losAngelesImage, notes: "Ambre · Fruits rouges · Musc", family: "Ambré fruité" },
+  { name: "Amsterdam", image: amsterdamImage, notes: "Violette · Bois doux · Musc", family: "Floral boisé" },
+  { name: "Zurich", image: zurichImage, notes: "Bois frais · Ambre · Épices", family: "Boisé ambré" },
+  { name: "Berlin", image: berlinImage, notes: "Vanille · Musc · Fleurs blanches", family: "Musqué doux" },
+  { name: "Dubai", image: dubaiImage, notes: "Oud · Ambre · Épices", family: "Oriental boisé" },
+  { name: "Riyadh", image: riyadhImage, notes: "Résines · Safran · Bois chauds", family: "Oriental ambré" },
+  { name: "Vienna", image: viennaImage, notes: "Rose · Musc · Fruits tendres", family: "Floral musqué" },
+  { name: "Lisbon", image: lisbonImage, notes: "Agrumes · Musc propre · Bois clair", family: "Frais musqué" },
+  { name: "Capri", image: capriImage, notes: "Marine · Agrumes · Ambre gris", family: "Frais aromatique" },
+] as const;
+
+export const catalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
+  name: product.name,
+  ref: "TAKEOFF Fragrance",
+  notes: product.notes,
+  headNotes: product.notes,
+  heartNotes: "Notes à préciser",
+  baseNotes: "Notes à préciser",
+  price: 25000,
+  collection: "takeoff",
+  image: product.image,
+  family: product.family,
+  concentration: "Eau de parfum",
+  volume: "100 ml",
+  description: `${product.name} par TAKEOFF Fragrance est une eau de parfum 100 ml de la collection Scent of Journey, disponible chez 2M Parfumerie à Dakar.`,
+}));
 
 export function slugifyProduct(product: BoutiqueProduct) {
   return `${product.name}-${product.ref}`
