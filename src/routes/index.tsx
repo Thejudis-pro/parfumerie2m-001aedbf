@@ -56,7 +56,7 @@ function Index() {
                <p className="fade-up mt-6 max-w-lg text-base text-muted-foreground md:text-lg" style={{ animationDelay: "240ms" }}>Le parfum n'est pas un luxe — c'est votre identité. +100 collections authentiques, disponibles maintenant.</p>
               <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "360ms" }}>
                 <Button asChild variant="whatsapp" size="lg">
-                  <a href={whatsappUrl(heroMessage)} target="_blank" rel="noreferrer"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Commander sur WhatsApp</a>
+                  <a href={whatsappUrl(heroMessage)} target="_blank" rel="noreferrer"><MessageCircle className="size-5" aria-hidden="true" /> Commander sur WhatsApp</a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link to="/boutique" search={{ collection: "all", price: "all" }}>Explorer la boutique</Link>
@@ -109,7 +109,7 @@ function Index() {
       </section>
 
       <section className="final-cta-bg border-t border-border py-16 md:py-20">
-        <div className="section-shell mx-auto max-w-2xl text-center"><p className="caption-luxe mb-4 text-accent">Trouvez votre signature</p><h2 className="font-display text-[32px] leading-[1.2] text-foreground md:text-5xl">Votre parfum parfait est à un message WhatsApp.</h2><p className="mt-4 text-muted-foreground">Décrivez-nous votre style, votre occasion, votre budget — on s'occupe du reste.</p><Button asChild variant="whatsapp" size="lg" className="mt-8 min-h-14 px-10 py-5 text-[15px]"><a href={whatsappUrl(finalMessage)} target="_blank" rel="noreferrer"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" aria-hidden="true" /></span> Démarrer sur WhatsApp</a></Button></div>
+        <div className="section-shell mx-auto max-w-2xl text-center"><p className="caption-luxe mb-4 text-accent">Trouvez votre signature</p><h2 className="font-display text-[32px] leading-[1.2] text-foreground md:text-5xl">Votre parfum parfait est à un message WhatsApp.</h2><p className="mt-4 text-muted-foreground">Décrivez-nous votre style, votre occasion, votre budget — on s'occupe du reste.</p><Button asChild variant="whatsapp" size="lg" className="mt-8 min-h-14 px-10 py-5 text-[15px]"><a href={whatsappUrl(finalMessage)} target="_blank" rel="noreferrer"><MessageCircle className="size-5" aria-hidden="true" /> Démarrer sur WhatsApp</a></Button></div>
       </section>
     </SiteLayout>
   );
