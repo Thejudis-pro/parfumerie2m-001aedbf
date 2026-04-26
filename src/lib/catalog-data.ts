@@ -5,7 +5,7 @@ import berlinImage from "@/assets/takeoff-berlin.png";
 import dubaiImage from "@/assets/takeoff-dubai.png";
 import riyadhImage from "@/assets/takeoff-riyadh.png";
 import viennaImage from "@/assets/takeoff-vienna.png";
-import lisbonImage from "@/assets/takeoff-lisbon.png";
+import lisbonImage from "@/assets/hero-lisbon.jpg";
 import capriImage from "@/assets/takeoff-capri.png";
 import seoulImage from "@/assets/takeoff-seoul.png";
 import romeImage from "@/assets/takeoff-rome.png";
@@ -32,7 +32,7 @@ import cognacWhisperImage from "@/assets/scentlab-cognac-whisper-upload.png";
 import rosyGlowImage from "@/assets/scentlab-rosy-glow-upload.png";
 
 export const collectionValues = ["all", "scentlab", "takeoff", "dubai", "pocket", "authentic", "haqqi"] as const;
-export const priceValues = ["all", "under-10000", "10000-20000", "over-20000"] as const;
+ export const priceValues = ["all", "under-10000", "10000-25000", "over-25000"] as const;
 
 export type Collection = (typeof collectionValues)[number];
 export type PriceRange = (typeof priceValues)[number];
@@ -68,29 +68,29 @@ export const collectionFilters: { label: string; value: Collection }[] = [
 export const priceFilters: { label: string; value: PriceRange }[] = [
   { label: "Tous les prix", value: "all" },
   { label: "< 10 000 FCFA", value: "under-10000" },
-  { label: "10 000 – 20 000 FCFA", value: "10000-20000" },
-  { label: "> 20 000 FCFA", value: "over-20000" },
+   { label: "10 000 – 25 000 FCFA", value: "10000-25000" },
+   { label: "> 25 000 FCFA", value: "over-25000" },
 ];
 
 const takeoffProducts = [
-  { name: "Los Angeles", ref: "Kilian Love Don’t Be Shy", price: 20000, image: losAngelesImage, notes: "Ambre · Fruits rouges · Musc", family: "Ambré fruité" },
-  { name: "Amsterdam", ref: "Initio Side Effect", price: 30000, image: amsterdamImage, notes: "Violette · Bois doux · Musc", family: "Floral boisé" },
-  { name: "Zurich", ref: "MFK Oud Satin Mood", price: 20000, image: zurichImage, notes: "Bois frais · Ambre · Épices", family: "Boisé ambré" },
-  { name: "Berlin", ref: "Xerjoff Naxos 1861", price: 30000, image: berlinImage, notes: "Vanille · Musc · Fleurs blanches", family: "Musqué doux" },
+  { name: "Los Angeles", ref: "Kilian Love Don’t Be Shy", price: 25000, image: losAngelesImage, notes: "Ambre · Fruits rouges · Musc", family: "Ambré fruité" },
+  { name: "Amsterdam", ref: "Initio Side Effect", price: 25000, image: amsterdamImage, notes: "Violette · Bois doux · Musc", family: "Floral boisé" },
+  { name: "Zurich", ref: "MFK Oud Satin Mood", price: 25000, image: zurichImage, notes: "Bois frais · Ambre · Épices", family: "Boisé ambré" },
+  { name: "Berlin", ref: "Xerjoff Naxos 1861", price: 25000, image: berlinImage, notes: "Vanille · Musc · Fleurs blanches", family: "Musqué doux" },
   { name: "Dubai", ref: "Montale Arabian Tonka", price: 25000, image: dubaiImage, notes: "Oud · Ambre · Épices", family: "Oriental boisé" },
-  { name: "Riyadh", ref: "Louis Vuitton Ombre Nomade", price: 20000, image: riyadhImage, notes: "Résines · Safran · Bois chauds", family: "Oriental ambré" },
-  { name: "Vienna", ref: "Delina Parfums de Marly", price: 30000, image: viennaImage, notes: "Rose · Musc · Fruits tendres", family: "Floral musqué" },
-  { name: "Lisbon", ref: "Xerjoff Sospiro Erba Pura", price: 30000, image: lisbonImage, notes: "Agrumes · Musc propre · Bois clair", family: "Frais musqué" },
+  { name: "Riyadh", ref: "Louis Vuitton Ombre Nomade", price: 25000, image: riyadhImage, notes: "Résines · Safran · Bois chauds", family: "Oriental ambré" },
+  { name: "Vienna", ref: "Delina Parfums de Marly", price: 25000, image: viennaImage, notes: "Rose · Musc · Fruits tendres", family: "Floral musqué" },
+  { name: "Lisbon", ref: "Xerjoff Sospiro Erba Pura", price: 25000, image: lisbonImage, notes: "Agrumes · Musc propre · Bois clair", family: "Frais musqué" },
   { name: "Capri", ref: "Tiziani Terenzi Kirke", price: 25000, image: capriImage, notes: "Marine · Agrumes · Ambre gris", family: "Frais aromatique" },
-  { name: "Seoul", ref: "Louis Vuitton Imagination", price: 20000, image: seoulImage, notes: "Musc bleu · Agrumes · Bois propres", family: "Frais boisé" },
-  { name: "Rome", ref: "Xerjoff Accento", price: 20000, image: romeImage, notes: "Violette · Ambre doux · Musc", family: "Floral ambré" },
-  { name: "Istanbul", ref: "Nishane Hacivat", price: 30000, image: istanbulImage, notes: "Musc blanc · Fleurs propres · Bois doux", family: "Musqué floral" },
-  { name: "Monaco", ref: "Xerjoff 40 Knots", price: 20000, image: monacoImage, notes: "Accord marin · Agrumes · Ambre clair", family: "Aromatique frais" },
-  { name: "New York", ref: "Dior Sauvage Elixir", price: 20000, image: newYorkImage, notes: "Bois urbains · Ambre · Épices fraîches", family: "Boisé épicé" },
+  { name: "Seoul", ref: "Louis Vuitton Imagination", price: 25000, image: seoulImage, notes: "Musc bleu · Agrumes · Bois propres", family: "Frais boisé" },
+  { name: "Rome", ref: "Xerjoff Accento", price: 25000, image: romeImage, notes: "Violette · Ambre doux · Musc", family: "Floral ambré" },
+  { name: "Istanbul", ref: "Nishane Hacivat", price: 25000, image: istanbulImage, notes: "Musc blanc · Fleurs propres · Bois doux", family: "Musqué floral" },
+  { name: "Monaco", ref: "Xerjoff 40 Knots", price: 25000, image: monacoImage, notes: "Accord marin · Agrumes · Ambre clair", family: "Aromatique frais" },
+  { name: "New York", ref: "Dior Sauvage Elixir", price: 25000, image: newYorkImage, notes: "Bois urbains · Ambre · Épices fraîches", family: "Boisé épicé" },
   { name: "Moscow", ref: "Xerjoff La Capitale", price: 25000, image: moscowImage, notes: "Vanille claire · Ambre · Musc", family: "Ambré doux" },
-  { name: "Milan", ref: "Xerjoff Torino 21", price: 20000, image: milanImage, notes: "Bergamote · Musc · Bois élégants", family: "Chypré frais" },
-  { name: "Budapest", ref: "MFK Grand Soir", price: 30000, image: budapestImage, notes: "Ambre doré · Musc · Bois blonds", family: "Ambré musqué" },
-  { name: "Paris", ref: "MFK Baccarat Rouge", price: 20000, image: parisImage, notes: "Rose rouge · Ambre · Musc", family: "Floral ambré" },
+  { name: "Milan", ref: "Xerjoff Torino 21", price: 25000, image: milanImage, notes: "Bergamote · Musc · Bois élégants", family: "Chypré frais" },
+  { name: "Budapest", ref: "MFK Grand Soir", price: 25000, image: budapestImage, notes: "Ambre doré · Musc · Bois blonds", family: "Ambré musqué" },
+  { name: "Paris", ref: "MFK Baccarat Rouge", price: 25000, image: parisImage, notes: "Rose rouge · Ambre · Musc", family: "Floral ambré" },
 ] as const;
 
 const scentlabProducts = [

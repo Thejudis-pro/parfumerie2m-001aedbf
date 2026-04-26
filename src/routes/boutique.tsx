@@ -38,7 +38,7 @@ function BoutiquePage() {
   const filteredProducts = useMemo(() => {
     return catalog.filter((product) => {
       const collectionMatch = collection === "all" || product.collection === collection;
-      const priceMatch = price === "all" || (price === "under-10000" && product.price < 10000) || (price === "10000-20000" && product.price >= 10000 && product.price <= 20000) || (price === "over-20000" && product.price > 20000);
+      const priceMatch = price === "all" || (price === "under-10000" && product.price < 10000) || (price === "10000-25000" && product.price >= 10000 && product.price <= 25000) || (price === "over-25000" && product.price > 25000);
       return collectionMatch && priceMatch;
     });
   }, [collection, price]);

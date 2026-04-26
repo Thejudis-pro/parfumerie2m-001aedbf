@@ -334,7 +334,7 @@ function OrdersPanel({ orders, orderForm, setOrderForm, saveOrder, updateOrderSt
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<OrderStatus | "all">("all");
   const filteredOrders = useMemo(() => orders.filter((order) => {
-    const haystack = [order.order_number, order.customer_name, order.customer_phone, order.customer_address, order.status].filter(Boolean).join(" ").toLowerCase();
+    const haystack = [order.order_number, order.customer_name, order.customer_phone || "", order.customer_address, order.status].filter(Boolean).join(" ").toLowerCase();
     return haystack.includes(query.toLowerCase()) && (status === "all" || order.status === status);
   }), [orders, query, status]);
 
@@ -376,7 +376,7 @@ function OrdersPanel({ orders, orderForm, setOrderForm, saveOrder, updateOrderSt
             </div>
             <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
               <InfoBlock label="Client" value={order.customer_name || "Non renseigné"} />
-              <InfoBlock label="Téléphone" value={order.customer_phone || "Non renseigné"} />
+              <InfoBlock label="Téléphone" value={order.customer_phone || "" || "Non renseigné"} />
               <InfoBlock label="Adresse" value={order.customer_address || "Non renseignée"} />
               <InfoBlock label="Total" value={`${order.total.toLocaleString("fr-FR")} FCFA`} strong />
             </div>
@@ -388,7 +388,7 @@ function OrdersPanel({ orders, orderForm, setOrderForm, saveOrder, updateOrderSt
             </div>
             {order.notes && <p className="mt-3 text-sm text-muted-foreground">Note : {order.notes}</p>}
             <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-              {order.customer_phone && <Button type="button" variant="outline" className="flex-1" onClick={() => window.open(`https://wa.me/${normalizePhone(order.customer_phone)}`, "_blank")}>WhatsApp</Button>}
+               {order.customer_phone && <Button type="button" variant="outline" className="flex-1" onClick={() => window.open(`https://wa.me/${normalizePhone(order.customer_phone || "")}`, "_blank")}>WhatsApp</Button>}
               <Button type="button" variant="outline" className="flex-1" onClick={() => deleteOrder(order)}><Trash2 /> Supprimer</Button>
             </div>
           </article>
