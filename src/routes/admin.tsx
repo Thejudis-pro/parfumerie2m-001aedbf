@@ -1031,12 +1031,13 @@ function slugify(value: string) {
 function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): AdminProduct[] {
   const databaseBySlug = new Map(databaseProducts.map((product) => [product.slug, product]));
   const catalogSlugs = new Set(catalog.map(slugifyProduct));
-  const catalogProducts: AdminProduct[] = catalog.map((product) => {
+  const catalogProducts: AdminProduct[] = catalog.flatMap((product) => {
     const slug = slugifyProduct(product);
     const savedProduct = databaseBySlug.get(slug);
+    if (savedProduct?.description === DELETED_PRODUCT_MARKER) return [];
     if (savedProduct) return { ...savedProduct, source: "database" };
 
-    return {
+    return [{
       id: `catalog-${slug}`,
       name: product.name,
       subtitle: product.ref,
@@ -1053,10 +1054,10 @@ function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): Admin
       created_at: null,
       updated_at: null,
       source: "catalog",
-    };
+    }];
   });
   const extraDatabaseProducts = databaseProducts
-    .filter((product) => !catalogSlugs.has(product.slug))
+    .filter((product) => !catalogSlugs.has(product.slug) && product.description !== DELETED_PRODUCT_MARKER)
     .map((product) => ({ ...product, source: "database" as const }));
   return [...catalogProducts, ...extraDatabaseProducts];
 }
