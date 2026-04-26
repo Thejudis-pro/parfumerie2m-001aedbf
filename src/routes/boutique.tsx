@@ -51,7 +51,7 @@ function BoutiquePage() {
 
   return (
     <SiteLayout>
-      <section className="border-b border-border bg-surface pt-24 pb-16 md:pt-32">
+      <section className="border-b border-border bg-surface pt-24 pb-12 md:pt-32 md:pb-16">
         <div className="section-shell text-center">
           <p className="caption-luxe text-accent">Toutes les collections</p>
           <h1 className="mt-4 font-display text-4xl font-semibold text-foreground md:text-[56px]">La Boutique</h1>
@@ -59,8 +59,8 @@ function BoutiquePage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-background py-8">
-        <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-3 px-6">
+      <section className="border-b border-border bg-background py-5 md:py-8">
+        <div className="mx-auto flex max-w-7xl snap-x gap-2 overflow-x-auto px-3 pb-1 md:flex-wrap md:justify-center md:gap-3 md:px-6">
           {collectionFilters.map((filter) => (
             <FilterLink key={filter.value} active={collection === filter.value} search={{ collection: filter.value, price }} label={filter.label} />
           ))}
@@ -71,8 +71,8 @@ function BoutiquePage() {
         </div>
       </section>
 
-      <section className="bg-background py-12">
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="bg-background py-8 md:py-12">
+        <div className="mx-auto max-w-7xl px-3 md:px-6">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {visibleProducts.map((product, index) => (
               <CatalogCard key={`${product.collection}-${product.name}-${index}`} product={product} index={index} />
@@ -91,7 +91,7 @@ function BoutiquePage() {
 
 function FilterLink({ active, search, label }: { active: boolean; search: { collection: Collection; price: PriceRange }; label: string }) {
   return (
-    <Link to="/boutique" search={search} className={active ? "rounded-full border border-accent bg-accent px-4 py-2 text-[13px] font-semibold text-primary-foreground" : "rounded-full border border-border bg-transparent px-4 py-2 text-[13px] text-muted-foreground hover:border-accent hover:text-foreground"}>
+    <Link to="/boutique" search={search} className={active ? "snap-start whitespace-nowrap rounded-full border border-accent bg-accent px-4 py-2 text-[13px] font-semibold text-primary-foreground" : "snap-start whitespace-nowrap rounded-full border border-border bg-transparent px-4 py-2 text-[13px] text-muted-foreground hover:border-accent hover:text-foreground"}>
       {label}
     </Link>
   );

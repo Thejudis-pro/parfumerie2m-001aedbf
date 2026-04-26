@@ -25,7 +25,7 @@ export function ProductGrid({ limit }: { limit?: number }) {
 }
 
 export function Ticker() {
-  const items = ["✦ Livraison Dakar & banlieue", "✦ +33 collections exclusives", "✦ Paiement à la livraison", "✦ Notes olfactives certifiées", "✦ SCENTLAB · DUBAI · TAKEOFF", "✦ Réponse WhatsApp en moins d'1h", "✦ Haqqi · Pocket · Authentic"];
+  const items = ["✦ Livraison Dakar & banlieue", "✦ +100 collections exclusives", "✦ Paiement à la livraison", "✦ Notes olfactives certifiées", "✦ SCENTLAB · DUBAI · TAKEOFF", "✦ Réponse WhatsApp en moins d'1h", "✦ Haqqi · Pocket · Authentic"];
   return (
     <div className="flex h-11 items-center overflow-hidden whitespace-nowrap bg-accent md:h-12" aria-hidden="true">
       <div className="ticker-track flex w-max shrink-0 flex-nowrap items-center gap-8">
@@ -39,11 +39,11 @@ export function Ticker() {
 
 export function WhatsAppBand() {
   return (
-    <section className="bg-accent-muted py-16">
+    <section className="bg-accent-muted py-12 md:py-16">
       <div className="section-shell flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
         <div className="max-w-2xl">
           <p className="caption-luxe text-accent">Commande directe</p>
-          <h2 className="mt-3 font-display text-[32px] leading-tight md:text-5xl">Un parfum choisi, un message envoyé, une réponse humaine.</h2>
+          <h2 className="mt-3 font-display text-[32px] leading-tight text-foreground md:text-5xl">Un parfum choisi, un message envoyé, une réponse humaine.</h2>
         </div>
         <Button asChild variant="whatsapp" size="lg">
           <a href={whatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Commander sur WhatsApp</a>
