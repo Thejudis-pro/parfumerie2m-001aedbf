@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import {
-  catalog,
   collectionFilters,
   collectionLabel,
   collectionValues,
@@ -17,6 +16,8 @@ import {
   type Collection,
   type PriceRange,
 } from "@/lib/catalog-data";
+import { supabase } from "@/integrations/supabase/client";
+import { mergeLiveCatalog } from "@/lib/live-catalog";
 
 function validateBoutiqueSearch(search: Record<string, unknown>) {
   const collection = collectionValues.includes(search.collection as Collection)
@@ -57,13 +58,23 @@ function BoutiquePage() {
   const location = useLocation();
   const { collection, price } = Route.useSearch();
   const [visibleCount, setVisibleCount] = useState(12);
+  const [products, setProducts] = useState<BoutiqueProduct[]>([]);
 
   useEffect(() => {
     setVisibleCount(12);
   }, [collection, price]);
 
+  useEffect(() => {
+    void loadProducts();
+  }, []);
+
+  const loadProducts = async () => {
+    const { data } = await supabase.from("products").select("*");
+    setProducts(mergeLiveCatalog(data ?? []));
+  };
+
   const filteredProducts = useMemo(() => {
-    return catalog.filter((product) => {
+    return products.filter((product) => {
       const collectionMatch = collection === "all" || product.collection === collection;
       const priceMatch =
         price === "all" ||
@@ -72,7 +83,7 @@ function BoutiquePage() {
         (price === "over-25000" && product.price > 25000);
       return collectionMatch && priceMatch;
     });
-  }, [collection, price]);
+  }, [products, collection, price]);
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
 
