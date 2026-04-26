@@ -2,9 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Instagram, Mail, MapPin, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { WhatsAppIcon } from "@/components/commerce/WhatsAppIcon";
 import { displayPhone, email, instagram, products, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 import { ProductCard } from "./ProductCard";
-import { WhatsAppIcon } from "./WhatsAppIcon";
 
 export function SectionHeader({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
   return (

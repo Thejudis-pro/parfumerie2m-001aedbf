@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/commerce/CartDrawer";
+import { WhatsAppIcon } from "@/components/commerce/WhatsAppIcon";
 import { useCart } from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
-import { WhatsAppIcon } from "./WhatsAppIcon";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
 const navItems = [
