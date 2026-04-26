@@ -32,7 +32,7 @@ import cognacWhisperImage from "@/assets/scentlab-cognac-whisper-upload.png";
 import rosyGlowImage from "@/assets/scentlab-rosy-glow-upload.png";
 
 export const collectionValues = ["all", "scentlab", "takeoff", "dubai", "pocket", "authentic", "haqqi"] as const;
-export const priceValues = ["all", "under-10000", "10000-20000", "over-20000"] as const;
+ export const priceValues = ["all", "under-10000", "10000-25000", "over-25000"] as const;
 
 export type Collection = (typeof collectionValues)[number];
 export type PriceRange = (typeof priceValues)[number];
@@ -68,8 +68,8 @@ export const collectionFilters: { label: string; value: Collection }[] = [
 export const priceFilters: { label: string; value: PriceRange }[] = [
   { label: "Tous les prix", value: "all" },
   { label: "< 10 000 FCFA", value: "under-10000" },
-  { label: "10 000 – 20 000 FCFA", value: "10000-20000" },
-  { label: "> 20 000 FCFA", value: "over-20000" },
+   { label: "10 000 – 25 000 FCFA", value: "10000-25000" },
+   { label: "> 25 000 FCFA", value: "over-25000" },
 ];
 
 const takeoffProducts = [
