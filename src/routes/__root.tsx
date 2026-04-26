@@ -40,8 +40,8 @@ export const Route = createRootRoute({
       { name: "twitter:site", content: "@2mparfumeriesn" },
       { name: "twitter:title", content: "2M Parfumerie Dakar | Parfums authentiques" },
       { name: "twitter:description", content: "Parfumerie de luxe à Dakar. Commandez des parfums authentiques et accessibles directement sur WhatsApp." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e9feb4a4-80ef-450d-b561-7fe096a8dcc8" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e9feb4a4-80ef-450d-b561-7fe096a8dcc8" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777170233901-Screenshot_2026-04-26_022328.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Rdk3SIsNBY8XQlqCNXGgzrYeON2/social-images/social-1777170233901-Screenshot_2026-04-26_022328.webp" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
