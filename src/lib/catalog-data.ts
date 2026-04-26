@@ -24,6 +24,12 @@ import fruityVanillaImage from "@/assets/scentlab-fruity-vanilla.png";
 import leatherVioletImage from "@/assets/scentlab-leather-violet.png";
 import spicyCaramelImage from "@/assets/scentlab-spicy-caramel-upload.png";
 import spicyLeatherImage from "@/assets/scentlab-spicy-leather-upload.png";
+import rosyHazelnutImage from "@/assets/scentlab-rosy-hazelnut-upload.png";
+import orientalOudImage from "@/assets/scentlab-oriental-oud-upload.png";
+import vanillaDreamImage from "@/assets/scentlab-vanilla-dream-upload.png";
+import savannaVetiverImage from "@/assets/scentlab-savanna-vetiver-upload.png";
+import cognacWhisperImage from "@/assets/scentlab-cognac-whisper-upload.png";
+import rosyGlowImage from "@/assets/scentlab-rosy-glow-upload.png";
 
 export const collectionValues = ["all", "scentlab", "takeoff", "dubai", "pocket", "authentic", "haqqi"] as const;
 export const priceValues = ["all", "under-10000", "10000-20000", "over-20000"] as const;
@@ -95,6 +101,12 @@ const scentlabProducts = [
   { name: "Leather Violet", image: leatherVioletImage, notes: "Cuir · Violette · Ambre", family: "Cuir floral" },
   { name: "Spicy Caramel", image: spicyCaramelImage, notes: "Caramel · Épices · Bois ambrés", family: "Gourmand épicé" },
   { name: "Spicy Leather", image: spicyLeatherImage, notes: "Cuir · Épices · Résines", family: "Cuir épicé" },
+  { name: "Rosy Hazelnut", image: rosyHazelnutImage, notes: "Rose · Noisette · Ambre", family: "Floral ambré" },
+  { name: "Oriental Oud", image: orientalOudImage, notes: "Oud · Résines · Ambre", family: "Oriental boisé" },
+  { name: "Vanilla Dream", image: vanillaDreamImage, notes: "Vanille · Ambre · Musc", family: "Vanillé ambré" },
+  { name: "Savanna Vetiver", image: savannaVetiverImage, notes: "Vétiver · Agrumes · Bois secs", family: "Boisé frais" },
+  { name: "Cognac Whisper", image: cognacWhisperImage, notes: "Cognac · Bois · Épices", family: "Ambré boisé" },
+  { name: "Rosy Glow", image: rosyGlowImage, notes: "Rose · Musc · Fruits doux", family: "Floral musqué" },
 ] as const;
 
 const takeoffCatalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
