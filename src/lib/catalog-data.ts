@@ -66,6 +66,7 @@ export const collectionFilters: { label: string; value: Collection }[] = [
 ];
 
 export const priceFilters: { label: string; value: PriceRange }[] = [
+  { label: "Tous les prix", value: "all" },
   { label: "< 10 000 FCFA", value: "under-10000" },
   { label: "10 000 – 20 000 FCFA", value: "10000-20000" },
   { label: "> 20 000 FCFA", value: "over-20000" },
