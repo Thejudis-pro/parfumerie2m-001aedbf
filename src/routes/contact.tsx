@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
@@ -28,6 +28,8 @@ const schedules = [
   ["Samedi", "09h – 20h"],
   ["Dimanche", "10h – 18h"],
 ];
+
+const facebookUrl = "https://www.facebook.com/profile.php?id=61551806734713";
 
 function ContactPage() {
   return (
@@ -70,6 +72,10 @@ function ContactPage() {
 
               <ContactItem icon={<Instagram className="size-6 text-accent" aria-hidden="true" />} label="Instagram">
                 <a href="https://instagram.com/2mparfumeriesn" target="_blank" rel="noreferrer" className="text-foreground hover:text-accent">{instagram}</a>
+              </ContactItem>
+
+              <ContactItem icon={<Facebook className="size-6 text-accent" aria-hidden="true" />} label="Facebook">
+                <a href={facebookUrl} target="_blank" rel="noreferrer" className="text-foreground hover:text-accent">2MPARFUMERIE-Dk</a>
               </ContactItem>
 
               <ContactItem icon={<MapPin className="size-6 text-accent" aria-hidden="true" />} label="Zone de livraison">
