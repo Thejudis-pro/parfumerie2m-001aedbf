@@ -1088,7 +1088,14 @@ function Field({
 }
 
 function productPayloadFromForm(form: typeof blankProduct): ProductInsert {
-  return { ...form, price: Number(form.price), slug: form.slug || slugify(form.name) };
+  const image_urls = normalizeImageList([form.image_url, ...form.image_urls]);
+  return {
+    ...form,
+    image_url: image_urls[0] || "",
+    image_urls,
+    price: Number(form.price),
+    slug: form.slug || slugify(form.name),
+  };
 }
 
 function productPayloadFromRow(
@@ -1104,7 +1111,8 @@ function productPayloadFromRow(
     notes_heart: product.notes_heart,
     notes_base: product.notes_base,
     description: product.description,
-    image_url: product.image_url,
+    image_url: primaryImage(product),
+    image_urls: normalizeImageList(product.image_urls ?? imageListFromPrimary(product.image_url)),
     slug: product.slug,
     in_stock: Boolean(product.in_stock),
     is_bestseller: Boolean(product.is_bestseller),
@@ -1119,6 +1127,18 @@ function slugify(value: string) {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function normalizeImageList(urls: Array<string | null | undefined>) {
+  return Array.from(new Set(urls.map((url) => url?.trim()).filter(Boolean) as string[]));
+}
+
+function imageListFromPrimary(imageUrl: string | null | undefined) {
+  return normalizeImageList([imageUrl]);
+}
+
+function primaryImage(product: Pick<AdminProduct, "image_url" | "image_urls">) {
+  return normalizeImageList([...(product.image_urls ?? []), product.image_url])[0] || "";
 }
 
 function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): AdminProduct[] {
@@ -1141,6 +1161,7 @@ function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): Admin
       notes_base: product.baseNotes,
       description: product.description,
       image_url: product.image,
+      image_urls: [product.image],
       slug,
       in_stock: true,
       is_bestseller: false,
