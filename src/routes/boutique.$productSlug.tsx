@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
@@ -14,6 +14,8 @@ import {
   slugifyProduct,
   type BoutiqueProduct,
 } from "@/lib/catalog-data";
+import { supabase } from "@/integrations/supabase/client";
+import { mergeLiveCatalog } from "@/lib/live-catalog";
 import { displayPhone } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/boutique/$productSlug")({
@@ -39,7 +41,27 @@ export const Route = createFileRoute("/boutique/$productSlug")({
 
 function ProductPage() {
   const { productSlug } = Route.useParams();
-  const product = findProductBySlug(productSlug);
+  const [products, setProducts] = useState<BoutiqueProduct[] | null>(null);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      const { data } = await supabase.from("products").select("*");
+      setProducts(mergeLiveCatalog(data ?? []));
+    };
+    void loadProducts();
+  }, []);
+
+  const product = products?.find((item) => slugifyProduct(item) === productSlug) ?? null;
+
+  if (!products) {
+    return (
+      <SiteLayout>
+        <section className="section-shell py-40 text-center">
+          <p className="text-muted-foreground">Chargement…</p>
+        </section>
+      </SiteLayout>
+    );
+  }
 
   if (!product) {
     return (
@@ -60,13 +82,13 @@ function ProductPage() {
     );
   }
 
-  return <ProductTemplate product={product} />;
+  return <ProductTemplate product={product} products={products} />;
 }
 
-function ProductTemplate({ product }: { product: BoutiqueProduct }) {
+function ProductTemplate({ product, products }: { product: BoutiqueProduct; products: BoutiqueProduct[] }) {
   const label = collectionLabel(product.collection);
   const images = productImages(product);
-  const similar = catalog
+  const similar = products
     .filter(
       (item) =>
         item.collection === product.collection && slugifyProduct(item) !== slugifyProduct(product),

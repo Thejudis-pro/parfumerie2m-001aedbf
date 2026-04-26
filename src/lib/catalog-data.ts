@@ -61,6 +61,7 @@ export type BoutiqueProduct = {
   concentration: string;
   volume: string;
   description: string;
+  slug?: string;
   placeholder?: boolean;
 };
 
@@ -364,6 +365,7 @@ const scentlabCatalog: BoutiqueProduct[] = scentlabProducts.map((product) => ({
 export const catalog: BoutiqueProduct[] = [...takeoffCatalog, ...scentlabCatalog];
 
 export function slugifyProduct(product: BoutiqueProduct) {
+  if (product.slug) return product.slug;
   return `${product.name}-${product.ref}`
     .toLowerCase()
     .normalize("NFD")
