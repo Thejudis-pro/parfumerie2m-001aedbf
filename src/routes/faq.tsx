@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, Plus } from "lucide-react";
+import { MessageCircle, Phone, Plus } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { WhatsAppIcon } from "@/components/commerce/WhatsAppIcon";
 import { displayPhone, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/faq")({
@@ -120,7 +119,7 @@ function FaqPage() {
             <h2 className="mt-3 font-display text-[32px] text-foreground">On est sur WhatsApp et par téléphone.</h2>
             <Button asChild variant="whatsapp" size="lg" className="mt-6">
               <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-                <WhatsAppIcon className="size-5" aria-hidden="true" /> Nous écrire sur WhatsApp →
+                <MessageCircle className="size-5" aria-hidden="true" /> Nous écrire sur WhatsApp →
               </a>
             </Button>
             <div className="mt-5 flex flex-col items-center justify-center gap-3 text-sm text-muted-foreground sm:flex-row">

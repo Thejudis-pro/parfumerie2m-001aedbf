@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { WhatsAppIcon } from "@/components/commerce/WhatsAppIcon";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
 export const Route = createFileRoute("/contact")({
@@ -47,7 +46,7 @@ function ContactPage() {
           <div className="fade-up">
             <h2 className="mb-6 font-display text-[32px] text-foreground md:mb-8">Comment nous joindre</h2>
             <div className="space-y-6 md:space-y-8">
-              <ContactItem icon={<WhatsAppIcon className="size-7 text-whatsapp" aria-hidden="true" />} label="WhatsApp — Disponible 7j/7">
+              <ContactItem icon={<MessageCircle className="size-7 text-whatsapp" aria-hidden="true" />} label="WhatsApp — Disponible 7j/7">
                 <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="text-lg font-semibold text-foreground hover:text-accent">
                   {displayPhone}
                 </a>
