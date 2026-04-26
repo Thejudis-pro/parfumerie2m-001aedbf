@@ -118,7 +118,7 @@ function AboutPage() {
             ))}
           </div>
           <div className="mt-16 text-center">
-            <Button asChild variant="whatsapp" size="lg">
+            <Button asChild variant="whatsapp" size="lg" className="w-full max-w-full whitespace-normal px-5 text-center leading-relaxed sm:w-auto sm:whitespace-nowrap sm:px-8">
               <a href={whatsappUrl()} target="_blank" rel="noreferrer">
                 <MessageCircle className="size-5" aria-hidden="true" /> Discuter avec nous sur WhatsApp
               </a>
