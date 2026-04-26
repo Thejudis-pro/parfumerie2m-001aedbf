@@ -34,7 +34,7 @@ const faqs = [
   {
     question: "Comment se passe la livraison à Dakar ?",
     answer:
-      "Nous livrons à Dakar et dans les banlieues proches. Pour toute commande passée avant 16h, nous faisons le maximum pour livrer le jour même. Passé 16h, livraison garantie le lendemain. Contactez-nous sur WhatsApp pour confirmer votre zone.",
+      "Nous livrons à Dakar et dans les banlieues proches. Pour toute commande passée avant 21h, nous faisons le maximum pour livrer le jour même. Passé 21h, livraison garantie le lendemain. Contactez-nous sur WhatsApp pour confirmer votre zone.",
   },
   {
     question: "Quels sont les modes de paiement acceptés ?",
