@@ -7,6 +7,14 @@ import riyadhImage from "@/assets/takeoff-riyadh.png";
 import viennaImage from "@/assets/takeoff-vienna.png";
 import lisbonImage from "@/assets/takeoff-lisbon.png";
 import capriImage from "@/assets/takeoff-capri.png";
+import seoulImage from "@/assets/takeoff-seoul.png";
+import romeImage from "@/assets/takeoff-rome.png";
+import istanbulImage from "@/assets/takeoff-istanbul.png";
+import monacoImage from "@/assets/takeoff-monaco.png";
+import newYorkImage from "@/assets/takeoff-new-york.png";
+import moscowImage from "@/assets/takeoff-moscow.png";
+import milanImage from "@/assets/takeoff-milan.png";
+import budapestImage from "@/assets/takeoff-budapest.png";
 
 export const collectionValues = ["all", "scentlab", "takeoff", "dubai", "pocket", "authentic", "haqqi"] as const;
 export const priceValues = ["all", "under-10000", "10000-20000", "over-20000"] as const;
@@ -58,6 +66,14 @@ const takeoffProducts = [
   { name: "Vienna", image: viennaImage, notes: "Rose · Musc · Fruits tendres", family: "Floral musqué" },
   { name: "Lisbon", image: lisbonImage, notes: "Agrumes · Musc propre · Bois clair", family: "Frais musqué" },
   { name: "Capri", image: capriImage, notes: "Marine · Agrumes · Ambre gris", family: "Frais aromatique" },
+  { name: "Seoul", image: seoulImage, notes: "Musc bleu · Agrumes · Bois propres", family: "Frais boisé" },
+  { name: "Rome", image: romeImage, notes: "Violette · Ambre doux · Musc", family: "Floral ambré" },
+  { name: "Istanbul", image: istanbulImage, notes: "Musc blanc · Fleurs propres · Bois doux", family: "Musqué floral" },
+  { name: "Monaco", image: monacoImage, notes: "Accord marin · Agrumes · Ambre clair", family: "Aromatique frais" },
+  { name: "New York", image: newYorkImage, notes: "Bois urbains · Ambre · Épices fraîches", family: "Boisé épicé" },
+  { name: "Moscow", image: moscowImage, notes: "Vanille claire · Ambre · Musc", family: "Ambré doux" },
+  { name: "Milan", image: milanImage, notes: "Bergamote · Musc · Bois élégants", family: "Chypré frais" },
+  { name: "Budapest", image: budapestImage, notes: "Ambre doré · Musc · Bois blonds", family: "Ambré musqué" },
 ] as const;
 
 export const catalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
