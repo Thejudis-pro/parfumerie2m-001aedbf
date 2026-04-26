@@ -56,6 +56,7 @@ export type BoutiqueProduct = {
   price: number;
   collection: Collection;
   image: string;
+  imageUrls?: string[];
   family: string;
   concentration: string;
   volume: string;
@@ -373,6 +374,10 @@ export function slugifyProduct(product: BoutiqueProduct) {
 
 export function findProductBySlug(slug: string) {
   return catalog.find((product) => slugifyProduct(product) === slug);
+}
+
+export function productImages(product: BoutiqueProduct) {
+  return Array.from(new Set([product.image, ...(product.imageUrls ?? [])].filter(Boolean)));
 }
 
 export function formatPrice(price: number) {
