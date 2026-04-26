@@ -88,6 +88,7 @@ function ProductPage() {
 function ProductTemplate({ product, products }: { product: BoutiqueProduct; products: BoutiqueProduct[] }) {
   const label = collectionLabel(product.collection);
   const images = productImages(product);
+  const [selectedImage, setSelectedImage] = useState(images[0]);
   const similar = products
     .filter(
       (item) =>
@@ -95,32 +96,47 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
     )
     .slice(0, 4);
 
+  useEffect(() => {
+    setSelectedImage(images[0]);
+  }, [images[0]]);
+
   return (
     <SiteLayout>
       <section className="bg-background pt-24 pb-12 md:pt-32 md:pb-16">
         <div className="section-shell grid gap-8 md:grid-cols-2 md:gap-16">
-          <div className="order-1">
-            <div className="mx-auto flex aspect-square max-w-lg items-center justify-center overflow-hidden rounded-xl bg-surface p-5 shadow-card md:p-8">
+          <div className="order-1 flex flex-col gap-4 md:flex-row md:items-start">
+            {images.length > 1 && (
+              <div className="order-2 grid grid-cols-5 gap-3 md:order-1 md:w-20 md:flex-none md:grid-cols-1">
+                {images.map((image, index) => {
+                  const isSelected = image === selectedImage;
+                  return (
+                    <button
+                      key={image}
+                      type="button"
+                      onClick={() => setSelectedImage(image)}
+                      className={`aspect-square overflow-hidden rounded-md border bg-surface p-1.5 transition-all hover:border-accent ${
+                        isSelected ? "border-accent shadow-card" : "border-border"
+                      }`}
+                      aria-label={`Afficher la photo ${index + 1} de ${product.name}`}
+                    >
+                    <img
+                      src={image}
+                      alt={`${product.name} vue ${index + 1}`}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+            <div className="order-1 mx-auto flex aspect-square w-full max-w-lg items-center justify-center overflow-hidden rounded-xl bg-surface p-5 shadow-card md:order-2 md:p-8">
               <img
-                src={images[0]}
+                src={selectedImage}
                 alt={`${product.name} chez 2M Parfumerie`}
                 className="h-full w-full rounded-lg object-contain"
               />
             </div>
-            {images.length > 1 && (
-              <div className="mx-auto mt-4 grid max-w-lg grid-cols-4 gap-3">
-                {images.slice(1).map((image, index) => (
-                  <div key={image} className="aspect-square overflow-hidden rounded-md bg-surface p-2">
-                    <img
-                      src={image}
-                      alt={`${product.name} vue ${index + 2}`}
-                      className="h-full w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
 
           <aside className="order-2 md:sticky md:top-24 md:self-start">
