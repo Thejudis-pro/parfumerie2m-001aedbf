@@ -184,11 +184,10 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
   return (
     <article
       data-collection={product.collection}
-      className="fade-up product-card-motion group overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all duration-500 hover:-translate-y-2 hover:border-accent hover:shadow-glow"
+      className="fade-up group overflow-hidden rounded-lg border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-accent"
       style={{ animationDelay: `${index * 80}ms` }}
     >
-      <div className="image-zoom product-image-motion relative aspect-square overflow-hidden bg-surface">
-        <span className="product-image-shine" aria-hidden="true" />
+      <div className="image-zoom relative aspect-square overflow-hidden bg-surface">
         <span className="absolute left-3 top-3 z-10 rounded-full bg-surface px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
           {label}
         </span>
@@ -207,7 +206,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
           <img
             src={product.image}
             alt={`${product.name} chez 2M Parfumerie`}
-            className="h-full w-full object-contain p-5 transition-transform duration-700 group-hover:scale-110"
+            className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
         </Link>
