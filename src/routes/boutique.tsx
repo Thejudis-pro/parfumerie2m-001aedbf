@@ -17,10 +17,10 @@ export const Route = createFileRoute("/boutique")({
   validateSearch: validateBoutiqueSearch,
   head: () => ({
     meta: [
-      { title: "Boutique — +33 Parfums Authentiques | 2M Parfumerie Dakar" },
-      { name: "description", content: "Parcourez +33 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus. Filtrez par collection. Livraison Dakar." },
-      { property: "og:title", content: "Boutique — +33 Parfums Authentiques | 2M Parfumerie Dakar" },
-      { property: "og:description", content: "Parcourez +33 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus." },
+       { title: "Boutique — +100 Parfums Authentiques | 2M Parfumerie Dakar" },
+       { name: "description", content: "Parcourez +100 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus. Filtrez par collection. Livraison Dakar." },
+       { property: "og:title", content: "Boutique — +100 Parfums Authentiques | 2M Parfumerie Dakar" },
+       { property: "og:description", content: "Parcourez +100 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus." },
     ],
   }),
   component: BoutiquePage,
@@ -55,7 +55,7 @@ function BoutiquePage() {
         <div className="section-shell text-center">
           <p className="caption-luxe text-accent">Toutes les collections</p>
           <h1 className="mt-4 font-display text-4xl font-semibold text-foreground md:text-[56px]">La Boutique</h1>
-          <p className="mt-4 text-muted-foreground">+33 fragrances authentiques. Trouvez celle qui vous ressemble.</p>
+           <p className="mt-4 text-muted-foreground">+100 fragrances authentiques. Trouvez celle qui vous ressemble.</p>
         </div>
       </section>
 
