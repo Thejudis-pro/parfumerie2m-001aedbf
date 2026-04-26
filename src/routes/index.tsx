@@ -55,7 +55,7 @@ function Index() {
                   <a href={whatsappUrl(heroMessage)} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /> Commander sur WhatsApp</a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link to="/boutique">Explorer la boutique</Link>
+                  <Link to="/boutique" search={{ collection: "all", price: "all" }}>Explorer la boutique</Link>
                 </Button>
               </div>
               <div className="fade-up mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted-foreground" style={{ animationDelay: "480ms" }}>
