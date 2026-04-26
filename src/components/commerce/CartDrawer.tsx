@@ -61,7 +61,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             </div>
             <footer className="sticky bottom-0 border-t border-accent/15 bg-placeholder p-4 md:p-6">
               <div className="mb-5 flex items-center justify-between text-sm"><span className="text-muted-foreground">Sous-total</span><strong className="text-lg text-accent">{formatCartPrice(total)} FCFA</strong></div>
-              <Button type="button" onClick={checkout} className="w-full bg-whatsapp py-4 text-primary-foreground hover:bg-whatsapp-hover"><span className="flex size-6 items-center justify-center rounded-full bg-primary-foreground text-whatsapp"><MessageCircle className="size-4" /></span> Commander sur WhatsApp</Button>
+              <Button type="button" onClick={checkout} className="w-full bg-whatsapp py-4 text-primary-foreground hover:bg-whatsapp-hover"><MessageCircle className="size-5" /> Commander sur WhatsApp</Button>
               <Button type="button" variant="outline" onClick={onClose} className="mt-3 w-full py-3">Continuer mes achats</Button>
             </footer>
           </>
