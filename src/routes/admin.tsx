@@ -790,16 +790,27 @@ function ProductForm({
 }) {
   const [uploadingImage, setUploadingImage] = useState(false);
 
-  const uploadProductImage = async (file: File) => {
-    if (!file.type.startsWith("image/")) {
-      toast.error("Choisissez un fichier image.");
+  const uploadProductImage = async (files: FileList) => {
+    const imageFiles = Array.from(files);
+    if (!imageFiles.length) return;
+    const invalidFile = imageFiles.find((file) => !file.type.startsWith("image/"));
+    if (invalidFile) {
+      toast.error("Choisissez uniquement des fichiers image.");
       return;
     }
 
     setUploadingImage(true);
+    const uploadedUrls: string[] = [];
+    for (const file of imageFiles) {
+    if (!file.type.startsWith("image/")) {
+      toast.error("Choisissez un fichier image.");
+      setUploadingImage(false);
+      return;
+    }
+
     const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
     const baseName = slugify(form.name || file.name.replace(/\.[^.]+$/, "")) || "produit";
-    const filePath = `public/${baseName}-${Date.now()}.${extension}`;
+    const filePath = `public/${baseName}-${Date.now()}-${uploadedUrls.length}.${extension}`;
     const { error } = await supabase.storage.from("product-images").upload(filePath, file, {
       cacheControl: "3600",
       upsert: true,
@@ -807,11 +818,16 @@ function ProductForm({
 
     if (error) {
       toast.error(error.message);
+      setUploadingImage(false);
+      return;
     } else {
       const { data } = supabase.storage.from("product-images").getPublicUrl(filePath);
-      setForm({ ...form, image_url: data.publicUrl });
-      toast.success("Image ajoutée");
+      uploadedUrls.push(data.publicUrl);
     }
+    }
+    const image_urls = normalizeImageList([...form.image_urls, ...uploadedUrls]);
+    setForm({ ...form, image_url: form.image_url || image_urls[0] || "", image_urls });
+    toast.success(uploadedUrls.length > 1 ? "Images ajoutées" : "Image ajoutée");
     setUploadingImage(false);
   };
 
@@ -876,9 +892,10 @@ function ProductForm({
               id="product-image-upload"
               type="file"
               accept="image/*"
+              multiple
               onChange={(event) => {
-                const file = event.target.files?.[0];
-                if (file) void uploadProductImage(file);
+                const files = event.target.files;
+                if (files) void uploadProductImage(files);
                 event.target.value = "";
               }}
               disabled={uploadingImage}
@@ -890,9 +907,29 @@ function ProductForm({
               <ImageUp className="size-4" /> {uploadingImage ? "Envoi…" : "Uploader"}
             </label>
             <span className="break-all rounded-md border border-border bg-background px-4 py-3 text-sm font-normal text-muted-foreground">
-              {form.image_url || "Aucune image sélectionnée"}
+              {form.image_urls.length ? `${form.image_urls.length} image(s) ajoutée(s)` : "Aucune image sélectionnée"}
             </span>
           </div>
+          {form.image_urls.length > 0 && (
+            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {form.image_urls.map((url) => (
+                <div key={url} className="relative overflow-hidden rounded-md border border-border bg-background">
+                  <img src={url} alt="Aperçu produit" className="aspect-square w-full object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const image_urls = form.image_urls.filter((item) => item !== url);
+                      setForm({ ...form, image_urls, image_url: form.image_url === url ? image_urls[0] || "" : form.image_url });
+                    }}
+                    className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full bg-card text-foreground shadow-card"
+                    aria-label="Retirer l'image"
+                  >
+                    <X className="size-4" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </label>
         <Field
           label="Notes de tête"
