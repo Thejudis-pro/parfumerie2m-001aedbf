@@ -5,7 +5,7 @@ import { BoutiqueLink, SectionHeader, WhatsAppBand } from "@/components/commerce
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 
 export const Route = createFileRoute("/conseils")({
-  head: () => ({ meta: [{ title: "Conseils parfum | 2M Parfumerie" }, { name: "description", content: "Conseils pour choisir un parfum selon votre style, votre moment et votre sillage à Dakar." }] }),
+  head: () => ({ meta: [{ title: "Conseils parfum | 2M Parfumerie" }, { name: "description", content: "Conseils pour choisir un parfum selon votre style, votre moment et votre sillage au Sénégal." }] }),
   component: AdvicePage,
 });
 

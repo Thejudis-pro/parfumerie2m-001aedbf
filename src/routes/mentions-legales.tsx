@@ -20,7 +20,7 @@ function LegalPage() {
         <div className="mt-10 space-y-10 text-[15px] leading-8 text-muted-foreground">
           <section>
             <h2 className="mb-3 font-display text-2xl text-foreground">Éditeur du site</h2>
-            <p>Le présent site est édité par 2M Parfumerie, parfumerie spécialisée dans la vente de fragrances authentiques à Dakar, Sénégal.</p>
+            <p>Le présent site est édité par 2M Parfumerie, parfumerie spécialisée dans la vente de fragrances authentiques au Sénégal.</p>
             <p className="mt-2">Contact : commande@2mparfumerie.com · Téléphone : +221 76 192 34 41 / +221 78 144 17 66.</p>
           </section>
           <section>

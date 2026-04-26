@@ -12,7 +12,7 @@ export const Route = createFileRoute("/boutique/$productSlug")({
   head: ({ params }) => {
     const product = findProductBySlug(params.productSlug);
     const title = product ? `${product.name} — ${collectionLabel(product.collection)} | 2M Parfumerie` : "Parfum introuvable | 2M Parfumerie";
-    const description = product ? `${product.name}, ${collectionLabel(product.collection)}, ${product.notes}. ${formatPrice(product.price)}. Livraison Dakar.` : "Ce parfum n'est pas disponible dans la boutique 2M Parfumerie.";
+    const description = product ? `${product.name}, ${collectionLabel(product.collection)}, ${product.notes}. ${formatPrice(product.price)}. Livraison partout au Sénégal.` : "Ce parfum n'est pas disponible dans la boutique 2M Parfumerie.";
     return { meta: [{ title }, { name: "description", content: description }, { property: "og:title", content: title }, { property: "og:description", content: description }] };
   },
   component: ProductPage,
@@ -57,7 +57,7 @@ function ProductTemplate({ product }: { product: BoutiqueProduct }) {
             <h1 className="font-display text-4xl font-medium leading-tight text-foreground md:text-5xl">{product.name}</h1>
             <p className="mt-3 text-sm italic text-muted-foreground">Inspiré de {product.ref}{product.inspiration ? ` · ${product.inspiration}` : ""}</p>
             <p className="mt-6 font-body text-[32px] font-bold text-accent">{formatPrice(product.price)}</p>
-            <p className="mt-2 text-[13px] text-whatsapp">✓ En stock — Livraison Dakar aujourd'hui</p>
+            <p className="mt-2 text-[13px] text-whatsapp">✓ En stock — Livraison partout au Sénégal</p>
 
             <div className="mt-8"><AddToCartButton item={{ id: slugifyProduct(product), name: product.name, collection: label, price: product.price, imageUrl: product.image }} /></div>
             <a href="tel:+221761923441" className="mt-3 flex min-h-11 items-center justify-center gap-2 text-center text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> Ou appeler : {displayPhone}</a>

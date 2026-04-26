@@ -11,15 +11,15 @@ import { whatsappUrl } from "@/lib/perfume-data";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "2M Parfumerie — Parfums Authentiques à Dakar | Livraison Rapide" },
+      { title: "2M Parfumerie — Parfums Authentiques au Sénégal" },
       {
         name: "description",
-         content: "Découvrez +100 collections de parfums authentiques à Dakar. SCENTLAB, Dubai Perfumes, TAKEOFF Fragrance. Livraison le jour même, paiement à la livraison.",
+         content: "Découvrez +100 collections de parfums authentiques au Sénégal. SCENTLAB, Dubai Perfumes, TAKEOFF Fragrance. Livraison partout au Sénégal, paiement à la livraison.",
       },
-      { property: "og:title", content: "2M Parfumerie — Parfums Authentiques à Dakar" },
+      { property: "og:title", content: "2M Parfumerie — Parfums Authentiques au Sénégal" },
       {
         property: "og:description",
-         content: "Découvrez +100 collections de parfums authentiques à Dakar. Livraison le jour même, paiement à la livraison.",
+         content: "Découvrez +100 collections de parfums authentiques au Sénégal. Livraison partout au Sénégal, paiement à la livraison.",
       },
     ],
   }),
@@ -34,14 +34,14 @@ const featuredProducts = catalog.slice(0, 4);
 const promises = [
   { icon: MessageCircle, title: "Réponse en moins d'1h", body: "Notre équipe WhatsApp est disponible 7j/7 pour vous aider à trouver votre fragrance." },
   { icon: ShieldCheck, title: "Authenticité certifiée", body: "Chaque flacon est contrôlé avant envoi. Zéro contrefaçon, zéro compromis." },
-  { icon: Truck, title: "Livraison Dakar même jour", body: "Dakar et banlieue proches. Commandez avant 16h, recevez le soir même." },
+  { icon: Truck, title: "Livraison Sénégal", body: "Partout au Sénégal. Commandez avant 21h, nous confirmons le meilleur délai selon votre zone." },
   { icon: Wallet, title: "Paiement à la livraison", body: "Pas de carte, pas de risque. Vous payez quand le flacon est dans vos mains." },
 ];
 
 const testimonials = [
-  { quote: "J'avais essayé Monaco chez une amie aux Almadies et j'ai commandé le lendemain via WhatsApp. Le flacon est arrivé le soir même. Franchement impeccable.", name: "Khalil M.", location: "Les Almadies, Dakar", initials: "KM" },
-  { quote: "Vienna sent exactement comme Delina mais sans casser la tirelire. Je l'porte au bureau chaque semaine. On me demande souvent où j'achète.", name: "Rokhaya S.", location: "Plateau, Dakar", initials: "RS" },
-  { quote: "Je suis très regardant sur l'authenticité. J'ai commandé un Dubai Perfumes et la qualité est sans discussion. Ce sont de vrais parfums, pas des imitations.", name: "Ibrahima D.", location: "Sacré-Cœur, Dakar", initials: "ID" },
+  { quote: "J'avais essayé Monaco chez une amie aux Almadies et j'ai commandé le lendemain via WhatsApp. Le flacon est arrivé le soir même. Franchement impeccable.", name: "Khalil M.", location: "Les Almadies, Sénégal", initials: "KM" },
+  { quote: "Vienna sent exactement comme Delina mais sans casser la tirelire. Je l'porte au bureau chaque semaine. On me demande souvent où j'achète.", name: "Rokhaya S.", location: "Plateau, Sénégal", initials: "RS" },
+  { quote: "Je suis très regardant sur l'authenticité. J'ai commandé un Dubai Perfumes et la qualité est sans discussion. Ce sont de vrais parfums, pas des imitations.", name: "Ibrahima D.", location: "Sacré-Cœur, Sénégal", initials: "ID" },
 ];
 
 function Index() {
@@ -51,8 +51,8 @@ function Index() {
         <div className="grid items-center md:min-h-[calc(100vh-96px)] md:grid-cols-[55fr_45fr]">
           <div className="section-shell z-10 order-1 py-8 md:w-auto md:py-10 md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
             <div className="max-w-2xl">
-              <p className="caption-luxe mb-6 text-accent fade-up">Dakar · Parfumerie Authentique</p>
-              <h1 className="fade-up font-display text-4xl font-semibold leading-[1.1] text-foreground md:text-7xl" style={{ animationDelay: "120ms" }}>Votre signature olfactive, livrée à Dakar.</h1>
+              <p className="caption-luxe mb-6 text-accent fade-up">Sénégal · Parfumerie Authentique</p>
+              <h1 className="fade-up font-display text-4xl font-semibold leading-[1.1] text-foreground md:text-7xl" style={{ animationDelay: "120ms" }}>Votre signature olfactive, livrée au Sénégal.</h1>
                <p className="fade-up mt-6 max-w-lg text-base text-muted-foreground md:text-lg" style={{ animationDelay: "240ms" }}>Le parfum n'est pas un luxe — c'est votre identité. +100 collections authentiques, disponibles maintenant.</p>
               <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "360ms" }}>
                 <Button asChild size="lg">
@@ -63,7 +63,7 @@ function Index() {
                 </Button>
               </div>
               <div className="fade-up mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted-foreground" style={{ animationDelay: "480ms" }}>
-                {["Livraison Dakar même jour", "Authenticité garantie", "Paiement à la livraison"].map((item) => <span key={item} className="inline-flex items-center gap-1"><Check className="size-3 text-accent" aria-hidden="true" /> {item}</span>)}
+                {["Livraison Sénégal", "Authenticité garantie", "Paiement à la livraison"].map((item) => <span key={item} className="inline-flex items-center gap-1"><Check className="size-3 text-accent" aria-hidden="true" /> {item}</span>)}
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@ function Index() {
 
       <section className="bg-surface-alt py-16 md:py-24">
         <div className="section-shell">
-          <HomeHeader title="Ce que Dakar dit de nous" subtitle="Des vraies personnes, de vraies fragrances." />
+          <HomeHeader title="Ce que le Sénégal dit de nous" subtitle="Des vraies personnes, de vraies fragrances." />
           <div className="flex snap-x gap-5 overflow-x-auto pb-4 md:grid md:grid-cols-3 md:overflow-visible">
             {testimonials.map((item, index) => <article key={item.name} className="fade-up min-w-[86%] snap-center rounded-lg border border-border bg-surface p-8 transition-all hover:border-accent-hover md:min-w-0" style={{ animationDelay: `${index * 80}ms` }}><div className="mb-4 text-xl text-accent">★★★★★</div><Quote className="mb-4 text-accent" aria-hidden="true" /><p className="text-sm text-muted-foreground">“{item.quote}”</p><div className="mt-6 flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-full bg-accent-muted text-sm font-semibold text-accent">{item.initials}</span><span><strong className="block text-sm text-foreground">{item.name}</strong><small className="text-muted-foreground">{item.location}</small></span></div></article>)}
           </div>

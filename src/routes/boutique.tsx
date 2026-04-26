@@ -17,9 +17,9 @@ export const Route = createFileRoute("/boutique")({
   validateSearch: validateBoutiqueSearch,
   head: () => ({
     meta: [
-       { title: "Boutique — +100 Parfums Authentiques | 2M Parfumerie Dakar" },
-       { name: "description", content: "Parcourez +100 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus. Filtrez par collection. Livraison Dakar." },
-       { property: "og:title", content: "Boutique — +100 Parfums Authentiques | 2M Parfumerie Dakar" },
+       { title: "Boutique — +100 Parfums Authentiques | 2M Parfumerie Sénégal" },
+       { name: "description", content: "Parcourez +100 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus. Filtrez par collection. Livraison partout au Sénégal." },
+       { property: "og:title", content: "Boutique — +100 Parfums Authentiques | 2M Parfumerie Sénégal" },
        { property: "og:description", content: "Parcourez +100 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus." },
     ],
   }),

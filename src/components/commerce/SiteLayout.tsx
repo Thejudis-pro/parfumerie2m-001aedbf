@@ -1,11 +1,12 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, Menu, MessageCircle, Phone, ShoppingBag, X } from "lucide-react";
+import { Instagram, Mail, MapPin, Menu, Phone, ShoppingBag, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/commerce/CartDrawer";
 import { useCart } from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
 const navItems = [
@@ -116,10 +117,10 @@ function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-2 md:px-6 lg:grid-cols-4">
         <div>
           <Link to="/" className="font-display text-2xl font-semibold text-accent">2M Parfumerie</Link>
-          <p className="mt-2 max-w-xs text-[13px] text-muted-foreground">L'authenticité en flacon. Livraison Dakar.</p>
+          <p className="mt-2 max-w-xs text-[13px] text-muted-foreground">L'authenticité en flacon. Livraison partout au Sénégal.</p>
           <div className="mt-6 flex gap-4">
             <a href="https://instagram.com/2mparfumeriesn" target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent" aria-label="Instagram 2M Parfumerie"><Instagram className="size-5" aria-hidden="true" /></a>
-            <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-whatsapp hover:text-whatsapp" aria-label="WhatsApp 2M Parfumerie"><MessageCircle className="size-5" aria-hidden="true" /></a>
+            <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-whatsapp hover:text-whatsapp" aria-label="WhatsApp 2M Parfumerie"><WhatsAppIcon className="size-5" aria-hidden="true" /></a>
           </div>
         </div>
         <FooterColumn title="Navigation">
@@ -132,13 +133,13 @@ function SiteFooter() {
           <a href="tel:+221761923441" className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {displayPhone}</a>
           <a href="tel:+221781441766" className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Phone className="size-4" aria-hidden="true" /> {secondPhone}</a>
           <a href={`mailto:${email}`} className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"><Mail className="size-4" aria-hidden="true" /> {email}</a>
-          <p className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground"><MapPin className="size-4" aria-hidden="true" /> Dakar, Sénégal</p>
+          <p className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground"><MapPin className="size-4" aria-hidden="true" /> Sénégal</p>
           <a href={whatsappUrl()} target="_blank" rel="noreferrer" className="mt-6 inline-flex min-h-11 items-center rounded-full bg-whatsapp px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary-foreground hover:bg-whatsapp-hover">Commander maintenant</a>
         </FooterColumn>
       </div>
       <div className="mx-auto mt-8 flex max-w-7xl flex-col justify-between gap-3 border-t border-foreground/5 px-4 pt-8 text-xs text-muted-foreground md:flex-row md:px-6">
         <p>© 2026 2M Parfumerie. Tous droits réservés.</p>
-        <p>Fait avec ♥ à Dakar</p>
+        <p>Fait avec ♥ au Sénégal</p>
       </div>
     </footer>
   );
@@ -166,7 +167,7 @@ function FloatingWhatsApp() {
     >
       <span className="pointer-events-none absolute right-[72px] hidden whitespace-nowrap rounded-md border border-border bg-background px-3 py-2 text-xs text-foreground opacity-0 shadow-card transition-opacity group-hover:opacity-100 md:block">Commander sur WhatsApp</span>
       {rippling && <span className="absolute inset-0 animate-ping rounded-full bg-primary-foreground/30" aria-hidden="true" />}
-      <MessageCircle className="size-7" aria-hidden="true" />
+      <WhatsAppIcon className="size-7" aria-hidden="true" />
     </a>
   );
 }
