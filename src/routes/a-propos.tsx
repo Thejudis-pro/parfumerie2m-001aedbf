@@ -50,7 +50,7 @@ const values = [
 function AboutPage() {
   return (
     <SiteLayout>
-      <section className="relative overflow-hidden pt-48 pb-24">
+      <section className="relative overflow-hidden pt-32 pb-16 md:pt-48 md:pb-24">
         <img
           src={aboutHero}
           alt="Flacon précieux tenu dans une lumière dorée à Dakar"
@@ -65,14 +65,14 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-background py-24">
-        <div className="section-shell grid gap-12 md:grid-cols-[40fr_60fr] md:items-center">
+      <section className="bg-background py-16 md:py-24">
+        <div className="section-shell grid gap-10 md:grid-cols-[40fr_60fr] md:items-center md:gap-12">
           <div className="fade-up overflow-hidden rounded-xl border border-border bg-surface shadow-card">
             <PerfumePlaceholder className="aspect-[3/4]" />
           </div>
           <div className="fade-up">
             <p className="caption-luxe text-accent">La genèse</p>
-            <h2 className="mt-4 font-display text-[40px] font-medium leading-tight text-foreground">
+            <h2 className="mt-4 font-display text-[32px] font-medium leading-tight text-foreground md:text-[40px]">
               Né d'une passion, construit pour Dakar.
             </h2>
             <div className="mt-6 space-y-6 text-base leading-[1.9] text-muted-foreground">
@@ -97,14 +97,14 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-surface-alt py-24">
+      <section className="bg-surface-alt py-16 md:py-24">
         <div className="section-shell">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="font-display text-[32px] font-medium text-foreground md:text-5xl">
               Ce en quoi nous croyons
             </h2>
           </div>
-          <div className="mt-16 grid gap-8 md:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:mt-16 md:grid-cols-3 md:gap-8">
             {values.map(({ icon: Icon, title, body }, index) => (
               <article
                 key={title}
