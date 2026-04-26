@@ -126,7 +126,7 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
                         loading="lazy"
                       />
                       {!isSelected && (
-                        <span className="pointer-events-none absolute inset-0 bg-background/55 transition-opacity group-hover:opacity-0" />
+                        <span className="pointer-events-none absolute inset-0 bg-background/55 opacity-0 transition-opacity group-hover:opacity-100" />
                       )}
                     </button>
                   );
