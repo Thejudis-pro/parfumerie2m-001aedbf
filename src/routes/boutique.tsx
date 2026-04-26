@@ -1,5 +1,5 @@
 import { Link, Outlet, createFileRoute, useLocation } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
@@ -31,6 +31,10 @@ function BoutiquePage() {
   const { collection, price } = Route.useSearch();
   const [visibleCount, setVisibleCount] = useState(12);
 
+  useEffect(() => {
+    setVisibleCount(12);
+  }, [collection, price]);
+
   const filteredProducts = useMemo(() => {
     return catalog.filter((product) => {
       const collectionMatch = collection === "all" || product.collection === collection;
@@ -55,7 +59,7 @@ function BoutiquePage() {
         </div>
       </section>
 
-      <section className="sticky top-[65px] z-40 border-b border-border bg-background py-8">
+      <section className="border-b border-border bg-background py-8">
         <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-3 px-6">
           {collectionFilters.map((filter) => (
             <FilterLink key={filter.value} active={collection === filter.value} search={{ collection: filter.value, price }} label={filter.label} />
