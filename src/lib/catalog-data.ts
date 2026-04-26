@@ -93,20 +93,20 @@ const takeoffProducts = [
 ] as const;
 
 const scentlabProducts = [
-  { name: "Creamy Almond", image: creamyAlmondImage, notes: "Amande crémeuse · Vanille · Musc", family: "Gourmand crémeux" },
-  { name: "Bright Mandarin", image: brightMandarinImage, notes: "Mandarine · Agrumes · Musc propre", family: "Hespéridé frais" },
-  { name: "Caramel Citrus", image: caramelCitrusImage, notes: "Caramel · Agrumes · Ambre", family: "Gourmand hespéridé" },
-  { name: "Fruity Gourmand", image: fruityGourmandImage, notes: "Fruits doux · Praline · Musc", family: "Fruité gourmand" },
-  { name: "Fruity Vanilla", image: fruityVanillaImage, notes: "Fruits rouges · Vanille · Musc", family: "Vanillé fruité" },
-  { name: "Leather Violet", image: leatherVioletImage, notes: "Cuir · Violette · Ambre", family: "Cuir floral" },
-  { name: "Spicy Caramel", image: spicyCaramelImage, notes: "Caramel · Épices · Bois ambrés", family: "Gourmand épicé" },
-  { name: "Spicy Leather", image: spicyLeatherImage, notes: "Cuir · Épices · Résines", family: "Cuir épicé" },
-  { name: "Rosy Hazelnut", image: rosyHazelnutImage, notes: "Rose · Noisette · Ambre", family: "Floral ambré" },
-  { name: "Oriental Oud", image: orientalOudImage, notes: "Oud · Résines · Ambre", family: "Oriental boisé" },
-  { name: "Vanilla Dream", image: vanillaDreamImage, notes: "Vanille · Ambre · Musc", family: "Vanillé ambré" },
-  { name: "Savanna Vetiver", image: savannaVetiverImage, notes: "Vétiver · Agrumes · Bois secs", family: "Boisé frais" },
-  { name: "Cognac Whisper", image: cognacWhisperImage, notes: "Cognac · Bois · Épices", family: "Ambré boisé" },
-  { name: "Rosy Glow", image: rosyGlowImage, notes: "Rose · Musc · Fruits doux", family: "Floral musqué" },
+  { name: "Creamy Almond", ref: "Hypnotic Poison", image: creamyAlmondImage, notes: "Amande crémeuse · Vanille · Musc", family: "Gourmand crémeux" },
+  { name: "Bright Mandarin", ref: "Louis Vuitton Imagination", image: brightMandarinImage, notes: "Mandarine · Agrumes · Musc propre", family: "Hespéridé frais" },
+  { name: "Citrus Caramel", ref: "Xerjoff Casamorati Lira", image: caramelCitrusImage, notes: "Caramel · Agrumes · Ambre", family: "Gourmand hespéridé" },
+  { name: "Fruity Gourmand", ref: "La Vie Est Belle", image: fruityGourmandImage, notes: "Fruits doux · Praline · Musc", family: "Fruité gourmand" },
+  { name: "Fruity Vanilla", ref: "Xerjoff Erba Pura", image: fruityVanillaImage, notes: "Fruits rouges · Vanille · Musc", family: "Vanillé fruité" },
+  { name: "Leather Violet", ref: "Dior Fahrenheit", image: leatherVioletImage, notes: "Cuir · Violette · Ambre", family: "Cuir floral" },
+  { name: "Spicy Caramel", ref: "Scandal Man JPG", image: spicyCaramelImage, notes: "Caramel · Épices · Bois ambrés", family: "Gourmand épicé" },
+  { name: "Spicy Leather", ref: "One Million Lucky", image: spicyLeatherImage, notes: "Cuir · Épices · Résines", family: "Cuir épicé" },
+  { name: "Rosy Hazelnut", ref: "Amouage Guidance", image: rosyHazelnutImage, notes: "Rose · Noisette · Ambre", family: "Floral ambré" },
+  { name: "Oriental Oud", ref: "Oud For Greatness", image: orientalOudImage, notes: "Oud · Résines · Ambre", family: "Oriental boisé" },
+  { name: "Vanilla Dream", ref: "Burberry Goddess", image: vanillaDreamImage, notes: "Vanille · Ambre · Musc", family: "Vanillé ambré" },
+  { name: "Savanna Vetiver", ref: "Bal d’Afrique", image: savannaVetiverImage, notes: "Vétiver · Agrumes · Bois secs", family: "Boisé frais" },
+  { name: "Cognac Whisper", ref: "Kilian Angels’ Share", image: cognacWhisperImage, notes: "Cognac · Bois · Épices", family: "Ambré boisé" },
+  { name: "Rosy Glow", ref: "Lancôme Idole", image: rosyGlowImage, notes: "Rose · Musc · Fruits doux", family: "Floral musqué" },
 ] as const;
 
 const takeoffCatalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
@@ -127,12 +127,12 @@ const takeoffCatalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
 
 const scentlabCatalog: BoutiqueProduct[] = scentlabProducts.map((product) => ({
   name: product.name,
-  ref: "SCENTLAB",
+  ref: product.ref,
   notes: product.notes,
   headNotes: product.notes,
   heartNotes: "Notes à préciser",
   baseNotes: "Notes à préciser",
-  price: 10000,
+  price: 6000,
   collection: "scentlab",
   image: product.image,
   family: product.family,
