@@ -12,10 +12,21 @@ import {
   Trash2,
   X,
 } from "lucide-react";
-import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type Dispatch, type FormEvent, type ReactNode, type SetStateAction } from "react";
+import Cropper from "react-easy-crop";
+import type { Area } from "react-easy-crop";
+import "react-easy-crop/react-easy-crop.css";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import type { Database, Json } from "@/integrations/supabase/types";
@@ -26,6 +37,7 @@ import {
   slugifyProduct,
   type Collection,
 } from "@/lib/catalog-data";
+import { cropImageFile, mimeTypeToExtension, resizeImageFile, type CropArea } from "@/lib/image-processing";
 
 type ProductRow = Database["public"]["Tables"]["products"]["Row"];
 type ProductInsert = Database["public"]["Tables"]["products"]["Insert"];
@@ -518,6 +530,7 @@ function ProductsPanel({
         </label>
         <select
           className="min-h-12 rounded-md border border-border bg-card px-4 text-foreground"
+          aria-label="Filtre de collection"
           value={collection}
           onChange={(event) => setCollection(event.target.value as Collection | "all")}
         >
@@ -678,6 +691,7 @@ function OrdersPanel({
         </label>
         <select
           className="min-h-12 rounded-md border border-border bg-card px-4 text-foreground"
+          aria-label="Filtre de statut des commandes"
           value={status}
           onChange={(event) => setStatus(event.target.value as OrderStatus | "all")}
         >
@@ -701,6 +715,7 @@ function OrdersPanel({
                 <p className="mt-1 text-sm text-muted-foreground">{formatDate(order.created_at)}</p>
               </div>
               <select
+                aria-label={`Statut de la commande ${order.order_number}`}
                 value={order.status ?? "nouveau"}
                 onChange={(event) => updateOrderStatus(order.id, event.target.value)}
                 className="min-h-11 rounded-md border border-border bg-background px-3 text-sm font-semibold text-foreground"
@@ -783,52 +798,174 @@ function ProductForm({
   saving,
 }: {
   form: typeof blankProduct;
-  setForm: (form: typeof blankProduct) => void;
+  setForm: Dispatch<SetStateAction<typeof blankProduct>>;
   onSubmit: (event: FormEvent) => void;
   editing: boolean;
   saving: boolean;
 }) {
-  const [uploadingImage, setUploadingImage] = useState(false);
+  type ImageEditorMode = "crop" | "resize";
+  type CropPreset = "square" | "landscape";
 
-  const uploadProductImage = async (files: FileList) => {
+  const cropPresets: Array<{
+    key: CropPreset;
+    label: string;
+    description: string;
+    width: number;
+    height: number;
+  }> = [
+    { key: "square", label: "Carré 1:1", description: "Idéal pour les vignettes produit", width: 1200, height: 1200 },
+    { key: "landscape", label: "Large 4:5", description: "Mieux pour les visuels éditoriaux", width: 1600, height: 2000 },
+  ];
+
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imageEditorOpen, setImageEditorOpen] = useState(false);
+  const [imageQueue, setImageQueue] = useState<File[]>([]);
+  const [imageQueueIndex, setImageQueueIndex] = useState(0);
+  const [imageEditorMode, setImageEditorMode] = useState<ImageEditorMode>("crop");
+  const [cropPreset, setCropPreset] = useState<CropPreset>("square");
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArea | null>(null);
+  const [outputWidth, setOutputWidth] = useState(1200);
+  const [outputHeight, setOutputHeight] = useState(1200);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  const currentImage = imageQueue[imageQueueIndex] ?? null;
+
+  useEffect(() => {
+    if (!currentImage) {
+      setPreviewUrl(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(currentImage);
+    setPreviewUrl(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [currentImage]);
+
+  useEffect(() => {
+    setCrop({ x: 0, y: 0 });
+    setZoom(1);
+    setCroppedAreaPixels(null);
+    if (imageEditorMode === "crop") {
+      const preset = cropPresets.find((item) => item.key === cropPreset) ?? cropPresets[0];
+      setOutputWidth(preset.width);
+      setOutputHeight(preset.height);
+      return;
+    }
+
+    setOutputWidth(1600);
+    setOutputHeight(1600);
+  }, [currentImage, cropPreset, imageEditorMode]);
+
+  const startImageUpload = (files: FileList) => {
     const imageFiles = Array.from(files);
     if (!imageFiles.length) return;
+
     const invalidFile = imageFiles.find((file) => !file.type.startsWith("image/"));
     if (invalidFile) {
       toast.error("Choisissez uniquement des fichiers image.");
       return;
     }
 
-    setUploadingImage(true);
-    const uploadedUrls: string[] = [];
-    for (const file of imageFiles) {
-    if (!file.type.startsWith("image/")) {
-      toast.error("Choisissez un fichier image.");
-      setUploadingImage(false);
+    setImageQueue(imageFiles);
+    setImageQueueIndex(0);
+    setCropPreset("square");
+    setImageEditorOpen(true);
+  };
+
+  const closeImageEditor = () => {
+    if (uploadingImage) {
       return;
     }
 
-    const extension = file.name.split(".").pop()?.toLowerCase() || "jpg";
+    setImageEditorOpen(false);
+    setImageQueue([]);
+    setImageQueueIndex(0);
+    setCropPreset("square");
+    setCroppedAreaPixels(null);
+    setZoom(1);
+    setCrop({ x: 0, y: 0 });
+  };
+
+  const applyCropPreset = (preset: CropPreset) => {
+    setCropPreset(preset);
+    const presetData = cropPresets.find((item) => item.key === preset);
+    if (presetData) {
+      setOutputWidth(presetData.width);
+      setOutputHeight(presetData.height);
+    }
+  };
+
+  const uploadPreparedImage = async (file: File, processedBlob: Blob) => {
+    const extension = mimeTypeToExtension(processedBlob.type || file.type || "image/jpeg");
     const baseName = slugify(form.name || file.name.replace(/\.[^.]+$/, "")) || "produit";
-    const filePath = `public/${baseName}-${Date.now()}-${uploadedUrls.length}.${extension}`;
-    const { error } = await supabase.storage.from("product-images").upload(filePath, file, {
+    const filePath = `public/${baseName}-${Date.now()}-${imageQueueIndex}.${extension}`;
+    const processedFile = new File([processedBlob], `${baseName}.${extension}`, {
+      type: processedBlob.type || file.type || "image/jpeg",
+    });
+
+    const { error } = await supabase.storage.from("product-images").upload(filePath, processedFile, {
       cacheControl: "3600",
       upsert: true,
     });
 
     if (error) {
-      toast.error(error.message);
-      setUploadingImage(false);
+      throw error;
+    }
+
+    const { data } = supabase.storage.from("product-images").getPublicUrl(filePath);
+    setForm((current) => {
+      const imageUrls = normalizeImageList([...current.image_urls, data.publicUrl]);
+      return {
+        ...current,
+        image_url: current.image_url || imageUrls[0] || "",
+        image_urls: imageUrls,
+      };
+    });
+  };
+
+  const processCurrentImage = async () => {
+    if (!currentImage) return;
+
+    if (imageEditorMode === "crop" && !croppedAreaPixels) {
+      toast.error("Définissez un cadrage avant de valider.");
       return;
-    } else {
-      const { data } = supabase.storage.from("product-images").getPublicUrl(filePath);
-      uploadedUrls.push(data.publicUrl);
     }
+
+    setUploadingImage(true);
+
+    try {
+      const processedBlob =
+        imageEditorMode === "crop"
+          ? await cropImageFile(currentImage, croppedAreaPixels as CropArea, {
+              outputWidth,
+              outputHeight,
+              mimeType: currentImage.type,
+            })
+          : await resizeImageFile(currentImage, {
+              maxWidth: outputWidth,
+              maxHeight: outputHeight,
+              mimeType: currentImage.type,
+            });
+
+      await uploadPreparedImage(currentImage, processedBlob);
+
+      const nextIndex = imageQueueIndex + 1;
+      if (nextIndex < imageQueue.length) {
+        setImageQueueIndex(nextIndex);
+        return;
+      }
+
+      toast.success(imageQueue.length > 1 ? "Images ajoutées" : "Image ajoutée");
+      closeImageEditor();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Impossible d'envoyer l'image.";
+      toast.error(message);
+    } finally {
+      setUploadingImage(false);
     }
-    const image_urls = normalizeImageList([...form.image_urls, ...uploadedUrls]);
-    setForm({ ...form, image_url: form.image_url || image_urls[0] || "", image_urls });
-    toast.success(uploadedUrls.length > 1 ? "Images ajoutées" : "Image ajoutée");
-    setUploadingImage(false);
   };
 
   return (
@@ -895,10 +1032,10 @@ function ProductForm({
               multiple
               onChange={(event) => {
                 const files = event.target.files;
-                if (files) void uploadProductImage(files);
+                if (files) startImageUpload(files);
                 event.target.value = "";
               }}
-              disabled={uploadingImage}
+              disabled={uploadingImage || imageEditorOpen}
             />
             <label
               htmlFor="product-image-upload"
@@ -910,6 +1047,181 @@ function ProductForm({
               {form.image_urls.length ? `${form.image_urls.length} image(s) ajoutée(s)` : "Aucune image sélectionnée"}
             </span>
           </div>
+          <Dialog open={imageEditorOpen} onOpenChange={(open) => (open ? setImageEditorOpen(true) : closeImageEditor())}>
+            <DialogContent className="max-h-[92vh] max-w-5xl overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Préparer l’image</DialogTitle>
+                <DialogDescription>
+                  Recadrez ou redimensionnez l’image avant l’envoi pour garder un rendu cohérent dans la boutique.
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_320px]">
+                <div className="space-y-3">
+                  <div className="relative h-[360px] overflow-hidden rounded-lg border border-border bg-black/5">
+                    {previewUrl ? (
+                      <>
+                        {imageEditorMode === "crop" ? (
+                          <>
+                            <Cropper
+                              image={previewUrl}
+                              crop={crop}
+                              zoom={zoom}
+                              aspect={outputWidth / outputHeight}
+                              cropShape="rect"
+                              showGrid
+                              restrictPosition
+                              onCropChange={setCrop}
+                              onZoomChange={setZoom}
+                              onCropComplete={(_, croppedPixels) => setCroppedAreaPixels(croppedPixels as Area)}
+                            />
+                            <div className="pointer-events-none absolute inset-0">
+                              <div className="absolute inset-4 rounded-2xl border border-white/70 shadow-[0_0_0_9999px_rgba(0,0,0,0.18)]" />
+                              <div className="absolute left-4 top-4 size-6 border-l-2 border-t-2 border-white/90" />
+                              <div className="absolute right-4 top-4 size-6 border-r-2 border-t-2 border-white/90" />
+                              <div className="absolute bottom-4 left-4 size-6 border-b-2 border-l-2 border-white/90" />
+                              <div className="absolute bottom-4 right-4 size-6 border-b-2 border-r-2 border-white/90" />
+                              <div className="absolute inset-x-4 top-4 rounded-2xl bg-gradient-to-b from-black/10 to-transparent" />
+                            </div>
+                          </>
+                        ) : (
+                          <div className="flex h-full items-center justify-center p-4">
+                            <img
+                              src={previewUrl}
+                              alt="Prévisualisation de l'image"
+                              className="max-h-full max-w-full rounded-md object-contain shadow-card"
+                            />
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                        Chargement de l’aperçu…
+                      </div>
+                    )}
+                  </div>
+
+                  {imageEditorMode === "crop" && (
+                  <div className="space-y-3">
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      {cropPresets.map((preset) => (
+                        <button
+                          key={preset.key}
+                          type="button"
+                          onClick={() => applyCropPreset(preset.key)}
+                          className={`rounded-lg border px-3 py-3 text-left transition-colors ${cropPreset === preset.key ? "border-accent bg-accent/10 text-foreground" : "border-border bg-background text-muted-foreground hover:border-accent/50 hover:text-foreground"}`}
+                        >
+                          <span className="block text-sm font-semibold">{preset.label}</span>
+                          <span className="mt-1 block text-xs leading-5">{preset.description}</span>
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span>Zoom</span>
+                      <span>{Math.round(zoom * 100)}%</span>
+                    </div>
+                    <input
+                      className="w-full accent-accent"
+                      type="range"
+                      min="1"
+                      max="3"
+                      step="0.01"
+                      value={zoom}
+                      onChange={(event) => setZoom(Number(event.target.value))}
+                    />
+                    <p className="text-xs leading-5 text-muted-foreground">
+                      Glissez l’image pour repositionner le cadrage. Les coins de la fenêtre indiquent la zone exportée.
+                    </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-4 rounded-lg border border-border bg-background p-4">
+                  <div className="space-y-2">
+                    <p className="text-sm font-semibold text-foreground">Fichier en cours</p>
+                    <p className="break-all text-sm text-muted-foreground">
+                      {currentImage ? `${imageQueueIndex + 1}/${imageQueue.length} · ${currentImage.name}` : "Aucun fichier"}
+                    </p>
+                  </div>
+
+                  <label className="grid gap-2 text-sm font-medium text-foreground">
+                    Mode
+                    <select
+                      className="min-h-12 rounded-md border border-border bg-background px-4 text-foreground"
+                      aria-label="Mode de préparation de l'image"
+                      value={imageEditorMode}
+                      onChange={(event) => {
+                        const nextMode = event.target.value as ImageEditorMode;
+                        setImageEditorMode(nextMode);
+                        if (nextMode === "crop") {
+                          applyCropPreset("square");
+                        }
+                      }}
+                    >
+                      <option value="crop">Recadrer</option>
+                      <option value="resize">Redimensionner</option>
+                    </select>
+                  </label>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <label className="grid gap-2 text-sm font-medium text-foreground">
+                      Largeur
+                      <input
+                        className="min-h-12 rounded-md border border-border bg-background px-4 text-foreground"
+                        type="number"
+                        min="1"
+                        value={outputWidth}
+                        onChange={(event) => setOutputWidth(Number(event.target.value) || 1)}
+                      />
+                    </label>
+                    <label className="grid gap-2 text-sm font-medium text-foreground">
+                      Hauteur
+                      <input
+                        className="min-h-12 rounded-md border border-border bg-background px-4 text-foreground"
+                        type="number"
+                        min="1"
+                        value={outputHeight}
+                        onChange={(event) => setOutputHeight(Number(event.target.value) || 1)}
+                      />
+                    </label>
+                  </div>
+
+                  <p className="text-xs leading-5 text-muted-foreground">
+                    L’image finale sera exportée à ces dimensions maximum. En mode recadrage, le ratio de sortie est appliqué au cadre.
+                  </p>
+                </div>
+              </div>
+
+              <DialogFooter className="gap-2 sm:justify-between">
+                <Button type="button" variant="outline" onClick={closeImageEditor} disabled={uploadingImage}>
+                  Annuler
+                </Button>
+                <div className="flex gap-2">
+                  {imageQueueIndex > 0 && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setImageQueueIndex((current) => Math.max(0, current - 1))}
+                      disabled={uploadingImage}
+                    >
+                      Retour
+                    </Button>
+                  )}
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() => setImageQueueIndex((current) => Math.min(imageQueue.length - 1, current + 1))}
+                    disabled={uploadingImage || imageQueueIndex + 1 >= imageQueue.length}
+                  >
+                    Passer
+                  </Button>
+                  <Button type="button" onClick={processCurrentImage} disabled={uploadingImage || !currentImage}>
+                    {uploadingImage ? "Traitement…" : imageQueueIndex + 1 < imageQueue.length ? "Valider et continuer" : "Valider et envoyer"}
+                  </Button>
+                </div>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
           {form.image_urls.length > 0 && (
             <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {form.image_urls.map((url) => (
@@ -1022,6 +1334,7 @@ function OrderForm({
           Statut
           <select
             className="min-h-12 rounded-md border border-border bg-background px-4 text-foreground"
+            aria-label="Statut de commande"
             value={form.status}
             onChange={(event) => setForm({ ...form, status: event.target.value })}
           >
