@@ -162,7 +162,7 @@ function FilterLink({
   label,
 }: {
   active: boolean;
-  search: { collection: Collection; price: PriceRange };
+  search: { collection: Collection };
   label: string;
 }) {
   return (
@@ -200,7 +200,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
-          search={{ collection: "all", price: "all" }}
+          search={{ collection: "all" }}
           aria-label={`Voir ${product.name}`}
           className="block h-full w-full"
         >
@@ -219,7 +219,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
-          search={{ collection: "all", price: "all" }}
+          search={{ collection: "all" }}
           className="mb-1 block font-display text-[22px] text-foreground hover:text-accent"
         >
           {product.name}
