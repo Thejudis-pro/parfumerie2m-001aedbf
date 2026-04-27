@@ -441,7 +441,7 @@ function ProductsPanel({
   showProductForm: boolean;
   setShowProductForm: (show: boolean) => void;
   productForm: typeof blankProduct;
-  setProductForm: (form: typeof blankProduct) => void;
+  setProductForm: Dispatch<SetStateAction<typeof blankProduct>>;
   saveProduct: (event: FormEvent) => void;
   editingProductId: string | null;
   setEditingProductId: (id: string | null) => void;
