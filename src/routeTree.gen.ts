@@ -14,6 +14,7 @@ import { Route as LivraisonRouteImport } from './routes/livraison'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ConseilsRouteImport } from './routes/conseils'
+import { Route as CoffretSignatureRouteImport } from './routes/coffret-signature'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
@@ -43,6 +44,11 @@ const ContactRoute = ContactRouteImport.update({
 const ConseilsRoute = ConseilsRouteImport.update({
   id: '/conseils',
   path: '/conseils',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoffretSignatureRoute = CoffretSignatureRouteImport.update({
+  id: '/coffret-signature',
+  path: '/coffret-signature',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BoutiqueRoute = BoutiqueRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRoute
   '/boutique': typeof BoutiqueRouteWithChildren
+  '/coffret-signature': typeof CoffretSignatureRoute
   '/conseils': typeof ConseilsRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRoute
   '/boutique': typeof BoutiqueRouteWithChildren
+  '/coffret-signature': typeof CoffretSignatureRoute
   '/conseils': typeof ConseilsRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRoute
   '/boutique': typeof BoutiqueRouteWithChildren
+  '/coffret-signature': typeof CoffretSignatureRoute
   '/conseils': typeof ConseilsRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/admin'
     | '/boutique'
+    | '/coffret-signature'
     | '/conseils'
     | '/contact'
     | '/faq'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/admin'
     | '/boutique'
+    | '/coffret-signature'
     | '/conseils'
     | '/contact'
     | '/faq'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/a-propos'
     | '/admin'
     | '/boutique'
+    | '/coffret-signature'
     | '/conseils'
     | '/contact'
     | '/faq'
@@ -152,6 +164,7 @@ export interface RootRouteChildren {
   AProposRoute: typeof AProposRoute
   AdminRoute: typeof AdminRoute
   BoutiqueRoute: typeof BoutiqueRouteWithChildren
+  CoffretSignatureRoute: typeof CoffretSignatureRoute
   ConseilsRoute: typeof ConseilsRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
@@ -194,6 +207,13 @@ declare module '@tanstack/react-router' {
       path: '/conseils'
       fullPath: '/conseils'
       preLoaderRoute: typeof ConseilsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coffret-signature': {
+      id: '/coffret-signature'
+      path: '/coffret-signature'
+      fullPath: '/coffret-signature'
+      preLoaderRoute: typeof CoffretSignatureRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/boutique': {
@@ -251,6 +271,7 @@ const rootRouteChildren: RootRouteChildren = {
   AProposRoute: AProposRoute,
   AdminRoute: AdminRoute,
   BoutiqueRoute: BoutiqueRouteWithChildren,
+  CoffretSignatureRoute: CoffretSignatureRoute,
   ConseilsRoute: ConseilsRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,

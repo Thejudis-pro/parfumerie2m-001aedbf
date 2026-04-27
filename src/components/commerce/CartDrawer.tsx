@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { MessageCircle, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { Button } from "@/components/ui/button";
 import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { useCart } from "@/hooks/useCart";
@@ -137,7 +138,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 onClick={checkout}
                 className="w-full bg-whatsapp py-4 text-primary-foreground hover:bg-whatsapp-hover"
               >
-                <MessageCircle className="size-5" /> Commander sur WhatsApp
+                <WhatsAppLogo tone="light" className="size-5" /> Commander sur WhatsApp
               </Button>
               <Button
                 type="button"

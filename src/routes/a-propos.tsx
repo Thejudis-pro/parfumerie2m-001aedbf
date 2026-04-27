@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Gem, MapPin, MessageCircle, Users } from "lucide-react";
+import { Gem, MapPin, Users } from "lucide-react";
 
 import aboutHero from "@/assets/about-perfume-grid.png";
 import brandLogo from "@/assets/2m-parfumerie-logo.png";
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { whatsappUrl } from "@/lib/perfume-data";
@@ -125,8 +126,8 @@ function AboutPage() {
               size="lg"
               className="w-full max-w-full whitespace-normal px-5 text-center leading-relaxed sm:w-auto sm:whitespace-nowrap sm:px-8"
             >
-              <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-                <MessageCircle className="size-5" aria-hidden="true" /> Discuter avec nous sur
+              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+                <WhatsAppLogo tone="light" className="size-5" /> Discuter avec nous sur
                 WhatsApp
               </a>
             </Button>

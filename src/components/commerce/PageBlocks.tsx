@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import {
   displayPhone,
   email,
@@ -85,8 +86,8 @@ export function WhatsAppBand() {
           </h2>
         </div>
         <Button asChild variant="whatsapp" size="lg">
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-            <MessageCircle className="size-5" aria-hidden="true" /> Commander sur WhatsApp
+          <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+            <WhatsAppLogo tone="light" className="size-5" /> Commander sur WhatsApp
           </a>
         </Button>
       </div>
@@ -97,7 +98,7 @@ export function WhatsAppBand() {
 export function ContactCards() {
   const cards = [
     {
-      icon: MessageCircle,
+      icon: WhatsAppLogo,
       label: "WhatsApp",
       value: displayPhone,
       href: whatsappUrl(),
@@ -123,10 +124,7 @@ export function ContactCards() {
           rel="noreferrer"
           className="min-h-32 rounded-lg border border-border bg-card p-5 shadow-card transition-all hover:-translate-y-1 hover:border-accent"
         >
-          <Icon
-            className={brand ? "mb-5 size-7 text-whatsapp" : "mb-5 text-accent"}
-            aria-hidden="true"
-          />
+          <Icon className={brand ? "mb-5 size-7" : "mb-5 text-accent"} />
           <p className="caption-luxe text-muted-foreground">{label}</p>
           <p className="mt-2 font-medium text-foreground">{value}</p>
         </a>

@@ -3,7 +3,6 @@ import {
   Check,
   Edit3,
   ImageUp,
-  MessageCircle,
   Package,
   Plus,
   Save,
@@ -19,6 +18,7 @@ import "react-easy-crop/react-easy-crop.css";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import {
   Dialog,
   DialogContent,
@@ -762,7 +762,7 @@ function OrdersPanel({
                     )
                   }
                 >
-                  <MessageCircle className="size-4" /> WhatsApp
+                  <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
                 </Button>
               )}
               <Button

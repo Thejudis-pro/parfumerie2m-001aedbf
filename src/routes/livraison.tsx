@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Clock, MapPinned, MessageCircle } from "lucide-react";
+import { Clock, MapPinned } from "lucide-react";
 
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { SectionHeader, WhatsAppBand } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/livraison")({
 function DeliveryPage() {
   const steps = [
     {
-      icon: MessageCircle,
+      icon: WhatsAppLogo,
       title: "Commande",
       text: "Envoyez votre choix sur WhatsApp avec le parfum, l’édition et vos coordonnées.",
     },

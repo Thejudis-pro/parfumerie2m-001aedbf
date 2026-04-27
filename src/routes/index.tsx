@@ -1,11 +1,12 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Check, MessageCircle, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
+import { Check, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import homeHeroBottle from "@/assets/home-white-bottle.png";
 import { catalog, formatPrice, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
 import { supabase } from "@/integrations/supabase/client";
@@ -46,7 +47,7 @@ const fallbackFeaturedProducts = pickFeaturedProducts(catalog);
 
 const promises = [
   {
-    icon: MessageCircle,
+    icon: WhatsAppLogo,
     title: "Réponse en moins d'1h",
     body: "Notre équipe WhatsApp est disponible 7j/7 pour vous aider à trouver votre fragrance.",
   },
@@ -128,8 +129,8 @@ function Index() {
                 style={{ animationDelay: "360ms" }}
               >
                 <Button asChild variant="whatsapp" size="lg">
-                  <a href={whatsappUrl(heroMessage)} target="_blank" rel="noreferrer">
-                    <MessageCircle className="size-5" aria-hidden="true" /> Commander sur WhatsApp
+                  <a href={whatsappUrl(heroMessage)} target="_blank" rel="noopener noreferrer">
+                    <WhatsAppLogo tone="light" className="size-5" /> Commander sur WhatsApp
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
@@ -297,8 +298,8 @@ function Index() {
             size="lg"
             className="mt-8 min-h-14 px-10 py-5 text-[15px]"
           >
-            <a href={whatsappUrl(finalMessage)} target="_blank" rel="noreferrer">
-              <MessageCircle className="size-5" aria-hidden="true" /> Démarrer sur WhatsApp
+            <a href={whatsappUrl(finalMessage)} target="_blank" rel="noopener noreferrer">
+              <WhatsAppLogo tone="light" className="size-5" /> Démarrer sur WhatsApp
             </a>
           </Button>
         </div>

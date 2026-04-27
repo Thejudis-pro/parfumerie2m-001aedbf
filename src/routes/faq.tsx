@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MessageCircle, Phone, Plus } from "lucide-react";
+import { Phone, Plus } from "lucide-react";
 import { useState } from "react";
 
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { Button } from "@/components/ui/button";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { displayPhone, secondPhone, whatsappUrl } from "@/lib/perfume-data";
@@ -93,7 +94,7 @@ function FaqPage() {
                   <button
                     type="button"
                     className="flex min-h-11 w-full items-center justify-between gap-6 text-left text-[15px] font-semibold text-foreground hover:text-accent"
-                    aria-expanded={isOpen}
+                    aria-expanded={isOpen ? "true" : "false"}
                     aria-controls={`faq-answer-${index}`}
                     onClick={() => setOpenIndex(isOpen ? -1 : index)}
                   >
@@ -132,8 +133,8 @@ function FaqPage() {
               On est sur WhatsApp et par téléphone.
             </h2>
             <Button asChild variant="whatsapp" size="lg" className="mt-6">
-              <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-                <MessageCircle className="size-5" aria-hidden="true" /> Nous écrire sur WhatsApp →
+              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+                <WhatsAppLogo tone="light" className="size-5" /> Nous écrire sur WhatsApp →
               </a>
             </Button>
             <div className="mt-5 flex flex-col items-center justify-center gap-3 text-sm text-muted-foreground sm:flex-row">

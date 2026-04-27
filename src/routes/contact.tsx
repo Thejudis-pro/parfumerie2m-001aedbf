@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Facebook, Instagram, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
@@ -51,13 +52,13 @@ function ContactPage() {
             </h2>
             <div className="space-y-6 md:space-y-8">
               <ContactItem
-                icon={<MessageCircle className="size-7 text-whatsapp" aria-hidden="true" />}
+                icon={<WhatsAppLogo className="size-7 text-whatsapp" />}
                 label="WhatsApp — Disponible 7j/7"
               >
                 <a
                   href={whatsappUrl()}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="text-lg font-semibold text-foreground hover:text-accent"
                 >
                   {displayPhone}
@@ -68,10 +69,10 @@ function ContactPage() {
                 <a
                   href={whatsappUrl()}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-whatsapp px-6 py-3 text-[13px] font-semibold text-primary-foreground hover:bg-whatsapp-hover"
                 >
-                  <MessageCircle className="size-4" aria-hidden="true" /> Écrire sur WhatsApp →
+                  <WhatsAppLogo tone="light" className="size-4" /> Écrire sur WhatsApp →
                 </a>
               </ContactItem>
 
@@ -106,7 +107,7 @@ function ContactPage() {
                 <a
                   href="https://instagram.com/2mparfumeriesn"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="text-foreground hover:text-accent"
                 >
                   {instagram}
@@ -120,7 +121,7 @@ function ContactPage() {
                 <a
                   href={facebookUrl}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="text-foreground hover:text-accent"
                 >
                   2MPARFUMERIE-Dk

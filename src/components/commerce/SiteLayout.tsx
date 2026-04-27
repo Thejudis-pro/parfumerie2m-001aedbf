@@ -5,7 +5,6 @@ import {
   Mail,
   MapPin,
   Menu,
-  MessageCircle,
   Phone,
   ShoppingBag,
   X,
@@ -14,6 +13,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/commerce/CartDrawer";
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { useCart } from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
@@ -21,6 +21,7 @@ import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/
 const navItems = [
   { label: "Accueil", to: "/" },
   { label: "Boutique", to: "/boutique" },
+  { label: "Coffret Signature", to: "/coffret-signature" },
   { label: "À Propos", to: "/a-propos" },
   { label: "FAQ", to: "/faq" },
   { label: "Contact", to: "/contact" },
@@ -97,8 +98,8 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             )}
           </button>
           <Button asChild variant="whatsapp" size="sm" className="hidden md:inline-flex">
-            <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-              <MessageCircle className="size-4" aria-hidden="true" /> Commander
+            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+              <WhatsAppLogo tone="light" className="size-4" /> Commander
             </a>
           </Button>
           <div className="flex items-center gap-1 md:hidden">
@@ -119,7 +120,6 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
               type="button"
               className="flex h-11 w-11 items-center justify-center text-foreground"
               aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-              aria-expanded={open}
               onClick={() => setOpen((value) => !value)}
             >
               {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -154,8 +154,8 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
           size="lg"
           className="absolute bottom-6 left-4 right-4 h-[52px] md:bottom-8 md:left-6 md:right-6"
         >
-          <a href={whatsappUrl()} target="_blank" rel="noreferrer">
-            <MessageCircle className="size-5" aria-hidden="true" /> Commander sur WhatsApp
+          <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+            <WhatsAppLogo tone="light" className="size-5" /> Commander sur WhatsApp
           </a>
         </Button>
       </div>
@@ -188,7 +188,7 @@ function SiteFooter() {
             <a
               href="https://instagram.com/2mparfumeriesn"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent"
               aria-label="Instagram 2M Parfumerie"
             >
@@ -197,7 +197,7 @@ function SiteFooter() {
             <a
               href={facebookUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent"
               aria-label="Facebook 2M Parfumerie"
             >
@@ -206,11 +206,11 @@ function SiteFooter() {
             <a
               href={whatsappUrl()}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="flex h-11 w-11 items-center justify-center rounded-full bg-whatsapp text-primary-foreground hover:bg-whatsapp-hover"
               aria-label="WhatsApp 2M Parfumerie"
             >
-              <MessageCircle className="size-5" aria-hidden="true" />
+              <WhatsAppLogo tone="light" className="size-5" />
             </a>
           </div>
         </div>
@@ -260,10 +260,10 @@ function SiteFooter() {
           <a
             href={whatsappUrl()}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-whatsapp px-5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-primary-foreground hover:bg-whatsapp-hover"
           >
-            <MessageCircle className="size-4" aria-hidden="true" /> Commander maintenant
+            <WhatsAppLogo tone="light" className="size-4" /> Commander maintenant
           </a>
         </FooterColumn>
       </div>
@@ -288,7 +288,14 @@ function FooterLink({
   to,
   children,
 }: {
-  to: "/" | "/boutique" | "/a-propos" | "/faq" | "/contact" | "/mentions-legales";
+  to:
+    | "/"
+    | "/boutique"
+    | "/coffret-signature"
+    | "/a-propos"
+    | "/faq"
+    | "/contact"
+    | "/mentions-legales";
   children: React.ReactNode;
 }) {
   return (
@@ -309,7 +316,7 @@ function FloatingWhatsApp() {
         "Bonjour 2M Parfumerie 👋 Je souhaite commander un parfum. Pouvez-vous m'aider ?",
       )}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       role="link"
       aria-label="Commander sur WhatsApp"
       onClick={() => {
@@ -327,7 +334,7 @@ function FloatingWhatsApp() {
           aria-hidden="true"
         />
       )}
-      <MessageCircle className="size-8" aria-hidden="true" />
+      <WhatsAppLogo tone="light" className="size-8" />
     </a>
   );
 }
