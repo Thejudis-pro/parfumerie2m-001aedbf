@@ -8,6 +8,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Checkbox } from "@/components/ui/checkbox";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
+import haqqiCinemaImage from "@/assets/haqqi-cinema.png";
+import haqqiCollectionImage from "@/assets/haqqi-collection.png";
+import haqqiDeclarationImage from "@/assets/haqqi-declaration.png";
 import { formatPrice } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
@@ -186,6 +189,12 @@ const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
 };
 
 const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab"];
+
+const haqqiSideImages = [
+  { src: haqqiCollectionImage, alt: "Sélection de parfums Haqqi" },
+  { src: haqqiDeclarationImage, alt: "Visuel Haqqi avec coffret" },
+  { src: haqqiCinemaImage, alt: "Flacon Haqqi avec coffret" },
+];
 
 export const Route = createFileRoute("/coffret-signature")({
   head: () => ({
