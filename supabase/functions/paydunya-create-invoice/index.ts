@@ -3,7 +3,12 @@ import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Content-Type": "application/json",
 };
+
+function fallbackResponse(error: string, message: string) {
+  return Response.json({ error, message, fallback: true }, { status: 200, headers: corsHeaders });
+}
 
 type CartItem = {
   id: string;
@@ -38,10 +43,7 @@ serve(async (req) => {
     const token = Deno.env.get("PAYDUNYA_TOKEN");
 
     if (!masterKey || !privateKey || !token) {
-      return Response.json(
-        { error: "Paiement indisponible pour le moment." },
-        { headers: corsHeaders },
-      );
+      return fallbackResponse("PAYMENT_NOT_CONFIGURED", "Paiement indisponible pour le moment.");
     }
 
     const body = await req.json().catch(() => null);
@@ -99,23 +101,20 @@ serve(async (req) => {
 
     const data = await paydunyaResponse.json().catch(() => null);
     if (!paydunyaResponse.ok || data?.response_code !== "00" || !data?.response_text) {
-      const providerMessage = data?.response_text ?? data?.message ?? "Impossible de créer le paiement.";
-      const error = providerMessage.toLowerCase().includes("kyc")
+      const providerMessage =
+        data?.response_text ?? data?.message ?? data?.error ?? "Impossible de créer le paiement.";
+      const isKycError = providerMessage.toLowerCase().includes("kyc");
+      const message = isKycError
         ? "PayDunya demande la validation KYC du compte marchand avant d'activer les paiements. Vous pouvez finaliser la commande sur WhatsApp en attendant."
         : providerMessage;
 
-      return Response.json(
-        { error },
-        { headers: corsHeaders },
-      );
+      console.error("PayDunya API error", paydunyaResponse.status, data);
+      return fallbackResponse(isKycError ? "KYC_VERIFICATION_REQUIRED" : "PAYMENT_SERVICE_UNAVAILABLE", message);
     }
 
     return Response.json({ invoiceUrl: data.response_text }, { headers: corsHeaders });
   } catch (error) {
     console.error("paydunya-create-invoice", error);
-    return Response.json(
-      { error: "Le paiement n'a pas pu être démarré." },
-      { headers: corsHeaders },
-    );
+    return fallbackResponse("INTERNAL_SERVER_ERROR", "Le paiement n'a pas pu être démarré.");
   }
 });

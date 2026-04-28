@@ -46,8 +46,12 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
         body: { items },
       });
 
+      if (data?.fallback) {
+        throw new Error(data.message ?? "Le paiement PayDunya est momentanément indisponible.");
+      }
+
       if (error || !data?.invoiceUrl) {
-        throw new Error(data?.error ?? "Le paiement n'a pas pu être démarré.");
+        throw new Error(data?.message ?? data?.error ?? "Le paiement n'a pas pu être démarré.");
       }
 
       window.location.href = data.invoiceUrl;
