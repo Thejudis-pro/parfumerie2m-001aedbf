@@ -53,7 +53,10 @@ serve(async (req) => {
       return Response.json({ error: "Panier invalide." }, { status: 400, headers: corsHeaders });
     }
 
-    const total = items.reduce((sum: number, item: CartItem) => sum + item.price * item.quantity, 0);
+    const total = items.reduce(
+      (sum: number, item: CartItem) => sum + item.price * item.quantity,
+      0,
+    );
     const origin = req.headers.get("origin") ?? "https://parfumerie2m.lovable.app";
     const invoiceItems = Object.fromEntries(
       items.map((item: CartItem, index: number) => [
@@ -109,7 +112,10 @@ serve(async (req) => {
         : providerMessage;
 
       console.error("PayDunya API error", paydunyaResponse.status, data);
-      return fallbackResponse(isKycError ? "KYC_VERIFICATION_REQUIRED" : "PAYMENT_SERVICE_UNAVAILABLE", message);
+      return fallbackResponse(
+        isKycError ? "KYC_VERIFICATION_REQUIRED" : "PAYMENT_SERVICE_UNAVAILABLE",
+        message,
+      );
     }
 
     return Response.json({ invoiceUrl: data.response_text }, { headers: corsHeaders });

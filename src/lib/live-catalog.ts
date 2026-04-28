@@ -23,7 +23,10 @@ export function mergeLiveCatalog(productRows: ProductRow[]) {
     return [product];
   });
   const extraProducts = productRows
-    .filter((product) => !catalogSlugs.has(product.slug) && product.description !== DELETED_PRODUCT_MARKER)
+    .filter(
+      (product) =>
+        !catalogSlugs.has(product.slug) && product.description !== DELETED_PRODUCT_MARKER,
+    )
     .map((product) => productFromRow(product));
 
   return [...mergedCatalog, ...extraProducts];
@@ -48,7 +51,8 @@ function productFromRow(product: ProductRow, fallback?: BoutiqueProduct): Boutiq
     family: fallback?.family || collectionLabelFallback(collection),
     concentration: fallback?.concentration || "Eau de parfum",
     volume: fallback?.volume || "100 ml",
-    description: product.description || fallback?.description || "Disponible chez 2M Parfumerie au Sénégal.",
+    description:
+      product.description || fallback?.description || "Disponible chez 2M Parfumerie au Sénégal.",
     slug: product.slug,
   };
 }

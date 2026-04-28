@@ -85,7 +85,13 @@ function ProductPage() {
   return <ProductTemplate product={product} products={products} />;
 }
 
-function ProductTemplate({ product, products }: { product: BoutiqueProduct; products: BoutiqueProduct[] }) {
+function ProductTemplate({
+  product,
+  products,
+}: {
+  product: BoutiqueProduct;
+  products: BoutiqueProduct[];
+}) {
   const label = collectionLabel(product.collection);
   const images = productImages(product);
   const [selectedImage, setSelectedImage] = useState(images[0]);

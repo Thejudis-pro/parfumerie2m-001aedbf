@@ -11,7 +11,15 @@ import {
   Trash2,
   X,
 } from "lucide-react";
-import { useEffect, useMemo, useState, type Dispatch, type FormEvent, type ReactNode, type SetStateAction } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type Dispatch,
+  type FormEvent,
+  type ReactNode,
+  type SetStateAction,
+} from "react";
 import Cropper from "react-easy-crop";
 import type { Area } from "react-easy-crop";
 import "react-easy-crop/react-easy-crop.css";
@@ -37,7 +45,12 @@ import {
   slugifyProduct,
   type Collection,
 } from "@/lib/catalog-data";
-import { cropImageFile, mimeTypeToExtension, resizeImageFile, type CropArea } from "@/lib/image-processing";
+import {
+  cropImageFile,
+  mimeTypeToExtension,
+  resizeImageFile,
+  type CropArea,
+} from "@/lib/image-processing";
 
 type ProductRow = Database["public"]["Tables"]["products"]["Row"];
 type ProductInsert = Database["public"]["Tables"]["products"]["Insert"];
@@ -598,11 +611,7 @@ function ProductsPanel({
               <Button type="button" variant="outline" onClick={() => editProduct(product)}>
                 <Edit3 /> Modifier
               </Button>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => deleteProduct(product)}
-              >
+              <Button type="button" variant="outline" onClick={() => deleteProduct(product)}>
                 <Trash2 /> Supprimer
               </Button>
             </div>
@@ -813,8 +822,20 @@ function ProductForm({
     width: number;
     height: number;
   }> = [
-    { key: "square", label: "Carré 1:1", description: "Idéal pour les vignettes produit", width: 1200, height: 1200 },
-    { key: "landscape", label: "Large 4:5", description: "Mieux pour les visuels éditoriaux", width: 1600, height: 2000 },
+    {
+      key: "square",
+      label: "Carré 1:1",
+      description: "Idéal pour les vignettes produit",
+      width: 1200,
+      height: 1200,
+    },
+    {
+      key: "landscape",
+      label: "Large 4:5",
+      description: "Mieux pour les visuels éditoriaux",
+      width: 1600,
+      height: 2000,
+    },
   ];
 
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -907,10 +928,12 @@ function ProductForm({
       type: processedBlob.type || file.type || "image/jpeg",
     });
 
-    const { error } = await supabase.storage.from("product-images").upload(filePath, processedFile, {
-      cacheControl: "3600",
-      upsert: true,
-    });
+    const { error } = await supabase.storage
+      .from("product-images")
+      .upload(filePath, processedFile, {
+        cacheControl: "3600",
+        upsert: true,
+      });
 
     if (error) {
       throw error;
@@ -1059,15 +1082,21 @@ function ProductForm({
               <ImageUp className="size-4" /> {uploadingImage ? "Envoi…" : "Uploader"}
             </label>
             <span className="break-all rounded-md border border-border bg-background px-4 py-3 text-sm font-normal text-muted-foreground">
-              {form.image_urls.length ? `${form.image_urls.length} image(s) ajoutée(s)` : "Aucune image sélectionnée"}
+              {form.image_urls.length
+                ? `${form.image_urls.length} image(s) ajoutée(s)`
+                : "Aucune image sélectionnée"}
             </span>
           </div>
-          <Dialog open={imageEditorOpen} onOpenChange={(open) => (open ? setImageEditorOpen(true) : closeImageEditor())}>
+          <Dialog
+            open={imageEditorOpen}
+            onOpenChange={(open) => (open ? setImageEditorOpen(true) : closeImageEditor())}
+          >
             <DialogContent className="max-h-[92vh] max-w-5xl overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>Préparer l’image</DialogTitle>
                 <DialogDescription>
-                  Recadrez ou redimensionnez l’image avant l’envoi pour garder un rendu cohérent dans la boutique.
+                  Recadrez ou redimensionnez l’image avant l’envoi pour garder un rendu cohérent
+                  dans la boutique.
                 </DialogDescription>
               </DialogHeader>
 
@@ -1088,7 +1117,9 @@ function ProductForm({
                               restrictPosition
                               onCropChange={setCrop}
                               onZoomChange={setZoom}
-                              onCropComplete={(_, croppedPixels) => setCroppedAreaPixels(croppedPixels as Area)}
+                              onCropComplete={(_, croppedPixels) =>
+                                setCroppedAreaPixels(croppedPixels as Area)
+                              }
                             />
                             <div className="pointer-events-none absolute inset-0">
                               <div className="absolute inset-4 rounded-2xl border border-white/70 shadow-[0_0_0_9999px_rgba(0,0,0,0.18)]" />
@@ -1117,36 +1148,39 @@ function ProductForm({
                   </div>
 
                   {imageEditorMode === "crop" && (
-                  <div className="space-y-3">
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      {cropPresets.map((preset) => (
-                        <button
-                          key={preset.key}
-                          type="button"
-                          onClick={() => applyCropPreset(preset.key)}
-                          className={`rounded-lg border px-3 py-3 text-left transition-colors ${cropPreset === preset.key ? "border-accent bg-accent/10 text-foreground" : "border-border bg-background text-muted-foreground hover:border-accent/50 hover:text-foreground"}`}
-                        >
-                          <span className="block text-sm font-semibold">{preset.label}</span>
-                          <span className="mt-1 block text-xs leading-5">{preset.description}</span>
-                        </button>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>Zoom</span>
-                      <span>{Math.round(zoom * 100)}%</span>
-                    </div>
-                    <input
-                      className="w-full accent-accent"
-                      type="range"
-                      min="1"
-                      max="3"
-                      step="0.01"
-                      value={zoom}
-                      onChange={(event) => setZoom(Number(event.target.value))}
-                    />
-                    <p className="text-xs leading-5 text-muted-foreground">
-                      Glissez l’image pour repositionner le cadrage. Les coins de la fenêtre indiquent la zone exportée.
-                    </p>
+                    <div className="space-y-3">
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {cropPresets.map((preset) => (
+                          <button
+                            key={preset.key}
+                            type="button"
+                            onClick={() => applyCropPreset(preset.key)}
+                            className={`rounded-lg border px-3 py-3 text-left transition-colors ${cropPreset === preset.key ? "border-accent bg-accent/10 text-foreground" : "border-border bg-background text-muted-foreground hover:border-accent/50 hover:text-foreground"}`}
+                          >
+                            <span className="block text-sm font-semibold">{preset.label}</span>
+                            <span className="mt-1 block text-xs leading-5">
+                              {preset.description}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                      <div className="flex items-center justify-between text-xs text-muted-foreground">
+                        <span>Zoom</span>
+                        <span>{Math.round(zoom * 100)}%</span>
+                      </div>
+                      <input
+                        className="w-full accent-accent"
+                        type="range"
+                        min="1"
+                        max="3"
+                        step="0.01"
+                        value={zoom}
+                        onChange={(event) => setZoom(Number(event.target.value))}
+                      />
+                      <p className="text-xs leading-5 text-muted-foreground">
+                        Glissez l’image pour repositionner le cadrage. Les coins de la fenêtre
+                        indiquent la zone exportée.
+                      </p>
                     </div>
                   )}
                 </div>
@@ -1155,7 +1189,9 @@ function ProductForm({
                   <div className="space-y-2">
                     <p className="text-sm font-semibold text-foreground">Fichier en cours</p>
                     <p className="break-all text-sm text-muted-foreground">
-                      {currentImage ? `${imageQueueIndex + 1}/${imageQueue.length} · ${currentImage.name}` : "Aucun fichier"}
+                      {currentImage
+                        ? `${imageQueueIndex + 1}/${imageQueue.length} · ${currentImage.name}`
+                        : "Aucun fichier"}
                     </p>
                   </div>
 
@@ -1202,13 +1238,19 @@ function ProductForm({
                   </div>
 
                   <p className="text-xs leading-5 text-muted-foreground">
-                    L’image finale sera exportée à ces dimensions maximum. En mode recadrage, le ratio de sortie est appliqué au cadre.
+                    L’image finale sera exportée à ces dimensions maximum. En mode recadrage, le
+                    ratio de sortie est appliqué au cadre.
                   </p>
                 </div>
               </div>
 
               <DialogFooter className="gap-2 sm:justify-between">
-                <Button type="button" variant="outline" onClick={closeImageEditor} disabled={uploadingImage}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={closeImageEditor}
+                  disabled={uploadingImage}
+                >
                   Annuler
                 </Button>
                 <div className="flex gap-2">
@@ -1225,13 +1267,23 @@ function ProductForm({
                   <Button
                     type="button"
                     variant="ghost"
-                    onClick={() => setImageQueueIndex((current) => Math.min(imageQueue.length - 1, current + 1))}
+                    onClick={() =>
+                      setImageQueueIndex((current) => Math.min(imageQueue.length - 1, current + 1))
+                    }
                     disabled={uploadingImage || imageQueueIndex + 1 >= imageQueue.length}
                   >
                     Passer
                   </Button>
-                  <Button type="button" onClick={processCurrentImage} disabled={uploadingImage || !currentImage}>
-                    {uploadingImage ? "Traitement…" : imageQueueIndex + 1 < imageQueue.length ? "Valider et continuer" : "Valider et envoyer"}
+                  <Button
+                    type="button"
+                    onClick={processCurrentImage}
+                    disabled={uploadingImage || !currentImage}
+                  >
+                    {uploadingImage
+                      ? "Traitement…"
+                      : imageQueueIndex + 1 < imageQueue.length
+                        ? "Valider et continuer"
+                        : "Valider et envoyer"}
                   </Button>
                 </div>
               </DialogFooter>
@@ -1240,13 +1292,24 @@ function ProductForm({
           {form.image_urls.length > 0 && (
             <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {form.image_urls.map((url) => (
-                <div key={url} className="relative overflow-hidden rounded-md border border-border bg-background">
-                  <img src={url} alt="Aperçu produit" className="aspect-square w-full object-cover" />
+                <div
+                  key={url}
+                  className="relative overflow-hidden rounded-md border border-border bg-background"
+                >
+                  <img
+                    src={url}
+                    alt="Aperçu produit"
+                    className="aspect-square w-full object-cover"
+                  />
                   <button
                     type="button"
                     onClick={() => {
                       const image_urls = form.image_urls.filter((item) => item !== url);
-                      setForm({ ...form, image_urls, image_url: form.image_url === url ? image_urls[0] || "" : form.image_url });
+                      setForm({
+                        ...form,
+                        image_urls,
+                        image_url: form.image_url === url ? image_urls[0] || "" : form.image_url,
+                      });
                     }}
                     className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full bg-card text-foreground shadow-card"
                     aria-label="Retirer l'image"
@@ -1287,7 +1350,8 @@ function ProductForm({
         )}
         {hideNotesForHaqqi && (
           <p className="sm:col-span-2 text-sm leading-6 text-muted-foreground">
-            Haqqi utilise uniquement le nom du parfum dans le dashboard pour garder l’édition plus compacte.
+            Haqqi utilise uniquement le nom du parfum dans le dashboard pour garder l’édition plus
+            compacte.
           </p>
         )}
         <label className="flex min-h-12 items-center gap-3 rounded-md border border-border bg-background px-4 text-sm text-foreground">
@@ -1516,28 +1580,33 @@ function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): Admin
       ];
     }
 
-    return [{
-      id: `catalog-${slug}`,
-      name: product.name,
-      subtitle: product.ref,
-      collection: product.collection,
-      price: product.price,
-      notes_top: product.headNotes,
-      notes_heart: product.heartNotes,
-      notes_base: product.baseNotes,
-      description: product.description,
-      image_url: product.image,
-      image_urls: [product.image],
-      slug,
-      in_stock: true,
-      is_bestseller: false,
-      created_at: null,
-      updated_at: null,
-      source: "catalog",
-    }];
+    return [
+      {
+        id: `catalog-${slug}`,
+        name: product.name,
+        subtitle: product.ref,
+        collection: product.collection,
+        price: product.price,
+        notes_top: product.headNotes,
+        notes_heart: product.heartNotes,
+        notes_base: product.baseNotes,
+        description: product.description,
+        image_url: product.image,
+        image_urls: [product.image],
+        slug,
+        in_stock: true,
+        is_bestseller: false,
+        created_at: null,
+        updated_at: null,
+        source: "catalog",
+      },
+    ];
   });
   const extraDatabaseProducts = databaseProducts
-    .filter((product) => !catalogSlugs.has(product.slug) && product.description !== DELETED_PRODUCT_MARKER)
+    .filter(
+      (product) =>
+        !catalogSlugs.has(product.slug) && product.description !== DELETED_PRODUCT_MARKER,
+    )
     .map((product) => ({
       ...product,
       notes_top: product.collection === "haqqi" ? "" : product.notes_top,

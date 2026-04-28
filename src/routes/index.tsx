@@ -38,8 +38,12 @@ const heroMessage =
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
 
 function pickFeaturedProducts(products: BoutiqueProduct[]) {
-  const takeoffProducts = products.filter((product) => product.collection === "takeoff").slice(0, 2);
-  const scentlabProducts = products.filter((product) => product.collection === "scentlab").slice(0, 2);
+  const takeoffProducts = products
+    .filter((product) => product.collection === "takeoff")
+    .slice(0, 2);
+  const scentlabProducts = products
+    .filter((product) => product.collection === "scentlab")
+    .slice(0, 2);
   return [...takeoffProducts, ...scentlabProducts];
 }
 
@@ -70,13 +74,15 @@ const promises = [
 
 const testimonials = [
   {
-    quote: "Kyoto sent exactement comme Amouage guidance mais sans casser la tirelire. Je l'porte au bureau chaque semaine. On me demande souvent où j'achète.",
+    quote:
+      "Kyoto sent exactement comme Amouage guidance mais sans casser la tirelire. Je l'porte au bureau chaque semaine. On me demande souvent où j'achète.",
     name: "Khalil M.",
     location: "Les Almadies, Sénégal",
     initials: "KM",
   },
   {
-    quote: "J'ai essayé Takeoff Paris qui a la même senteur que Baccarat Rouge chez une amie. Je l'ai commandé le lendemain via Whatsapp et le flacon est arrivé le soir même. Franchement impeccable!",
+    quote:
+      "J'ai essayé Takeoff Paris qui a la même senteur que Baccarat Rouge chez une amie. Je l'ai commandé le lendemain via Whatsapp et le flacon est arrivé le soir même. Franchement impeccable!",
     name: "Rokhaya S.",
     location: "Plateau, Sénégal",
     initials: "RS",
@@ -91,7 +97,8 @@ const testimonials = [
 ];
 
 function Index() {
-  const [featuredProducts, setFeaturedProducts] = useState<BoutiqueProduct[]>(fallbackFeaturedProducts);
+  const [featuredProducts, setFeaturedProducts] =
+    useState<BoutiqueProduct[]>(fallbackFeaturedProducts);
 
   useEffect(() => {
     const loadFeaturedProducts = async () => {

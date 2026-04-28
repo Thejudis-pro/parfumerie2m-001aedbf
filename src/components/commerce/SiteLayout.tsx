@@ -1,14 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import {
-  Facebook,
-  Instagram,
-  Mail,
-  MapPin,
-  Menu,
-  Phone,
-  ShoppingBag,
-  X,
-} from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Menu, Phone, ShoppingBag, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
