@@ -40,7 +40,7 @@ serve(async (req) => {
     if (!masterKey || !privateKey || !token) {
       return Response.json(
         { error: "Paiement indisponible pour le moment." },
-        { status: 500, headers: corsHeaders },
+        { headers: corsHeaders },
       );
     }
 
@@ -99,9 +99,14 @@ serve(async (req) => {
 
     const data = await paydunyaResponse.json().catch(() => null);
     if (!paydunyaResponse.ok || data?.response_code !== "00" || !data?.response_text) {
+      const providerMessage = data?.response_text ?? data?.message ?? "Impossible de créer le paiement.";
+      const error = providerMessage.toLowerCase().includes("kyc")
+        ? "PayDunya demande la validation KYC du compte marchand avant d'activer les paiements. Vous pouvez finaliser la commande sur WhatsApp en attendant."
+        : providerMessage;
+
       return Response.json(
-        { error: data?.response_text ?? data?.message ?? "Impossible de créer le paiement." },
-        { status: 502, headers: corsHeaders },
+        { error },
+        { headers: corsHeaders },
       );
     }
 
@@ -110,7 +115,7 @@ serve(async (req) => {
     console.error("paydunya-create-invoice", error);
     return Response.json(
       { error: "Le paiement n'a pas pu être démarré." },
-      { status: 500, headers: corsHeaders },
+      { headers: corsHeaders },
     );
   }
 });
