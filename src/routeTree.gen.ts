@@ -20,6 +20,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BoutiqueProductSlugRouteImport } from './routes/boutique.$productSlug'
+import { Route as ApiPublicPaydunyaCreateInvoiceRouteImport } from './routes/api.public.paydunya.create-invoice'
 
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
   id: '/mentions-legales',
@@ -76,6 +77,12 @@ const BoutiqueProductSlugRoute = BoutiqueProductSlugRouteImport.update({
   path: '/$productSlug',
   getParentRoute: () => BoutiqueRoute,
 } as any)
+const ApiPublicPaydunyaCreateInvoiceRoute =
+  ApiPublicPaydunyaCreateInvoiceRouteImport.update({
+    id: '/api/public/paydunya/create-invoice',
+    path: '/api/public/paydunya/create-invoice',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/api/public/paydunya/create-invoice': typeof ApiPublicPaydunyaCreateInvoiceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +110,7 @@ export interface FileRoutesByTo {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/api/public/paydunya/create-invoice': typeof ApiPublicPaydunyaCreateInvoiceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +125,7 @@ export interface FileRoutesById {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/api/public/paydunya/create-invoice': typeof ApiPublicPaydunyaCreateInvoiceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/api/public/paydunya/create-invoice'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/api/public/paydunya/create-invoice'
   id:
     | '__root__'
     | '/'
@@ -157,6 +169,7 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/api/public/paydunya/create-invoice'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -170,6 +183,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   LivraisonRoute: typeof LivraisonRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
+  ApiPublicPaydunyaCreateInvoiceRoute: typeof ApiPublicPaydunyaCreateInvoiceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -251,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoutiqueProductSlugRouteImport
       parentRoute: typeof BoutiqueRoute
     }
+    '/api/public/paydunya/create-invoice': {
+      id: '/api/public/paydunya/create-invoice'
+      path: '/api/public/paydunya/create-invoice'
+      fullPath: '/api/public/paydunya/create-invoice'
+      preLoaderRoute: typeof ApiPublicPaydunyaCreateInvoiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -277,6 +298,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   LivraisonRoute: LivraisonRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
+  ApiPublicPaydunyaCreateInvoiceRoute: ApiPublicPaydunyaCreateInvoiceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

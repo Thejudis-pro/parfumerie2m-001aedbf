@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { CreditCard, Loader2, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { Button } from "@/components/ui/button";
@@ -21,6 +23,7 @@ function buildOrderMessage(items: ReturnType<typeof useCart>["items"], total: nu
 
 export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { items, removeItem, updateQuantity, clearCart, total, itemCount } = useCart();
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
   const checkout = () => {
     if (!items.length) return;
@@ -31,6 +34,29 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     );
     clearCart();
     onClose();
+  };
+
+  const payWithPayDunya = async () => {
+    if (!items.length || paymentLoading) return;
+    setPaymentLoading(true);
+
+    try {
+      const response = await fetch("/api/public/paydunya/create-invoice", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items }),
+      });
+      const data = await response.json();
+
+      if (!response.ok || !data.invoiceUrl) {
+        throw new Error(data.error ?? "Le paiement n'a pas pu être démarré.");
+      }
+
+      window.location.href = data.invoiceUrl;
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Le paiement n'a pas pu être démarré.");
+      setPaymentLoading(false);
+    }
   };
 
   return (
@@ -135,8 +161,21 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               </div>
               <Button
                 type="button"
+                onClick={payWithPayDunya}
+                disabled={paymentLoading}
+                className="w-full py-4"
+              >
+                {paymentLoading ? (
+                  <Loader2 className="size-5 animate-spin" aria-hidden="true" />
+                ) : (
+                  <CreditCard className="size-5" aria-hidden="true" />
+                )}
+                Payer avec PayDunya
+              </Button>
+              <Button
+                type="button"
                 onClick={checkout}
-                className="w-full bg-whatsapp py-4 text-primary-foreground hover:bg-whatsapp-hover"
+                className="mt-3 w-full bg-whatsapp py-4 text-primary-foreground hover:bg-whatsapp-hover"
               >
                 <WhatsAppLogo tone="light" className="size-5" /> Commander sur WhatsApp
               </Button>
