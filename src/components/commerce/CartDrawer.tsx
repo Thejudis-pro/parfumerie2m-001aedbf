@@ -7,6 +7,7 @@ import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { Button } from "@/components/ui/button";
 import { PerfumePlaceholder } from "@/components/commerce/PerfumePlaceholder";
 import { useCart } from "@/hooks/useCart";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
 function formatCartPrice(price: number) {
@@ -41,15 +42,12 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
     setPaymentLoading(true);
 
     try {
-      const response = await fetch("/api/public/paydunya/create-invoice", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items }),
+      const { data, error } = await supabase.functions.invoke("paydunya-create-invoice", {
+        body: { items },
       });
-      const data = await response.json();
 
-      if (!response.ok || !data.invoiceUrl) {
-        throw new Error(data.error ?? "Le paiement n'a pas pu être démarré.");
+      if (error || !data?.invoiceUrl) {
+        throw new Error(data?.error ?? "Le paiement n'a pas pu être démarré.");
       }
 
       window.location.href = data.invoiceUrl;
