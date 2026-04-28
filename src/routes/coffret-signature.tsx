@@ -9,7 +9,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import haqqiCollectionImage from "@/assets/haqqi-collection.png";
-import haqqiDeclarationImage from "@/assets/haqqi-declaration.png";
 import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
 import scentlabMarineCitrusImage from "@/assets/scentlab-marine-citrus.png";
 import { formatPrice } from "@/lib/catalog-data";
@@ -193,7 +192,6 @@ const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab"];
 
 const haqqiSideImages = [
   { src: haqqiCollectionImage, alt: "Sélection de parfums Haqqi" },
-  { src: haqqiDeclarationImage, alt: "Visuel Haqqi avec coffret" },
 ];
 
 const scentlabSideImages = [
