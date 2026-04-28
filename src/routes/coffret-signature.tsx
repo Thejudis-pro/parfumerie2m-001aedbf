@@ -390,9 +390,6 @@ function CoffretSignaturePage() {
                                     <Check className="mt-1 size-5 text-accent" aria-hidden="true" />
                                   )}
                                 </div>
-                                <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                                  {option.description}
-                                </p>
                               </div>
                             </label>
                           );
@@ -436,9 +433,6 @@ function CoffretSignaturePage() {
                             </div>
                             {checked && <Check className="mt-1 size-5 text-accent" aria-hidden="true" />}
                           </div>
-                          <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                            {option.description}
-                          </p>
                         </div>
                       </label>
                     );
