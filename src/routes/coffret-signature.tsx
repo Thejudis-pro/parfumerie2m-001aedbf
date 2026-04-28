@@ -103,69 +103,86 @@ const haqqiSections: CoffretSection[] = [
   },
 ];
 
+const scentlabSections: CoffretSection[] = [
+  {
+    title: "Homme",
+    items: [
+      { id: "scentlab-woody-bergamot", title: "Woody Bergamot", description: "Sauvage" },
+      { id: "scentlab-minty-cedar", title: "Minty Cedar", description: "Bleu de Chanel" },
+      { id: "scentlab-fresh-grapefruit", title: "Fresh Grapefruit", description: "Invictus" },
+      { id: "scentlab-minty-vanilla", title: "Minty Vanilla", description: "Versace Éros" },
+      { id: "scentlab-earth-vetiver", title: "Earth Vétiver", description: "Terre d’Hermès" },
+      { id: "scentlab-aquatique-jasmine", title: "Aquatique Jasmine", description: "Acqua di Gio" },
+      { id: "scentlab-warm-spicy", title: "Warm Spicy", description: "Stronger With You" },
+      { id: "scentlab-cool-mint", title: "Cool Mint", description: "Allure" },
+      { id: "scentlab-pineapple-bergamote", title: "Pineapple Bergamote", description: "Creed Aventus" },
+      { id: "scentlab-minty-lavender", title: "Minty Lavender", description: "JPG Le Mâle" },
+      { id: "scentlab-spicy-leather", title: "Spicy Leather", description: "One Million" },
+      { id: "scentlab-bright-mandarin", title: "Bright Mandarin", description: "Louis Vuitton Imagination" },
+      { id: "scentlab-sweet-tobacco", title: "Sweet Tobacco", description: "Xerjoff Naxos" },
+      { id: "scentlab-woody-oud", title: "Woody Oud", description: "Tom Ford Oud Wood" },
+      { id: "scentlab-dark-leather", title: "Dark Leather", description: "Tom Ford Ombre Leather" },
+      { id: "scentlab-iris-cedar", title: "İris Cedar", description: "Dior Homme Intense" },
+      { id: "scentlab-leather-violet", title: "Leather Violet", description: "Dior Fahrenheit" },
+      { id: "scentlab-spicy-caramel", title: "Spicy Caramel", description: "Scandal Man" },
+      { id: "scentlab-cognac-whisper", title: "Cognac Whisper", description: "Kilian Angels’ Share" },
+      { id: "scentlab-oriental-oud", title: "Oriental Oud", description: "Oud for Greatness" },
+      { id: "scentlab-spicy-leather-exclusive", title: "Spicy Leather Exclusive", description: "One Million Lucky" },
+      { id: "scentlab-oriental-tonka", title: "Oriental Tonka", description: "Arabian Tonka" },
+      { id: "scentlab-poetic-amber", title: "Poetic Amber", description: "More Than Words" },
+      { id: "scentlab-dreamy-bloom", title: "Dreamy Bloom", description: "Mémo Marfa" },
+      { id: "scentlab-galactic-musk", title: "Galactic Musk", description: "Ganymed" },
+      { id: "scentlab-savanna-vetiver", title: "Savanna Vétiver", description: "Bal d’Afrique" },
+    ],
+  },
+  {
+    title: "Unisex",
+    items: [
+      { id: "scentlab-sweet-safron", title: "Sweet Safron", description: "MFK Baccarat Rouge" },
+      { id: "scentlab-smoky-oud", title: "Smoky Oud", description: "Louis Vuitton Ombre Nomade" },
+      { id: "scentlab-fruity-passion", title: "Fruity Passion", description: "Tiziana Terenzi Kirke" },
+      { id: "scentlab-fruity-vanille", title: "Fruity Vanille", description: "Xerjoff Erba Pura" },
+      { id: "scentlab-addictive-peach", title: "Addictive Peach", description: "Fleur Narcotique" },
+      { id: "scentlab-ambery-orchid", title: "Ambery Orchid", description: "Tom Ford Black Orchid" },
+      { id: "scentlab-pink-peony", title: "Pink Peony", description: "Parfums de Marly Delina" },
+      { id: "scentlab-cherry-almond", title: "Cherry Almond", description: "Tom Ford Lost Cherry" },
+      { id: "scentlab-marine-citrus", title: "Marine Citrus", description: "Orto Parisi Megamare" },
+      { id: "scentlab-satin-rose", title: "Satin Rose", description: "MFK Oud Satin Mood" },
+      { id: "scentlab-jasmine-cedar", title: "Jasmine Cédar", description: "Amouage Reflection" },
+      { id: "scentlab-glow-amber", title: "Glow Amber", description: "Grand Soir" },
+      { id: "scentlab-sandal-wood-leather", title: "Sandal Wood Leather", description: "Santal 33" },
+      { id: "scentlab-sweet-safron-exclusive", title: "Sweet Safron Exclusive", description: "Baccarat Extrait" },
+    ],
+  },
+  {
+    title: "Femme",
+    items: [
+      { id: "scentlab-naughty-rose", title: "Naughty Rose", description: "Good Girl Gone Bad" },
+      { id: "scentlab-ambery-vanilla", title: "Ambery Vanilla", description: "Black Opium" },
+      { id: "scentlab-floral-musk", title: "Floral Musk", description: "Coco Mademoiselle" },
+      { id: "scentlab-golden-floral", title: "Golden Floral", description: "J’adore" },
+      { id: "scentlab-fruity-gourmand", title: "Fruity Gourmand", description: "La Vie Est Belle" },
+      { id: "scentlab-spicy-citrus", title: "Spicy Citrus", description: "Chanel Chance" },
+      { id: "scentlab-orange-blossom", title: "Orange Blossom", description: "Libre" },
+      { id: "scentlab-fruity-cyphere", title: "Fruity Cyphere", description: "Si" },
+      { id: "scentlab-gardenia-jam", title: "Gardénia Jam", description: "Scandal" },
+      { id: "scentlab-lush-gardenia", title: "Lush Gardénia", description: "Gucci Bloom" },
+      { id: "scentlab-flirty-caramel", title: "Flirty Caramel", description: "Good Girl" },
+      { id: "scentlab-exotic-vanilla", title: "Exotic Vanilla", description: "My Way" },
+      { id: "scentlab-mystic-jasmine", title: "Mystic Jasmine", description: "Alien" },
+      { id: "scentlab-rosy-hazelnut", title: "Rosy Hazelnut", description: "Amouage Guidance" },
+      { id: "scentlab-creamy-almond", title: "Creamy Almond", description: "Hypnotic Poison" },
+      { id: "scentlab-rosy-glow", title: "Rosy Glow", description: "Lancôme Idole" },
+      { id: "scentlab-vanilla-dream", title: "Vanilla Dream", description: "Burberry Goddess" },
+      { id: "scentlab-caramel-citrus", title: "Caramel Citrus", description: "Xerjoff Casamorati Lira" },
+      { id: "scentlab-caramel-orange", title: "Caramel Orange", description: "Kilian Love Don’t Be Shy" },
+    ],
+  },
+];
+
 const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
   haqqi: haqqiSections.flatMap((section) => section.items),
-  scentlab: [
-    { id: "scentlab-bright-mandarin", title: "Bright Mandarin", description: "Louis Vuitton Imagination" },
-    { id: "scentlab-caramel-citrus", title: "Caramel Citrus", description: "Xerjoff Casamorati Lira" },
-    { id: "scentlab-caramel-orange", title: "Caramel Orange", description: "Kilian Love Don’t Be Shy" },
-    { id: "scentlab-cognac-whisper", title: "Cognac Whisper", description: "Kilian Angels’ Share" },
-    { id: "scentlab-dreamy-bloom", title: "Dreamy Bloom", description: "Mémo Marfa" },
-    { id: "scentlab-galactic-musk", title: "Galactic Musk", description: "Ganymed" },
-    { id: "scentlab-glow-amber", title: "Glow Amber", description: "Grand Soir" },
-    { id: "scentlab-oriental-oud", title: "Oriental Oud", description: "Oud for Greatness" },
-    { id: "scentlab-oriental-tonka", title: "Oriental Tonka", description: "Arabian Tonka" },
-    { id: "scentlab-poetic-amber", title: "Poetic Amber", description: "More Than Words" },
-    { id: "scentlab-rosy-hazelnut", title: "Rosy Hazelnut", description: "Amouage Guidance" },
-    { id: "scentlab-sandal-wood-leather", title: "Sandal Wood Leather", description: "Santal 33" },
-    { id: "scentlab-savanna-vetiver", title: "Savanna Vétiver", description: "Bal d’Afrique" },
-    { id: "scentlab-spicy-leather-exclusive", title: "Spicy Leather Exclusive", description: "One Million Lucky" },
-    { id: "scentlab-sweet-safron-exclusive", title: "Sweet Safron Exclusive", description: "Baccarat Extrait" },
-    { id: "scentlab-sweet-tobacco", title: "Sweet Tobacco", description: "Xerjoff Naxos" },
-    { id: "scentlab-woody-oud", title: "Woody Oud", description: "Tom Ford Oud Wood" },
-    { id: "scentlab-dark-leather", title: "Dark Leather", description: "Tom Ford Ombre Leather" },
-    { id: "scentlab-iris-cedar", title: "İris Cedar", description: "Dior Homme Intense" },
-    { id: "scentlab-leather-violet", title: "Leather Violet", description: "Dior Fahrenheit" },
-    { id: "scentlab-spicy-caramel", title: "Spicy Caramel", description: "Scandal Man" },
-    { id: "scentlab-creamy-almond", title: "Creamy Almond", description: "Hypnotic Poison" },
-    { id: "scentlab-rosy-glow", title: "Rosy Glow", description: "Lancôme Idole" },
-    { id: "scentlab-vanilla-dream", title: "Vanilla Dream", description: "Burberry Goddess" },
-    { id: "scentlab-woody-bergamot", title: "Woody Bergamot", description: "Sauvage" },
-    { id: "scentlab-minty-cedar", title: "Minty Cedar", description: "Bleu de Chanel" },
-    { id: "scentlab-fresh-grapefruit", title: "Fresh Grapefruit", description: "Invictus" },
-    { id: "scentlab-minty-vanilla", title: "Minty Vanilla", description: "Versace Éros" },
-    { id: "scentlab-earth-vetiver", title: "Earth Vétiver", description: "Terre d’Hermès" },
-    { id: "scentlab-aquatique-jasmine", title: "Aquatique Jasmine", description: "Acqua di Gio" },
-    { id: "scentlab-warm-spicy", title: "Warm Spicy", description: "Stronger With You" },
-    { id: "scentlab-cool-mint", title: "Cool Mint", description: "Allure" },
-    { id: "scentlab-pineapple-bergamote", title: "Pineapple Bergamote", description: "Creed Aventus" },
-    { id: "scentlab-minty-lavender", title: "Minty Lavender", description: "JPG Le Mâle" },
-    { id: "scentlab-spicy-leather", title: "Spicy Leather", description: "One Million" },
-    { id: "scentlab-sweet-safron", title: "Sweet Safron", description: "MFK Baccarat Rouge" },
-    { id: "scentlab-smoky-oud", title: "Smoky Oud", description: "Louis Vuitton Ombre Nomade" },
-    { id: "scentlab-fruity-passion", title: "Fruity Passion", description: "Tiziana Terenzi Kirke" },
-    { id: "scentlab-fruity-vanille", title: "Fruity Vanille", description: "Xerjoff Erba Pura" },
-    { id: "scentlab-addictive-peach", title: "Addictive Peach", description: "Fleur Narcotique" },
-    { id: "scentlab-ambery-orchid", title: "Ambery Orchid", description: "Tom Ford Black Orchid" },
-    { id: "scentlab-pink-peony", title: "Pink Peony", description: "Parfums de Marly Delina" },
-    { id: "scentlab-cherry-almond", title: "Cherry Almond", description: "Tom Ford Lost Cherry" },
-    { id: "scentlab-marine-citrus", title: "Marine Citrus", description: "Orto Parisi Megamare" },
-    { id: "scentlab-satin-rose", title: "Satin Rose", description: "MFK Oud Satin Mood" },
-    { id: "scentlab-jasmine-cedar", title: "Jasmine Cédar", description: "Amouage Reflection" },
-    { id: "scentlab-naughty-rose", title: "Naughty Rose", description: "Good Girl Gone Bad" },
-    { id: "scentlab-ambery-vanilla", title: "Ambery Vanilla", description: "Black Opium" },
-    { id: "scentlab-floral-musk", title: "Floral Musk", description: "Coco Mademoiselle" },
-    { id: "scentlab-golden-floral", title: "Golden Floral", description: "J’adore" },
-    { id: "scentlab-fruity-gourmand", title: "Fruity Gourmand", description: "La Vie Est Belle" },
-    { id: "scentlab-spicy-citrus", title: "Spicy Citrus", description: "Chanel Chance" },
-    { id: "scentlab-orange-blossom", title: "Orange Blossom", description: "Libre" },
-    { id: "scentlab-fruity-cyphere", title: "Fruity Cyphere", description: "Si" },
-    { id: "scentlab-gardenia-jam", title: "Gardénia Jam", description: "Scandal" },
-    { id: "scentlab-lush-gardenia", title: "Lush Gardénia", description: "Gucci Bloom" },
-    { id: "scentlab-flirty-caramel", title: "Flirty Caramel", description: "Good Girl" },
-    { id: "scentlab-exotic-vanilla", title: "Exotic Vanilla", description: "My Way" },
-    { id: "scentlab-mystic-jasmine", title: "Mystic Jasmine", description: "Alien" },
-  ],
+  scentlab: scentlabSections.flatMap((section) => section.items),
 };
 
 const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab"];
@@ -399,8 +416,15 @@ function CoffretSignaturePage() {
                   ))}
                 </div>
               ) : (
-                <div className="grid gap-4 md:grid-cols-2">
-                  {currentOptions.map((option) => {
+                <div className="space-y-6">
+                  {scentlabSections.map((section) => (
+                    <div key={section.title} className="space-y-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
+                        <Badge variant="secondary">{section.items.length} parfums</Badge>
+                      </div>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {section.items.map((option) => {
                     const checked = selectedIds.includes(option.id);
                     const disabled = !checked && selectedOptions.length >= 3;
 
@@ -436,7 +460,10 @@ function CoffretSignaturePage() {
                         </div>
                       </label>
                     );
-                  })}
+                        })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
 
