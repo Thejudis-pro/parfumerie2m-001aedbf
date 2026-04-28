@@ -254,10 +254,6 @@ function Index() {
 
       <section className="bg-surface-alt py-16 md:py-24">
         <div className="section-shell">
-          <HomeHeader
-            title="Ce que le Sénégal dit de nous"
-            subtitle="Des vraies personnes, de vraies fragrances."
-          />
           <div className="flex snap-x gap-5 overflow-x-auto pb-4 md:grid md:grid-cols-3 md:overflow-visible">
             {testimonials.map((item, index) => (
               <article

@@ -21,7 +21,7 @@ import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/
 const navItems = [
   { label: "Accueil", to: "/" },
   { label: "Boutique", to: "/boutique" },
-  { label: "Coffret Signature", to: "/coffret-signature" },
+  { label: "Compose ton pack", to: "/coffret-signature" },
   { label: "À Propos", to: "/a-propos" },
   { label: "FAQ", to: "/faq" },
   { label: "Contact", to: "/contact" },

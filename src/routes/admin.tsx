@@ -829,6 +829,7 @@ function ProductForm({
   const [outputWidth, setOutputWidth] = useState(1200);
   const [outputHeight, setOutputHeight] = useState(1200);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const hideNotesForHaqqi = form.collection === "haqqi";
 
   const currentImage = imageQueue[imageQueueIndex] ?? null;
 
@@ -993,7 +994,21 @@ function ProductForm({
           <select
             className="min-h-12 rounded-md border border-border bg-background px-4 text-foreground"
             value={form.collection}
-            onChange={(event) => setForm({ ...form, collection: event.target.value })}
+            onChange={(event) => {
+              const nextCollection = event.target.value as Collection;
+              setForm(
+                nextCollection === "haqqi"
+                  ? {
+                      ...form,
+                      collection: nextCollection,
+                      notes_top: "",
+                      notes_heart: "",
+                      notes_base: "",
+                      description: "",
+                    }
+                  : { ...form, collection: nextCollection },
+              );
+            }}
           >
             {collectionFilters
               .filter((filter) => filter.value !== "all")
@@ -1243,29 +1258,38 @@ function ProductForm({
             </div>
           )}
         </label>
-        <Field
-          label="Notes de tête"
-          value={form.notes_top}
-          onChange={(value) => setForm({ ...form, notes_top: value })}
-        />
-        <Field
-          label="Notes de cœur"
-          value={form.notes_heart}
-          onChange={(value) => setForm({ ...form, notes_heart: value })}
-        />
-        <Field
-          label="Notes de fond"
-          value={form.notes_base}
-          onChange={(value) => setForm({ ...form, notes_base: value })}
-        />
-        <label className="grid gap-2 text-sm font-medium text-foreground sm:col-span-2">
-          Description
-          <textarea
-            className="min-h-28 rounded-md border border-border bg-background px-4 py-3 text-foreground"
-            value={form.description}
-            onChange={(event) => setForm({ ...form, description: event.target.value })}
-          />
-        </label>
+        {!hideNotesForHaqqi && (
+          <>
+            <Field
+              label="Notes de tête"
+              value={form.notes_top}
+              onChange={(value) => setForm({ ...form, notes_top: value })}
+            />
+            <Field
+              label="Notes de cœur"
+              value={form.notes_heart}
+              onChange={(value) => setForm({ ...form, notes_heart: value })}
+            />
+            <Field
+              label="Notes de fond"
+              value={form.notes_base}
+              onChange={(value) => setForm({ ...form, notes_base: value })}
+            />
+            <label className="grid gap-2 text-sm font-medium text-foreground sm:col-span-2">
+              Description
+              <textarea
+                className="min-h-28 rounded-md border border-border bg-background px-4 py-3 text-foreground"
+                value={form.description}
+                onChange={(event) => setForm({ ...form, description: event.target.value })}
+              />
+            </label>
+          </>
+        )}
+        {hideNotesForHaqqi && (
+          <p className="sm:col-span-2 text-sm leading-6 text-muted-foreground">
+            Haqqi utilise uniquement le nom du parfum dans le dashboard pour garder l’édition plus compacte.
+          </p>
+        )}
         <label className="flex min-h-12 items-center gap-3 rounded-md border border-border bg-background px-4 text-sm text-foreground">
           <input
             type="checkbox"
@@ -1402,20 +1426,29 @@ function Field({
 
 function productPayloadFromForm(form: typeof blankProduct): ProductInsert {
   const image_urls = normalizeImageList([form.image_url, ...form.image_urls]);
-  return {
+  const payload = {
     ...form,
     image_url: image_urls[0] || "",
     image_urls,
     price: Number(form.price),
     slug: form.slug || slugify(form.name),
   };
+  return form.collection === "haqqi"
+    ? {
+        ...payload,
+        notes_top: "",
+        notes_heart: "",
+        notes_base: "",
+        description: "",
+      }
+    : payload;
 }
 
 function productPayloadFromRow(
   product: AdminProduct,
   overrides: Partial<ProductInsert>,
 ): ProductInsert {
-  return {
+  const payload = {
     name: product.name,
     subtitle: product.subtitle,
     collection: product.collection,
@@ -1431,6 +1464,15 @@ function productPayloadFromRow(
     is_bestseller: Boolean(product.is_bestseller),
     ...overrides,
   };
+  return payload.collection === "haqqi"
+    ? {
+        ...payload,
+        notes_top: "",
+        notes_heart: "",
+        notes_base: "",
+        description: "",
+      }
+    : payload;
 }
 
 function slugify(value: string) {
@@ -1461,7 +1503,18 @@ function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): Admin
     const slug = slugifyProduct(product);
     const savedProduct = databaseBySlug.get(slug);
     if (savedProduct?.description === DELETED_PRODUCT_MARKER) return [];
-    if (savedProduct) return [{ ...savedProduct, source: "database" as const }];
+    if (savedProduct) {
+      return [
+        {
+          ...savedProduct,
+          notes_top: savedProduct.collection === "haqqi" ? "" : savedProduct.notes_top,
+          notes_heart: savedProduct.collection === "haqqi" ? "" : savedProduct.notes_heart,
+          notes_base: savedProduct.collection === "haqqi" ? "" : savedProduct.notes_base,
+          description: savedProduct.collection === "haqqi" ? "" : savedProduct.description,
+          source: "database" as const,
+        },
+      ];
+    }
 
     return [{
       id: `catalog-${slug}`,
@@ -1485,7 +1538,14 @@ function mergeCatalogWithDatabaseProducts(databaseProducts: ProductRow[]): Admin
   });
   const extraDatabaseProducts = databaseProducts
     .filter((product) => !catalogSlugs.has(product.slug) && product.description !== DELETED_PRODUCT_MARKER)
-    .map((product) => ({ ...product, source: "database" as const }));
+    .map((product) => ({
+      ...product,
+      notes_top: product.collection === "haqqi" ? "" : product.notes_top,
+      notes_heart: product.collection === "haqqi" ? "" : product.notes_heart,
+      notes_base: product.collection === "haqqi" ? "" : product.notes_base,
+      description: product.collection === "haqqi" ? "" : product.description,
+      source: "database" as const,
+    }));
   return [...catalogProducts, ...extraDatabaseProducts];
 }
 
