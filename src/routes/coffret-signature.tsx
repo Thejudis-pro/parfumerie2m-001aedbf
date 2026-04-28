@@ -4,7 +4,14 @@ import { useMemo, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
@@ -46,59 +53,231 @@ const haqqiSections: CoffretSection[] = [
   {
     title: "Homme",
     items: [
-      { id: "haqqi-homme-lacoste-noir-l12", title: "Lacoste noir L12", description: "Propre, élégant, facile à porter tous les jours." },
-      { id: "haqqi-homme-la-nuit-del-homme", title: "La nuit del homme", description: "Plus sombre, plus chic, avec une belle présence." },
-      { id: "haqqi-homme-desert-oud", title: "Desert oud", description: "Oud sec et profond avec une signature marquée." },
-      { id: "haqqi-homme-oud-noir", title: "Oud noir", description: "Boisé, intense et très enveloppant." },
-      { id: "haqqi-homme-scandal-man", title: "Scandal man", description: "Plus charismatique, plus affirmé, très présent." },
-      { id: "haqqi-homme-imagination", title: "Imagination", description: "Frais lumineux, net et moderne." },
-      { id: "haqqi-homme-terre-d-hermes", title: "Terre d Hermès", description: "Boisé minéral, sec et très raffiné." },
-      { id: "haqqi-homme-ck-euphoria", title: "Ck Euphoria", description: "Plus rond, propre et facile à aimer." },
-      { id: "haqqi-homme-krouss", title: "Krouss", description: "Un choix direct, expressif et sans détour." },
-      { id: "haqqi-homme-burberry-classic", title: "Burberry classic", description: "Classique, doux et élégant." },
-      { id: "haqqi-homme-pegasus", title: "Pegasus", description: "Crémeux, élégant et très distinctif." },
-      { id: "haqqi-homme-creed-aventus", title: "Creed Aventus", description: "Frais, noble et très signature." },
-      { id: "haqqi-homme-african-leather", title: "African Leather", description: "Cuir chaud, sec et racé." },
-      { id: "haqqi-homme-encre-noir", title: "Encre noir", description: "Sombre, boisé et très texturé." },
-      { id: "haqqi-homme-black-code", title: "Black code", description: "Nocturne, élégant et subtil." },
-      { id: "haqqi-homme-man-in-black", title: "Man in black", description: "Ambré et intense avec une belle profondeur." },
-      { id: "haqqi-homme-cartier-declaration", title: "Cartier déclaration", description: "Boisé épicé, plus classique et net." },
-      { id: "haqqi-homme-dolce-gabbana-the-one", title: "Dolce gabbana the One", description: "Chaud, suave et très séduisant." },
-      { id: "haqqi-homme-valentino-uomo", title: "Valentino oumo", description: "Doux, ambré et raffiné." },
+      {
+        id: "haqqi-homme-lacoste-noir-l12",
+        title: "Lacoste noir L12",
+        description: "Propre, élégant, facile à porter tous les jours.",
+      },
+      {
+        id: "haqqi-homme-la-nuit-del-homme",
+        title: "La nuit del homme",
+        description: "Plus sombre, plus chic, avec une belle présence.",
+      },
+      {
+        id: "haqqi-homme-desert-oud",
+        title: "Desert oud",
+        description: "Oud sec et profond avec une signature marquée.",
+      },
+      {
+        id: "haqqi-homme-oud-noir",
+        title: "Oud noir",
+        description: "Boisé, intense et très enveloppant.",
+      },
+      {
+        id: "haqqi-homme-scandal-man",
+        title: "Scandal man",
+        description: "Plus charismatique, plus affirmé, très présent.",
+      },
+      {
+        id: "haqqi-homme-imagination",
+        title: "Imagination",
+        description: "Frais lumineux, net et moderne.",
+      },
+      {
+        id: "haqqi-homme-terre-d-hermes",
+        title: "Terre d Hermès",
+        description: "Boisé minéral, sec et très raffiné.",
+      },
+      {
+        id: "haqqi-homme-ck-euphoria",
+        title: "Ck Euphoria",
+        description: "Plus rond, propre et facile à aimer.",
+      },
+      {
+        id: "haqqi-homme-krouss",
+        title: "Krouss",
+        description: "Un choix direct, expressif et sans détour.",
+      },
+      {
+        id: "haqqi-homme-burberry-classic",
+        title: "Burberry classic",
+        description: "Classique, doux et élégant.",
+      },
+      {
+        id: "haqqi-homme-pegasus",
+        title: "Pegasus",
+        description: "Crémeux, élégant et très distinctif.",
+      },
+      {
+        id: "haqqi-homme-creed-aventus",
+        title: "Creed Aventus",
+        description: "Frais, noble et très signature.",
+      },
+      {
+        id: "haqqi-homme-african-leather",
+        title: "African Leather",
+        description: "Cuir chaud, sec et racé.",
+      },
+      {
+        id: "haqqi-homme-encre-noir",
+        title: "Encre noir",
+        description: "Sombre, boisé et très texturé.",
+      },
+      {
+        id: "haqqi-homme-black-code",
+        title: "Black code",
+        description: "Nocturne, élégant et subtil.",
+      },
+      {
+        id: "haqqi-homme-man-in-black",
+        title: "Man in black",
+        description: "Ambré et intense avec une belle profondeur.",
+      },
+      {
+        id: "haqqi-homme-cartier-declaration",
+        title: "Cartier déclaration",
+        description: "Boisé épicé, plus classique et net.",
+      },
+      {
+        id: "haqqi-homme-dolce-gabbana-the-one",
+        title: "Dolce gabbana the One",
+        description: "Chaud, suave et très séduisant.",
+      },
+      {
+        id: "haqqi-homme-valentino-uomo",
+        title: "Valentino oumo",
+        description: "Doux, ambré et raffiné.",
+      },
     ],
   },
   {
     title: "Unisex",
     items: [
-      { id: "haqqi-unisex-baccarat-rouge-540", title: "Baccarat rouge 540", description: "Signature lumineuse, ambrée et ultra reconnaissable." },
-      { id: "haqqi-unisex-baccarat-rouge-540-extrait", title: "Baccarat rouge 540 extrait", description: "Version plus profonde, plus dense et plus luxueuse." },
-      { id: "haqqi-unisex-oud-satin-mood", title: "Oud satin mood", description: "Velouté, oriental et raffiné." },
-      { id: "haqqi-unisex-more-than-words", title: "More than words", description: "Élégant, poétique et légèrement boisé." },
-      { id: "haqqi-unisex-kirke", title: "Kirke", description: "Fruité, solaire et très expressif." },
-      { id: "haqqi-unisex-duetto", title: "Duetto", description: "Équilibré, net et facile à porter à deux styles." },
-      { id: "haqqi-unisex-tom-ford-neroli-portofino", title: "Tom Ford neroli portofino", description: "Agrumes propres, lumineux et très frais." },
-      { id: "haqqi-unisex-tom-ford-white-pachouli", title: "Tom Ford White pachouli", description: "Chic, blanc, boisé et très fluide." },
-      { id: "haqqi-unisex-tom-ford-soleil-blanc", title: "Tom Ford soleil blanc", description: "Solaire, doux et élégant." },
-      { id: "haqqi-unisex-tom-ford-ombre-leather", title: "Tom Ford ombre Leather", description: "Cuir profond, sombre et sophistiqué." },
+      {
+        id: "haqqi-unisex-baccarat-rouge-540",
+        title: "Baccarat rouge 540",
+        description: "Signature lumineuse, ambrée et ultra reconnaissable.",
+      },
+      {
+        id: "haqqi-unisex-baccarat-rouge-540-extrait",
+        title: "Baccarat rouge 540 extrait",
+        description: "Version plus profonde, plus dense et plus luxueuse.",
+      },
+      {
+        id: "haqqi-unisex-oud-satin-mood",
+        title: "Oud satin mood",
+        description: "Velouté, oriental et raffiné.",
+      },
+      {
+        id: "haqqi-unisex-more-than-words",
+        title: "More than words",
+        description: "Élégant, poétique et légèrement boisé.",
+      },
+      {
+        id: "haqqi-unisex-kirke",
+        title: "Kirke",
+        description: "Fruité, solaire et très expressif.",
+      },
+      {
+        id: "haqqi-unisex-duetto",
+        title: "Duetto",
+        description: "Équilibré, net et facile à porter à deux styles.",
+      },
+      {
+        id: "haqqi-unisex-tom-ford-neroli-portofino",
+        title: "Tom Ford neroli portofino",
+        description: "Agrumes propres, lumineux et très frais.",
+      },
+      {
+        id: "haqqi-unisex-tom-ford-white-pachouli",
+        title: "Tom Ford White pachouli",
+        description: "Chic, blanc, boisé et très fluide.",
+      },
+      {
+        id: "haqqi-unisex-tom-ford-soleil-blanc",
+        title: "Tom Ford soleil blanc",
+        description: "Solaire, doux et élégant.",
+      },
+      {
+        id: "haqqi-unisex-tom-ford-ombre-leather",
+        title: "Tom Ford ombre Leather",
+        description: "Cuir profond, sombre et sophistiqué.",
+      },
     ],
   },
   {
     title: "Femme",
     items: [
-      { id: "haqqi-femme-la-nuit-tresor", title: "La nuit trésor", description: "Gourmand, velouté et très féminin." },
-      { id: "haqqi-femme-supreme-bouquet", title: "Suprême bouquet", description: "Floral riche, lumineux et généreux." },
-      { id: "haqqi-femme-guidance", title: "Guidance", description: "Florale, crémeuse et élégante." },
-      { id: "haqqi-femme-chanel-chance", title: "Chanel chance", description: "Doux, pétillant et intemporel." },
-      { id: "haqqi-femme-euphoria", title: "Euphoria", description: "Fruité, sensuel et facile à aimer." },
-      { id: "haqqi-femme-la-vie-est-belle", title: "La vie est belle", description: "Gourmand, lumineux et très réconfortant." },
-      { id: "haqqi-femme-ysl-cinema", title: "YSL Cinéma", description: "Chaleureux, glamour et assumé." },
-      { id: "haqqi-femme-manifesto", title: "Manifesto", description: "Plus moderne, plus doux, plus affirmé." },
-      { id: "haqqi-femme-bright-cristal", title: "Bright cristal", description: "Aérien, propre et lumineux." },
-      { id: "haqqi-femme-gucci-bloom", title: "Gucci Bloom", description: "Floral blanc, pur et généreux." },
-      { id: "haqqi-femme-lolita-lempicka", title: "Lolita lempicka", description: "Sucré, original et très féminin." },
-      { id: "haqqi-femme-dior-addict", title: "Dior addict", description: "Plus profond, plus sensuel, plus marqué." },
-      { id: "haqqi-femme-diesel-full-for-life", title: "Diesel full for Life", description: "Audacieux, doux et très présent." },
-      { id: "haqqi-femme-si-passione", title: "Si passione", description: "Rouge, fruité et intensément féminin." },
+      {
+        id: "haqqi-femme-la-nuit-tresor",
+        title: "La nuit trésor",
+        description: "Gourmand, velouté et très féminin.",
+      },
+      {
+        id: "haqqi-femme-supreme-bouquet",
+        title: "Suprême bouquet",
+        description: "Floral riche, lumineux et généreux.",
+      },
+      {
+        id: "haqqi-femme-guidance",
+        title: "Guidance",
+        description: "Florale, crémeuse et élégante.",
+      },
+      {
+        id: "haqqi-femme-chanel-chance",
+        title: "Chanel chance",
+        description: "Doux, pétillant et intemporel.",
+      },
+      {
+        id: "haqqi-femme-euphoria",
+        title: "Euphoria",
+        description: "Fruité, sensuel et facile à aimer.",
+      },
+      {
+        id: "haqqi-femme-la-vie-est-belle",
+        title: "La vie est belle",
+        description: "Gourmand, lumineux et très réconfortant.",
+      },
+      {
+        id: "haqqi-femme-ysl-cinema",
+        title: "YSL Cinéma",
+        description: "Chaleureux, glamour et assumé.",
+      },
+      {
+        id: "haqqi-femme-manifesto",
+        title: "Manifesto",
+        description: "Plus moderne, plus doux, plus affirmé.",
+      },
+      {
+        id: "haqqi-femme-bright-cristal",
+        title: "Bright cristal",
+        description: "Aérien, propre et lumineux.",
+      },
+      {
+        id: "haqqi-femme-gucci-bloom",
+        title: "Gucci Bloom",
+        description: "Floral blanc, pur et généreux.",
+      },
+      {
+        id: "haqqi-femme-lolita-lempicka",
+        title: "Lolita lempicka",
+        description: "Sucré, original et très féminin.",
+      },
+      {
+        id: "haqqi-femme-dior-addict",
+        title: "Dior addict",
+        description: "Plus profond, plus sensuel, plus marqué.",
+      },
+      {
+        id: "haqqi-femme-diesel-full-for-life",
+        title: "Diesel full for Life",
+        description: "Audacieux, doux et très présent.",
+      },
+      {
+        id: "haqqi-femme-si-passione",
+        title: "Si passione",
+        description: "Rouge, fruité et intensément féminin.",
+      },
     ],
   },
 ];
@@ -106,9 +285,21 @@ const haqqiSections: CoffretSection[] = [
 const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
   haqqi: haqqiSections.flatMap((section) => section.items),
   scentlab: [
-    { id: "scentlab-bright-mandarin", title: "Bright Mandarin", description: "Louis Vuitton Imagination" },
-    { id: "scentlab-caramel-citrus", title: "Caramel Citrus", description: "Xerjoff Casamorati Lira" },
-    { id: "scentlab-caramel-orange", title: "Caramel Orange", description: "Kilian Love Don’t Be Shy" },
+    {
+      id: "scentlab-bright-mandarin",
+      title: "Bright Mandarin",
+      description: "Louis Vuitton Imagination",
+    },
+    {
+      id: "scentlab-caramel-citrus",
+      title: "Caramel Citrus",
+      description: "Xerjoff Casamorati Lira",
+    },
+    {
+      id: "scentlab-caramel-orange",
+      title: "Caramel Orange",
+      description: "Kilian Love Don’t Be Shy",
+    },
     { id: "scentlab-cognac-whisper", title: "Cognac Whisper", description: "Kilian Angels’ Share" },
     { id: "scentlab-dreamy-bloom", title: "Dreamy Bloom", description: "Mémo Marfa" },
     { id: "scentlab-galactic-musk", title: "Galactic Musk", description: "Ganymed" },
@@ -119,8 +310,16 @@ const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
     { id: "scentlab-rosy-hazelnut", title: "Rosy Hazelnut", description: "Amouage Guidance" },
     { id: "scentlab-sandal-wood-leather", title: "Sandal Wood Leather", description: "Santal 33" },
     { id: "scentlab-savanna-vetiver", title: "Savanna Vétiver", description: "Bal d’Afrique" },
-    { id: "scentlab-spicy-leather-exclusive", title: "Spicy Leather Exclusive", description: "One Million Lucky" },
-    { id: "scentlab-sweet-safron-exclusive", title: "Sweet Safron Exclusive", description: "Baccarat Extrait" },
+    {
+      id: "scentlab-spicy-leather-exclusive",
+      title: "Spicy Leather Exclusive",
+      description: "One Million Lucky",
+    },
+    {
+      id: "scentlab-sweet-safron-exclusive",
+      title: "Sweet Safron Exclusive",
+      description: "Baccarat Extrait",
+    },
     { id: "scentlab-sweet-tobacco", title: "Sweet Tobacco", description: "Xerjoff Naxos" },
     { id: "scentlab-woody-oud", title: "Woody Oud", description: "Tom Ford Oud Wood" },
     { id: "scentlab-dark-leather", title: "Dark Leather", description: "Tom Ford Ombre Leather" },
@@ -138,12 +337,20 @@ const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
     { id: "scentlab-aquatique-jasmine", title: "Aquatique Jasmine", description: "Acqua di Gio" },
     { id: "scentlab-warm-spicy", title: "Warm Spicy", description: "Stronger With You" },
     { id: "scentlab-cool-mint", title: "Cool Mint", description: "Allure" },
-    { id: "scentlab-pineapple-bergamote", title: "Pineapple Bergamote", description: "Creed Aventus" },
+    {
+      id: "scentlab-pineapple-bergamote",
+      title: "Pineapple Bergamote",
+      description: "Creed Aventus",
+    },
     { id: "scentlab-minty-lavender", title: "Minty Lavender", description: "JPG Le Mâle" },
     { id: "scentlab-spicy-leather", title: "Spicy Leather", description: "One Million" },
     { id: "scentlab-sweet-safron", title: "Sweet Safron", description: "MFK Baccarat Rouge" },
     { id: "scentlab-smoky-oud", title: "Smoky Oud", description: "Louis Vuitton Ombre Nomade" },
-    { id: "scentlab-fruity-passion", title: "Fruity Passion", description: "Tiziana Terenzi Kirke" },
+    {
+      id: "scentlab-fruity-passion",
+      title: "Fruity Passion",
+      description: "Tiziana Terenzi Kirke",
+    },
     { id: "scentlab-fruity-vanille", title: "Fruity Vanille", description: "Xerjoff Erba Pura" },
     { id: "scentlab-addictive-peach", title: "Addictive Peach", description: "Fleur Narcotique" },
     { id: "scentlab-ambery-orchid", title: "Ambery Orchid", description: "Tom Ford Black Orchid" },
@@ -244,12 +451,14 @@ function CoffretSignaturePage() {
               Compose ton coffret, coche tes 3 parfums, on s’occupe du reste.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
-              Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
-              tu coches trois parfums, et ton coffret est préparé pour être offert ou porté tout de
-              suite.
+              Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton
+              univers, tu coches trois parfums, et ton coffret est préparé pour être offert ou porté
+              tout de suite.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Badge className="bg-accent text-primary-foreground">3 parfums dans chaque coffret</Badge>
+              <Badge className="bg-accent text-primary-foreground">
+                3 parfums dans chaque coffret
+              </Badge>
               <Badge variant="secondary">Coffret prêt à offrir</Badge>
               <Badge variant="secondary">Validation rapide sur WhatsApp</Badge>
             </div>
@@ -434,7 +643,9 @@ function CoffretSignaturePage() {
                                 {option.title}
                               </h3>
                             </div>
-                            {checked && <Check className="mt-1 size-5 text-accent" aria-hidden="true" />}
+                            {checked && (
+                              <Check className="mt-1 size-5 text-accent" aria-hidden="true" />
+                            )}
                           </div>
                           <p className="mt-3 text-sm leading-7 text-muted-foreground">
                             {option.description}
@@ -458,9 +669,7 @@ function CoffretSignaturePage() {
               <CardTitle className="font-display text-[28px] text-foreground">
                 Ton coffret en cours
               </CardTitle>
-              <CardDescription>
-                Résumé rapide avant l’envoi du message.
-              </CardDescription>
+              <CardDescription>Résumé rapide avant l’envoi du message.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="rounded-2xl bg-surface p-5">
@@ -482,7 +691,10 @@ function CoffretSignaturePage() {
                 {selectedOptions.length ? (
                   <ul className="mt-4 space-y-3">
                     {selectedOptions.map((option) => (
-                      <li key={option.id} className="flex items-start gap-3 text-sm text-foreground">
+                      <li
+                        key={option.id}
+                        className="flex items-start gap-3 text-sm text-foreground"
+                      >
                         <Check className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
                         <span>{option.title}</span>
                       </li>

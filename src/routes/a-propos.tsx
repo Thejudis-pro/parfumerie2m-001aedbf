@@ -127,8 +127,7 @@ function AboutPage() {
               className="w-full max-w-full whitespace-normal px-5 text-center leading-relaxed sm:w-auto sm:whitespace-nowrap sm:px-8"
             >
               <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
-                <WhatsAppLogo tone="light" className="size-5" /> Discuter avec nous sur
-                WhatsApp
+                <WhatsAppLogo tone="light" className="size-5" /> Discuter avec nous sur WhatsApp
               </a>
             </Button>
           </div>

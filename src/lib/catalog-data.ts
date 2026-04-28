@@ -94,7 +94,10 @@ const collectionAliases: Record<string, Collection> = {
 export function normalizeCollectionValue(value: string | null | undefined): Collection {
   if (!value) return "scentlab";
   const normalized = value.trim().toLowerCase();
-  return collectionAliases[normalized] ?? (collectionValues.includes(normalized as Collection) ? (normalized as Collection) : "scentlab");
+  return (
+    collectionAliases[normalized] ??
+    (collectionValues.includes(normalized as Collection) ? (normalized as Collection) : "scentlab")
+  );
 }
 
 export const priceFilters: { label: string; value: PriceRange }[] = [
