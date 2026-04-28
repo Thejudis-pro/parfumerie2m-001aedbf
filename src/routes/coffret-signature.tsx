@@ -12,7 +12,6 @@ import haqqiCinemaImage from "@/assets/haqqi-cinema.png";
 import haqqiCollectionImage from "@/assets/haqqi-collection.png";
 import haqqiDeclarationImage from "@/assets/haqqi-declaration.png";
 import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
-import scentlabFruityVanillaImage from "@/assets/scentlab-fruity-vanilla.png";
 import scentlabMarineCitrusImage from "@/assets/scentlab-marine-citrus.png";
 import { formatPrice } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
@@ -202,7 +201,6 @@ const haqqiSideImages = [
 const scentlabSideImages = [
   { src: scentlabMarineCitrusImage, alt: "Visuel SCENTLAB Marine Citrus" },
   { src: scentlabBoxesImage, alt: "Sélection de coffrets SCENTLAB" },
-  { src: scentlabFruityVanillaImage, alt: "Visuel SCENTLAB Fruity Vanilla" },
 ];
 
 export const Route = createFileRoute("/coffret-signature")({
