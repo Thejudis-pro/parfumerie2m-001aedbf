@@ -169,7 +169,7 @@ function Index() {
         <div className="section-shell text-center">
           <HomeHeader
             title="Nos parfums du moment"
-            subtitle="Deux signatures TAKEOFF et deux essentiels SCENTLAB, choisis pour vous."
+            subtitle="Quelques de nos best sellers, choisis pour vous !"
           />
           <div className="grid gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.map((product, index) => (
