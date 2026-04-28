@@ -11,6 +11,9 @@ import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import haqqiCinemaImage from "@/assets/haqqi-cinema.png";
 import haqqiCollectionImage from "@/assets/haqqi-collection.png";
 import haqqiDeclarationImage from "@/assets/haqqi-declaration.png";
+import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
+import scentlabFruityVanillaImage from "@/assets/scentlab-fruity-vanilla.png";
+import scentlabMarineCitrusImage from "@/assets/scentlab-marine-citrus.png";
 import { formatPrice } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
@@ -194,6 +197,12 @@ const haqqiSideImages = [
   { src: haqqiCollectionImage, alt: "Sélection de parfums Haqqi" },
   { src: haqqiDeclarationImage, alt: "Visuel Haqqi avec coffret" },
   { src: haqqiCinemaImage, alt: "Flacon Haqqi avec coffret" },
+];
+
+const scentlabSideImages = [
+  { src: scentlabMarineCitrusImage, alt: "Visuel SCENTLAB Marine Citrus" },
+  { src: scentlabBoxesImage, alt: "Sélection de coffrets SCENTLAB" },
+  { src: scentlabFruityVanillaImage, alt: "Visuel SCENTLAB Fruity Vanilla" },
 ];
 
 export const Route = createFileRoute("/coffret-signature")({
@@ -438,54 +447,67 @@ function CoffretSignaturePage() {
                   </aside>
                 </div>
               ) : (
-                <div className="space-y-6">
-                  {scentlabSections.map((section) => (
-                    <div key={section.title} className="space-y-3">
-                      <div className="flex items-center justify-between gap-3">
-                        <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
-                        <Badge variant="secondary">{section.items.length} parfums</Badge>
-                      </div>
-                      <div className="grid gap-4 md:grid-cols-2">
-                        {section.items.map((option) => {
-                    const checked = selectedIds.includes(option.id);
-                    const disabled = !checked && selectedOptions.length >= 3;
-
-                    return (
-                      <label
-                        key={option.id}
-                        htmlFor={option.id}
-                        className={
-                          checked
-                            ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
-                            : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
-                        }
-                      >
-                        <Checkbox
-                          id={option.id}
-                          checked={checked}
-                          disabled={disabled}
-                          onCheckedChange={() => toggleOption(option.id)}
-                          className="mt-1"
-                        />
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-start justify-between gap-3">
-                            <div>
-                              <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                                {collectionOffersLabel(selectedCollection)}
-                              </p>
-                              <h3 className="mt-1 font-display text-[22px] text-foreground">
-                                {option.title}
-                              </h3>
-                            </div>
-                            {checked && <Check className="mt-1 size-5 text-accent" aria-hidden="true" />}
-                          </div>
+                <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_180px]">
+                  <div className="space-y-6">
+                    {scentlabSections.map((section) => (
+                      <div key={section.title} className="space-y-3">
+                        <div className="flex items-center justify-between gap-3">
+                          <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
+                          <Badge variant="secondary">{section.items.length} parfums</Badge>
                         </div>
-                      </label>
-                    );
-                        })}
+                        <div className="grid gap-4 md:grid-cols-2">
+                          {section.items.map((option) => {
+                            const checked = selectedIds.includes(option.id);
+                            const disabled = !checked && selectedOptions.length >= 3;
+
+                            return (
+                              <label
+                                key={option.id}
+                                htmlFor={option.id}
+                                className={
+                                  checked
+                                    ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
+                                    : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
+                                }
+                              >
+                                <Checkbox
+                                  id={option.id}
+                                  checked={checked}
+                                  disabled={disabled}
+                                  onCheckedChange={() => toggleOption(option.id)}
+                                  className="mt-1"
+                                />
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-start justify-between gap-3">
+                                    <div>
+                                      <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                                        {collectionOffersLabel(selectedCollection)} {section.title}
+                                      </p>
+                                      <h3 className="mt-1 font-display text-[22px] text-foreground">
+                                        {option.title}
+                                      </h3>
+                                    </div>
+                                    {checked && <Check className="mt-1 size-5 text-accent" aria-hidden="true" />}
+                                  </div>
+                                </div>
+                              </label>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  <aside className="grid gap-3 sm:grid-cols-3 xl:sticky xl:top-24 xl:block xl:space-y-3 xl:self-start">
+                    {scentlabSideImages.map((image) => (
+                      <img
+                        key={image.alt}
+                        src={image.src}
+                        alt={image.alt}
+                        loading="lazy"
+                        className="aspect-[4/5] w-full rounded-xl border border-border object-cover shadow-card"
+                      />
+                    ))}
+                  </aside>
                 </div>
               )}
 
