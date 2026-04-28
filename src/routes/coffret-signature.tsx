@@ -416,8 +416,15 @@ function CoffretSignaturePage() {
                   ))}
                 </div>
               ) : (
-                <div className="grid gap-4 md:grid-cols-2">
-                  {currentOptions.map((option) => {
+                <div className="space-y-6">
+                  {scentlabSections.map((section) => (
+                    <div key={section.title} className="space-y-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
+                        <Badge variant="secondary">{section.items.length} parfums</Badge>
+                      </div>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {section.items.map((option) => {
                     const checked = selectedIds.includes(option.id);
                     const disabled = !checked && selectedOptions.length >= 3;
 
@@ -453,7 +460,10 @@ function CoffretSignaturePage() {
                         </div>
                       </label>
                     );
-                  })}
+                        })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
 
