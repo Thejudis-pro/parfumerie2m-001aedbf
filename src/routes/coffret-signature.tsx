@@ -382,7 +382,18 @@ function CoffretSignaturePage() {
               </div>
 
               {selectedCollection === "haqqi" ? (
-                <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_180px]">
+                <div className="space-y-6">
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {haqqiSideImages.map((image) => (
+                      <img
+                        key={image.alt}
+                        src={image.src}
+                        alt={image.alt}
+                        loading="lazy"
+                        className="aspect-[4/3] w-full rounded-xl border border-border object-cover shadow-card"
+                      />
+                    ))}
+                  </div>
                   <div className="space-y-6">
                     {haqqiSections.map((section) => (
                       <div key={section.title} className="space-y-3">
@@ -434,20 +445,20 @@ function CoffretSignaturePage() {
                       </div>
                     ))}
                   </div>
-                  <aside className="grid gap-3 sm:grid-cols-3 xl:sticky xl:top-24 xl:block xl:space-y-3 xl:self-start">
-                    {haqqiSideImages.map((image) => (
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {scentlabSideImages.map((image) => (
                       <img
                         key={image.alt}
                         src={image.src}
                         alt={image.alt}
                         loading="lazy"
-                        className="aspect-[4/5] w-full rounded-xl border border-border object-cover shadow-card"
+                        className="aspect-[4/3] w-full rounded-xl border border-border object-cover shadow-card"
                       />
                     ))}
-                  </aside>
-                </div>
-              ) : (
-                <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_180px]">
+                  </div>
                   <div className="space-y-6">
                     {scentlabSections.map((section) => (
                       <div key={section.title} className="space-y-3">
@@ -497,17 +508,6 @@ function CoffretSignaturePage() {
                       </div>
                     ))}
                   </div>
-                  <aside className="grid gap-3 sm:grid-cols-3 xl:sticky xl:top-24 xl:block xl:space-y-3 xl:self-start">
-                    {scentlabSideImages.map((image) => (
-                      <img
-                        key={image.alt}
-                        src={image.src}
-                        alt={image.alt}
-                        loading="lazy"
-                        className="aspect-[4/5] w-full rounded-xl border border-border object-cover shadow-card"
-                      />
-                    ))}
-                  </aside>
                 </div>
               )}
 
