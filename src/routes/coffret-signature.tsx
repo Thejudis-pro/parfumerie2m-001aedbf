@@ -8,7 +8,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Checkbox } from "@/components/ui/checkbox";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
-import haqqiCinemaImage from "@/assets/haqqi-cinema.png";
 import haqqiCollectionImage from "@/assets/haqqi-collection.png";
 import haqqiDeclarationImage from "@/assets/haqqi-declaration.png";
 import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
@@ -195,7 +194,6 @@ const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab"];
 const haqqiSideImages = [
   { src: haqqiCollectionImage, alt: "Sélection de parfums Haqqi" },
   { src: haqqiDeclarationImage, alt: "Visuel Haqqi avec coffret" },
-  { src: haqqiCinemaImage, alt: "Flacon Haqqi avec coffret" },
 ];
 
 const scentlabSideImages = [
