@@ -172,7 +172,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
                 ) : (
                   <CreditCard className="size-5" aria-hidden="true" />
                 )}
-                Payer avec PayDunya
+                Payez avec Wave ou Orange Money
               </Button>
               <Button
                 type="button"
