@@ -48,6 +48,7 @@ function pickFeaturedProducts(products: BoutiqueProduct[]) {
     "takeoff",
     "scentlab",
     "dubai",
+    "authentic",
   ];
 
   return featuredCollections
@@ -183,7 +184,7 @@ function Index() {
             title="Nos parfums du moment"
             subtitle="Quelques de nos best sellers, choisis pour vous !"
           />
-          <div className="mx-auto grid max-w-5xl gap-6 text-left md:grid-cols-3">
+          <div className="mx-auto grid max-w-5xl gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.map((product, index) => (
               <article
                 key={product.name}
