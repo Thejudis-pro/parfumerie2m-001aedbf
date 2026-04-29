@@ -25,6 +25,26 @@ function validateBoutiqueSearch(search: Record<string, unknown>) {
   return { collection };
 }
 
+const mixedCollectionOrder: Collection[] = [
+  "takeoff",
+  "scentlab",
+  "dubai",
+  "pocket",
+  "authentic",
+  "haqqi",
+];
+
+function mixProductsByCollection(products: BoutiqueProduct[]) {
+  const groupedProducts = mixedCollectionOrder.map((collection) =>
+    products.filter((product) => product.collection === collection),
+  );
+  const maxGroupLength = Math.max(0, ...groupedProducts.map((group) => group.length));
+
+  return Array.from({ length: maxGroupLength }).flatMap((_, index) =>
+    groupedProducts.flatMap((group) => (group[index] ? [group[index]] : [])),
+  );
+}
+
 export const Route = createFileRoute("/boutique")({
   validateSearch: validateBoutiqueSearch,
   head: () => ({
@@ -68,12 +88,14 @@ function BoutiquePage() {
     setProducts(mergeLiveCatalog(data ?? []));
   };
 
+  const mixedProducts = useMemo(() => mixProductsByCollection(products), [products]);
+
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
+    return mixedProducts.filter((product) => {
       const collectionMatch = collection === "all" || product.collection === collection;
       return collectionMatch;
     });
-  }, [products, collection]);
+  }, [mixedProducts, collection]);
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
 
