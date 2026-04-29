@@ -57,7 +57,8 @@ const yslYIntenseProduct: BoutiqueProduct = {
   family: "Authentic Perfumes",
   concentration: "Eau de parfum intense",
   volume: "100 ml",
-  description: "Yves Saint Laurent Y eau de parfum intense 100 ml, disponible chez 2M Parfumerie au Sénégal.",
+  description:
+    "Yves Saint Laurent Y eau de parfum intense 100 ml, disponible chez 2M Parfumerie au Sénégal.",
   slug: "yves-saint-laurent-y-eau-de-parfum-intense-100-ml",
 };
 
