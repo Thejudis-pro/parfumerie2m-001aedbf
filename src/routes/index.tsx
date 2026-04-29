@@ -48,14 +48,11 @@ function pickFeaturedProducts(products: BoutiqueProduct[]) {
     "takeoff",
     "scentlab",
     "dubai",
-    "pocket",
-    "authentic",
-    "haqqi",
   ];
 
-  return featuredCollections.flatMap((collection) =>
-    products.filter((product) => product.collection === collection).slice(0, 2),
-  );
+  return featuredCollections
+    .map((collection) => products.find((product) => product.collection === collection))
+    .filter((product): product is BoutiqueProduct => Boolean(product));
 }
 
 const fallbackFeaturedProducts = pickFeaturedProducts(catalog);
