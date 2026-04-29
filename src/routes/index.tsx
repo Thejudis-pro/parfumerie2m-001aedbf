@@ -8,7 +8,6 @@ import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import homeHeroBottle from "@/assets/home-white-bottle.png";
-import yslYIntenseImage from "@/assets/ysl-y-intense-authentic.png";
 import {
   catalog,
   collectionLabel,
@@ -44,31 +43,18 @@ const heroMessage =
   "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos collections. Pouvez-vous m'aider ?";
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
 
-const yslYIntenseProduct: BoutiqueProduct = {
-  name: "Yves Saint Laurent Y eau de parfum intense 100 ml",
-  ref: "Collection 2M",
-  notes: "Bergamote",
-  headNotes: "Bergamote",
-  heartNotes: "Notes aromatiques",
-  baseNotes: "Bois ambrés",
-  price: 85000,
-  collection: "authentic",
-  image: yslYIntenseImage,
-  family: "Authentic Perfumes",
-  concentration: "Eau de parfum intense",
-  volume: "100 ml",
-  description:
-    "Yves Saint Laurent Y eau de parfum intense 100 ml, disponible chez 2M Parfumerie au Sénégal.",
-  slug: "yves-saint-laurent-y-eau-de-parfum-intense-100-ml",
-};
-
 function pickFeaturedProducts(products: BoutiqueProduct[]) {
   const featuredCollections: BoutiqueProduct["collection"][] = ["takeoff", "scentlab", "dubai"];
   const featuredProducts = featuredCollections
     .map((collection) => products.find((product) => product.collection === collection))
     .filter((product): product is BoutiqueProduct => Boolean(product));
+  const yslYIntenseProduct = products.find(
+    (product) =>
+      product.collection === "authentic" &&
+      product.name.toLowerCase().includes("yves saint laurent y"),
+  );
 
-  return [...featuredProducts, yslYIntenseProduct];
+  return yslYIntenseProduct ? [...featuredProducts, yslYIntenseProduct] : featuredProducts;
 }
 
 const fallbackFeaturedProducts = pickFeaturedProducts(catalog);
