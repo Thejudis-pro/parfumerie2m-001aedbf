@@ -70,7 +70,9 @@ export const collectionFilters: { label: string; value: Collection }[] = [
   { label: "SCENTLAB", value: "scentlab" },
   { label: "TAKEOFF FRAGANCE", value: "takeoff" },
   { label: "Dubai Perfumes", value: "dubai" },
+  { label: "Pocket Perfumes", value: "pocket" },
   { label: "Authentic Perfumes", value: "authentic" },
+  { label: "Haqqui", value: "haqqi" },
 ];
 
 const collectionAliases: Record<string, Collection> = {
@@ -87,6 +89,7 @@ const collectionAliases: Record<string, Collection> = {
   authentic: "authentic",
   "authentic perfumes": "authentic",
   haqqi: "haqqi",
+  haqqui: "haqqi",
 };
 
 export function normalizeCollectionValue(value: string | null | undefined): Collection {
