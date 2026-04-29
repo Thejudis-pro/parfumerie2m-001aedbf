@@ -44,16 +44,15 @@ const heroMessage =
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
 
 function pickFeaturedProducts(products: BoutiqueProduct[]) {
-  const featuredCollections: BoutiqueProduct["collection"][] = [
-    "takeoff",
-    "scentlab",
-    "dubai",
-    "authentic",
-  ];
-
-  return featuredCollections
+  const featuredCollections: BoutiqueProduct["collection"][] = ["takeoff", "scentlab", "dubai"];
+  const featuredProducts = featuredCollections
     .map((collection) => products.find((product) => product.collection === collection))
     .filter((product): product is BoutiqueProduct => Boolean(product));
+  const extraProduct = products.find(
+    (product) => !featuredProducts.some((featuredProduct) => featuredProduct.name === product.name),
+  );
+
+  return extraProduct ? [...featuredProducts, extraProduct] : featuredProducts;
 }
 
 const fallbackFeaturedProducts = pickFeaturedProducts(catalog);
@@ -187,7 +186,7 @@ function Index() {
             title="Nos parfums du moment"
             subtitle="Quelques de nos best sellers, choisis pour vous !"
           />
-          <div className="mx-auto grid max-w-5xl gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-5xl gap-6 text-left sm:grid-cols-2">
             {featuredProducts.map((product, index) => (
               <article
                 key={product.name}
