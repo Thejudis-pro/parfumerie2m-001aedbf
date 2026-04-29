@@ -215,7 +215,7 @@ function Index() {
             ))}
           </div>
           <Button asChild variant="outline" size="lg" className="mt-12">
-            <Link to="/boutique" search={{ collection: "takeoff" }}>
+            <Link to="/boutique" search={{ collection: "all" }}>
               Voir toute la sélection
             </Link>
           </Button>
