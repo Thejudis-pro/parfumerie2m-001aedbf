@@ -25,7 +25,14 @@ function validateBoutiqueSearch(search: Record<string, unknown>) {
   return { collection };
 }
 
-const mixedCollectionOrder: Collection[] = ["takeoff", "scentlab", "dubai", "pocket", "authentic", "haqqi"];
+const mixedCollectionOrder: Collection[] = [
+  "takeoff",
+  "scentlab",
+  "dubai",
+  "pocket",
+  "authentic",
+  "haqqi",
+];
 
 function mixProductsByCollection(products: BoutiqueProduct[]) {
   const groupedProducts = mixedCollectionOrder.map((collection) =>
