@@ -70,6 +70,7 @@ export const collectionFilters: { label: string; value: Collection }[] = [
   { label: "SCENTLAB", value: "scentlab" },
   { label: "TAKEOFF FRAGANCE", value: "takeoff" },
   { label: "Dubai Perfumes", value: "dubai" },
+  { label: "Authentic Perfumes", value: "authentic" },
 ];
 
 const collectionAliases: Record<string, Collection> = {
