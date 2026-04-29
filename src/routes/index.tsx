@@ -8,7 +8,13 @@ import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import homeHeroBottle from "@/assets/home-white-bottle.png";
-import { catalog, formatPrice, slugifyProduct, type BoutiqueProduct } from "@/lib/catalog-data";
+import {
+  catalog,
+  collectionLabel,
+  formatPrice,
+  slugifyProduct,
+  type BoutiqueProduct,
+} from "@/lib/catalog-data";
 import { supabase } from "@/integrations/supabase/client";
 import { mergeLiveCatalog } from "@/lib/live-catalog";
 import { whatsappUrl } from "@/lib/perfume-data";
@@ -38,9 +44,18 @@ const heroMessage =
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
 
 function pickFeaturedProducts(products: BoutiqueProduct[]) {
-  const takeoffProducts = products.filter((product) => product.collection === "takeoff").slice(0, 2);
-  const scentlabProducts = products.filter((product) => product.collection === "scentlab").slice(0, 2);
-  return [...takeoffProducts, ...scentlabProducts];
+  const featuredCollections: BoutiqueProduct["collection"][] = [
+    "takeoff",
+    "scentlab",
+    "dubai",
+    "pocket",
+    "authentic",
+    "haqqi",
+  ];
+
+  return featuredCollections.flatMap((collection) =>
+    products.filter((product) => product.collection === collection).slice(0, 2),
+  );
 }
 
 const fallbackFeaturedProducts = pickFeaturedProducts(catalog);
@@ -205,7 +220,7 @@ function Index() {
                     item={{
                       id: slugifyProduct(product),
                       name: product.name,
-                      collection: "TAKEOFF FRAGANCE",
+                      collection: collectionLabel(product.collection),
                       price: product.price,
                       imageUrl: product.image,
                     }}
