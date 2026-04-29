@@ -20,7 +20,7 @@ export function WhatsAppLogo({
       height={size}
       className={cn(
         "block shrink-0 object-contain",
-        tone === "light" && "brightness-0 invert",
+        tone === "light" && "rounded-full bg-primary-foreground p-0.5",
         className,
       )}
     />
