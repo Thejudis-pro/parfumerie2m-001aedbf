@@ -267,6 +267,12 @@ const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
 
 const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab", "pocket"];
 
+const collectionSections: Record<CoffretCollection, CoffretSection[]> = {
+  haqqi: haqqiSections,
+  scentlab: scentlabSections,
+  pocket: pocketSections,
+};
+
 const haqqiSideImages = [
   { src: haqqiCollectionImage, alt: "Sélection de parfums Haqqi" },
 ];
@@ -275,6 +281,12 @@ const scentlabSideImages = [
   { src: scentlabMarineCitrusImage, alt: "Visuel SCENTLAB Marine Citrus" },
   { src: scentlabBoxesImage, alt: "Sélection de coffrets SCENTLAB" },
 ];
+
+const collectionSideImages: Record<CoffretCollection, { src: string; alt: string }[]> = {
+  haqqi: haqqiSideImages,
+  scentlab: scentlabSideImages,
+  pocket: [],
+};
 
 export const Route = createFileRoute("/coffret-signature")({
   head: () => ({
