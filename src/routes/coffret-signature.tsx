@@ -466,10 +466,10 @@ function CoffretSignaturePage() {
                 })}
               </div>
 
-              {selectedCollection === "haqqi" ? (
-                <div className="space-y-6">
+              <div className="space-y-6">
+                {collectionSideImages[selectedCollection].length > 0 && (
                   <div className="grid gap-3 sm:grid-cols-3">
-                    {haqqiSideImages.map((image) => (
+                    {collectionSideImages[selectedCollection].map((image) => (
                       <img
                         key={image.alt}
                         src={image.src}
@@ -479,125 +479,62 @@ function CoffretSignaturePage() {
                       />
                     ))}
                   </div>
-                  <div className="space-y-6">
-                    {haqqiSections.map((section) => (
-                      <div key={section.title} className="space-y-3">
-                        <div className="flex items-center justify-between gap-3">
-                          <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
-                          <Badge variant="secondary">{section.items.length} parfums</Badge>
-                        </div>
-                        <div className="grid gap-4 md:grid-cols-2">
-                          {section.items.map((option) => {
-                            const checked = selectedIds.includes(option.id);
-                            const disabled = !checked && selectedOptions.length >= 3;
-
-                            return (
-                              <label
-                                key={option.id}
-                                htmlFor={option.id}
-                                className={
-                                  checked
-                                    ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
-                                    : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
-                                }
-                              >
-                                <Checkbox
-                                  id={option.id}
-                                  checked={checked}
-                                  disabled={disabled}
-                                  onCheckedChange={() => toggleOption(option.id)}
-                                  className="mt-1"
-                                />
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-start justify-between gap-3">
-                                    <div>
-                                      <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                                        Haqqi {section.title}
-                                      </p>
-                                      <h4 className="mt-1 font-display text-[22px] text-foreground">
-                                        {option.title}
-                                      </h4>
-                                    </div>
-                                    {checked && (
-                                      <Check className="mt-1 size-5 text-accent" aria-hidden="true" />
-                                    )}
-                                  </div>
-                                </div>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
+                )}
                 <div className="space-y-6">
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {scentlabSideImages.map((image) => (
-                      <img
-                        key={image.alt}
-                        src={image.src}
-                        alt={image.alt}
-                        loading="lazy"
-                        className="aspect-[4/3] w-full rounded-xl border border-border object-cover shadow-card"
-                      />
-                    ))}
-                  </div>
-                  <div className="space-y-6">
-                    {scentlabSections.map((section) => (
-                      <div key={section.title} className="space-y-3">
-                        <div className="flex items-center justify-between gap-3">
-                          <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
-                          <Badge variant="secondary">{section.items.length} parfums</Badge>
-                        </div>
-                        <div className="grid gap-4 md:grid-cols-2">
-                          {section.items.map((option) => {
-                            const checked = selectedIds.includes(option.id);
-                            const disabled = !checked && selectedOptions.length >= 3;
-
-                            return (
-                              <label
-                                key={option.id}
-                                htmlFor={option.id}
-                                className={
-                                  checked
-                                    ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
-                                    : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
-                                }
-                              >
-                                <Checkbox
-                                  id={option.id}
-                                  checked={checked}
-                                  disabled={disabled}
-                                  onCheckedChange={() => toggleOption(option.id)}
-                                  className="mt-1"
-                                />
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-start justify-between gap-3">
-                                    <div>
-                                      <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                                        {collectionOffersLabel(selectedCollection)} {section.title}
-                                      </p>
-                                      <h3 className="mt-1 font-display text-[22px] text-foreground">
-                                        {option.title}
-                                      </h3>
-                                    </div>
-                                    {checked && <Check className="mt-1 size-5 text-accent" aria-hidden="true" />}
-                                  </div>
-                                </div>
-                              </label>
-                            );
-                          })}
-                        </div>
+                  {collectionSections[selectedCollection].map((section) => (
+                    <div key={section.title} className="space-y-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
+                        <Badge variant="secondary">{section.items.length} parfums</Badge>
                       </div>
-                    ))}
-                  </div>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {section.items.map((option) => {
+                          const checked = selectedIds.includes(option.id);
+                          const disabled = !checked && selectedOptions.length >= requiredCount;
+
+                          return (
+                            <label
+                              key={option.id}
+                              htmlFor={option.id}
+                              className={
+                                checked
+                                  ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
+                                  : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
+                              }
+                            >
+                              <Checkbox
+                                id={option.id}
+                                checked={checked}
+                                disabled={disabled}
+                                onCheckedChange={() => toggleOption(option.id)}
+                                className="mt-1"
+                              />
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-start justify-between gap-3">
+                                  <div>
+                                    <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                                      {collectionOffersLabel(selectedCollection)} {section.title}
+                                    </p>
+                                    <h4 className="mt-1 font-display text-[22px] text-foreground">
+                                      {option.title}
+                                    </h4>
+                                  </div>
+                                  {checked && (
+                                    <Check className="mt-1 size-5 text-accent" aria-hidden="true" />
+                                  )}
+                                </div>
+                              </div>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
 
               <p className="text-sm text-muted-foreground">
-                Tu dois cocher exactement 3 parfums. Si un choix n’est plus disponible, on te
+                Tu dois cocher exactement {requiredCount} parfums. Si un choix n’est plus disponible, on te
                 propose un remplacement proche avant validation.
               </p>
             </CardContent>
