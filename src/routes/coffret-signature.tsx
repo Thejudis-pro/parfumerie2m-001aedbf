@@ -301,6 +301,7 @@ function CoffretSignaturePage() {
   const [selections, setSelections] = useState<Record<CoffretCollection, string[]>>({
     haqqi: [],
     scentlab: [],
+    pocket: [],
   });
 
   const currentOffer = coffretOffers[selectedCollection];
@@ -310,8 +311,9 @@ function CoffretSignaturePage() {
     () => currentOptions.filter((option) => selectedIds.includes(option.id)),
     [currentOptions, selectedIds],
   );
-  const remaining = 3 - selectedOptions.length;
-  const canSend = selectedOptions.length === 3;
+  const requiredCount = currentOffer.selectionCount;
+  const remaining = requiredCount - selectedOptions.length;
+  const canSend = selectedOptions.length === requiredCount;
   const whatsappMessage = buildWhatsAppMessage(selectedCollection, selectedOptions);
 
   const toggleOption = (optionId: string) => {
@@ -326,7 +328,7 @@ function CoffretSignaturePage() {
         };
       }
 
-      if (activeSelections.length >= 3) {
+      if (activeSelections.length >= coffretOffers[selectedCollection].selectionCount) {
         return current;
       }
 
