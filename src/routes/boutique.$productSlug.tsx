@@ -149,10 +149,12 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
             <h1 className="font-display text-4xl font-medium leading-tight text-foreground md:text-5xl">
               {product.name}
             </h1>
-            <p className="mt-3 text-sm italic text-muted-foreground">
-              Inspiré de {product.ref}
-              {product.inspiration ? ` · ${product.inspiration}` : ""}
-            </p>
+            {product.collection !== "dubai" && product.collection !== "authentic" && (
+              <p className="mt-3 text-sm italic text-muted-foreground">
+                Inspiré de {product.ref}
+                {product.inspiration ? ` · ${product.inspiration}` : ""}
+              </p>
+            )}
             <p className="mt-6 font-body text-[32px] font-bold text-accent">
               {formatPrice(product.price)}
             </p>
@@ -257,9 +259,11 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
         />
       </Link>
       <div className="p-5">
-        <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
-          {product.ref}
-        </p>
+        {product.collection !== "dubai" && product.collection !== "authentic" && (
+          <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
+            {product.ref}
+          </p>
+        )}
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
