@@ -14,7 +14,7 @@ import scentlabMarineCitrusImage from "@/assets/scentlab-marine-citrus.png";
 import { formatPrice } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
-type CoffretCollection = "haqqi" | "scentlab";
+type CoffretCollection = "haqqi" | "scentlab" | "pocket";
 
 type CoffretOption = {
   id: string;
@@ -29,19 +29,28 @@ type CoffretSection = {
 
 const coffretOffers: Record<
   CoffretCollection,
-  { label: string; price: number; subtitle: string; accent: string }
+  { label: string; price: number; subtitle: string; accent: string; selectionCount: number }
 > = {
   haqqi: {
     label: "Coffret Signature Haqqi",
     price: 10000,
     subtitle: "3 parfums à composer dans un esprit plus profond, chaud et élégant.",
     accent: "Ambiance orientale",
+    selectionCount: 3,
   },
   scentlab: {
     label: "Coffret Signature SCENTLAB",
     price: 15000,
     subtitle: "3 parfums à composer dans une lecture plus moderne, fraîche ou gourmande.",
     accent: "Esprit contemporain",
+    selectionCount: 3,
+  },
+  pocket: {
+    label: "Coffret Pocket Perfumes",
+    price: 10000,
+    subtitle: "5 parfums de poche au choix dans une sélection iconique de maisons prestigieuses.",
+    accent: "Format nomade",
+    selectionCount: 5,
   },
 };
 
