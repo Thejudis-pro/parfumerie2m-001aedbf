@@ -361,7 +361,7 @@ function CoffretSignaturePage() {
               Coffret Signature
             </Badge>
             <h1 className="mt-6 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-foreground md:text-[64px]">
-              Compose ton coffret, coche tes 3 parfums, on s’occupe du reste.
+              Compose ton coffret, coche tes parfums, on s’occupe du reste.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
               Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
@@ -369,7 +369,7 @@ function CoffretSignaturePage() {
               suite.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Badge className="bg-accent text-primary-foreground">3 parfums dans chaque coffret</Badge>
+              <Badge className="bg-accent text-primary-foreground">3 ou 5 parfums selon le coffret</Badge>
               <Badge variant="secondary">Coffret prêt à offrir</Badge>
               <Badge variant="secondary">Validation rapide sur WhatsApp</Badge>
             </div>
@@ -423,7 +423,7 @@ function CoffretSignaturePage() {
           <Card className="border-border bg-card shadow-card">
             <CardHeader>
               <CardTitle className="font-display text-[28px] text-foreground md:text-[34px]">
-                Choisis ton univers, puis coche 3 parfums
+                Choisis ton univers, puis coche tes parfums
               </CardTitle>
               <CardDescription className="mt-2 text-base text-muted-foreground">
                 Tu peux garder tes sélections Haqqi et SCENTLAB séparément. Une fois que tu as 3
@@ -454,7 +454,7 @@ function CoffretSignaturePage() {
                             {offer.label}
                           </p>
                           <p className="mt-1 font-semibold text-foreground">
-                            {count}/3 sélectionné{count > 1 ? "s" : ""}
+                            {count}/{offer.selectionCount} sélectionné{count > 1 ? "s" : ""}
                           </p>
                         </div>
                         <Badge variant={active ? "default" : "secondary"}>
@@ -560,7 +560,7 @@ function CoffretSignaturePage() {
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
                   <Sparkles className="size-4 text-accent" aria-hidden="true" />
-                  <span>{selectedOptions.length}/3 parfums choisis</span>
+                  <span>{selectedOptions.length}/{requiredCount} parfums choisis</span>
                 </div>
               </div>
 
@@ -577,7 +577,7 @@ function CoffretSignaturePage() {
                   </ul>
                 ) : (
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Choisis 3 parfums pour voir ton coffret se construire ici.
+                    Choisis {requiredCount} parfums pour voir ton coffret se construire ici.
                   </p>
                 )}
               </div>
@@ -618,11 +618,11 @@ function CoffretSignaturePage() {
             {
               icon: WandSparkles,
               title: "1. Tu choisis l’univers",
-              text: "Haqqi à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style recherché.",
+              text: "Haqqi & Pocket à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style.",
             },
             {
               icon: Check,
-              title: "2. Tu coches 3 parfums",
+              title: "2. Tu coches tes parfums",
               text: "La sélection se fait en quelques clics, avec un vrai sentiment de composition.",
             },
             {
@@ -647,12 +647,14 @@ function CoffretSignaturePage() {
 }
 
 function collectionOffersLabel(collection: CoffretCollection) {
-  return collection === "haqqi" ? "Haqqi" : "SCENTLAB";
+  if (collection === "haqqi") return "Haqqi";
+  if (collection === "scentlab") return "SCENTLAB";
+  return "Pocket";
 }
 
 function buildWhatsAppMessage(collection: CoffretCollection, options: CoffretOption[]) {
   const offer = coffretOffers[collection];
   const choiceLines = options.map((option) => `• ${option.title}`).join("\n");
 
-  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes 3 choix :\n${choiceLines}\n\nMerci de me préparer le coffret.`;
+  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes ${offer.selectionCount} choix :\n${choiceLines}\n\nMerci de me préparer le coffret.`;
 }
