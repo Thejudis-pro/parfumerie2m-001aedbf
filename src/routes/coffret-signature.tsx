@@ -34,21 +34,21 @@ const coffretOffers: Record<
   { label: string; price: number; subtitle: string; accent: string; selectionCount: number }
 > = {
   haqqi: {
-    label: "Coffret Signature Haqqi",
+    label: "Pack de 3 Haqqi",
     price: 10000,
     subtitle: "3 parfums à composer dans un esprit plus profond, chaud et élégant.",
     accent: "Ambiance orientale",
     selectionCount: 3,
   },
   scentlab: {
-    label: "Coffret Signature SCENTLAB",
+    label: "Pack de 3 SCENTLAB",
     price: 15000,
     subtitle: "3 parfums à composer dans une lecture plus moderne, fraîche ou gourmande.",
     accent: "Esprit contemporain",
     selectionCount: 3,
   },
   pocket: {
-    label: "Coffret Pocket Perfumes",
+    label: "Pack de 5 parfums de poches",
     price: 10000,
     subtitle: "5 parfums de poche au choix dans une sélection iconique de maisons prestigieuses.",
     accent: "Format nomade",
@@ -285,8 +285,8 @@ const scentlabSideImages = [
 ];
 
 const pocketSideImages = [
-  { src: pocketHommeImage, alt: "Sélection de Pocket Perfumes Homme" },
-  { src: pocketFemmeImage, alt: "Sélection de Pocket Perfumes Femme" },
+  { src: pocketHommeImage, alt: "Sélection de Parfums de poches Homme" },
+  { src: pocketFemmeImage, alt: "Sélection de Parfums de poches Femme" },
 ];
 
 const collectionSideImages: Record<CoffretCollection, { src: string; alt: string }[]> = {
@@ -302,13 +302,13 @@ export const Route = createFileRoute("/coffret-signature")({
       {
         name: "description",
         content:
-          "Composez votre Coffret Signature chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Pocket Perfumes à 10 000 FCFA.",
+          "Composez votre Coffret Signature chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Parfums de poches à 10 000 FCFA.",
       },
       { property: "og:title", content: "Coffret Signature — 2M Parfumerie" },
       {
         property: "og:description",
         content:
-          "3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Pocket Perfumes à 10 000 FCFA, à composer en quelques clics.",
+          "3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Parfums de poches à 10 000 FCFA, à composer en quelques clics.",
       },
     ],
   }),
@@ -625,7 +625,7 @@ function CoffretSignaturePage() {
             {
               icon: WandSparkles,
               title: "1. Tu choisis l’univers",
-              text: "Haqqi & Pocket à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style.",
+              text: "Haqqi & Parfums de poches à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style.",
             },
             {
               icon: Check,
@@ -656,7 +656,7 @@ function CoffretSignaturePage() {
 function collectionOffersLabel(collection: CoffretCollection) {
   if (collection === "haqqi") return "Haqqi";
   if (collection === "scentlab") return "SCENTLAB";
-  return "Pocket";
+  return "Parfums de poches";
 }
 
 function buildWhatsAppMessage(collection: CoffretCollection, options: CoffretOption[]) {
