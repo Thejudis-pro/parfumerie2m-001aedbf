@@ -89,12 +89,14 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
   const label = collectionLabel(product.collection);
   const images = productImages(product);
   const [selectedImage, setSelectedImage] = useState(images[0]);
-  const similar = products
-    .filter(
-      (item) =>
-        item.collection === product.collection && slugifyProduct(item) !== slugifyProduct(product),
-    )
-    .slice(0, 4);
+  const currentSlug = slugifyProduct(product);
+  const sameCollection = products.filter(
+    (item) => item.collection === product.collection && slugifyProduct(item) !== currentSlug,
+  );
+  const others = products.filter(
+    (item) => item.collection !== product.collection && slugifyProduct(item) !== currentSlug,
+  );
+  const similar = [...sameCollection, ...others].slice(0, 4);
 
   useEffect(() => {
     setSelectedImage(images[0]);
@@ -225,10 +227,11 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
         </div>
       </section>
 
+      {similar.length > 0 && (
       <section className="bg-background py-16 md:py-20">
         <div className="section-shell">
           <h2 className="mb-12 text-center font-display text-[32px] text-foreground md:text-5xl">
-            De la même collection
+            Vous aimerez aussi
           </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {similar.map((item) => (
@@ -237,6 +240,7 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
           </div>
         </div>
       </section>
+      )}
     </SiteLayout>
   );
 }
