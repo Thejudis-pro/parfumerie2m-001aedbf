@@ -235,9 +235,11 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         </Link>
       </div>
       <div className="p-5">
-        <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
-          {product.ref}
-        </p>
+        {product.collection !== "dubai" && product.collection !== "authentic" && (
+          <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
+            {product.ref}
+          </p>
+        )}
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
