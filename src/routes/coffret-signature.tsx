@@ -14,7 +14,7 @@ import scentlabMarineCitrusImage from "@/assets/scentlab-marine-citrus.png";
 import { formatPrice } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
-type CoffretCollection = "haqqi" | "scentlab";
+type CoffretCollection = "haqqi" | "scentlab" | "pocket";
 
 type CoffretOption = {
   id: string;
@@ -29,19 +29,28 @@ type CoffretSection = {
 
 const coffretOffers: Record<
   CoffretCollection,
-  { label: string; price: number; subtitle: string; accent: string }
+  { label: string; price: number; subtitle: string; accent: string; selectionCount: number }
 > = {
   haqqi: {
     label: "Coffret Signature Haqqi",
     price: 10000,
     subtitle: "3 parfums à composer dans un esprit plus profond, chaud et élégant.",
     accent: "Ambiance orientale",
+    selectionCount: 3,
   },
   scentlab: {
     label: "Coffret Signature SCENTLAB",
     price: 15000,
     subtitle: "3 parfums à composer dans une lecture plus moderne, fraîche ou gourmande.",
     accent: "Esprit contemporain",
+    selectionCount: 3,
+  },
+  pocket: {
+    label: "Coffret Pocket Perfumes",
+    price: 10000,
+    subtitle: "5 parfums de poche au choix dans une sélection iconique de maisons prestigieuses.",
+    accent: "Format nomade",
+    selectionCount: 5,
   },
 };
 
@@ -183,12 +192,86 @@ const scentlabSections: CoffretSection[] = [
   },
 ];
 
+const pocketSections: CoffretSection[] = [
+  {
+    title: "Homme",
+    items: [
+      { id: "pocket-le-male", title: "Le Mâle", description: "JPG — frais lavandé sucré." },
+      { id: "pocket-one-million", title: "One Million", description: "Paco Rabanne — épicé doré." },
+      { id: "pocket-zara-tobacco-collection", title: "Zara Tobacco Collection", description: "Tabac chaleureux." },
+      { id: "pocket-ck-eternity", title: "CK Eternity", description: "Frais boisé classique." },
+      { id: "pocket-killian-back-to-black", title: "Killian Back to Black", description: "Tabac miel sensuel." },
+      { id: "pocket-killian-intoxicated", title: "Killian Intoxicated", description: "Café cardamome envoûtant." },
+      { id: "pocket-killian-amber-oud", title: "Killian Amber Oud", description: "Oud ambré profond." },
+      { id: "pocket-killian-straight-to-heaven", title: "Killian Straight to Heaven", description: "Rhum boisé enveloppant." },
+      { id: "pocket-killian-good-girl-gone-bad-h", title: "Killian Good Girl Gone Bad", description: "Floral fruité magnétique." },
+      { id: "pocket-tom-ford-tuscan-leather", title: "Tom Ford Tuscan Leather", description: "Cuir framboise mythique." },
+      { id: "pocket-tom-ford-tobacco-oud", title: "Tom Ford Tobacco Oud", description: "Tabac oud épicé." },
+      { id: "pocket-tom-ford-noir-extreme", title: "Tom Ford Noir Extrême", description: "Gourmand boisé chaud." },
+      { id: "pocket-pegasus", title: "Parfums de Marly Pegasus", description: "Amande vanille élégant." },
+      { id: "pocket-creed-aventus", title: "Creed Aventus", description: "Ananas fumé iconique." },
+      { id: "pocket-nasomatto-black-afgano", title: "Nasomatto Black Afgano", description: "Boisé résineux intense." },
+      { id: "pocket-amouage-interlude", title: "Amouage Interlude", description: "Encens ambre puissant." },
+      { id: "pocket-amouage-reflection", title: "Amouage Reflection", description: "Floral vert raffiné." },
+      { id: "pocket-amouage-opus", title: "Amouage Opus", description: "Boisé oriental noble." },
+      { id: "pocket-mousuf", title: "Mousuf", description: "Oriental signature." },
+      { id: "pocket-byredo-mojave-ghost", title: "Byredo Mojave Ghost", description: "Boisé minéral aérien." },
+      { id: "pocket-byredo-bal-d-afrique", title: "Byredo Bal d’Afrique", description: "Vétiver agrumes solaire." },
+      { id: "pocket-killian-black-phantom", title: "Killian Black Phantom", description: "Café rhum gourmand." },
+      { id: "pocket-dsquared2-wood", title: "Dsquared2 Wood", description: "Boisé moderne dynamique." },
+      { id: "pocket-zara-oriental", title: "Zara Oriental", description: "Ambre vanille chaleureux." },
+      { id: "pocket-zara-orchid", title: "Zara Orchid", description: "Floral oriental vibrant." },
+    ],
+  },
+  {
+    title: "Unisex",
+    items: [
+      { id: "pocket-baccarat-rouge-540", title: "Baccarat Rouge 540", description: "MFK — ambré safrané iconique." },
+      { id: "pocket-kirke", title: "Kirke", description: "Tiziana Terenzi — fruité solaire." },
+      { id: "pocket-ex-nihilo-fleur-narcotique", title: "Ex Nihilo Fleur Narcotique", description: "Floral fruité poudré." },
+      { id: "pocket-nasomatto-narcotique", title: "Nasomatto Narcotique", description: "Floral envoûtant intense." },
+    ],
+  },
+  {
+    title: "Femme",
+    items: [
+      { id: "pocket-la-vie-est-belle", title: "La Vie Est Belle", description: "Lancôme — gourmand iris." },
+      { id: "pocket-la-vie-est-belle-floral", title: "La Vie Est Belle Floral", description: "Version florale lumineuse." },
+      { id: "pocket-gucci-bloom", title: "Gucci Bloom", description: "Tubéreuse jasmin opulent." },
+      { id: "pocket-coco-mademoiselle", title: "Coco Mademoiselle", description: "Patchouli rose chypré." },
+      { id: "pocket-chanel-chance", title: "Chanel Chance", description: "Floral pétillant joyeux." },
+      { id: "pocket-chanel-chance-eau-tendre", title: "Chanel Chance Eau Tendre", description: "Floral fruité doux." },
+      { id: "pocket-armani-si", title: "Armani Si", description: "Cassis ambré sensuel." },
+      { id: "pocket-ck-euphoria", title: "CK Euphoria", description: "Orchidée noire envoûtant." },
+      { id: "pocket-creed-aventus-for-her", title: "Creed Aventus for Her", description: "Floral fruité chic." },
+      { id: "pocket-212-sexy-women", title: "212 Sexy Women", description: "Vanille fleurs piquantes." },
+      { id: "pocket-212-vip-women", title: "212 VIP Women", description: "Rhum musc festif." },
+      { id: "pocket-hermes-jour", title: "Hermès Jour", description: "Floral lumineux frais." },
+      { id: "pocket-dior-jadore", title: "Dior J’adore", description: "Bouquet floral solaire." },
+      { id: "pocket-ck-eternity-femme", title: "Calvin Klein Eternity", description: "Floral blanc romantique." },
+      { id: "pocket-alien", title: "Alien", description: "Mugler — jasmin ambré hypnotique." },
+      { id: "pocket-killian-good-girl-gone-bad-f", title: "Killian Good Girl Gone Bad", description: "Tubéreuse rose magnétique." },
+      { id: "pocket-killian-liaisons-dangereuses", title: "Killian Liaisons Dangereuses", description: "Rose prune sensuelle." },
+      { id: "pocket-versace-crystal-noir", title: "Versace Crystal Noir", description: "Gardénia ambré mystérieux." },
+      { id: "pocket-dkny-be-delicious", title: "DKNY Be Delicious", description: "Pomme verte pétillante." },
+      { id: "pocket-bulgari-omnia", title: "Bulgari Omnia", description: "Épices musc raffiné." },
+    ],
+  },
+];
+
 const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
   haqqi: haqqiSections.flatMap((section) => section.items),
   scentlab: scentlabSections.flatMap((section) => section.items),
+  pocket: pocketSections.flatMap((section) => section.items),
 };
 
-const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab"];
+const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab", "pocket"];
+
+const collectionSections: Record<CoffretCollection, CoffretSection[]> = {
+  haqqi: haqqiSections,
+  scentlab: scentlabSections,
+  pocket: pocketSections,
+};
 
 const haqqiSideImages = [
   { src: haqqiCollectionImage, alt: "Sélection de parfums Haqqi" },
@@ -199,6 +282,12 @@ const scentlabSideImages = [
   { src: scentlabBoxesImage, alt: "Sélection de coffrets SCENTLAB" },
 ];
 
+const collectionSideImages: Record<CoffretCollection, { src: string; alt: string }[]> = {
+  haqqi: haqqiSideImages,
+  scentlab: scentlabSideImages,
+  pocket: [],
+};
+
 export const Route = createFileRoute("/coffret-signature")({
   head: () => ({
     meta: [
@@ -206,13 +295,13 @@ export const Route = createFileRoute("/coffret-signature")({
       {
         name: "description",
         content:
-          "Composez votre Coffret Signature chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA ou 3 parfums SCENTLAB à 15 000 FCFA, à sélectionner vous-même.",
+          "Composez votre Coffret Signature chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Pocket Perfumes à 10 000 FCFA.",
       },
       { property: "og:title", content: "Coffret Signature — 2M Parfumerie" },
       {
         property: "og:description",
         content:
-          "3 parfums Haqqi à 10 000 FCFA ou 3 parfums SCENTLAB à 15 000 FCFA, à composer vous-même en quelques clics.",
+          "3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Pocket Perfumes à 10 000 FCFA, à composer en quelques clics.",
       },
     ],
   }),
@@ -224,6 +313,7 @@ function CoffretSignaturePage() {
   const [selections, setSelections] = useState<Record<CoffretCollection, string[]>>({
     haqqi: [],
     scentlab: [],
+    pocket: [],
   });
 
   const currentOffer = coffretOffers[selectedCollection];
@@ -233,8 +323,9 @@ function CoffretSignaturePage() {
     () => currentOptions.filter((option) => selectedIds.includes(option.id)),
     [currentOptions, selectedIds],
   );
-  const remaining = 3 - selectedOptions.length;
-  const canSend = selectedOptions.length === 3;
+  const requiredCount = currentOffer.selectionCount;
+  const remaining = requiredCount - selectedOptions.length;
+  const canSend = selectedOptions.length === requiredCount;
   const whatsappMessage = buildWhatsAppMessage(selectedCollection, selectedOptions);
 
   const toggleOption = (optionId: string) => {
@@ -249,7 +340,7 @@ function CoffretSignaturePage() {
         };
       }
 
-      if (activeSelections.length >= 3) {
+      if (activeSelections.length >= coffretOffers[selectedCollection].selectionCount) {
         return current;
       }
 
@@ -270,7 +361,7 @@ function CoffretSignaturePage() {
               Coffret Signature
             </Badge>
             <h1 className="mt-6 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-foreground md:text-[64px]">
-              Compose ton coffret, coche tes 3 parfums, on s’occupe du reste.
+              Compose ton coffret, coche tes parfums, on s’occupe du reste.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
               Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
@@ -278,7 +369,7 @@ function CoffretSignaturePage() {
               suite.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Badge className="bg-accent text-primary-foreground">3 parfums dans chaque coffret</Badge>
+              <Badge className="bg-accent text-primary-foreground">3 ou 5 parfums selon le coffret</Badge>
               <Badge variant="secondary">Coffret prêt à offrir</Badge>
               <Badge variant="secondary">Validation rapide sur WhatsApp</Badge>
             </div>
@@ -332,7 +423,7 @@ function CoffretSignaturePage() {
           <Card className="border-border bg-card shadow-card">
             <CardHeader>
               <CardTitle className="font-display text-[28px] text-foreground md:text-[34px]">
-                Choisis ton univers, puis coche 3 parfums
+                Choisis ton univers, puis coche tes parfums
               </CardTitle>
               <CardDescription className="mt-2 text-base text-muted-foreground">
                 Tu peux garder tes sélections Haqqi et SCENTLAB séparément. Une fois que tu as 3
@@ -363,7 +454,7 @@ function CoffretSignaturePage() {
                             {offer.label}
                           </p>
                           <p className="mt-1 font-semibold text-foreground">
-                            {count}/3 sélectionné{count > 1 ? "s" : ""}
+                            {count}/{offer.selectionCount} sélectionné{count > 1 ? "s" : ""}
                           </p>
                         </div>
                         <Badge variant={active ? "default" : "secondary"}>
@@ -375,10 +466,10 @@ function CoffretSignaturePage() {
                 })}
               </div>
 
-              {selectedCollection === "haqqi" ? (
-                <div className="space-y-6">
+              <div className="space-y-6">
+                {collectionSideImages[selectedCollection].length > 0 && (
                   <div className="grid gap-3 sm:grid-cols-3">
-                    {haqqiSideImages.map((image) => (
+                    {collectionSideImages[selectedCollection].map((image) => (
                       <img
                         key={image.alt}
                         src={image.src}
@@ -388,125 +479,62 @@ function CoffretSignaturePage() {
                       />
                     ))}
                   </div>
-                  <div className="space-y-6">
-                    {haqqiSections.map((section) => (
-                      <div key={section.title} className="space-y-3">
-                        <div className="flex items-center justify-between gap-3">
-                          <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
-                          <Badge variant="secondary">{section.items.length} parfums</Badge>
-                        </div>
-                        <div className="grid gap-4 md:grid-cols-2">
-                          {section.items.map((option) => {
-                            const checked = selectedIds.includes(option.id);
-                            const disabled = !checked && selectedOptions.length >= 3;
-
-                            return (
-                              <label
-                                key={option.id}
-                                htmlFor={option.id}
-                                className={
-                                  checked
-                                    ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
-                                    : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
-                                }
-                              >
-                                <Checkbox
-                                  id={option.id}
-                                  checked={checked}
-                                  disabled={disabled}
-                                  onCheckedChange={() => toggleOption(option.id)}
-                                  className="mt-1"
-                                />
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-start justify-between gap-3">
-                                    <div>
-                                      <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                                        Haqqi {section.title}
-                                      </p>
-                                      <h4 className="mt-1 font-display text-[22px] text-foreground">
-                                        {option.title}
-                                      </h4>
-                                    </div>
-                                    {checked && (
-                                      <Check className="mt-1 size-5 text-accent" aria-hidden="true" />
-                                    )}
-                                  </div>
-                                </div>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ) : (
+                )}
                 <div className="space-y-6">
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {scentlabSideImages.map((image) => (
-                      <img
-                        key={image.alt}
-                        src={image.src}
-                        alt={image.alt}
-                        loading="lazy"
-                        className="aspect-[4/3] w-full rounded-xl border border-border object-cover shadow-card"
-                      />
-                    ))}
-                  </div>
-                  <div className="space-y-6">
-                    {scentlabSections.map((section) => (
-                      <div key={section.title} className="space-y-3">
-                        <div className="flex items-center justify-between gap-3">
-                          <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
-                          <Badge variant="secondary">{section.items.length} parfums</Badge>
-                        </div>
-                        <div className="grid gap-4 md:grid-cols-2">
-                          {section.items.map((option) => {
-                            const checked = selectedIds.includes(option.id);
-                            const disabled = !checked && selectedOptions.length >= 3;
-
-                            return (
-                              <label
-                                key={option.id}
-                                htmlFor={option.id}
-                                className={
-                                  checked
-                                    ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
-                                    : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
-                                }
-                              >
-                                <Checkbox
-                                  id={option.id}
-                                  checked={checked}
-                                  disabled={disabled}
-                                  onCheckedChange={() => toggleOption(option.id)}
-                                  className="mt-1"
-                                />
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-start justify-between gap-3">
-                                    <div>
-                                      <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                                        {collectionOffersLabel(selectedCollection)} {section.title}
-                                      </p>
-                                      <h3 className="mt-1 font-display text-[22px] text-foreground">
-                                        {option.title}
-                                      </h3>
-                                    </div>
-                                    {checked && <Check className="mt-1 size-5 text-accent" aria-hidden="true" />}
-                                  </div>
-                                </div>
-                              </label>
-                            );
-                          })}
-                        </div>
+                  {collectionSections[selectedCollection].map((section) => (
+                    <div key={section.title} className="space-y-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
+                        <Badge variant="secondary">{section.items.length} parfums</Badge>
                       </div>
-                    ))}
-                  </div>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {section.items.map((option) => {
+                          const checked = selectedIds.includes(option.id);
+                          const disabled = !checked && selectedOptions.length >= requiredCount;
+
+                          return (
+                            <label
+                              key={option.id}
+                              htmlFor={option.id}
+                              className={
+                                checked
+                                  ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
+                                  : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
+                              }
+                            >
+                              <Checkbox
+                                id={option.id}
+                                checked={checked}
+                                disabled={disabled}
+                                onCheckedChange={() => toggleOption(option.id)}
+                                className="mt-1"
+                              />
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-start justify-between gap-3">
+                                  <div>
+                                    <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                                      {collectionOffersLabel(selectedCollection)} {section.title}
+                                    </p>
+                                    <h4 className="mt-1 font-display text-[22px] text-foreground">
+                                      {option.title}
+                                    </h4>
+                                  </div>
+                                  {checked && (
+                                    <Check className="mt-1 size-5 text-accent" aria-hidden="true" />
+                                  )}
+                                </div>
+                              </div>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
 
               <p className="text-sm text-muted-foreground">
-                Tu dois cocher exactement 3 parfums. Si un choix n’est plus disponible, on te
+                Tu dois cocher exactement {requiredCount} parfums. Si un choix n’est plus disponible, on te
                 propose un remplacement proche avant validation.
               </p>
             </CardContent>
@@ -532,7 +560,7 @@ function CoffretSignaturePage() {
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
                   <Sparkles className="size-4 text-accent" aria-hidden="true" />
-                  <span>{selectedOptions.length}/3 parfums choisis</span>
+                  <span>{selectedOptions.length}/{requiredCount} parfums choisis</span>
                 </div>
               </div>
 
@@ -549,7 +577,7 @@ function CoffretSignaturePage() {
                   </ul>
                 ) : (
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Choisis 3 parfums pour voir ton coffret se construire ici.
+                    Choisis {requiredCount} parfums pour voir ton coffret se construire ici.
                   </p>
                 )}
               </div>
@@ -590,11 +618,11 @@ function CoffretSignaturePage() {
             {
               icon: WandSparkles,
               title: "1. Tu choisis l’univers",
-              text: "Haqqi à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style recherché.",
+              text: "Haqqi & Pocket à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style.",
             },
             {
               icon: Check,
-              title: "2. Tu coches 3 parfums",
+              title: "2. Tu coches tes parfums",
               text: "La sélection se fait en quelques clics, avec un vrai sentiment de composition.",
             },
             {
@@ -619,12 +647,14 @@ function CoffretSignaturePage() {
 }
 
 function collectionOffersLabel(collection: CoffretCollection) {
-  return collection === "haqqi" ? "Haqqi" : "SCENTLAB";
+  if (collection === "haqqi") return "Haqqi";
+  if (collection === "scentlab") return "SCENTLAB";
+  return "Pocket";
 }
 
 function buildWhatsAppMessage(collection: CoffretCollection, options: CoffretOption[]) {
   const offer = coffretOffers[collection];
   const choiceLines = options.map((option) => `• ${option.title}`).join("\n");
 
-  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes 3 choix :\n${choiceLines}\n\nMerci de me préparer le coffret.`;
+  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes ${offer.selectionCount} choix :\n${choiceLines}\n\nMerci de me préparer le coffret.`;
 }
