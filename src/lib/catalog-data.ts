@@ -72,7 +72,7 @@ export const collectionFilters: { label: string; value: Collection }[] = [
   { label: "Dubai Perfumes", value: "dubai" },
   { label: "Pocket Perfumes", value: "pocket" },
   { label: "Authentic Perfumes", value: "authentic" },
-  { label: "Haqqui", value: "haqqi" },
+  { label: "Haqqi", value: "haqqi" },
 ];
 
 const collectionAliases: Record<string, Collection> = {
