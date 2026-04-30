@@ -31,7 +31,7 @@ const footerCollections = [
   { label: "SCENTLAB", collection: "scentlab" },
   { label: "TAKEOFF FRAGANCE", collection: "takeoff" },
   { label: "Dubai Perfumes", collection: "dubai" },
-  { label: "Pocket Perfumes", collection: "pocket" },
+  { label: "Parfums de poches", collection: "pocket" },
   { label: "Authentic Perfumes", collection: "authentic" },
   { label: "Haqqi", collection: "haqqi" },
 ] as const;
