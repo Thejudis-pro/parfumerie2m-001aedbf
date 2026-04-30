@@ -192,12 +192,80 @@ const scentlabSections: CoffretSection[] = [
   },
 ];
 
+const pocketSections: CoffretSection[] = [
+  {
+    title: "Homme",
+    items: [
+      { id: "pocket-le-male", title: "Le Mâle", description: "JPG — frais lavandé sucré." },
+      { id: "pocket-one-million", title: "One Million", description: "Paco Rabanne — épicé doré." },
+      { id: "pocket-zara-tobacco-collection", title: "Zara Tobacco Collection", description: "Tabac chaleureux." },
+      { id: "pocket-ck-eternity", title: "CK Eternity", description: "Frais boisé classique." },
+      { id: "pocket-killian-back-to-black", title: "Killian Back to Black", description: "Tabac miel sensuel." },
+      { id: "pocket-killian-intoxicated", title: "Killian Intoxicated", description: "Café cardamome envoûtant." },
+      { id: "pocket-killian-amber-oud", title: "Killian Amber Oud", description: "Oud ambré profond." },
+      { id: "pocket-killian-straight-to-heaven", title: "Killian Straight to Heaven", description: "Rhum boisé enveloppant." },
+      { id: "pocket-killian-good-girl-gone-bad-h", title: "Killian Good Girl Gone Bad", description: "Floral fruité magnétique." },
+      { id: "pocket-tom-ford-tuscan-leather", title: "Tom Ford Tuscan Leather", description: "Cuir framboise mythique." },
+      { id: "pocket-tom-ford-tobacco-oud", title: "Tom Ford Tobacco Oud", description: "Tabac oud épicé." },
+      { id: "pocket-tom-ford-noir-extreme", title: "Tom Ford Noir Extrême", description: "Gourmand boisé chaud." },
+      { id: "pocket-pegasus", title: "Parfums de Marly Pegasus", description: "Amande vanille élégant." },
+      { id: "pocket-creed-aventus", title: "Creed Aventus", description: "Ananas fumé iconique." },
+      { id: "pocket-nasomatto-black-afgano", title: "Nasomatto Black Afgano", description: "Boisé résineux intense." },
+      { id: "pocket-amouage-interlude", title: "Amouage Interlude", description: "Encens ambre puissant." },
+      { id: "pocket-amouage-reflection", title: "Amouage Reflection", description: "Floral vert raffiné." },
+      { id: "pocket-amouage-opus", title: "Amouage Opus", description: "Boisé oriental noble." },
+      { id: "pocket-mousuf", title: "Mousuf", description: "Oriental signature." },
+      { id: "pocket-byredo-mojave-ghost", title: "Byredo Mojave Ghost", description: "Boisé minéral aérien." },
+      { id: "pocket-byredo-bal-d-afrique", title: "Byredo Bal d’Afrique", description: "Vétiver agrumes solaire." },
+      { id: "pocket-killian-black-phantom", title: "Killian Black Phantom", description: "Café rhum gourmand." },
+      { id: "pocket-dsquared2-wood", title: "Dsquared2 Wood", description: "Boisé moderne dynamique." },
+      { id: "pocket-zara-oriental", title: "Zara Oriental", description: "Ambre vanille chaleureux." },
+      { id: "pocket-zara-orchid", title: "Zara Orchid", description: "Floral oriental vibrant." },
+    ],
+  },
+  {
+    title: "Unisex",
+    items: [
+      { id: "pocket-baccarat-rouge-540", title: "Baccarat Rouge 540", description: "MFK — ambré safrané iconique." },
+      { id: "pocket-kirke", title: "Kirke", description: "Tiziana Terenzi — fruité solaire." },
+      { id: "pocket-ex-nihilo-fleur-narcotique", title: "Ex Nihilo Fleur Narcotique", description: "Floral fruité poudré." },
+      { id: "pocket-nasomatto-narcotique", title: "Nasomatto Narcotique", description: "Floral envoûtant intense." },
+    ],
+  },
+  {
+    title: "Femme",
+    items: [
+      { id: "pocket-la-vie-est-belle", title: "La Vie Est Belle", description: "Lancôme — gourmand iris." },
+      { id: "pocket-la-vie-est-belle-floral", title: "La Vie Est Belle Floral", description: "Version florale lumineuse." },
+      { id: "pocket-gucci-bloom", title: "Gucci Bloom", description: "Tubéreuse jasmin opulent." },
+      { id: "pocket-coco-mademoiselle", title: "Coco Mademoiselle", description: "Patchouli rose chypré." },
+      { id: "pocket-chanel-chance", title: "Chanel Chance", description: "Floral pétillant joyeux." },
+      { id: "pocket-chanel-chance-eau-tendre", title: "Chanel Chance Eau Tendre", description: "Floral fruité doux." },
+      { id: "pocket-armani-si", title: "Armani Si", description: "Cassis ambré sensuel." },
+      { id: "pocket-ck-euphoria", title: "CK Euphoria", description: "Orchidée noire envoûtant." },
+      { id: "pocket-creed-aventus-for-her", title: "Creed Aventus for Her", description: "Floral fruité chic." },
+      { id: "pocket-212-sexy-women", title: "212 Sexy Women", description: "Vanille fleurs piquantes." },
+      { id: "pocket-212-vip-women", title: "212 VIP Women", description: "Rhum musc festif." },
+      { id: "pocket-hermes-jour", title: "Hermès Jour", description: "Floral lumineux frais." },
+      { id: "pocket-dior-jadore", title: "Dior J’adore", description: "Bouquet floral solaire." },
+      { id: "pocket-ck-eternity-femme", title: "Calvin Klein Eternity", description: "Floral blanc romantique." },
+      { id: "pocket-alien", title: "Alien", description: "Mugler — jasmin ambré hypnotique." },
+      { id: "pocket-killian-good-girl-gone-bad-f", title: "Killian Good Girl Gone Bad", description: "Tubéreuse rose magnétique." },
+      { id: "pocket-killian-liaisons-dangereuses", title: "Killian Liaisons Dangereuses", description: "Rose prune sensuelle." },
+      { id: "pocket-versace-crystal-noir", title: "Versace Crystal Noir", description: "Gardénia ambré mystérieux." },
+      { id: "pocket-dkny-be-delicious", title: "DKNY Be Delicious", description: "Pomme verte pétillante." },
+      { id: "pocket-bulgari-omnia", title: "Bulgari Omnia", description: "Épices musc raffiné." },
+    ],
+  },
+];
+
 const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
   haqqi: haqqiSections.flatMap((section) => section.items),
   scentlab: scentlabSections.flatMap((section) => section.items),
+  pocket: pocketSections.flatMap((section) => section.items),
 };
 
-const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab"];
+const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab", "pocket"];
 
 const haqqiSideImages = [
   { src: haqqiCollectionImage, alt: "Sélection de parfums Haqqi" },
