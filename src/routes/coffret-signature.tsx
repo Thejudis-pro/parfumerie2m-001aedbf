@@ -11,6 +11,8 @@ import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import haqqiCollectionImage from "@/assets/haqqi-collection.png";
 import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
 import scentlabMarineCitrusImage from "@/assets/scentlab-marine-citrus.png";
+import pocketHommeImage from "@/assets/pocket-perfumes-homme.png";
+import pocketFemmeImage from "@/assets/pocket-perfumes-femme.png";
 import { formatPrice } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
@@ -282,10 +284,15 @@ const scentlabSideImages = [
   { src: scentlabBoxesImage, alt: "Sélection de coffrets SCENTLAB" },
 ];
 
+const pocketSideImages = [
+  { src: pocketHommeImage, alt: "Sélection de Pocket Perfumes Homme" },
+  { src: pocketFemmeImage, alt: "Sélection de Pocket Perfumes Femme" },
+];
+
 const collectionSideImages: Record<CoffretCollection, { src: string; alt: string }[]> = {
   haqqi: haqqiSideImages,
   scentlab: scentlabSideImages,
-  pocket: [],
+  pocket: pocketSideImages,
 };
 
 export const Route = createFileRoute("/coffret-signature")({
