@@ -371,14 +371,18 @@ function CoffretSignaturePage() {
               Compose ton pack en choisissant tes parfums sur la liste et on s’occupe du reste.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
-              Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
-              tu coches trois parfums, et ton pack est préparé pour être offert ou porté tout de
-              suite.
+              Chez 2M Parfumerie, nous vous offrons la possibilité de tester différentes senteurs.
+              C’est la raison pour laquelle nous vous donnons l’opportunité de choisir vous-même les
+              parfums qui composent votre pack. Les packs sont composés de 3 à 5 parfums avec des
+              formats de 40 ou 50 ml.
+              <br />
+              <br />
+              Suis les étapes ci-dessous et envoie-nous ta commande ! Livraison rapide et immédiate !
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Badge className="bg-accent text-primary-foreground">3 ou 5 parfums selon le pack</Badge>
-              <Badge variant="secondary">Pack prêt à offrir</Badge>
-              <Badge variant="secondary">Validation rapide sur WhatsApp</Badge>
+              <Badge className="bg-accent text-primary-foreground">3 à 5 parfums au choix</Badge>
+              <Badge variant="secondary">Format 40 ou 50 ml</Badge>
+              <Badge variant="secondary">Livraison rapide</Badge>
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="whatsapp" size="lg">
