@@ -30,6 +30,7 @@ import vanillaDreamImage from "@/assets/scentlab-vanilla-dream-upload.png";
 import savannaVetiverImage from "@/assets/scentlab-savanna-vetiver-upload.png";
 import cognacWhisperImage from "@/assets/scentlab-cognac-whisper-upload.png";
 import rosyGlowImage from "@/assets/scentlab-rosy-glow-upload.png";
+import haqqiCollectionImage from "@/assets/haqqi-collection.png";
 
 export const collectionValues = [
   "all",
@@ -388,7 +389,72 @@ const scentlabCatalog: BoutiqueProduct[] = scentlabProducts.map((product) => ({
   description: `${product.name} par SCENTLAB est une eau de parfum sélectionnée par 2M Parfumerie pour un sillage moderne et facile à porter au Sénégal.`,
 }));
 
-export const catalog: BoutiqueProduct[] = [...takeoffCatalog, ...scentlabCatalog];
+const haqqiProducts: { name: string; ref: string; family: string; notes: string }[] = [
+  // Homme
+  { name: "Lacoste Noir L12", ref: "Inspiration Lacoste L12.12 Noir", family: "Homme", notes: "Propre · Élégant · Quotidien" },
+  { name: "La Nuit de l'Homme", ref: "Inspiration YSL La Nuit de l'Homme", family: "Homme", notes: "Sombre · Chic · Présent" },
+  { name: "Desert Oud", ref: "Inspiration Desert Oud", family: "Homme", notes: "Oud sec · Profond · Signature" },
+  { name: "Oud Noir", ref: "Inspiration Oud Noir", family: "Homme", notes: "Boisé · Intense · Enveloppant" },
+  { name: "Scandal Man", ref: "Inspiration JPG Scandal", family: "Homme", notes: "Charismatique · Affirmé · Présent" },
+  { name: "Imagination", ref: "Inspiration Louis Vuitton Imagination", family: "Homme", notes: "Frais · Lumineux · Moderne" },
+  { name: "Terre d'Hermès", ref: "Inspiration Hermès Terre d'Hermès", family: "Homme", notes: "Boisé minéral · Sec · Raffiné" },
+  { name: "CK Euphoria", ref: "Inspiration Calvin Klein Euphoria", family: "Homme", notes: "Rond · Propre · Facile" },
+  { name: "Krouss", ref: "Inspiration Krouss", family: "Homme", notes: "Direct · Expressif · Sans détour" },
+  { name: "Burberry Classic", ref: "Inspiration Burberry Classic", family: "Homme", notes: "Classique · Doux · Élégant" },
+  { name: "Pegasus", ref: "Inspiration Parfums de Marly Pegasus", family: "Homme", notes: "Crémeux · Élégant · Distinctif" },
+  { name: "Creed Aventus", ref: "Inspiration Creed Aventus", family: "Homme", notes: "Frais · Noble · Signature" },
+  { name: "African Leather", ref: "Inspiration Memo African Leather", family: "Homme", notes: "Cuir chaud · Sec · Racé" },
+  { name: "Encre Noire", ref: "Inspiration Lalique Encre Noire", family: "Homme", notes: "Sombre · Boisé · Texturé" },
+  { name: "Black Code", ref: "Inspiration Armani Code", family: "Homme", notes: "Nocturne · Élégant · Subtil" },
+  { name: "Man in Black", ref: "Inspiration Bvlgari Man in Black", family: "Homme", notes: "Ambré · Intense · Profond" },
+  { name: "Cartier Déclaration", ref: "Inspiration Cartier Déclaration", family: "Homme", notes: "Boisé épicé · Classique · Net" },
+  { name: "Dolce Gabbana The One", ref: "Inspiration D&G The One", family: "Homme", notes: "Chaud · Suave · Séduisant" },
+  { name: "Valentino Uomo", ref: "Inspiration Valentino Uomo", family: "Homme", notes: "Doux · Ambré · Raffiné" },
+  // Unisex
+  { name: "Baccarat Rouge 540", ref: "Inspiration MFK Baccarat Rouge 540", family: "Unisex", notes: "Lumineux · Ambré · Iconique" },
+  { name: "Baccarat Rouge 540 Extrait", ref: "Inspiration MFK Baccarat Rouge Extrait", family: "Unisex", notes: "Profond · Dense · Luxueux" },
+  { name: "Oud Satin Mood", ref: "Inspiration MFK Oud Satin Mood", family: "Unisex", notes: "Velouté · Oriental · Raffiné" },
+  { name: "More Than Words", ref: "Inspiration Xerjoff More Than Words", family: "Unisex", notes: "Élégant · Poétique · Boisé" },
+  { name: "Kirke", ref: "Inspiration Tiziana Terenzi Kirke", family: "Unisex", notes: "Fruité · Solaire · Expressif" },
+  { name: "Duetto", ref: "Inspiration Xerjoff Casamorati Duetto", family: "Unisex", notes: "Équilibré · Net · Polyvalent" },
+  { name: "Tom Ford Neroli Portofino", ref: "Inspiration Tom Ford Neroli Portofino", family: "Unisex", notes: "Agrumes · Lumineux · Frais" },
+  { name: "Tom Ford White Patchouli", ref: "Inspiration Tom Ford White Patchouli", family: "Unisex", notes: "Chic · Blanc · Boisé" },
+  { name: "Tom Ford Soleil Blanc", ref: "Inspiration Tom Ford Soleil Blanc", family: "Unisex", notes: "Solaire · Doux · Élégant" },
+  { name: "Tom Ford Ombré Leather", ref: "Inspiration Tom Ford Ombré Leather", family: "Unisex", notes: "Cuir profond · Sombre · Sophistiqué" },
+  // Femme
+  { name: "La Nuit Trésor", ref: "Inspiration Lancôme La Nuit Trésor", family: "Femme", notes: "Gourmand · Velouté · Féminin" },
+  { name: "Suprême Bouquet", ref: "Inspiration Suprême Bouquet", family: "Femme", notes: "Floral riche · Lumineux · Généreux" },
+  { name: "Guidance", ref: "Inspiration Amouage Guidance", family: "Femme", notes: "Floral · Crémeux · Élégant" },
+  { name: "Chanel Chance", ref: "Inspiration Chanel Chance", family: "Femme", notes: "Doux · Pétillant · Intemporel" },
+  { name: "Euphoria Femme", ref: "Inspiration Calvin Klein Euphoria", family: "Femme", notes: "Fruité · Sensuel · Aimable" },
+  { name: "La Vie Est Belle", ref: "Inspiration Lancôme La Vie Est Belle", family: "Femme", notes: "Gourmand · Lumineux · Réconfortant" },
+  { name: "YSL Cinéma", ref: "Inspiration YSL Cinéma", family: "Femme", notes: "Chaleureux · Glamour · Assumé" },
+  { name: "Manifesto", ref: "Inspiration YSL Manifesto", family: "Femme", notes: "Moderne · Doux · Affirmé" },
+  { name: "Bright Crystal", ref: "Inspiration Versace Bright Crystal", family: "Femme", notes: "Aérien · Propre · Lumineux" },
+  { name: "Gucci Bloom", ref: "Inspiration Gucci Bloom", family: "Femme", notes: "Floral blanc · Pur · Généreux" },
+  { name: "Lolita Lempicka", ref: "Inspiration Lolita Lempicka", family: "Femme", notes: "Sucré · Original · Féminin" },
+  { name: "Dior Addict", ref: "Inspiration Dior Addict", family: "Femme", notes: "Profond · Sensuel · Marqué" },
+  { name: "Diesel Fuel for Life", ref: "Inspiration Diesel Fuel for Life", family: "Femme", notes: "Audacieux · Doux · Présent" },
+  { name: "Si Passione", ref: "Inspiration Armani Si Passione", family: "Femme", notes: "Rouge · Fruité · Intensément féminin" },
+];
+
+const haqqiCatalog: BoutiqueProduct[] = haqqiProducts.map((product) => ({
+  name: product.name,
+  ref: product.ref,
+  notes: product.notes,
+  headNotes: product.notes,
+  heartNotes: "Notes à préciser",
+  baseNotes: "Notes à préciser",
+  price: 4000,
+  collection: "haqqi",
+  image: haqqiCollectionImage,
+  family: product.family,
+  concentration: "Extrait de parfum",
+  volume: "30 ml",
+  description: `${product.name} de la collection Haqqi : un parfum oriental, chaud et profond, disponible à l'unité chez 2M Parfumerie ou dans le Pack de 3 Haqqi à composer.`,
+}));
+
+export const catalog: BoutiqueProduct[] = [...takeoffCatalog, ...scentlabCatalog, ...haqqiCatalog];
 
 export function slugifyProduct(product: BoutiqueProduct) {
   if (product.slug) return product.slug;
