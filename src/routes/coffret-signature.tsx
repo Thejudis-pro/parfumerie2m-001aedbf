@@ -281,7 +281,7 @@ const haqqiSideImages = [
 
 const scentlabSideImages = [
   { src: scentlabMarineCitrusImage, alt: "Visuel SCENTLAB Marine Citrus" },
-  { src: scentlabBoxesImage, alt: "Sélection de coffrets SCENTLAB" },
+  { src: scentlabBoxesImage, alt: "Sélection de packs SCENTLAB" },
 ];
 
 const pocketSideImages = [
@@ -298,13 +298,13 @@ const collectionSideImages: Record<CoffretCollection, { src: string; alt: string
 export const Route = createFileRoute("/coffret-signature")({
   head: () => ({
     meta: [
-      { title: "Coffret Signature — 2M Parfumerie Sénégal" },
+      { title: "Compose ton Pack — 2M Parfumerie Sénégal" },
       {
         name: "description",
         content:
-          "Composez votre Coffret Signature chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Parfums de poches à 10 000 FCFA.",
+          "Composez votre Pack Signature chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Parfums de poches à 10 000 FCFA.",
       },
-      { property: "og:title", content: "Coffret Signature — 2M Parfumerie" },
+      { property: "og:title", content: "Compose ton Pack — 2M Parfumerie" },
       {
         property: "og:description",
         content:
@@ -365,24 +365,24 @@ function CoffretSignaturePage() {
         <div className="section-shell relative grid gap-12 py-14 md:grid-cols-[1.1fr_0.9fr] md:py-20">
           <div>
             <Badge variant="outline" className="border-accent/30 bg-accent-muted text-accent">
-              Coffret Signature
+              Pack Signature
             </Badge>
             <h1 className="mt-6 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-foreground md:text-[64px]">
-              Compose ton coffret, coche tes parfums, on s’occupe du reste.
+              Compose ton pack, coche tes parfums, on s’occupe du reste.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
               Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
-              tu coches trois parfums, et ton coffret est préparé pour être offert ou porté tout de
+              tu coches trois parfums, et ton pack est préparé pour être offert ou porté tout de
               suite.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Badge className="bg-accent text-primary-foreground">3 ou 5 parfums selon le coffret</Badge>
-              <Badge variant="secondary">Coffret prêt à offrir</Badge>
+              <Badge className="bg-accent text-primary-foreground">3 ou 5 parfums selon le pack</Badge>
+              <Badge variant="secondary">Pack prêt à offrir</Badge>
               <Badge variant="secondary">Validation rapide sur WhatsApp</Badge>
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="whatsapp" size="lg">
-                <a href="#compose">Composer mon coffret</a>
+                <a href="#compose">Composer mon pack</a>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link to="/boutique" search={{ collection: "all" }}>
@@ -550,7 +550,7 @@ function CoffretSignaturePage() {
           <Card className="border-border bg-card shadow-card">
             <CardHeader>
               <CardTitle className="font-display text-[28px] text-foreground">
-                Ton coffret en cours
+                Ton pack en cours
               </CardTitle>
               <CardDescription>
                 Résumé rapide avant l’envoi du message.
@@ -584,18 +584,18 @@ function CoffretSignaturePage() {
                   </ul>
                 ) : (
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Choisis {requiredCount} parfums pour voir ton coffret se construire ici.
+                    Choisis {requiredCount} parfums pour voir ton pack se construire ici.
                   </p>
                 )}
               </div>
 
               <div className="rounded-2xl bg-accent-muted p-5">
-                <p className="caption-luxe text-accent">Prix du coffret</p>
+                <p className="caption-luxe text-accent">Prix du pack</p>
                 <p className="mt-3 font-display text-4xl text-foreground">
                   {formatPrice(currentOffer.price)}
                 </p>
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  Trois parfums, un seul coffret, et un échange humain pour finaliser la sélection.
+                  Trois parfums, un seul pack, et un échange humain pour finaliser la sélection.
                 </p>
               </div>
             </CardContent>
@@ -603,7 +603,7 @@ function CoffretSignaturePage() {
               {canSend ? (
                 <Button asChild variant="whatsapp" size="lg" className="w-full">
                   <a href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
-                    <WhatsAppLogo tone="light" className="size-5" /> Valider mon coffret
+                    <WhatsAppLogo tone="light" className="size-5" /> Valider mon pack
                   </a>
                 </Button>
               ) : (
@@ -634,7 +634,7 @@ function CoffretSignaturePage() {
             },
             {
               icon: Sparkles,
-              title: "3. On prépare ton coffret",
+              title: "3. On prépare ton pack",
               text: "Tu valides sur WhatsApp et on finalise la commande avec toi.",
             },
           ].map(({ icon: Icon, title, text }) => (
@@ -663,5 +663,5 @@ function buildWhatsAppMessage(collection: CoffretCollection, options: CoffretOpt
   const offer = coffretOffers[collection];
   const choiceLines = options.map((option) => `• ${option.title}`).join("\n");
 
-  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes ${offer.selectionCount} choix :\n${choiceLines}\n\nMerci de me préparer le coffret.`;
+  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes ${offer.selectionCount} choix :\n${choiceLines}\n\nMerci de me préparer le pack.`;
 }
