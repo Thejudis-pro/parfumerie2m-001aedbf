@@ -239,6 +239,29 @@ function Index() {
         </div>
       </section>
 
+      <section className="bg-surface-alt py-16 md:py-24">
+        <div className="section-shell text-center">
+          <p className="caption-luxe text-accent">Compose ton pack</p>
+          <h2 className="mt-4 font-display text-[32px] font-medium text-foreground md:text-5xl">
+            Crée ton coffret sur-mesure
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+            Choisis tes parfums dans la collection de ton choix — on s'occupe du reste.
+          </p>
+          <div className="mt-8 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
+            <Button asChild size="lg">
+              <Link to="/coffret-signature">Pack Haqqi (3 parfums)</Link>
+            </Button>
+            <Button asChild size="lg">
+              <Link to="/coffret-signature">Pack SCENTLAB (3 parfums)</Link>
+            </Button>
+            <Button asChild size="lg">
+              <Link to="/coffret-signature">Pack Parfums de poches (5 parfums)</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-background py-16 md:py-24">
         <div className="section-shell grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-12">
           <div className="fade-up">
