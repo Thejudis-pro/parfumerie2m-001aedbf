@@ -179,30 +179,42 @@ function BoutiquePage() {
         <div className="mx-auto max-w-7xl px-3 text-center md:px-6">
           <p className="caption-luxe text-accent">Compose ton pack</p>
           <h2 className="mt-2 font-display text-2xl text-foreground md:text-3xl">
-            Crée ton coffret sur-mesure
+            {collection === "haqqi"
+              ? "Crée ton pack Haqqi ici"
+              : collection === "scentlab"
+                ? "Crée ton pack SCENTLAB ici"
+                : collection === "pocket"
+                  ? "Crée ton pack Parfums de poches ici"
+                  : "Crée ton coffret sur-mesure"}
           </h2>
           <div className="mt-5 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
-            >
-              <Link to="/coffret-signature">Pack Haqqi (3 parfums)</Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
-            >
-              <Link to="/coffret-signature">Pack SCENTLAB (3 parfums)</Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
-            >
-              <Link to="/coffret-signature">Pack Parfums de poches (5 parfums)</Link>
-            </Button>
+            {(collection === "all" || collection === "haqqi") && (
+              <Button
+                asChild
+                size="lg"
+                className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+              >
+                <Link to="/coffret-signature">Pack Haqqi (3 parfums)</Link>
+              </Button>
+            )}
+            {(collection === "all" || collection === "scentlab") && (
+              <Button
+                asChild
+                size="lg"
+                className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+              >
+                <Link to="/coffret-signature">Pack SCENTLAB (3 parfums)</Link>
+              </Button>
+            )}
+            {(collection === "all" || collection === "pocket") && (
+              <Button
+                asChild
+                size="lg"
+                className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+              >
+                <Link to="/coffret-signature">Pack Parfums de poches (5 parfums)</Link>
+              </Button>
+            )}
           </div>
         </div>
       </section>
