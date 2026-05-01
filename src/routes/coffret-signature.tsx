@@ -1,6 +1,6 @@
 ﻿import { Link, createFileRoute } from "@tanstack/react-router";
 import { Check, Sparkles, WandSparkles } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -331,6 +331,13 @@ function CoffretSignaturePage() {
   const remaining = requiredCount - selectedOptions.length;
   const canSend = selectedOptions.length === requiredCount;
   const whatsappMessage = buildWhatsAppMessage(selectedCollection, selectedOptions);
+  const validateRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (canSend && validateRef.current) {
+      validateRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [canSend, selectedCollection]);
 
   const toggleOption = (optionId: string) => {
     setSelections((current) => {
@@ -608,7 +615,7 @@ function CoffretSignaturePage() {
                 </p>
               </div>
             </CardContent>
-            <CardFooter className="flex flex-col gap-3">
+            <CardFooter ref={validateRef} className="flex flex-col gap-3 scroll-mt-24">
               {canSend ? (
                 <Button asChild variant="whatsapp" size="lg" className="w-full">
                   <a href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
