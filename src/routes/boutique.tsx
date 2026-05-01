@@ -193,7 +193,7 @@ function BoutiquePage() {
                 size="lg"
                 className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
               >
-                <Link to="/coffret-signature">Pack Haqqi (3 parfums)</Link>
+                <Link to="/coffret-signature">Pack Haqqi (3 parfums) — 10 000 FCFA</Link>
               </Button>
             )}
             {collection === "scentlab" && (
@@ -202,7 +202,7 @@ function BoutiquePage() {
                 size="lg"
                 className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
               >
-                <Link to="/coffret-signature">Pack SCENTLAB (3 parfums)</Link>
+                <Link to="/coffret-signature">Pack SCENTLAB (3 parfums) — 15 000 FCFA</Link>
               </Button>
             )}
             {collection === "pocket" && (
@@ -211,7 +211,7 @@ function BoutiquePage() {
                 size="lg"
                 className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
               >
-                <Link to="/coffret-signature">Pack Parfums de poches (5 parfums)</Link>
+                <Link to="/coffret-signature">Pack Parfums de poches (5 parfums) — 10 000 FCFA</Link>
               </Button>
             )}
           </div>
