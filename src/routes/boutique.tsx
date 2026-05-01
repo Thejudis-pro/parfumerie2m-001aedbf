@@ -192,9 +192,7 @@ function BoutiquePage() {
           <h2 className="mt-2 font-display text-2xl text-foreground md:text-3xl">
             {collection === "haqqi"
               ? "Crée ton pack Haqqi ici"
-              : collection === "scentlab"
-                ? "Crée ton pack SCENTLAB ici"
-                : "Crée ton pack Parfums de poches ici"}
+              : "Crée ton pack SCENTLAB ici"}
           </h2>
           <div className="mt-5 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
             {collection === "haqqi" && (
@@ -213,15 +211,6 @@ function BoutiquePage() {
                 className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
               >
                 <Link to="/coffret-signature">Pack SCENTLAB (3 parfums) — 15 000 FCFA</Link>
-              </Button>
-            )}
-            {collection === "pocket" && (
-              <Button
-                asChild
-                size="lg"
-                className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
-              >
-                <Link to="/coffret-signature">Pack Parfums de poches (5 parfums) — 10 000 FCFA</Link>
               </Button>
             )}
           </div>
