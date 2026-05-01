@@ -368,7 +368,7 @@ function CoffretSignaturePage() {
               Pack Signature
             </Badge>
             <h1 className="mt-6 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-foreground md:text-[64px]">
-              Compose ton pack, coche tes parfums, on s’occupe du reste.
+              Compose ton pack en choisissant tes parfums sur la liste et on s’occupe du reste.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
               Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
