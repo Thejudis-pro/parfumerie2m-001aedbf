@@ -32,7 +32,7 @@ const footerCollections = [
   { label: "TAKEOFF FRAGANCE", collection: "takeoff" },
   { label: "Dubai Perfumes", collection: "dubai" },
   { label: "Parfums de poches", collection: "pocket" },
-  { label: "Authentic Perfumes", collection: "authentic" },
+  { label: "Parfums authentiques", collection: "authentic" },
   { label: "Haqqi", collection: "haqqi" },
 ] as const;
 

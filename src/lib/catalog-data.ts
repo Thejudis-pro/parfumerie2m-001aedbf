@@ -72,7 +72,7 @@ export const collectionFilters: { label: string; value: Collection }[] = [
   { label: "TAKEOFF FRAGANCE", value: "takeoff" },
   { label: "Dubai Perfumes", value: "dubai" },
   { label: "Parfums de poches", value: "pocket" },
-  { label: "Authentic Perfumes", value: "authentic" },
+  { label: "Parfums authentiques", value: "authentic" },
   { label: "Haqqi", value: "haqqi" },
 ];
 
