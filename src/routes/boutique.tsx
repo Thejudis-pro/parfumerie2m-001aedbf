@@ -15,6 +15,8 @@ import {
 } from "@/lib/catalog-data";
 import { supabase } from "@/integrations/supabase/client";
 import { mergeLiveCatalog } from "@/lib/live-catalog";
+import pocketHommeImage from "@/assets/pocket-perfumes-homme.png";
+import pocketFemmeImage from "@/assets/pocket-perfumes-femme.png";
 
 function validateBoutiqueSearch(search: Record<string, unknown>) {
   const collection =
@@ -99,6 +101,8 @@ function BoutiquePage() {
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
 
+  const isPocketShowcase = collection === "pocket";
+
   if (location.pathname !== "/boutique") {
     return <Outlet />;
   }
@@ -132,6 +136,10 @@ function BoutiquePage() {
 
       <section className="bg-background py-8 md:py-12">
         <div className="mx-auto max-w-7xl px-3 md:px-6">
+          {isPocketShowcase ? (
+            <PocketShowcase />
+          ) : (
+            <>
           <div className="mb-4 flex items-center justify-between gap-3 text-sm text-muted-foreground">
             <p>
               {filteredProducts.length} résultat{filteredProducts.length > 1 ? "s" : ""}
@@ -172,19 +180,19 @@ function BoutiquePage() {
               </Button>
             </div>
           )}
+            </>
+          )}
         </div>
       </section>
 
-      {(collection === "haqqi" || collection === "scentlab" || collection === "pocket") && (
+      {(collection === "haqqi" || collection === "scentlab") && (
       <section className="border-t border-border bg-surface-alt py-10 md:py-14">
         <div className="mx-auto max-w-7xl px-3 text-center md:px-6">
           <p className="caption-luxe text-accent">Compose ton pack</p>
           <h2 className="mt-2 font-display text-2xl text-foreground md:text-3xl">
             {collection === "haqqi"
               ? "Crée ton pack Haqqi ici"
-              : collection === "scentlab"
-                ? "Crée ton pack SCENTLAB ici"
-                : "Crée ton pack Parfums de poches ici"}
+              : "Crée ton pack SCENTLAB ici"}
           </h2>
           <div className="mt-5 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
             {collection === "haqqi" && (
@@ -203,15 +211,6 @@ function BoutiquePage() {
                 className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
               >
                 <Link to="/coffret-signature">Pack SCENTLAB (3 parfums) — 15 000 FCFA</Link>
-              </Button>
-            )}
-            {collection === "pocket" && (
-              <Button
-                asChild
-                size="lg"
-                className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
-              >
-                <Link to="/coffret-signature">Pack Parfums de poches (5 parfums) — 10 000 FCFA</Link>
               </Button>
             )}
           </div>
@@ -307,5 +306,59 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         />
       </div>
     </article>
+  );
+}
+
+function PocketShowcase() {
+  return (
+    <div className="space-y-8">
+      <div className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
+        <video
+          src="/videos/pocket-perfumes.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls
+          className="h-full w-full object-cover"
+        />
+      </div>
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div className="overflow-hidden rounded-lg border border-border bg-surface shadow-card">
+          <img
+            src={pocketHommeImage}
+            alt="Parfums de poches Homme — 2M Parfumerie"
+            className="h-full w-full object-contain p-6"
+            loading="lazy"
+          />
+        </div>
+        <div className="overflow-hidden rounded-lg border border-border bg-surface shadow-card">
+          <img
+            src={pocketFemmeImage}
+            alt="Parfums de poches Femme — 2M Parfumerie"
+            className="h-full w-full object-contain p-6"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div className="rounded-lg border border-border bg-surface-alt px-6 py-10 text-center">
+        <p className="caption-luxe text-accent">Compose ton pack</p>
+        <h2 className="mt-2 font-display text-2xl text-foreground md:text-3xl">
+          Crée ton pack Parfums de poches ici
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+          Sélectionne 5 parfums de poches et compose ton pack signature.
+        </p>
+        <div className="mt-6 flex justify-center">
+          <Button
+            asChild
+            size="lg"
+            className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+          >
+            <Link to="/coffret-signature">Pack Parfums de poches (5 parfums) — 10 000 FCFA</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }
