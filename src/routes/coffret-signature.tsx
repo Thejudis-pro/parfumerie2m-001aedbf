@@ -31,27 +31,27 @@ type CoffretSection = {
 
 const coffretOffers: Record<
   CoffretCollection,
-  { label: string; price: number; subtitle: string; accent: string; selectionCount: number }
+  { label: string; price: number; subtitle: string; accent?: string; selectionCount: number }
 > = {
   haqqi: {
     label: "Pack de 3 Haqqi",
     price: 10000,
-    subtitle: "3 parfums à composer dans un esprit plus profond, chaud et élégant.",
-    accent: "Ambiance orientale",
+    subtitle:
+      "Format 40 ml, eau de parfum, durée 48h. Choisissez 3 parfums dans la liste ci-dessous et faites-vous livrer rapidement !",
     selectionCount: 3,
   },
   scentlab: {
     label: "Pack de 3 SCENTLAB",
     price: 15000,
-    subtitle: "3 parfums à composer dans une lecture plus moderne, fraîche ou gourmande.",
-    accent: "Esprit contemporain",
+    subtitle:
+      "Format 50 ml, eau de parfum, durée 48h. Choisissez 3 parfums dans la liste ci-dessous et faites-vous livrer rapidement !",
     selectionCount: 3,
   },
   pocket: {
     label: "Pack de 5 parfums de poches",
     price: 10000,
-    subtitle: "5 parfums de poche au choix dans une sélection iconique de maisons prestigieuses.",
-    accent: "Format nomade",
+    subtitle:
+      "Format 50 ml, eau de parfum, durée 48h. Choisissez 5 parfums dans la liste ci-dessous et faites-vous livrer rapidement !",
     selectionCount: 5,
   },
 };
@@ -410,8 +410,7 @@ function CoffretSignaturePage() {
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="caption-luxe text-accent">{offer.accent}</p>
-                      <h2 className="mt-2 font-display text-2xl text-foreground">{offer.label}</h2>
+                      <h2 className="font-display text-2xl text-foreground">{offer.label}</h2>
                     </div>
                     <Badge variant={active ? "default" : "secondary"}>
                       {formatPrice(offer.price)}
