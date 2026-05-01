@@ -594,7 +594,7 @@ function CoffretSignaturePage() {
                   {formatPrice(currentOffer.price)}
                 </p>
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  Trois parfums, un seul pack, et un échange humain pour finaliser la sélection.
+                  Votre pack de {requiredCount} est prêt. Veuillez cliquer ci-dessous 👇 pour valider votre commande.
                 </p>
               </div>
             </CardContent>
