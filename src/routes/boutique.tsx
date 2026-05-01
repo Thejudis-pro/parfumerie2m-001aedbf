@@ -235,7 +235,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         </Link>
       </div>
       <div className="p-5">
-        {product.collection !== "dubai" && product.collection !== "authentic" && (
+        {product.collection !== "dubai" && product.collection !== "authentic" && product.ref && (
           <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
             {product.ref}
           </p>
