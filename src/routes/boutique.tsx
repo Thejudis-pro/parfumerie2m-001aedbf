@@ -99,6 +99,8 @@ function BoutiquePage() {
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
 
+  const isPocketShowcase = collection === "pocket";
+
   if (location.pathname !== "/boutique") {
     return <Outlet />;
   }
@@ -132,6 +134,10 @@ function BoutiquePage() {
 
       <section className="bg-background py-8 md:py-12">
         <div className="mx-auto max-w-7xl px-3 md:px-6">
+          {isPocketShowcase ? (
+            <PocketShowcase />
+          ) : (
+            <>
           <div className="mb-4 flex items-center justify-between gap-3 text-sm text-muted-foreground">
             <p>
               {filteredProducts.length} résultat{filteredProducts.length > 1 ? "s" : ""}
@@ -171,6 +177,8 @@ function BoutiquePage() {
                 Load More
               </Button>
             </div>
+          )}
+            </>
           )}
         </div>
       </section>
