@@ -366,7 +366,7 @@ function PocketShowcase() {
           <Button
             asChild
             size="lg"
-            className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+            className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
           >
             <Link to="/coffret-signature">Pack Parfums de poches (5 parfums) — 10 000 FCFA</Link>
           </Button>
