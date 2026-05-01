@@ -36,22 +36,19 @@ const coffretOffers: Record<
   haqqi: {
     label: "Pack de 3 Haqqi",
     price: 10000,
-    subtitle:
-      "Format 40 ml, eau de parfum, durée 48h. Choisissez 3 parfums dans la liste ci-dessous et faites-vous livrer rapidement !",
+    subtitle: "Choisis tes 3 parfums de 40 ml.",
     selectionCount: 3,
   },
   scentlab: {
     label: "Pack de 3 SCENTLAB",
     price: 15000,
-    subtitle:
-      "Format 50 ml, eau de parfum, durée 48h. Choisissez 3 parfums dans la liste ci-dessous et faites-vous livrer rapidement !",
+    subtitle: "Choisis tes 3 parfums de 50 ml.",
     selectionCount: 3,
   },
   pocket: {
     label: "Pack de 5 parfums de poches",
     price: 10000,
-    subtitle:
-      "Format 50 ml, eau de parfum, durée 48h. Choisissez 5 parfums dans la liste ci-dessous et faites-vous livrer rapidement !",
+    subtitle: "Choisis tes 5 parfums de 50 ml.",
     selectionCount: 5,
   },
 };
