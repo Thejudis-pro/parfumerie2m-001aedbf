@@ -175,6 +175,7 @@ function BoutiquePage() {
         </div>
       </section>
 
+      {(collection === "haqqi" || collection === "scentlab" || collection === "pocket") && (
       <section className="border-t border-border bg-surface-alt py-10 md:py-14">
         <div className="mx-auto max-w-7xl px-3 text-center md:px-6">
           <p className="caption-luxe text-accent">Compose ton pack</p>
@@ -183,12 +184,10 @@ function BoutiquePage() {
               ? "Crée ton pack Haqqi ici"
               : collection === "scentlab"
                 ? "Crée ton pack SCENTLAB ici"
-                : collection === "pocket"
-                  ? "Crée ton pack Parfums de poches ici"
-                  : "Crée ton coffret sur-mesure"}
+                : "Crée ton pack Parfums de poches ici"}
           </h2>
           <div className="mt-5 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
-            {(collection === "all" || collection === "haqqi") && (
+            {collection === "haqqi" && (
               <Button
                 asChild
                 size="lg"
@@ -197,7 +196,7 @@ function BoutiquePage() {
                 <Link to="/coffret-signature">Pack Haqqi (3 parfums)</Link>
               </Button>
             )}
-            {(collection === "all" || collection === "scentlab") && (
+            {collection === "scentlab" && (
               <Button
                 asChild
                 size="lg"
@@ -206,7 +205,7 @@ function BoutiquePage() {
                 <Link to="/coffret-signature">Pack SCENTLAB (3 parfums)</Link>
               </Button>
             )}
-            {(collection === "all" || collection === "pocket") && (
+            {collection === "pocket" && (
               <Button
                 asChild
                 size="lg"
@@ -218,6 +217,7 @@ function BoutiquePage() {
           </div>
         </div>
       </section>
+      )}
     </SiteLayout>
   );
 }
