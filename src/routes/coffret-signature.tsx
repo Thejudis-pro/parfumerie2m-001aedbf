@@ -433,11 +433,20 @@ function CoffretSignaturePage() {
           <Card className="border-border bg-card shadow-card">
             <CardHeader>
               <CardTitle className="font-display text-[28px] text-foreground md:text-[34px]">
-                Choisis ton univers, puis coche tes parfums
+                Compose ton pack en 3 étapes
               </CardTitle>
-              <CardDescription className="mt-2 text-base text-muted-foreground">
-                Tu peux garder tes sélections Haqqi et SCENTLAB séparément. Une fois que tu as 3
-                choix dans l’univers actif, tu peux valider directement sur WhatsApp.
+              <CardDescription className="mt-3 space-y-2 text-base text-muted-foreground">
+                <span className="block">
+                  <strong className="text-foreground">Étape 1.</strong> Choisis parmi ces 3 collections :
+                  HAQQI, SCENTLAB ou PARFUMS DE POCHES.
+                </span>
+                <span className="block">
+                  <strong className="text-foreground">Étape 2.</strong> Coche tes parfums sur la liste.
+                </span>
+                <span className="block">
+                  <strong className="text-foreground">Étape 3.</strong> Valide ta commande sur le bouton
+                  WhatsApp en surbrillance vert !
+                </span>
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-5">
