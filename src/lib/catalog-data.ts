@@ -31,6 +31,8 @@ import savannaVetiverImage from "@/assets/scentlab-savanna-vetiver-upload.png";
 import cognacWhisperImage from "@/assets/scentlab-cognac-whisper-upload.png";
 import rosyGlowImage from "@/assets/scentlab-rosy-glow-upload.png";
 import haqqiCollectionImage from "@/assets/haqqi-collection.png";
+import pocketHommeImage from "@/assets/pocket-perfumes-homme.png";
+import pocketFemmeImage from "@/assets/pocket-perfumes-femme.png";
 
 export const collectionValues = [
   "all",
@@ -454,7 +456,78 @@ const haqqiCatalog: BoutiqueProduct[] = haqqiProducts.map((product) => ({
   description: `${product.name} de la collection Haqqi : un parfum oriental, chaud et profond, disponible à l'unité chez 2M Parfumerie ou dans le Pack de 3 Haqqi à composer.`,
 }));
 
-export const catalog: BoutiqueProduct[] = [...takeoffCatalog, ...scentlabCatalog, ...haqqiCatalog];
+const pocketProducts: { name: string; ref: string; family: "Homme" | "Unisex" | "Femme"; notes: string; image: string }[] = [
+  // Homme
+  { name: "Le Mâle", ref: "Inspiration JPG Le Mâle", family: "Homme", notes: "Frais lavandé · Sucré", image: pocketHommeImage },
+  { name: "One Million", ref: "Inspiration Paco Rabanne One Million", family: "Homme", notes: "Épicé · Doré", image: pocketHommeImage },
+  { name: "Zara Tobacco Collection", ref: "Inspiration Zara Tobacco", family: "Homme", notes: "Tabac chaleureux", image: pocketHommeImage },
+  { name: "CK Eternity", ref: "Inspiration Calvin Klein Eternity", family: "Homme", notes: "Frais · Boisé classique", image: pocketHommeImage },
+  { name: "Killian Back to Black", ref: "Inspiration Killian Back to Black", family: "Homme", notes: "Tabac · Miel sensuel", image: pocketHommeImage },
+  { name: "Killian Intoxicated", ref: "Inspiration Killian Intoxicated", family: "Homme", notes: "Café · Cardamome", image: pocketHommeImage },
+  { name: "Killian Amber Oud", ref: "Inspiration Killian Amber Oud", family: "Homme", notes: "Oud · Ambré profond", image: pocketHommeImage },
+  { name: "Killian Straight to Heaven", ref: "Inspiration Killian Straight to Heaven", family: "Homme", notes: "Rhum · Boisé", image: pocketHommeImage },
+  { name: "Killian Good Girl Gone Bad (H)", ref: "Inspiration Killian Good Girl Gone Bad", family: "Homme", notes: "Floral · Fruité magnétique", image: pocketHommeImage },
+  { name: "Tom Ford Tuscan Leather", ref: "Inspiration Tom Ford Tuscan Leather", family: "Homme", notes: "Cuir · Framboise", image: pocketHommeImage },
+  { name: "Tom Ford Tobacco Oud", ref: "Inspiration Tom Ford Tobacco Oud", family: "Homme", notes: "Tabac · Oud épicé", image: pocketHommeImage },
+  { name: "Tom Ford Noir Extrême", ref: "Inspiration Tom Ford Noir Extrême", family: "Homme", notes: "Gourmand · Boisé chaud", image: pocketHommeImage },
+  { name: "Parfums de Marly Pegasus", ref: "Inspiration Parfums de Marly Pegasus", family: "Homme", notes: "Amande · Vanille élégant", image: pocketHommeImage },
+  { name: "Creed Aventus", ref: "Inspiration Creed Aventus", family: "Homme", notes: "Ananas · Fumé iconique", image: pocketHommeImage },
+  { name: "Nasomatto Black Afgano", ref: "Inspiration Nasomatto Black Afgano", family: "Homme", notes: "Boisé · Résineux intense", image: pocketHommeImage },
+  { name: "Amouage Interlude", ref: "Inspiration Amouage Interlude", family: "Homme", notes: "Encens · Ambre puissant", image: pocketHommeImage },
+  { name: "Amouage Reflection", ref: "Inspiration Amouage Reflection", family: "Homme", notes: "Floral vert raffiné", image: pocketHommeImage },
+  { name: "Amouage Opus", ref: "Inspiration Amouage Opus", family: "Homme", notes: "Boisé oriental noble", image: pocketHommeImage },
+  { name: "Mousuf", ref: "Inspiration Mousuf", family: "Homme", notes: "Oriental signature", image: pocketHommeImage },
+  { name: "Byredo Mojave Ghost", ref: "Inspiration Byredo Mojave Ghost", family: "Homme", notes: "Boisé minéral aérien", image: pocketHommeImage },
+  { name: "Byredo Bal d’Afrique", ref: "Inspiration Byredo Bal d’Afrique", family: "Homme", notes: "Vétiver · Agrumes solaire", image: pocketHommeImage },
+  { name: "Killian Black Phantom", ref: "Inspiration Killian Black Phantom", family: "Homme", notes: "Café · Rhum gourmand", image: pocketHommeImage },
+  { name: "Dsquared2 Wood", ref: "Inspiration Dsquared2 Wood", family: "Homme", notes: "Boisé moderne dynamique", image: pocketHommeImage },
+  { name: "Zara Oriental", ref: "Inspiration Zara Oriental", family: "Homme", notes: "Ambre · Vanille chaleureux", image: pocketHommeImage },
+  { name: "Zara Orchid", ref: "Inspiration Zara Orchid", family: "Homme", notes: "Floral oriental vibrant", image: pocketHommeImage },
+  // Unisex
+  { name: "Baccarat Rouge 540", ref: "Inspiration MFK Baccarat Rouge 540", family: "Unisex", notes: "Ambré · Safrané iconique", image: pocketHommeImage },
+  { name: "Kirke", ref: "Inspiration Tiziana Terenzi Kirke", family: "Unisex", notes: "Fruité solaire", image: pocketHommeImage },
+  { name: "Ex Nihilo Fleur Narcotique", ref: "Inspiration Ex Nihilo Fleur Narcotique", family: "Unisex", notes: "Floral fruité poudré", image: pocketHommeImage },
+  { name: "Nasomatto Narcotique", ref: "Inspiration Nasomatto Narcotique", family: "Unisex", notes: "Floral envoûtant intense", image: pocketHommeImage },
+  // Femme
+  { name: "La Vie Est Belle", ref: "Inspiration Lancôme La Vie Est Belle", family: "Femme", notes: "Gourmand iris", image: pocketFemmeImage },
+  { name: "La Vie Est Belle Floral", ref: "Inspiration Lancôme La Vie Est Belle Florale", family: "Femme", notes: "Florale lumineuse", image: pocketFemmeImage },
+  { name: "Gucci Bloom", ref: "Inspiration Gucci Bloom", family: "Femme", notes: "Tubéreuse · Jasmin", image: pocketFemmeImage },
+  { name: "Coco Mademoiselle", ref: "Inspiration Chanel Coco Mademoiselle", family: "Femme", notes: "Patchouli · Rose chypré", image: pocketFemmeImage },
+  { name: "Chanel Chance", ref: "Inspiration Chanel Chance", family: "Femme", notes: "Floral pétillant", image: pocketFemmeImage },
+  { name: "Chanel Chance Eau Tendre", ref: "Inspiration Chanel Chance Eau Tendre", family: "Femme", notes: "Floral fruité doux", image: pocketFemmeImage },
+  { name: "Armani Si", ref: "Inspiration Armani Si", family: "Femme", notes: "Cassis · Ambré sensuel", image: pocketFemmeImage },
+  { name: "CK Euphoria", ref: "Inspiration Calvin Klein Euphoria", family: "Femme", notes: "Orchidée noire envoûtant", image: pocketFemmeImage },
+  { name: "Creed Aventus for Her", ref: "Inspiration Creed Aventus for Her", family: "Femme", notes: "Floral fruité chic", image: pocketFemmeImage },
+  { name: "212 Sexy Women", ref: "Inspiration Carolina Herrera 212 Sexy", family: "Femme", notes: "Vanille · Fleurs piquantes", image: pocketFemmeImage },
+  { name: "212 VIP Women", ref: "Inspiration Carolina Herrera 212 VIP", family: "Femme", notes: "Rhum · Musc festif", image: pocketFemmeImage },
+  { name: "Hermès Jour", ref: "Inspiration Hermès Jour d’Hermès", family: "Femme", notes: "Floral lumineux frais", image: pocketFemmeImage },
+  { name: "Dior J’adore", ref: "Inspiration Dior J’adore", family: "Femme", notes: "Bouquet floral solaire", image: pocketFemmeImage },
+  { name: "Calvin Klein Eternity Femme", ref: "Inspiration Calvin Klein Eternity", family: "Femme", notes: "Floral blanc romantique", image: pocketFemmeImage },
+  { name: "Alien", ref: "Inspiration Mugler Alien", family: "Femme", notes: "Jasmin · Ambré hypnotique", image: pocketFemmeImage },
+  { name: "Killian Good Girl Gone Bad (F)", ref: "Inspiration Killian Good Girl Gone Bad", family: "Femme", notes: "Tubéreuse · Rose magnétique", image: pocketFemmeImage },
+  { name: "Killian Liaisons Dangereuses", ref: "Inspiration Killian Liaisons Dangereuses", family: "Femme", notes: "Rose · Prune sensuelle", image: pocketFemmeImage },
+  { name: "Versace Crystal Noir", ref: "Inspiration Versace Crystal Noir", family: "Femme", notes: "Gardénia · Ambré mystérieux", image: pocketFemmeImage },
+  { name: "DKNY Be Delicious", ref: "Inspiration DKNY Be Delicious", family: "Femme", notes: "Pomme verte pétillante", image: pocketFemmeImage },
+  { name: "Bulgari Omnia", ref: "Inspiration Bvlgari Omnia", family: "Femme", notes: "Épices · Musc raffiné", image: pocketFemmeImage },
+];
+
+const pocketCatalog: BoutiqueProduct[] = pocketProducts.map((product) => ({
+  name: product.name,
+  ref: product.ref,
+  notes: product.notes,
+  headNotes: product.notes,
+  heartNotes: "Notes à préciser",
+  baseNotes: "Notes à préciser",
+  price: 2500,
+  collection: "pocket",
+  image: product.image,
+  family: product.family,
+  concentration: "Eau de parfum",
+  volume: "50 ml",
+  description: `${product.name} fait partie de la sélection Parfums de poches : un format 50 ml pratique, disponible à l'unité chez 2M Parfumerie ou dans le Pack de 5 Parfums de poches à composer.`,
+}));
+
+export const catalog: BoutiqueProduct[] = [...takeoffCatalog, ...scentlabCatalog, ...haqqiCatalog, ...pocketCatalog];
 
 export function slugifyProduct(product: BoutiqueProduct) {
   if (product.slug) return product.slug;
