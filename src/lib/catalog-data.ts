@@ -442,7 +442,7 @@ const haqqiProducts: { name: string; ref: string; family: string; notes: string 
 
 const haqqiCatalog: BoutiqueProduct[] = haqqiProducts.map((product) => ({
   name: product.name,
-  ref: product.ref,
+  ref: "",
   notes: product.notes,
   headNotes: product.notes,
   heartNotes: "Notes à préciser",
