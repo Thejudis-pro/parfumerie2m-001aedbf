@@ -189,7 +189,7 @@ function BoutiquePage() {
                 size="lg"
                 onClick={() => setVisibleCount((count) => count + 12)}
               >
-                Load More
+                Voir plus
               </Button>
             </div>
           )}
