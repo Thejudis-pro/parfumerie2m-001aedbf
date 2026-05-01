@@ -319,3 +319,57 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
     </article>
   );
 }
+
+function PocketShowcase() {
+  return (
+    <div className="space-y-8">
+      <div className="overflow-hidden rounded-lg border border-border bg-card shadow-card">
+        <video
+          src="/videos/pocket-perfumes.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls
+          className="h-full w-full object-cover"
+        />
+      </div>
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div className="overflow-hidden rounded-lg border border-border bg-surface shadow-card">
+          <img
+            src={pocketHommeImage}
+            alt="Parfums de poches Homme — 2M Parfumerie"
+            className="h-full w-full object-contain p-6"
+            loading="lazy"
+          />
+        </div>
+        <div className="overflow-hidden rounded-lg border border-border bg-surface shadow-card">
+          <img
+            src={pocketFemmeImage}
+            alt="Parfums de poches Femme — 2M Parfumerie"
+            className="h-full w-full object-contain p-6"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div className="rounded-lg border border-border bg-surface-alt px-6 py-10 text-center">
+        <p className="caption-luxe text-accent">Compose ton pack</p>
+        <h2 className="mt-2 font-display text-2xl text-foreground md:text-3xl">
+          Crée ton pack Parfums de poches ici
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+          Sélectionne 5 parfums de poches et compose ton pack signature.
+        </p>
+        <div className="mt-6 flex justify-center">
+          <Button
+            asChild
+            size="lg"
+            className="bg-accent text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+          >
+            <Link to="/coffret-signature">Pack Parfums de poches (5 parfums) — 10 000 FCFA</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
