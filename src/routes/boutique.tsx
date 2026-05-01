@@ -185,7 +185,7 @@ function BoutiquePage() {
         </div>
       </section>
 
-      {(collection === "haqqi" || collection === "scentlab" || collection === "pocket") && (
+      {(collection === "haqqi" || collection === "scentlab") && (
       <section className="border-t border-border bg-surface-alt py-10 md:py-14">
         <div className="mx-auto max-w-7xl px-3 text-center md:px-6">
           <p className="caption-luxe text-accent">Compose ton pack</p>
