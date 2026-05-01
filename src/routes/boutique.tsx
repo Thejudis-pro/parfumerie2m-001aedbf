@@ -118,7 +118,7 @@ function BoutiquePage() {
       </section>
 
       <section className="border-b border-border bg-background py-5 md:py-8">
-        <div className="mx-auto flex max-w-7xl snap-x gap-2 overflow-x-auto px-3 pb-1 md:flex-wrap md:justify-center md:gap-3 md:px-6">
+        <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-2 px-3 pb-1 md:gap-3 md:px-6">
           {collectionFilters.map((filter) => (
             <FilterLink
               key={filter.value}
