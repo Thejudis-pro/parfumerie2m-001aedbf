@@ -130,6 +130,26 @@ function BoutiquePage() {
         </div>
       </section>
 
+      <section className="border-b border-border bg-surface-alt py-8 md:py-10">
+        <div className="mx-auto max-w-7xl px-3 text-center md:px-6">
+          <p className="caption-luxe text-accent">Compose ton pack</p>
+          <h2 className="mt-2 font-display text-2xl text-foreground md:text-3xl">
+            Crée ton coffret sur-mesure
+          </h2>
+          <div className="mt-5 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
+            <Button asChild>
+              <Link to="/coffret-signature">Pack Haqqi (3 parfums)</Link>
+            </Button>
+            <Button asChild>
+              <Link to="/coffret-signature">Pack SCENTLAB (3 parfums)</Link>
+            </Button>
+            <Button asChild>
+              <Link to="/coffret-signature">Pack Parfums de poches (5 parfums)</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-background py-8 md:py-12">
         <div className="mx-auto max-w-7xl px-3 md:px-6">
           <div className="mb-4 flex items-center justify-between gap-3 text-sm text-muted-foreground">
