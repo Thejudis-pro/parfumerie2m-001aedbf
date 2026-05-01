@@ -15,6 +15,8 @@ import {
 } from "@/lib/catalog-data";
 import { supabase } from "@/integrations/supabase/client";
 import { mergeLiveCatalog } from "@/lib/live-catalog";
+import pocketHommeImage from "@/assets/pocket-perfumes-homme.png";
+import pocketFemmeImage from "@/assets/pocket-perfumes-femme.png";
 
 function validateBoutiqueSearch(search: Record<string, unknown>) {
   const collection =
