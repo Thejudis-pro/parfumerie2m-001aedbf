@@ -249,13 +249,25 @@ function Index() {
             Choisis tes parfums dans la collection de ton choix — on s'occupe du reste.
           </p>
           <div className="mt-8 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
-            <Button asChild size="lg">
+            <Button
+              asChild
+              size="lg"
+              className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+            >
               <Link to="/coffret-signature">Pack Haqqi (3 parfums)</Link>
             </Button>
-            <Button asChild size="lg">
+            <Button
+              asChild
+              size="lg"
+              className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+            >
               <Link to="/coffret-signature">Pack SCENTLAB (3 parfums)</Link>
             </Button>
-            <Button asChild size="lg">
+            <Button
+              asChild
+              size="lg"
+              className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
+            >
               <Link to="/coffret-signature">Pack Parfums de poches (5 parfums)</Link>
             </Button>
           </div>
