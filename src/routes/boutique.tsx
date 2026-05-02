@@ -180,6 +180,19 @@ function BoutiquePage() {
               />
             </div>
           )}
+          {collection === "authentic" && (
+            <div className="mb-8 overflow-hidden rounded-lg border border-border bg-card shadow-card">
+              <video
+                src="/videos/authentic.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+                className="h-full w-full object-cover"
+              />
+            </div>
+          )}
           <div className="mb-4 flex items-center justify-between gap-3 text-sm text-muted-foreground">
             <p>
               {filteredProducts.length} résultat{filteredProducts.length > 1 ? "s" : ""}
