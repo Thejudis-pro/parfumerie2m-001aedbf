@@ -349,7 +349,7 @@ function Index() {
               L'authenticité en vidéo
             </h2>
           </div>
-          <div className="mt-8 overflow-hidden rounded-lg border border-border bg-card shadow-card">
+          <div className="mx-auto mt-8 max-w-md overflow-hidden rounded-lg border border-border bg-card shadow-card">
             <video
               src="/videos/authentic.mp4"
               autoPlay
@@ -357,7 +357,7 @@ function Index() {
               muted
               playsInline
               controls
-              className="h-full w-full object-cover"
+              className="h-auto w-full"
             />
           </div>
         </div>
