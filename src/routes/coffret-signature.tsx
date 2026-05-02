@@ -335,7 +335,10 @@ function CoffretSignaturePage() {
 
   useEffect(() => {
     if (canSend && validateRef.current) {
-      validateRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      const timeout = window.setTimeout(() => {
+        validateRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 150);
+      return () => window.clearTimeout(timeout);
     }
   }, [canSend, selectedCollection]);
 
