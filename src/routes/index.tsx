@@ -340,6 +340,28 @@ function Index() {
           </Button>
         </div>
       </section>
+
+      <section className="bg-background py-12 md:py-16">
+        <div className="section-shell">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="caption-luxe text-accent">Parfums authentiques</p>
+            <h2 className="mt-3 font-display text-[28px] leading-tight text-foreground md:text-4xl">
+              L'authenticité en vidéo
+            </h2>
+          </div>
+          <div className="mt-8 overflow-hidden rounded-lg border border-border bg-card shadow-card">
+            <video
+              src="/videos/authentic.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls
+              className="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
     </SiteLayout>
   );
 }
