@@ -76,10 +76,11 @@ function BoutiquePage() {
   const { collection } = Route.useSearch();
   const [visibleCount, setVisibleCount] = useState(12);
   const [products, setProducts] = useState<BoutiqueProduct[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setVisibleCount(12);
-  }, [collection]);
+  }, [collection, searchQuery]);
 
   useEffect(() => {
     void loadProducts();
@@ -93,11 +94,24 @@ function BoutiquePage() {
   const mixedProducts = useMemo(() => mixProductsByCollection(products), [products]);
 
   const filteredProducts = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
     return mixedProducts.filter((product) => {
       const collectionMatch = collection === "all" || product.collection === collection;
-      return collectionMatch;
+      if (!collectionMatch) return false;
+      if (!query) return true;
+      const haystack = [
+        product.name,
+        product.ref,
+        product.notes,
+        product.family,
+        product.description,
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(query);
     });
-  }, [mixedProducts, collection]);
+  }, [mixedProducts, collection, searchQuery]);
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
 
@@ -122,15 +136,28 @@ function BoutiquePage() {
       </section>
 
       <section className="border-b border-border bg-background py-5 md:py-8">
-        <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-2 px-3 pb-1 md:gap-3 md:px-6">
-          {collectionFilters.map((filter) => (
-            <FilterLink
-              key={filter.value}
-              active={collection === filter.value}
-              search={{ collection: filter.value }}
-              label={filter.label}
+        <div className="mx-auto max-w-7xl px-3 md:px-6">
+          <div className="mx-auto mb-5 max-w-xl">
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="Rechercher un parfum, une note, une famille…"
+              aria-label="Rechercher un parfum"
+              className="w-full rounded-full border border-border bg-surface px-5 py-3 text-sm text-foreground shadow-card placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30"
             />
-          ))}
+          </div>
+          <p className="caption-luxe mb-3 text-center text-accent">Catégories</p>
+          <div className="flex flex-wrap justify-center gap-2 pb-1 md:gap-3">
+            {collectionFilters.map((filter) => (
+              <FilterLink
+                key={filter.value}
+                active={collection === filter.value}
+                search={{ collection: filter.value }}
+                label={filter.label}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
