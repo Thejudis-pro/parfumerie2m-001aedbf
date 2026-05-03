@@ -27,6 +27,12 @@ function NotFoundComponent() {
 export const Route = createRootRoute({
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
+  head: () => ({
+    meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@2mparfumeriesn" },
+    ],
+  }),
 });
 
 function RootComponent() {

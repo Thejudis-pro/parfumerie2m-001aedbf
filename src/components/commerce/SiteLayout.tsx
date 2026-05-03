@@ -191,8 +191,9 @@ function SiteFooter() {
               rel="noopener noreferrer"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent"
               aria-label="Instagram 2M Parfumerie"
+              title="Logo Instagram 2M Parfumerie"
             >
-              <Instagram className="size-5" aria-hidden="true" />
+              <Instagram className="size-5" aria-label="Logo Instagram 2M Parfumerie" />
             </a>
             <a
               href={facebookUrl}
@@ -200,8 +201,9 @@ function SiteFooter() {
               rel="noopener noreferrer"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent"
               aria-label="Facebook 2M Parfumerie"
+              title="Logo Facebook 2M Parfumerie"
             >
-              <Facebook className="size-5" aria-hidden="true" />
+              <Facebook className="size-5" aria-label="Logo Facebook 2M Parfumerie" />
             </a>
             <a
               href={whatsappUrl()}
@@ -269,7 +271,17 @@ function SiteFooter() {
       </div>
       <div className="mx-auto mt-8 flex max-w-7xl flex-col justify-between gap-3 border-t border-foreground/5 px-4 pt-8 text-xs text-muted-foreground md:flex-row md:px-6">
         <p>© 2026 2M Parfumerie. Tous droits réservés.</p>
-        <p>Fait avec ♥ au Sénégal</p>
+        <p>
+          Fait avec ♥ au Sénégal · Site by{" "}
+          <a
+            href="https://nextwave.sn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-accent hover:underline"
+          >
+            Nextwave
+          </a>
+        </p>
       </div>
     </footer>
   );
@@ -278,7 +290,7 @@ function SiteFooter() {
 function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="caption-luxe mb-4 text-muted-foreground">{title}</h2>
+      <p className="caption-luxe mb-4 text-muted-foreground">{title}</p>
       {children}
     </div>
   );

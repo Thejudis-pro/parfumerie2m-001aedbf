@@ -18,13 +18,13 @@ import { mergeLiveCatalog } from "@/lib/live-catalog";
 import pocketHommeImage from "@/assets/pocket-perfumes-homme.png";
 import pocketFemmeImage from "@/assets/pocket-perfumes-femme.png";
 
-function validateBoutiqueSearch(search: Record<string, unknown>) {
-  const collection =
-    typeof search.collection === "string" && search.collection.trim()
-      ? normalizeCollectionValue(search.collection)
-      : "all";
-
-  return { collection };
+function validateBoutiqueSearch(search: Record<string, unknown>): { collection?: Collection } {
+  if (typeof search.collection !== "string" || !search.collection.trim()) {
+    return {};
+  }
+  const value = normalizeCollectionValue(search.collection);
+  if (value === "all") return {};
+  return { collection: value };
 }
 
 const mixedCollectionOrder: Collection[] = [
@@ -51,20 +51,39 @@ export const Route = createFileRoute("/boutique")({
   validateSearch: validateBoutiqueSearch,
   head: () => ({
     meta: [
-      { title: "Boutique — +100 Parfums Authentiques | 2M Parfumerie Sénégal" },
+      { title: "Boutique Parfums Authentiques | 2M Parfumerie Sénégal" },
       {
         name: "description",
         content:
-          "Parcourez +100 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus. Filtrez par collection. Livraison partout au Sénégal.",
+          "Explorez +100 parfums authentiques disponibles au Sénégal : SCENTLAB, TAKEOFF, Dubai Perfumes, Haqqi, Pocket. Commandez sur WhatsApp, livraison express Dakar.",
       },
       {
         property: "og:title",
-        content: "Boutique — +100 Parfums Authentiques | 2M Parfumerie Sénégal",
+        content: "Boutique Parfums Authentiques | 2M Parfumerie Sénégal",
       },
       {
         property: "og:description",
         content:
-          "Parcourez +100 parfums authentiques : SCENTLAB, TAKEOFF Fragrance, Dubai Perfumes, Haqqi et plus.",
+          "Explorez +100 parfums authentiques disponibles au Sénégal. Livraison partout au Sénégal.",
+      },
+      { property: "og:url", content: "https://www.2mparfumeriedk.com/boutique" },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "fr_FR" },
+      { property: "og:image", content: "https://www.2mparfumeriedk.com/assets/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.2mparfumeriedk.com/boutique" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.2mparfumeriedk.com/" },
+            { "@type": "ListItem", position: 2, name: "Boutique", item: "https://www.2mparfumeriedk.com/boutique" },
+          ],
+        }),
       },
     ],
   }),
@@ -73,7 +92,8 @@ export const Route = createFileRoute("/boutique")({
 
 function BoutiquePage() {
   const location = useLocation();
-  const { collection } = Route.useSearch();
+  const search = Route.useSearch();
+  const collection: Collection = search.collection ?? "all";
   const [visibleCount, setVisibleCount] = useState(12);
   const [products, setProducts] = useState<BoutiqueProduct[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -201,7 +221,7 @@ function BoutiquePage() {
             {collection !== "all" && (
               <Link
                 to="/boutique"
-                search={{ collection: "all" }}
+                search={{}}
                 className="font-medium text-accent hover:underline"
               >
                 Réinitialiser les filtres
@@ -318,7 +338,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
-          search={{ collection: "all" }}
+          search={{}}
           aria-label={`Voir ${product.name}`}
           className="block h-full w-full"
         >
@@ -339,7 +359,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
-          search={{ collection: "all" }}
+          search={{}}
           className="mb-1 block font-display text-[22px] text-foreground hover:text-accent"
         >
           {product.name}
