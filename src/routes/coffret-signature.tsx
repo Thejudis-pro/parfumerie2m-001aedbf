@@ -396,7 +396,7 @@ function CoffretSignaturePage() {
                 <a href="#compose">Composer mon pack</a>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link to="/boutique" search={{ collection: "all" }}>
+                <Link to="/boutique" search={{}}>
                   Voir la boutique
                 </Link>
               </Button>

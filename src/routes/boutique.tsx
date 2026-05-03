@@ -221,7 +221,7 @@ function BoutiquePage() {
             {collection !== "all" && (
               <Link
                 to="/boutique"
-                search={{ collection: "all" }}
+                search={{}}
                 className="font-medium text-accent hover:underline"
               >
                 Réinitialiser les filtres
@@ -338,7 +338,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
-          search={{ collection: "all" }}
+          search={{}}
           aria-label={`Voir ${product.name}`}
           className="block h-full w-full"
         >
@@ -359,7 +359,7 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
         <Link
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
-          search={{ collection: "all" }}
+          search={{}}
           className="mb-1 block font-display text-[22px] text-foreground hover:text-accent"
         >
           {product.name}

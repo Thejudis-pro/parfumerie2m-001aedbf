@@ -151,7 +151,7 @@ function Index() {
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link to="/boutique" search={{ collection: "all" }}>
+                  <Link to="/boutique" search={{}}>
                     Explorer la boutique
                   </Link>
                 </Button>
@@ -198,7 +198,7 @@ function Index() {
                 <Link
                   to="/boutique/$productSlug"
                   params={{ productSlug: slugifyProduct(product) }}
-                  search={{ collection: "all" }}
+                  search={{}}
                   aria-label={`Voir la fiche produit de ${product.name}`}
                   className="image-zoom relative block aspect-square overflow-hidden bg-surface"
                 >
@@ -232,7 +232,7 @@ function Index() {
             ))}
           </div>
           <Button asChild variant="outline" size="lg" className="mt-12">
-            <Link to="/boutique" search={{ collection: "all" }}>
+            <Link to="/boutique" search={{}}>
               Voir toute la sélection
             </Link>
           </Button>
