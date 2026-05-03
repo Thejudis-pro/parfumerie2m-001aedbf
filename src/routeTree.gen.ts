@@ -20,6 +20,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CollectionsScentlabRouteImport } from './routes/collections.scentlab'
+import { Route as CollectionsHaqqiRouteImport } from './routes/collections.haqqi'
 import { Route as BoutiqueProductSlugRouteImport } from './routes/boutique.$productSlug'
 
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
@@ -77,6 +78,11 @@ const CollectionsScentlabRoute = CollectionsScentlabRouteImport.update({
   path: '/collections/scentlab',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsHaqqiRoute = CollectionsHaqqiRouteImport.update({
+  id: '/collections/haqqi',
+  path: '/collections/haqqi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BoutiqueProductSlugRoute = BoutiqueProductSlugRouteImport.update({
   id: '/$productSlug',
   path: '/$productSlug',
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
 }
 export interface FileRoutesByTo {
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
 }
 export interface FileRoutesById {
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
 }
 export interface FileRouteTypes {
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/collections/haqqi'
     | '/collections/scentlab'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -154,6 +164,7 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/collections/haqqi'
     | '/collections/scentlab'
   id:
     | '__root__'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/collections/haqqi'
     | '/collections/scentlab'
   fileRoutesById: FileRoutesById
 }
@@ -182,6 +194,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   LivraisonRoute: typeof LivraisonRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
+  CollectionsHaqqiRoute: typeof CollectionsHaqqiRoute
   CollectionsScentlabRoute: typeof CollectionsScentlabRoute
 }
 
@@ -264,6 +277,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsScentlabRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections/haqqi': {
+      id: '/collections/haqqi'
+      path: '/collections/haqqi'
+      fullPath: '/collections/haqqi'
+      preLoaderRoute: typeof CollectionsHaqqiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/boutique/$productSlug': {
       id: '/boutique/$productSlug'
       path: '/$productSlug'
@@ -297,6 +317,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   LivraisonRoute: LivraisonRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
+  CollectionsHaqqiRoute: CollectionsHaqqiRoute,
   CollectionsScentlabRoute: CollectionsScentlabRoute,
 }
 export const routeTree = rootRouteImport
