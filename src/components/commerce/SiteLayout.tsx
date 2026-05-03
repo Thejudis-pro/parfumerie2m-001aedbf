@@ -191,8 +191,9 @@ function SiteFooter() {
               rel="noopener noreferrer"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent"
               aria-label="Instagram 2M Parfumerie"
+              title="Logo Instagram 2M Parfumerie"
             >
-              <Instagram className="size-5" aria-hidden="true" />
+              <Instagram className="size-5" aria-label="Logo Instagram 2M Parfumerie" />
             </a>
             <a
               href={facebookUrl}
@@ -200,8 +201,9 @@ function SiteFooter() {
               rel="noopener noreferrer"
               className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent"
               aria-label="Facebook 2M Parfumerie"
+              title="Logo Facebook 2M Parfumerie"
             >
-              <Facebook className="size-5" aria-hidden="true" />
+              <Facebook className="size-5" aria-label="Logo Facebook 2M Parfumerie" />
             </a>
             <a
               href={whatsappUrl()}
