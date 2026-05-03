@@ -22,17 +22,48 @@ import { whatsappUrl } from "@/lib/perfume-data";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "2M Parfumerie — Parfums Authentiques au Sénégal" },
+      { title: "2M Parfumerie Sénégal | Parfums authentiques livrés à Dakar" },
       {
         name: "description",
         content:
-          "Découvrez +100 collections de parfums authentiques au Sénégal. SCENTLAB, Dubai Perfumes, TAKEOFF Fragrance. Livraison partout au Sénégal, paiement à la livraison.",
+          "Achetez des parfums authentiques de luxe au Sénégal. +100 collections SCENTLAB, TAKEOFF, Dubai Perfumes. Livraison partout au Sénégal. Paiement à la livraison.",
       },
-      { property: "og:title", content: "2M Parfumerie — Parfums Authentiques au Sénégal" },
+      { property: "og:title", content: "2M Parfumerie Sénégal | Parfums authentiques livrés à Dakar" },
       {
         property: "og:description",
         content:
-          "Découvrez +100 collections de parfums authentiques au Sénégal. Livraison partout au Sénégal, paiement à la livraison.",
+          "Achetez des parfums authentiques de luxe au Sénégal. Livraison partout au Sénégal, paiement à la livraison.",
+      },
+      { property: "og:url", content: "https://www.2mparfumeriedk.com/" },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "fr_FR" },
+      { property: "og:image", content: "https://www.2mparfumeriedk.com/assets/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.2mparfumeriedk.com/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "2M Parfumerie",
+          description:
+            "Parfumerie en ligne au Sénégal proposant des parfums authentiques de luxe livrés partout au Sénégal.",
+          url: "https://www.2mparfumeriedk.com",
+          telephone: "+221761923441",
+          email: "commande@2mparfumerie.com",
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: "SN",
+            addressLocality: "Dakar",
+          },
+          priceRange: "$$",
+          sameAs: [
+            "https://instagram.com/2mparfumeriesn",
+            "https://www.facebook.com/profile.php?id=61551806734713",
+          ],
+        }),
       },
     ],
   }),
@@ -132,8 +163,14 @@ function Index() {
                 className="fade-up font-display text-4xl font-semibold leading-[1.1] text-foreground md:text-7xl"
                 style={{ animationDelay: "120ms" }}
               >
-                Votre signature olfactive, livrée au Sénégal.
+                Parfums authentiques de luxe au Sénégal — Livraison Dakar
               </h1>
+              <p
+                className="fade-up mt-4 max-w-lg font-display text-xl text-foreground md:text-2xl"
+                style={{ animationDelay: "180ms" }}
+              >
+                Votre signature olfactive, livrée au Sénégal.
+              </p>
               <p
                 className="fade-up mt-6 max-w-lg text-base text-muted-foreground md:text-lg"
                 style={{ animationDelay: "240ms" }}
@@ -174,6 +211,10 @@ function Index() {
             <img
               src={homeHeroBottle}
               alt="Flacon blanc SCENTLAB chez 2M Parfumerie"
+              width="1200"
+              height="1500"
+              loading="eager"
+              fetchPriority="high"
               className="h-full w-full object-cover"
             />
           </div>
