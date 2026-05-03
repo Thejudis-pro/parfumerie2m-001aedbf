@@ -89,7 +89,7 @@ export const Route = createFileRoute("/boutique/$productSlug")({
 
 function ProductPage() {
   const { productSlug } = Route.useParams();
-  const [products, setProducts] = useState<BoutiqueProduct[] | null>(null);
+  const [products, setProducts] = useState<BoutiqueProduct[]>(() => catalog);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -100,16 +100,6 @@ function ProductPage() {
   }, []);
 
   const product = products?.find((item) => slugifyProduct(item) === productSlug) ?? null;
-
-  if (!products) {
-    return (
-      <SiteLayout>
-        <section className="section-shell py-40 text-center">
-          <p className="text-muted-foreground">Chargement…</p>
-        </section>
-      </SiteLayout>
-    );
-  }
 
   if (!product) {
     return (
