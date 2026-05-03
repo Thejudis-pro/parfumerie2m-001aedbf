@@ -295,19 +295,24 @@ const collectionSideImages: Record<CoffretCollection, { src: string; alt: string
 export const Route = createFileRoute("/coffret-signature")({
   head: () => ({
     meta: [
-      { title: "Compose ton Pack — 2M Parfumerie Sénégal" },
+      { title: "Compose ton Pack Parfums | 2M Parfumerie Sénégal" },
       {
         name: "description",
         content:
-          "Composez votre Pack Signature chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Parfums de poches à 10 000 FCFA.",
+          "Créez votre coffret parfums sur-mesure au Sénégal. Pack Haqqi, SCENTLAB ou Parfums de poches. Livraison Dakar et partout au Sénégal.",
       },
-      { property: "og:title", content: "Compose ton Pack — 2M Parfumerie" },
+      { property: "og:title", content: "Compose ton Pack Parfums | 2M Parfumerie Sénégal" },
       {
         property: "og:description",
         content:
-          "3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 Parfums de poches à 10 000 FCFA, à composer en quelques clics.",
+          "Créez votre coffret parfums sur-mesure au Sénégal. Pack Haqqi, SCENTLAB ou Parfums de poches.",
       },
+      { property: "og:url", content: "https://www.2mparfumeriedk.com/coffret-signature" },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "fr_FR" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://www.2mparfumeriedk.com/coffret-signature" }],
   }),
   component: CoffretSignaturePage,
 });
