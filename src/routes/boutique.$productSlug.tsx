@@ -21,19 +21,67 @@ import { displayPhone } from "@/lib/perfume-data";
 export const Route = createFileRoute("/boutique/$productSlug")({
   head: ({ params }) => {
     const product = findProductBySlug(params.productSlug);
+    const url = `https://www.2mparfumeriedk.com/boutique/${params.productSlug}`;
     const title = product
-      ? `${product.name} — ${collectionLabel(product.collection)} | 2M Parfumerie`
+      ? `${product.name} – ${collectionLabel(product.collection)} | 2M Parfumerie Sénégal`
       : "Parfum introuvable | 2M Parfumerie";
     const description = product
-      ? `${product.name}, ${collectionLabel(product.collection)}, ${product.notes}. ${formatPrice(product.price)}. Livraison partout au Sénégal.`
+      ? `${product.name} par ${collectionLabel(product.collection)} : notes de ${product.notes}. ${formatPrice(product.price)}. Livraison au Sénégal. Commandez sur WhatsApp chez 2M Parfumerie.`
       : "Ce parfum n'est pas disponible dans la boutique 2M Parfumerie.";
+    const image = product?.image;
+    const meta: Array<Record<string, string>> = [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:url", content: url },
+      { property: "og:type", content: "product" },
+      { property: "og:locale", content: "fr_FR" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ];
+    if (image) {
+      meta.push({ property: "og:image", content: image });
+      meta.push({ name: "twitter:image", content: image });
+    }
+    const scripts: Array<{ type: string; children: string }> = [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.2mparfumeriedk.com/" },
+            { "@type": "ListItem", position: 2, name: "Boutique", item: "https://www.2mparfumeriedk.com/boutique" },
+            { "@type": "ListItem", position: 3, name: product?.name ?? "Produit", item: url },
+          ],
+        }),
+      },
+    ];
+    if (product) {
+      scripts.push({
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.name,
+          description: product.description,
+          image: product.image,
+          brand: { "@type": "Brand", name: collectionLabel(product.collection) },
+          offers: {
+            "@type": "Offer",
+            price: product.price,
+            priceCurrency: "XOF",
+            availability: "https://schema.org/InStock",
+            url,
+            seller: { "@type": "Organization", name: "2M Parfumerie" },
+          },
+        }),
+      });
+    }
     return {
-      meta: [
-        { title },
-        { name: "description", content: description },
-        { property: "og:title", content: title },
-        { property: "og:description", content: description },
-      ],
+      meta,
+      links: [{ rel: "canonical", href: url }],
+      scripts,
     };
   },
   component: ProductPage,
