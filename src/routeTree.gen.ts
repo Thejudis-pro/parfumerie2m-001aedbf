@@ -19,6 +19,9 @@ import { Route as BoutiqueRouteImport } from './routes/boutique'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollectionsScentlabRouteImport } from './routes/collections.scentlab'
+import { Route as CollectionsParfumsDePochesRouteImport } from './routes/collections.parfums-de-poches'
+import { Route as CollectionsHaqqiRouteImport } from './routes/collections.haqqi'
 import { Route as BoutiqueProductSlugRouteImport } from './routes/boutique.$productSlug'
 
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
@@ -71,6 +74,22 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsScentlabRoute = CollectionsScentlabRouteImport.update({
+  id: '/collections/scentlab',
+  path: '/collections/scentlab',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsParfumsDePochesRoute =
+  CollectionsParfumsDePochesRouteImport.update({
+    id: '/collections/parfums-de-poches',
+    path: '/collections/parfums-de-poches',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CollectionsHaqqiRoute = CollectionsHaqqiRouteImport.update({
+  id: '/collections/haqqi',
+  path: '/collections/haqqi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BoutiqueProductSlugRoute = BoutiqueProductSlugRouteImport.update({
   id: '/$productSlug',
   path: '/$productSlug',
@@ -89,6 +108,9 @@ export interface FileRoutesByFullPath {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/haqqi': typeof CollectionsHaqqiRoute
+  '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
+  '/collections/scentlab': typeof CollectionsScentlabRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +124,9 @@ export interface FileRoutesByTo {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/haqqi': typeof CollectionsHaqqiRoute
+  '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
+  '/collections/scentlab': typeof CollectionsScentlabRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +141,9 @@ export interface FileRoutesById {
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/haqqi': typeof CollectionsHaqqiRoute
+  '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
+  '/collections/scentlab': typeof CollectionsScentlabRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +159,9 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/collections/haqqi'
+    | '/collections/parfums-de-poches'
+    | '/collections/scentlab'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +175,9 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/collections/haqqi'
+    | '/collections/parfums-de-poches'
+    | '/collections/scentlab'
   id:
     | '__root__'
     | '/'
@@ -157,6 +191,9 @@ export interface FileRouteTypes {
     | '/livraison'
     | '/mentions-legales'
     | '/boutique/$productSlug'
+    | '/collections/haqqi'
+    | '/collections/parfums-de-poches'
+    | '/collections/scentlab'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -170,6 +207,9 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   LivraisonRoute: typeof LivraisonRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
+  CollectionsHaqqiRoute: typeof CollectionsHaqqiRoute
+  CollectionsParfumsDePochesRoute: typeof CollectionsParfumsDePochesRoute
+  CollectionsScentlabRoute: typeof CollectionsScentlabRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -244,6 +284,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections/scentlab': {
+      id: '/collections/scentlab'
+      path: '/collections/scentlab'
+      fullPath: '/collections/scentlab'
+      preLoaderRoute: typeof CollectionsScentlabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/parfums-de-poches': {
+      id: '/collections/parfums-de-poches'
+      path: '/collections/parfums-de-poches'
+      fullPath: '/collections/parfums-de-poches'
+      preLoaderRoute: typeof CollectionsParfumsDePochesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/haqqi': {
+      id: '/collections/haqqi'
+      path: '/collections/haqqi'
+      fullPath: '/collections/haqqi'
+      preLoaderRoute: typeof CollectionsHaqqiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/boutique/$productSlug': {
       id: '/boutique/$productSlug'
       path: '/$productSlug'
@@ -277,6 +338,9 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   LivraisonRoute: LivraisonRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
+  CollectionsHaqqiRoute: CollectionsHaqqiRoute,
+  CollectionsParfumsDePochesRoute: CollectionsParfumsDePochesRoute,
+  CollectionsScentlabRoute: CollectionsScentlabRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
