@@ -11,18 +11,23 @@ import { whatsappUrl } from "@/lib/perfume-data";
 export const Route = createFileRoute("/a-propos")({
   head: () => ({
     meta: [
-      { title: "Notre Histoire — 2M Parfumerie | Parfums Authentiques au Sénégal" },
+      { title: "À Propos | 2M Parfumerie Sénégal" },
       {
         name: "description",
         content:
-          "L'histoire derrière 2M Parfumerie — une mission sénégalaise : rendre les parfums authentiques accessibles à tous.",
+          "Découvrez l'histoire de 2M Parfumerie, votre parfumerie authentique au Sénégal. Notre mission : rendre les parfums de luxe accessibles à tous les Sénégalais.",
       },
-      { property: "og:title", content: "Notre Histoire — 2M Parfumerie" },
+      { property: "og:title", content: "À Propos | 2M Parfumerie Sénégal" },
       {
         property: "og:description",
-        content: "Une mission sénégalaise : rendre les parfums authentiques accessibles à tous.",
+        content: "Découvrez l'histoire de 2M Parfumerie, votre parfumerie authentique au Sénégal.",
       },
+      { property: "og:url", content: "https://www.2mparfumeriedk.com/a-propos" },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "fr_FR" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://www.2mparfumeriedk.com/a-propos" }],
   }),
   component: AboutPage,
 });
