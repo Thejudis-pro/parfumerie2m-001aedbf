@@ -113,48 +113,6 @@ export type Database = {
         }
         Relationships: []
       }
-      blog_posts: {
-        Row: {
-          category: string
-          content: string
-          cover_image_url: string | null
-          created_at: string | null
-          excerpt: string
-          id: string
-          is_published: boolean | null
-          sort_order: number
-          slug: string
-          title: string
-          updated_at: string | null
-        }
-        Insert: {
-          category: string
-          content: string
-          cover_image_url?: string | null
-          created_at?: string | null
-          excerpt: string
-          id?: string
-          is_published?: boolean | null
-          sort_order?: number | null
-          slug: string
-          title: string
-          updated_at?: string | null
-        }
-        Update: {
-          category?: string
-          content?: string
-          cover_image_url?: string | null
-          created_at?: string | null
-          excerpt?: string
-          id?: string
-          is_published?: boolean | null
-          sort_order?: number | null
-          slug?: string
-          title?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
       user_roles: {
         Row: {
           id: string
