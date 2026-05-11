@@ -290,7 +290,7 @@ function Metric({
   label,
   value,
 }: {
-  icon: ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  icon: ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>;
   label: string;
   value: string;
 }) {
