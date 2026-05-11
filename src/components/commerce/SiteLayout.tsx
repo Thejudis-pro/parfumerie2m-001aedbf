@@ -22,6 +22,7 @@ const navItems = [
   { label: "Accueil", to: "/" },
   { label: "Boutique", to: "/boutique" },
   { label: "Compose ton pack", to: "/coffret-signature" },
+  { label: "Blog", to: "/blog" },
   { label: "À Propos", to: "/a-propos" },
   { label: "FAQ", to: "/faq" },
   { label: "Contact", to: "/contact" },

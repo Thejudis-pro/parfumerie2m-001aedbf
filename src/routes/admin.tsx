@@ -30,6 +30,7 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import type { Database, Json } from "@/integrations/supabase/types";
+import { BlogAdminPanel } from "@/components/admin/BlogAdminPanel";
 import {
   catalog,
   collectionFilters,
@@ -43,7 +44,8 @@ type ProductRow = Database["public"]["Tables"]["products"]["Row"];
 type ProductInsert = Database["public"]["Tables"]["products"]["Insert"];
 type AdminProduct = ProductRow & { source: "catalog" | "database" };
 type OrderRow = Database["public"]["Tables"]["orders"]["Row"];
-type AdminTab = "orders" | "products";
+type BlogPostRow = Database["public"]["Tables"]["blog_posts"]["Row"];
+type AdminTab = "orders" | "products" | "blog";
 type OrderStatus = "nouveau" | "confirme" | "prepare" | "livre" | "annule";
 
 const blankProduct = {
@@ -74,6 +76,7 @@ const DELETED_PRODUCT_MARKER = "__2M_ADMIN_DELETED_PRODUCT__";
 const adminTabs: Array<{ key: AdminTab; label: string; icon: typeof ShoppingBag }> = [
   { key: "orders", label: "Commandes", icon: ShoppingBag },
   { key: "products", label: "Produits", icon: Package },
+  { key: "blog", label: "Blog", icon: Edit3 },
 ];
 const orderStatuses: Array<{ value: OrderStatus | "all"; label: string }> = [
   { value: "all", label: "Toutes" },
@@ -98,6 +101,7 @@ function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [products, setProducts] = useState<AdminProduct[]>([]);
   const [orders, setOrders] = useState<OrderRow[]>([]);
+  const [blogPosts, setBlogPosts] = useState<BlogPostRow[]>([]);
   const [auth, setAuth] = useState({ email: "", password: "" });
   const [productForm, setProductForm] = useState(blankProduct);
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
@@ -123,12 +127,18 @@ function AdminPage() {
     });
     setIsAdmin(Boolean(roleAllowed));
     if (roleAllowed) {
-      const [{ data: productRows }, { data: orderRows }] = await Promise.all([
+      const [{ data: productRows }, { data: orderRows }, { data: blogRows }] = await Promise.all([
         supabase.from("products").select("*").order("created_at", { ascending: false }),
         supabase.from("orders").select("*").order("created_at", { ascending: false }),
+        supabase
+          .from("blog_posts")
+          .select("*")
+          .order("sort_order", { ascending: true })
+          .order("created_at", { ascending: false }),
       ]);
       setProducts(mergeCatalogWithDatabaseProducts(productRows ?? []));
       setOrders(orderRows ?? []);
+      setBlogPosts(blogRows ?? []);
     }
     setLoading(false);
   };
@@ -359,6 +369,7 @@ function AdminPage() {
             saving={saving}
           />
         )}
+        {activeTab === "blog" && <BlogAdminPanel blogPosts={blogPosts} onRefresh={loadAdminData} />}
       </AdminChrome>
     </AdminShell>
   );

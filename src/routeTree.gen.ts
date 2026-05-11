@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ConseilsRouteImport } from './routes/conseils'
 import { Route as CoffretSignatureRouteImport } from './routes/coffret-signature'
 import { Route as BoutiqueRouteImport } from './routes/boutique'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
@@ -23,6 +24,7 @@ import { Route as CollectionsScentlabRouteImport } from './routes/collections.sc
 import { Route as CollectionsParfumsDePochesRouteImport } from './routes/collections.parfums-de-poches'
 import { Route as CollectionsHaqqiRouteImport } from './routes/collections.haqqi'
 import { Route as BoutiqueProductSlugRouteImport } from './routes/boutique.$productSlug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
   id: '/mentions-legales',
@@ -57,6 +59,11 @@ const CoffretSignatureRoute = CoffretSignatureRouteImport.update({
 const BoutiqueRoute = BoutiqueRouteImport.update({
   id: '/boutique',
   path: '/boutique',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -95,11 +102,17 @@ const BoutiqueProductSlugRoute = BoutiqueProductSlugRouteImport.update({
   path: '/$productSlug',
   getParentRoute: () => BoutiqueRoute,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRoute
+  '/blog': typeof BlogRouteWithChildren
   '/boutique': typeof BoutiqueRouteWithChildren
   '/coffret-signature': typeof CoffretSignatureRoute
   '/conseils': typeof ConseilsRoute
@@ -107,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
@@ -116,6 +130,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRoute
+  '/blog': typeof BlogRouteWithChildren
   '/boutique': typeof BoutiqueRouteWithChildren
   '/coffret-signature': typeof CoffretSignatureRoute
   '/conseils': typeof ConseilsRoute
@@ -123,6 +138,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
@@ -133,6 +149,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/a-propos': typeof AProposRoute
   '/admin': typeof AdminRoute
+  '/blog': typeof BlogRouteWithChildren
   '/boutique': typeof BoutiqueRouteWithChildren
   '/coffret-signature': typeof CoffretSignatureRoute
   '/conseils': typeof ConseilsRoute
@@ -140,6 +157,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/livraison': typeof LivraisonRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
@@ -151,6 +169,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a-propos'
     | '/admin'
+    | '/blog'
     | '/boutique'
     | '/coffret-signature'
     | '/conseils'
@@ -158,6 +177,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/livraison'
     | '/mentions-legales'
+    | '/blog/$slug'
     | '/boutique/$productSlug'
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
@@ -167,6 +187,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a-propos'
     | '/admin'
+    | '/blog'
     | '/boutique'
     | '/coffret-signature'
     | '/conseils'
@@ -174,6 +195,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/livraison'
     | '/mentions-legales'
+    | '/blog/$slug'
     | '/boutique/$productSlug'
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
@@ -183,6 +205,7 @@ export interface FileRouteTypes {
     | '/'
     | '/a-propos'
     | '/admin'
+    | '/blog'
     | '/boutique'
     | '/coffret-signature'
     | '/conseils'
@@ -190,6 +213,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/livraison'
     | '/mentions-legales'
+    | '/blog/$slug'
     | '/boutique/$productSlug'
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
@@ -200,6 +224,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AProposRoute: typeof AProposRoute
   AdminRoute: typeof AdminRoute
+  BlogRoute: typeof BlogRouteWithChildren
   BoutiqueRoute: typeof BoutiqueRouteWithChildren
   CoffretSignatureRoute: typeof CoffretSignatureRoute
   ConseilsRoute: typeof ConseilsRoute
@@ -263,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoutiqueRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -312,8 +344,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoutiqueProductSlugRouteImport
       parentRoute: typeof BoutiqueRoute
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 interface BoutiqueRouteChildren {
   BoutiqueProductSlugRoute: typeof BoutiqueProductSlugRoute
@@ -331,6 +380,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AProposRoute: AProposRoute,
   AdminRoute: AdminRoute,
+  BlogRoute: BlogRouteWithChildren,
   BoutiqueRoute: BoutiqueRouteWithChildren,
   CoffretSignatureRoute: CoffretSignatureRoute,
   ConseilsRoute: ConseilsRoute,
