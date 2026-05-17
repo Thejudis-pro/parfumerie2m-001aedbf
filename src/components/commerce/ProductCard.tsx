@@ -27,7 +27,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           {product.notes.map((note) => (
             <span
               key={note}
-              className="rounded-full border border-border bg-accent-muted px-3 py-1 text-xs text-muted-foreground"
+              className="rounded-full border border-accent bg-accent-muted/40 px-3 py-1 text-xs text-accent font-medium"
             >
               {note}
             </span>

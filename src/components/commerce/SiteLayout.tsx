@@ -77,11 +77,11 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
                 key={item.to}
                 to={item.to}
                 activeOptions={{ exact: item.to === "/" }}
-                className="group nav-luxe relative min-h-11 content-center text-muted-foreground hover:text-foreground"
+                className="group nav-luxe relative min-h-11 content-center text-muted-foreground hover:text-accent transition-colors"
                 activeProps={{ className: "text-accent" }}
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full group-data-[status=active]:w-full" />
+                <span className="absolute -bottom-1 left-0 h-1 w-0 bg-accent rounded-full transition-all duration-300 group-hover:w-full group-data-[status=active]:w-full" />
               </Link>
             ))}
           </div>
@@ -190,7 +190,7 @@ function SiteFooter() {
               href="https://instagram.com/2mparfumeriesn"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent hover:bg-accent/5 transition-all"
               aria-label="Instagram 2M Parfumerie"
               title="Logo Instagram 2M Parfumerie"
             >
@@ -200,7 +200,7 @@ function SiteFooter() {
               href={facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-muted-foreground hover:border-accent hover:text-accent hover:bg-accent/5 transition-all"
               aria-label="Facebook 2M Parfumerie"
               title="Logo Facebook 2M Parfumerie"
             >
@@ -210,7 +210,7 @@ function SiteFooter() {
               href={whatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-whatsapp text-primary-foreground hover:bg-whatsapp-hover"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-whatsapp text-primary-foreground hover:bg-whatsapp-hover hover:shadow-green transition-all"
               aria-label="WhatsApp 2M Parfumerie"
             >
               <WhatsAppLogo tone="light" className="size-5" />
@@ -232,7 +232,7 @@ function SiteFooter() {
               key={item.collection}
               to="/boutique"
               search={{ collection: item.collection }}
-              className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-foreground"
+              className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-primary-foreground"
             >
               {item.label}
             </Link>
@@ -241,19 +241,19 @@ function SiteFooter() {
         <FooterColumn title="Contact">
           <a
             href="tel:+221761923441"
-            className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"
+            className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-primary-foreground"
           >
             <Phone className="size-4" aria-hidden="true" /> {displayPhone}
           </a>
           <a
             href="tel:+221781441766"
-            className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"
+            className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-primary-foreground"
           >
             <Phone className="size-4" aria-hidden="true" /> {secondPhone}
           </a>
           <a
             href={`mailto:${email}`}
-            className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-accent"
+            className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground hover:text-primary-foreground"
           >
             <Mail className="size-4" aria-hidden="true" /> {email}
           </a>
@@ -314,7 +314,7 @@ function FooterLink({
   return (
     <Link
       to={to}
-      className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-foreground"
+      className="block min-h-11 py-1 text-[13px] text-muted-foreground hover:text-primary-foreground"
     >
       {children}
     </Link>

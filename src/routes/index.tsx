@@ -153,7 +153,8 @@ function Index() {
   return (
     <SiteLayout>
       <section className="relative overflow-hidden bg-background pt-24 md:min-h-screen md:pt-32">
-        <div className="grid items-center md:min-h-[calc(100vh-96px)] md:grid-cols-[55fr_45fr]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,oklch(0.36_0.096_160/0.08),transparent_36%),radial-gradient(circle_at_bottom_left,oklch(0.87_0.045_160/0.05),transparent_40%)]" />
+        <div className="grid items-center relative z-10 md:min-h-[calc(100vh-96px)] md:grid-cols-[55fr_45fr]">
           <div className="section-shell z-10 order-1 py-8 md:w-auto md:py-10 md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
             <div className="max-w-2xl">
               <p className="caption-luxe mb-6 text-accent fade-up">
@@ -207,23 +208,23 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="relative order-2 h-[42vh] min-h-[300px] overflow-hidden bg-surface-alt md:h-full md:min-h-[calc(100vh-128px)]">
-            <img
-              src={homeHeroBottle}
-              alt="Flacon blanc SCENTLAB chez 2M Parfumerie"
-              width="1200"
-              height="1500"
-              loading="eager"
-              fetchPriority="high"
-              className="h-full w-full object-cover"
-            />
+            <div className="relative order-2 h-[38vh] min-h-[260px] overflow-hidden bg-surface-alt md:h-full md:min-h-[calc(100vh-144px)]">
+              <video
+                src="/videos/authentic.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="h-full w-full object-cover"
+              />
           </div>
         </div>
       </section>
 
       <Ticker />
 
-      <section className="bg-background py-16 md:py-24">
+      <section className="relative border-t-4 border-accent/20 bg-background py-16 md:py-24">
         <div className="section-shell text-center">
           <HomeHeader
             title="Nos parfums du moment"
@@ -280,7 +281,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-surface-alt py-16 md:py-24">
+      <section className="relative border-t-4 border-accent/20 bg-surface-alt py-16 md:py-24">
         <div className="section-shell text-center">
           <p className="caption-luxe text-accent">Compose ton pack</p>
           <h2 className="mt-4 font-display text-[32px] font-medium text-foreground md:text-5xl">
@@ -315,7 +316,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-24">
+      <section className="relative border-t-4 border-accent/20 bg-background py-16 md:py-24">
         <div className="section-shell grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-12">
           <div className="fade-up">
             <h2 className="font-display text-[32px] font-medium text-foreground md:text-5xl">
@@ -333,10 +334,10 @@ function Index() {
             {promises.map(({ icon: Icon, title, body }, index) => (
               <article
                 key={title}
-                className="fade-up rounded-lg border border-border bg-surface p-6 transition-all hover:border-accent"
+                className="fade-up rounded-lg border border-border bg-surface p-6 transition-all hover:border-accent hover:shadow-green"
                 style={{ animationDelay: `${index * 80}ms` }}
               >
-                <Icon className="mb-6 text-accent" aria-hidden="true" />
+                <Icon className="mb-6 size-8 text-accent drop-shadow-md" aria-hidden="true" />
                 <h3 className="font-display text-2xl text-foreground">{title}</h3>
                 <p className="mt-3 text-sm text-muted-foreground">{body}</p>
               </article>
@@ -345,20 +346,20 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-surface-alt py-16 md:py-24">
+      <section className="relative border-t-4 border-accent/20 bg-surface-alt py-16 md:py-24">
         <div className="section-shell">
           <div className="flex snap-x gap-5 overflow-x-auto pb-4 md:grid md:grid-cols-3 md:overflow-visible">
             {testimonials.map((item, index) => (
               <article
                 key={item.name}
-                className="fade-up min-w-[86%] snap-center rounded-lg border border-border bg-surface p-8 transition-all hover:border-accent-hover md:min-w-0"
+                className="fade-up min-w-[86%] snap-center rounded-lg border border-border bg-surface p-8 transition-all hover:border-accent-hover hover:shadow-green md:min-w-0"
                 style={{ animationDelay: `${index * 80}ms` }}
               >
                 <div className="mb-4 text-xl text-accent">★★★★★</div>
-                <Quote className="mb-4 text-accent" aria-hidden="true" />
+                <Quote className="mb-4 text-accent drop-shadow-md" aria-hidden="true" />
                 <p className="text-sm text-muted-foreground">“{item.quote}”</p>
                 <div className="mt-6 flex items-center gap-3">
-                  <span className="flex size-10 items-center justify-center rounded-full bg-accent-muted text-sm font-semibold text-accent">
+                  <span className="flex size-10 items-center justify-center rounded-full bg-accent/15 border border-accent text-sm font-semibold text-accent">
                     {item.initials}
                   </span>
                   <span>
@@ -372,7 +373,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="final-cta-bg border-t border-border py-16 md:py-20">
+      <section className="relative border-t-4 border-accent/20 final-cta-bg border-t border-border py-16 md:py-20">
         <div className="section-shell mx-auto max-w-2xl text-center">
           <p className="caption-luxe mb-4 text-accent">Trouvez votre signature</p>
           <h2 className="font-display text-[32px] leading-[1.2] text-foreground md:text-5xl">
@@ -394,27 +395,6 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-background py-12 md:py-16">
-        <div className="section-shell">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="caption-luxe text-accent">Parfums authentiques</p>
-            <h2 className="mt-3 font-display text-[28px] leading-tight text-foreground md:text-4xl">
-              L'authenticité en vidéo
-            </h2>
-          </div>
-          <div className="mx-auto mt-8 max-w-md overflow-hidden rounded-lg border border-border bg-card shadow-card">
-            <video
-              src="/videos/authentic.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              controls
-              className="h-auto w-full"
-            />
-          </div>
-        </div>
-      </section>
     </SiteLayout>
   );
 }

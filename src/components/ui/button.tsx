@@ -14,12 +14,13 @@ const buttonVariants = cva(
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
           "border border-accent bg-transparent text-accent hover:bg-accent-muted hover:text-accent",
-        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 hover:border-accent",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-primary underline-offset-4 hover:underline hover:text-accent",
         whatsapp:
           "bg-whatsapp text-primary-foreground shadow-btn hover:scale-[1.02] hover:bg-whatsapp-hover whatsapp-pulse",
-        luxe: "border border-border bg-surface text-foreground shadow-card hover:-translate-y-1 hover:border-accent hover:bg-surface-alt",
+        luxe: "border border-border bg-surface text-foreground shadow-card hover:-translate-y-1 hover:border-accent hover:bg-surface-alt hover:shadow-green",
+        green: "border border-accent/30 bg-accent-muted text-accent hover:bg-accent/10 hover:border-accent",
       },
       size: {
         default: "h-12 px-5 py-3",
