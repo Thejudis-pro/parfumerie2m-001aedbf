@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          category: string
+          content: string
+          cover_image_url: string | null
+          created_at: string | null
+          excerpt: string
+          id: string
+          is_published: boolean
+          slug: string
+          sort_order: number
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          category: string
+          content: string
+          cover_image_url?: string | null
+          created_at?: string | null
+          excerpt: string
+          id?: string
+          is_published?: boolean
+          slug: string
+          sort_order?: number
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string
+          content?: string
+          cover_image_url?: string | null
+          created_at?: string | null
+          excerpt?: string
+          id?: string
+          is_published?: boolean
+          slug?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           created_at: string | null
@@ -109,48 +151,6 @@ export type Database = {
           price?: number
           slug?: string
           subtitle?: string | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      blog_posts: {
-        Row: {
-          category: string
-          content: string
-          cover_image_url: string | null
-          created_at: string | null
-          excerpt: string
-          id: string
-          is_published: boolean | null
-          sort_order: number
-          slug: string
-          title: string
-          updated_at: string | null
-        }
-        Insert: {
-          category: string
-          content: string
-          cover_image_url?: string | null
-          created_at?: string | null
-          excerpt: string
-          id?: string
-          is_published?: boolean | null
-          sort_order?: number | null
-          slug: string
-          title: string
-          updated_at?: string | null
-        }
-        Update: {
-          category?: string
-          content?: string
-          cover_image_url?: string | null
-          created_at?: string | null
-          excerpt?: string
-          id?: string
-          is_published?: boolean | null
-          sort_order?: number | null
-          slug?: string
-          title?: string
           updated_at?: string | null
         }
         Relationships: []

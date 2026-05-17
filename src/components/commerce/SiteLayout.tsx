@@ -305,6 +305,7 @@ function FooterLink({
     | "/"
     | "/boutique"
     | "/coffret-signature"
+    | "/blog"
     | "/a-propos"
     | "/faq"
     | "/contact"
