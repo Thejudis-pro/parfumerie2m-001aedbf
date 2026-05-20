@@ -8,11 +8,11 @@ import { SiteLayout } from "@/components/commerce/SiteLayout";
 export const Route = createFileRoute("/livraison")({
   head: () => ({
     meta: [
-      { title: "Livraison | 2M Parfumerie Sénégal" },
+      { title: "Livraison | 2M Parfumerie dakar" },
       {
         name: "description",
         content:
-          "Informations de livraison et confirmation WhatsApp pour vos commandes 2M Parfumerie partout au Sénégal.",
+          "Informations de livraison et confirmation WhatsApp pour vos commandes 2M Parfumerie partout au dakar.",
       },
     ],
   }),
@@ -34,7 +34,7 @@ function DeliveryPage() {
     {
       icon: MapPinned,
       title: "Réception",
-      text: "La remise est organisée selon votre localisation au Sénégal et votre disponibilité.",
+      text: "La remise est organisée selon votre localisation au dakar et votre disponibilité.",
     },
   ];
   return (

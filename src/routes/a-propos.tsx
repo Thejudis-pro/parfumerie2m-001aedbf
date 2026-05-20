@@ -15,12 +15,12 @@ export const Route = createFileRoute("/a-propos")({
       {
         name: "description",
         content:
-          "Découvrez l'histoire de 2M Parfumerie, votre parfumerie authentique au Sénégal. Notre mission : rendre les parfums de luxe accessibles à tous les Sénégalais.",
+          "Découvrez l'histoire de 2M Parfumerie, votre parfumerie authentique au dakar. Notre mission : rendre les parfums de luxe accessibles à tous les dakar.",
       },
-      { property: "og:title", content: "À Propos | 2M Parfumerie Sénégal" },
+      { property: "og:title", content: "À Propos | 2M Parfumerie dakar" },
       {
         property: "og:description",
-        content: "Découvrez l'histoire de 2M Parfumerie, votre parfumerie authentique au Sénégal.",
+        content: "Découvrez l'histoire de 2M Parfumerie, votre parfumerie authentique au dakar.",
       },
       { property: "og:url", content: "https://www.2mparfumeriedk.com/a-propos" },
       { property: "og:type", content: "website" },
@@ -45,8 +45,8 @@ const values = [
   },
   {
     icon: MapPin,
-    title: "Le Sénégal, au cœur de tout",
-    body: "Notre marché, c'est le Sénégal. Notre livraison couvre le pays. Notre équipe accompagne chaque client avec la même exigence, où qu’il se trouve.",
+    title: "Le dakar, au cœur de tout",
+    body: "Notre marché, c'est le dakar. Notre livraison couvre le pays. Notre équipe accompagne chaque client avec la même exigence, où qu’il se trouve.",
   },
 ];
 

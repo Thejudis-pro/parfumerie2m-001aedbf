@@ -100,7 +100,7 @@ export function CartDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             <p className="mt-6 font-display text-2xl text-foreground">Votre panier est vide.</p>
             <Button asChild variant="outline" className="mt-8" onClick={onClose}>
               <Link to="/boutique" search={{}}>
-                Explorer la boutique
+                Visiter la boutique
               </Link>
             </Button>
           </div>

@@ -48,7 +48,7 @@ export function ProductGrid({ limit }: { limit?: number }) {
 
 export function Ticker() {
   const items = [
-    "✦ Livraison partout au Sénégal",
+    "✦ Livraison partout au dakar",
     "✦ +100 collections exclusives",
     "✦ Paiement à la livraison",
     "✦ Notes olfactives certifiées",

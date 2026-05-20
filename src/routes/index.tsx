@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Check, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
+import { ArrowDown, Check, MousePointerClick, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -22,17 +22,17 @@ import { whatsappUrl } from "@/lib/perfume-data";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "2M Parfumerie Sénégal | Parfums authentiques livrés à Dakar" },
+      { title: "2M Parfumerie dakar | Parfums authentiques livrés à Dakar" },
       {
         name: "description",
         content:
-          "Achetez des parfums authentiques de luxe au Sénégal. +100 collections SCENTLAB, TAKEOFF, Dubai Perfumes. Livraison partout au Sénégal. Paiement à la livraison.",
+          "Achetez des parfums authentiques de luxe au dakar. +100 collections SCENTLAB, TAKEOFF, Dubai Perfumes. Livraison partout au dakar. Paiement à la livraison.",
       },
-      { property: "og:title", content: "2M Parfumerie Sénégal | Parfums authentiques livrés à Dakar" },
+      { property: "og:title", content: "2M Parfumerie dakar | Parfums authentiques livrés à Dakar" },
       {
         property: "og:description",
         content:
-          "Achetez des parfums authentiques de luxe au Sénégal. Livraison partout au Sénégal, paiement à la livraison.",
+          "Achetez des parfums authentiques de luxe au dakar. Livraison partout au dakar, paiement à la livraison.",
       },
       { property: "og:url", content: "https://www.2mparfumeriedk.com/" },
       { property: "og:type", content: "website" },
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/")({
           "@type": "LocalBusiness",
           name: "2M Parfumerie",
           description:
-            "Parfumerie en ligne au Sénégal proposant des parfums authentiques de luxe livrés partout au Sénégal.",
+            "Parfumerie en ligne au dakar proposant des parfums authentiques de luxe livrés partout au dakar.",
           url: "https://www.2mparfumeriedk.com",
           telephone: "+221761923441",
           email: "commande@2mparfumerie.com",
@@ -190,7 +190,7 @@ function Index() {
                 </Button>
                 <Button asChild variant="outline" size="lg">
                   <Link to="/boutique" search={{}}>
-                    Explorer la boutique
+                    Visiter la boutique
                   </Link>
                 </Button>
               </div>
@@ -290,27 +290,48 @@ function Index() {
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
             Choisis tes parfums dans la collection de ton choix — on s'occupe du reste.
           </p>
+          <div className="mt-6 flex items-center justify-center gap-2 text-accent">
+            <ArrowDown className="size-5 animate-bounce" aria-hidden="true" />
+            <p className="text-sm font-semibold uppercase tracking-[0.18em]">
+              Clique sur l’un des packs
+            </p>
+          </div>
           <div className="mt-8 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
             <Button
               asChild
               size="lg"
               className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
             >
-              <Link to="/coffret-signature">Pack Haqqi (3 parfums)</Link>
+              <Link to="/coffret-signature">
+                <span className="inline-flex items-center gap-2">
+                  <MousePointerClick className="size-4" aria-hidden="true" />
+                  Pack Haqqi (3 parfums)
+                </span>
+              </Link>
             </Button>
             <Button
               asChild
               size="lg"
               className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
             >
-              <Link to="/coffret-signature">Pack SCENTLAB (3 parfums)</Link>
+              <Link to="/coffret-signature">
+                <span className="inline-flex items-center gap-2">
+                  <MousePointerClick className="size-4" aria-hidden="true" />
+                  Pack SCENTLAB (3 parfums)
+                </span>
+              </Link>
             </Button>
             <Button
               asChild
               size="lg"
               className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
             >
-              <Link to="/coffret-signature">Pack Parfums de poches (5 parfums)</Link>
+              <Link to="/coffret-signature">
+                <span className="inline-flex items-center gap-2">
+                  <MousePointerClick className="size-4" aria-hidden="true" />
+                  Pack Parfums de poches (5 parfums)
+                </span>
+              </Link>
             </Button>
           </div>
         </div>

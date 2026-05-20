@@ -8,16 +8,16 @@ import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — 2M Parfumerie Sénégal | WhatsApp & Téléphone" },
+      { title: "Contact — 2M Parfumerie dakar | WhatsApp & Téléphone" },
       {
         name: "description",
         content:
-          "Contactez 2M Parfumerie au Sénégal. WhatsApp et appels disponibles 7j/7. Livraison partout au Sénégal. commande@2mparfumerie.com",
+          "Contactez 2M Parfumerie au dakar. WhatsApp et appels disponibles 7j/7. Livraison partout au dakar. commande@2mparfumerie.com",
       },
-      { property: "og:title", content: "Contact — 2M Parfumerie Sénégal" },
+      { property: "og:title", content: "Contact — 2M Parfumerie dakar" },
       {
         property: "og:description",
-        content: "WhatsApp et appels disponibles 7j/7. Livraison partout au Sénégal.",
+        content: "WhatsApp et appels disponibles 7j/7. Livraison partout au dakar.",
       },
     ],
   }),

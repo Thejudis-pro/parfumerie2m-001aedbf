@@ -372,7 +372,7 @@ const takeoffCatalog: BoutiqueProduct[] = takeoffProducts.map((product) => ({
   family: product.family,
   concentration: "Eau de parfum",
   volume: "100 ml",
-  description: `${product.name} par TAKEOFF Fragrance est une eau de parfum 100 ml de la collection Scent of Journey, disponible chez 2M Parfumerie au Sénégal.`,
+  description: `${product.name} par TAKEOFF Fragrance est une eau de parfum 100 ml de la collection Scent of Journey, disponible chez 2M Parfumerie au dakar.`,
 }));
 
 const scentlabCatalog: BoutiqueProduct[] = scentlabProducts.map((product) => ({
@@ -388,7 +388,7 @@ const scentlabCatalog: BoutiqueProduct[] = scentlabProducts.map((product) => ({
   family: product.family,
   concentration: "Eau de parfum",
   volume: "50 ml",
-  description: `${product.name} par SCENTLAB est une eau de parfum sélectionnée par 2M Parfumerie pour un sillage moderne et facile à porter au Sénégal.`,
+  description: `${product.name} par SCENTLAB est une eau de parfum sélectionnée par 2M Parfumerie pour un sillage moderne et facile à porter au dakar.`,
 }));
 
 const haqqiProducts: { name: string; ref: string; family: string; notes: string }[] = [

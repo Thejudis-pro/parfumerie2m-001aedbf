@@ -23,10 +23,10 @@ export const Route = createFileRoute("/boutique/$productSlug")({
     const product = findProductBySlug(params.productSlug);
     const url = `https://www.2mparfumeriedk.com/boutique/${params.productSlug}`;
     const title = product
-      ? `${product.name} – ${collectionLabel(product.collection)} | 2M Parfumerie Sénégal`
+      ? `${product.name} – ${collectionLabel(product.collection)} | 2M Parfumerie dakar`
       : "Parfum introuvable | 2M Parfumerie";
     const description = product
-      ? `${product.name} par ${collectionLabel(product.collection)} : notes de ${product.notes}. ${formatPrice(product.price)}. Livraison au Sénégal. Commandez sur WhatsApp chez 2M Parfumerie.`
+      ? `${product.name} par ${collectionLabel(product.collection)} : notes de ${product.notes}. ${formatPrice(product.price)}. Livraison au dakar. Commandez sur WhatsApp chez 2M Parfumerie.`
       : "Ce parfum n'est pas disponible dans la boutique 2M Parfumerie.";
     const image = product?.image;
     const meta: Array<Record<string, string>> = [

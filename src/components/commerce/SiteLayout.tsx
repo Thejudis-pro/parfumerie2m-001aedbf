@@ -258,7 +258,7 @@ function SiteFooter() {
             <Mail className="size-4" aria-hidden="true" /> {email}
           </a>
           <p className="flex min-h-11 items-center gap-2 py-1 text-[13px] text-muted-foreground">
-            <MapPin className="size-4" aria-hidden="true" /> Sénégal
+            <MapPin className="size-4" aria-hidden="true" /> dakar
           </p>
           <a
             href={whatsappUrl()}
@@ -273,7 +273,7 @@ function SiteFooter() {
       <div className="mx-auto mt-8 flex max-w-7xl flex-col justify-between gap-3 border-t border-foreground/5 px-4 pt-8 text-xs text-muted-foreground md:flex-row md:px-6">
         <p>© 2026 2M Parfumerie. Tous droits réservés.</p>
         <p>
-          Fait avec ♥ au Sénégal · Site by{" "}
+          Fait avec ♥ au dakar · Site by{" "}
           <a
             href="https://nextwave.sn"
             target="_blank"

@@ -10,17 +10,17 @@ import { displayPhone, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — Questions Fréquentes | 2M Parfumerie Sénégal" },
+      { title: "FAQ — Questions Fréquentes | 2M Parfumerie dakar" },
       {
         name: "description",
         content:
-          "Toutes vos questions sur la livraison partout au Sénégal, l'authenticité, les paiements et les retours chez 2M Parfumerie.",
+          "Toutes vos questions sur la livraison partout au dakar, l'authenticité, les paiements et les retours chez 2M Parfumerie.",
       },
-      { property: "og:title", content: "FAQ — Questions Fréquentes | 2M Parfumerie Sénégal" },
+      { property: "og:title", content: "FAQ — Questions Fréquentes | 2M Parfumerie dakar" },
       {
         property: "og:description",
         content:
-          "Livraison partout au Sénégal, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie.",
+          "Livraison partout au dakar, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie.",
       },
     ],
   }),
@@ -34,9 +34,9 @@ const faqs = [
       "Absolument. Tous nos parfums sont sourcés directement auprès de distributeurs certifiés. Nous ne vendons aucune imitation ou contrefaçon. Si vous avez le moindre doute après réception, contactez-nous immédiatement sur WhatsApp.",
   },
   {
-    question: "Comment se passe la livraison au Sénégal ?",
+    question: "Comment se passe la livraison au dakar ?",
     answer:
-      "Nous livrons partout au Sénégal. Pour toute commande passée avant 21h, nous faisons le maximum pour livrer le jour même selon votre zone. Passé 21h, livraison garantie le lendemain ou selon les délais de transport vers votre région. Contactez-nous sur WhatsApp ou par appel pour confirmer votre localité.",
+      "Nous livrons partout au dakar. Pour toute commande passée avant 21h, nous faisons le maximum pour livrer le jour même selon votre zone. Passé 21h, livraison garantie le lendemain ou selon les délais de transport vers votre région. Contactez-nous sur WhatsApp ou par appel pour confirmer votre localité.",
   },
   {
     question: "Quels sont les modes de paiement acceptés ?",
@@ -54,9 +54,9 @@ const faqs = [
       "C'est notre spécialité. Écrivez-nous sur WhatsApp en décrivant votre style, l'occasion pour laquelle vous cherchez un parfum, et votre budget — nous vous conseillerons personnellement sur 2-3 options parfaites pour vous.",
   },
   {
-    question: "Livrez-vous dans les régions du Sénégal ?",
+    question: "Livrez-vous dans les régions du dakar ?",
     answer:
-      "Oui, nous livrons partout dans les régions du Sénégal. Nous avons déjà des clients satisfaits de nos produits dans plusieurs régions ; contactez-nous sur WhatsApp ou par appel pour confirmer le délai et le mode de livraison adaptés à votre localité.",
+      "Oui, nous livrons partout dans les régions du dakar. Nous avons déjà des clients satisfaits de nos produits dans plusieurs régions ; contactez-nous sur WhatsApp ou par appel pour confirmer le délai et le mode de livraison adaptés à votre localité.",
   },
   {
     question: "Quelle est la différence entre vos collections ?",
