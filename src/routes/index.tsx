@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, Check, MousePointerClick, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
+import { ArrowDown, Check, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,9 @@ import { Ticker } from "@/components/commerce/PageBlocks";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import homeHeroBottle from "@/assets/home-white-bottle.png";
+import haqqiCollectionImage from "@/assets/haqqi-collection.png";
+import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
+import pocketPerfumesHommeImage from "@/assets/pocket-perfumes-homme.png";
 import {
   catalog,
   collectionLabel,
@@ -73,6 +76,24 @@ export const Route = createFileRoute("/")({
 const heroMessage =
   "Bonjour 2M Parfumerie 👋 Je souhaite découvrir vos collections. Pouvez-vous m'aider ?";
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
+
+const featuredPackCards = [
+  {
+    title: "Pack Haqqi",
+    subtitle: "3 parfums",
+    image: haqqiCollectionImage,
+  },
+  {
+    title: "Pack SCENTLAB",
+    subtitle: "3 parfums",
+    image: scentlabBoxesImage,
+  },
+  {
+    title: "Parfums de poches",
+    subtitle: "5 parfums",
+    image: pocketPerfumesHommeImage,
+  },
+] as const;
 
 function pickFeaturedProducts(products: BoutiqueProduct[]) {
   const featuredCollections: BoutiqueProduct["collection"][] = ["takeoff", "scentlab", "dubai"];
@@ -296,43 +317,41 @@ function Index() {
               Clique sur l’un des packs
             </p>
           </div>
-          <div className="mt-8 flex flex-col flex-wrap items-center justify-center gap-3 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
-            >
-              <Link to="/coffret-signature">
-                <span className="inline-flex items-center gap-2">
-                  <MousePointerClick className="size-4" aria-hidden="true" />
-                  Pack Haqqi (3 parfums)
-                </span>
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
-            >
-              <Link to="/coffret-signature">
-                <span className="inline-flex items-center gap-2">
-                  <MousePointerClick className="size-4" aria-hidden="true" />
-                  Pack SCENTLAB (3 parfums)
-                </span>
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="h-auto max-w-full whitespace-normal break-words bg-accent px-6 py-3 text-center text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt animate-pulse hover:bg-accent/90"
-            >
-              <Link to="/coffret-signature">
-                <span className="inline-flex items-center gap-2">
-                  <MousePointerClick className="size-4" aria-hidden="true" />
-                  Pack Parfums de poches (5 parfums)
-                </span>
-              </Link>
-            </Button>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {featuredPackCards.map((pack) => (
+              <article
+                key={pack.title}
+                className="group mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-accent"
+              >
+                <div className="relative h-40 overflow-hidden bg-surface md:h-44">
+                  <img
+                    src={pack.image}
+                    alt={pack.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent shadow-sm backdrop-blur">
+                    Pack
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col gap-4 p-5">
+                  <div>
+                    <h3 className="font-display text-2xl leading-tight text-foreground">
+                      {pack.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground">{pack.subtitle}</p>
+                  </div>
+                  <div className="mt-auto">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="h-auto w-full justify-center rounded-full bg-accent px-5 py-3 text-primary-foreground shadow-elegant ring-2 ring-accent/40 ring-offset-2 ring-offset-surface-alt hover:bg-accent/90"
+                    >
+                      <Link to="/coffret-signature">Choisir ce pack</Link>
+                    </Button>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
