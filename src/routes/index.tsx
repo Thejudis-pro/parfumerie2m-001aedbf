@@ -29,8 +29,9 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Achetez des parfums authentiques de luxe au dakar. +100 collections SCENTLAB, TAKEOFF, Dubai Perfumes. Livraison partout au dakar. Paiement à la livraison.",
+          "2M Parfumerie est spécialisée dans la vente de parfums de qualité et propose une sélection variée de fragrances inspirées des grandes maisons, adaptées à tous les styles et à toutes les occasions. Nous vendons les parfums et collections suivants : 1. Haqqi 2. Scentlab 3. Takeoff Fragance 4. Parfums authentique 5. Parfums Dubai 6. Parfums de poches 7. Collections privées 8. Fragance Library",
       },
+      { name: "keywords", content: "Haqqi, Scentlab, Takeoff Fragance, Parfums authentique, Parfums Dubai, Parfums de poches, Collections privées, Fragance Library" },
       { property: "og:title", content: "2M Parfumerie dakar | Parfums authentiques livrés à Dakar" },
       {
         property: "og:description",
@@ -52,10 +53,11 @@ export const Route = createFileRoute("/")({
           "@type": "LocalBusiness",
           name: "2M Parfumerie",
           description:
-            "Parfumerie en ligne au dakar proposant des parfums authentiques de luxe livrés partout au dakar.",
+            "2M Parfumerie est spécialisée dans la vente de parfums de qualité et propose une sélection variée de fragrances inspirées des grandes maisons, adaptées à tous les styles et à toutes les occasions. Nous vendons les parfums et collections suivants : Haqqi, Scentlab, Takeoff Fragance, Parfums authentique, Parfums Dubai, Parfums de poches, Collections privées, Fragance Library",
           url: "https://www.2mparfumeriedk.com",
           telephone: "+221761923441",
-          email: "commande@2mparfumerie.com",
+          email: "2mparfumerie2025@gmail.com",
+          keywords: "Haqqi, Scentlab, Takeoff Fragance, Parfums authentique, Parfums Dubai, Parfums de poches, Collections privées, Fragance Library",
           address: {
             "@type": "PostalAddress",
             addressCountry: "SN",

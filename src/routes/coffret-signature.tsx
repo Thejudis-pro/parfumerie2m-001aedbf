@@ -1,22 +1,21 @@
-﻿import { Link, createFileRoute } from "@tanstack/react-router";
-import { Check, Sparkles, WandSparkles } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { ArrowDown, Check, Sparkles, WandSparkles } from "lucide-react";
+import { useMemo, useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
+import haqqiCollectionImage from "@/assets/haqqi-collection.png";
+import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
+import pocketPerfumesHommeImage from "@/assets/pocket-perfumes-homme.png";
+
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
-import haqqiCollectionImage from "@/assets/haqqi-collection.png";
-import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
-import scentlabMarineCitrusImage from "@/assets/scentlab-marine-citrus.png";
-import pocketHommeImage from "@/assets/pocket-perfumes-homme.png";
-import pocketFemmeImage from "@/assets/pocket-perfumes-femme.png";
 import { formatPrice } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
-type CoffretCollection = "haqqi" | "scentlab" | "pocket";
+type CoffretCollection = "haqqi" | "scentlab";
 
 type CoffretOption = {
   id: string;
@@ -31,25 +30,19 @@ type CoffretSection = {
 
 const coffretOffers: Record<
   CoffretCollection,
-  { label: string; price: number; subtitle: string; accent?: string; selectionCount: number }
+  { label: string; price: number; subtitle: string; accent: string }
 > = {
   haqqi: {
-    label: "Pack de 3 Haqqi",
+    label: "Compose ton pack Haqqi",
     price: 10000,
-    subtitle: "Choisis tes 3 parfums de 40 ml.",
-    selectionCount: 3,
+    subtitle: "3 parfums à composer dans un esprit plus profond, chaud et élégant.",
+    accent: "Ambiance orientale",
   },
   scentlab: {
-    label: "Pack de 3 SCENTLAB",
+    label: "Compose ton pack SCENTLAB",
     price: 15000,
-    subtitle: "Choisis tes 3 parfums de 50 ml.",
-    selectionCount: 3,
-  },
-  pocket: {
-    label: "Pack de 5 parfums de poches",
-    price: 10000,
-    subtitle: "Choisis tes 5 parfums de 50 ml.",
-    selectionCount: 5,
+    subtitle: "3 parfums à composer dans une lecture plus moderne, fraîche ou gourmande.",
+    accent: "Esprit contemporain",
   },
 };
 
@@ -116,144 +109,77 @@ const haqqiSections: CoffretSection[] = [
 
 const scentlabSections: CoffretSection[] = [
   {
-    title: "Homme",
+    title: "Hommes",
     items: [
-      { id: "scentlab-woody-bergamot", title: "Woody Bergamot", description: "Sauvage" },
-      { id: "scentlab-minty-cedar", title: "Minty Cedar", description: "Bleu de Chanel" },
-      { id: "scentlab-fresh-grapefruit", title: "Fresh Grapefruit", description: "Invictus" },
-      { id: "scentlab-minty-vanilla", title: "Minty Vanilla", description: "Versace Éros" },
-      { id: "scentlab-earth-vetiver", title: "Earth Vétiver", description: "Terre d’Hermès" },
-      { id: "scentlab-aquatique-jasmine", title: "Aquatique Jasmine", description: "Acqua di Gio" },
-      { id: "scentlab-warm-spicy", title: "Warm Spicy", description: "Stronger With You" },
-      { id: "scentlab-cool-mint", title: "Cool Mint", description: "Allure" },
-      { id: "scentlab-pineapple-bergamote", title: "Pineapple Bergamote", description: "Creed Aventus" },
-      { id: "scentlab-minty-lavender", title: "Minty Lavender", description: "JPG Le Mâle" },
-      { id: "scentlab-spicy-leather", title: "Spicy Leather", description: "One Million" },
-      { id: "scentlab-bright-mandarin", title: "Bright Mandarin", description: "Louis Vuitton Imagination" },
-      { id: "scentlab-sweet-tobacco", title: "Sweet Tobacco", description: "Xerjoff Naxos" },
-      { id: "scentlab-woody-oud", title: "Woody Oud", description: "Tom Ford Oud Wood" },
-      { id: "scentlab-dark-leather", title: "Dark Leather", description: "Tom Ford Ombre Leather" },
-      { id: "scentlab-iris-cedar", title: "İris Cedar", description: "Dior Homme Intense" },
-      { id: "scentlab-leather-violet", title: "Leather Violet", description: "Dior Fahrenheit" },
-      { id: "scentlab-spicy-caramel", title: "Spicy Caramel", description: "Scandal Man" },
-      { id: "scentlab-cognac-whisper", title: "Cognac Whisper", description: "Kilian Angels’ Share" },
-      { id: "scentlab-oriental-oud", title: "Oriental Oud", description: "Oud for Greatness" },
-      { id: "scentlab-spicy-leather-exclusive", title: "Spicy Leather Exclusive", description: "One Million Lucky" },
-      { id: "scentlab-oriental-tonka", title: "Oriental Tonka", description: "Arabian Tonka" },
-      { id: "scentlab-poetic-amber", title: "Poetic Amber", description: "More Than Words" },
-      { id: "scentlab-dreamy-bloom", title: "Dreamy Bloom", description: "Mémo Marfa" },
-      { id: "scentlab-galactic-musk", title: "Galactic Musk", description: "Ganymed" },
-      { id: "scentlab-savanna-vetiver", title: "Savanna Vétiver", description: "Bal d’Afrique" },
+      { id: "scentlab-match-woody-bergamot", title: "Woody bergamot", description: "Inspiré de Sauvage." },
+      { id: "scentlab-match-minty-cedar", title: "Minty Cedar", description: "Inspiré de Bleu de Chanel." },
+      { id: "scentlab-match-fresh-grapefruit", title: "Fresh grapefruit", description: "Inspiré d'Invictus." },
+      { id: "scentlab-match-minty-vanilla", title: "Minty vanilla", description: "Inspiré de Versace Eros." },
+      { id: "scentlab-match-earth-vetiver", title: "Earth vétiver", description: "Inspiré de Terre d'Hermès." },
+      { id: "scentlab-match-aquatique-jasmine", title: "Aquatique Jasmine", description: "Inspiré de Acqua di Gio." },
+      { id: "scentlab-match-warm-spicy", title: "Warm Spicy", description: "Inspiré de Stronger With You." },
+      { id: "scentlab-match-cool-mint", title: "Cool mint", description: "Inspiré d'Allure." },
+      { id: "scentlab-match-pineapple-bergamote", title: "Pineapple bergamote", description: "Inspiré de Creed Aventus." },
+      { id: "scentlab-match-minty-lavender", title: "Minty lavender", description: "Inspiré de JPG Le Male." },
+      { id: "scentlab-match-spicy-leather", title: "Spicy Leather", description: "Inspiré de One Million." },
+      { id: "scentlab-new-bright-mandarin", title: "Bright Mandarin", description: "Inspiré de Louis Vuitton Imagination." },
+      { id: "scentlab-new-sweet-tobacco", title: "Sweet Tobacco", description: "Inspiré de Xerjoff Naxos." },
+      { id: "scentlab-new-woody-oud", title: "Woody oud", description: "Inspiré de Tom Ford Oud Wood." },
+      { id: "scentlab-new-dark-leather", title: "Dark Leather", description: "Inspiré de Tom Ford Ombre Leather." },
+      { id: "scentlab-new-iris-cedar", title: "Iris Cedar", description: "Inspiré de Dior Homme Intense." },
+      { id: "scentlab-new-leather-violet", title: "Leather violet", description: "Inspiré de Dior Fahrenheit." },
+      { id: "scentlab-new-spicy-caramel", title: "Spicy caramel", description: "Inspiré de Scandal Man." },
+      { id: "scentlab-new-cognac-whisper", title: "Cognac whisper", description: "Inspiré de Killian Angels' Share." },
+      { id: "scentlab-new-oriental-oud", title: "Oriental oud", description: "Inspiré de Oud for Greatness." },
+      { id: "scentlab-new-spicy-leather-exclusive", title: "Spicy Leather exclusive", description: "Inspiré de One Million Lucky." },
+      { id: "scentlab-new-oriental-tonka", title: "Oriental tonka", description: "Inspiré d'Arabian Tonka." },
+      { id: "scentlab-new-poetic-amber", title: "Poetic Amber", description: "Inspiré de More Than Words." },
+      { id: "scentlab-new-dreamy-bloom", title: "Dreamy bloom", description: "Inspiré de Memo Marfa." },
+      { id: "scentlab-new-galactic-musk", title: "Galactic musk", description: "Inspiré de Ganymed." },
+      { id: "scentlab-new-savanna-vetiver", title: "Savanna vétiver", description: "Inspiré de Bal d'Afrique." },
     ],
   },
   {
     title: "Unisex",
     items: [
-      { id: "scentlab-sweet-safron", title: "Sweet Safron", description: "MFK Baccarat Rouge" },
-      { id: "scentlab-smoky-oud", title: "Smoky Oud", description: "Louis Vuitton Ombre Nomade" },
-      { id: "scentlab-fruity-passion", title: "Fruity Passion", description: "Tiziana Terenzi Kirke" },
-      { id: "scentlab-fruity-vanille", title: "Fruity Vanille", description: "Xerjoff Erba Pura" },
-      { id: "scentlab-addictive-peach", title: "Addictive Peach", description: "Fleur Narcotique" },
-      { id: "scentlab-ambery-orchid", title: "Ambery Orchid", description: "Tom Ford Black Orchid" },
-      { id: "scentlab-pink-peony", title: "Pink Peony", description: "Parfums de Marly Delina" },
-      { id: "scentlab-cherry-almond", title: "Cherry Almond", description: "Tom Ford Lost Cherry" },
-      { id: "scentlab-marine-citrus", title: "Marine Citrus", description: "Orto Parisi Megamare" },
-      { id: "scentlab-satin-rose", title: "Satin Rose", description: "MFK Oud Satin Mood" },
-      { id: "scentlab-jasmine-cedar", title: "Jasmine Cédar", description: "Amouage Reflection" },
-      { id: "scentlab-glow-amber", title: "Glow Amber", description: "Grand Soir" },
-      { id: "scentlab-sandal-wood-leather", title: "Sandal Wood Leather", description: "Santal 33" },
-      { id: "scentlab-sweet-safron-exclusive", title: "Sweet Safron Exclusive", description: "Baccarat Extrait" },
+      { id: "scentlab-new-glow-amber", title: "Glow amber", description: "Inspiré de Grand Soir." },
+      { id: "scentlab-new-sandal-wood-leather", title: "Sandal Wood Leather", description: "Inspiré de Santal 33." },
+      { id: "scentlab-new-sweet-safron-exclusive", title: "Sweet safron exclusive", description: "Inspiré de Baccarat Extrait." },
+      { id: "scentlab-match-sweet-safron", title: "Sweet safron", description: "Inspiré de MFK Baccarat Rouge." },
+      { id: "scentlab-match-smoky-oud", title: "Smoky Oud", description: "Inspiré de Louis Vuitton Ombre Nomade." },
+      { id: "scentlab-match-fruity-passion", title: "Fruity passion", description: "Inspiré de Tiziana Terenzi Kirke." },
+      { id: "scentlab-match-fruity-vanille", title: "Fruity Vanille", description: "Inspiré de Xerjoff Erba Pura." },
+      { id: "scentlab-match-addictive-peach", title: "Addictive peach", description: "Inspiré de Fleur Narcotique." },
+      { id: "scentlab-match-ambery-orchid", title: "Ambery orchid", description: "Inspiré de Tom Ford Black Orchid." },
+      { id: "scentlab-match-pink-peony", title: "Pink peony", description: "Inspiré de Parfums de Marly Delina." },
+      { id: "scentlab-match-cherry-almond", title: "Cherry Almond", description: "Inspiré de Tom Ford Lost Cherry." },
+      { id: "scentlab-match-marine-citrus", title: "Marine citrus", description: "Inspiré de Orto Parisi Megamare." },
+      { id: "scentlab-match-satin-rose", title: "Satin rose", description: "Inspiré de MFK Oud Satin Mood." },
+      { id: "scentlab-match-jasmine-cedar", title: "Jasmine Cédar", description: "Inspiré de Amouage Reflection." },
     ],
   },
   {
-    title: "Femme",
+    title: "Femmes",
     items: [
-      { id: "scentlab-naughty-rose", title: "Naughty Rose", description: "Good Girl Gone Bad" },
-      { id: "scentlab-ambery-vanilla", title: "Ambery Vanilla", description: "Black Opium" },
-      { id: "scentlab-floral-musk", title: "Floral Musk", description: "Coco Mademoiselle" },
-      { id: "scentlab-golden-floral", title: "Golden Floral", description: "J’adore" },
-      { id: "scentlab-fruity-gourmand", title: "Fruity Gourmand", description: "La Vie Est Belle" },
-      { id: "scentlab-spicy-citrus", title: "Spicy Citrus", description: "Chanel Chance" },
-      { id: "scentlab-orange-blossom", title: "Orange Blossom", description: "Libre" },
-      { id: "scentlab-fruity-cyphere", title: "Fruity Cyphere", description: "Si" },
-      { id: "scentlab-gardenia-jam", title: "Gardénia Jam", description: "Scandal" },
-      { id: "scentlab-lush-gardenia", title: "Lush Gardénia", description: "Gucci Bloom" },
-      { id: "scentlab-flirty-caramel", title: "Flirty Caramel", description: "Good Girl" },
-      { id: "scentlab-exotic-vanilla", title: "Exotic Vanilla", description: "My Way" },
-      { id: "scentlab-mystic-jasmine", title: "Mystic Jasmine", description: "Alien" },
-      { id: "scentlab-rosy-hazelnut", title: "Rosy Hazelnut", description: "Amouage Guidance" },
-      { id: "scentlab-creamy-almond", title: "Creamy Almond", description: "Hypnotic Poison" },
-      { id: "scentlab-rosy-glow", title: "Rosy Glow", description: "Lancôme Idole" },
-      { id: "scentlab-vanilla-dream", title: "Vanilla Dream", description: "Burberry Goddess" },
-      { id: "scentlab-caramel-citrus", title: "Caramel Citrus", description: "Xerjoff Casamorati Lira" },
-      { id: "scentlab-caramel-orange", title: "Caramel Orange", description: "Kilian Love Don’t Be Shy" },
-    ],
-  },
-];
-
-const pocketSections: CoffretSection[] = [
-  {
-    title: "Homme",
-    items: [
-      { id: "pocket-le-male", title: "Le Mâle", description: "JPG — frais lavandé sucré." },
-      { id: "pocket-one-million", title: "One Million", description: "Paco Rabanne — épicé doré." },
-      { id: "pocket-zara-tobacco-collection", title: "Zara Tobacco Collection", description: "Tabac chaleureux." },
-      { id: "pocket-ck-eternity", title: "CK Eternity", description: "Frais boisé classique." },
-      { id: "pocket-killian-back-to-black", title: "Killian Back to Black", description: "Tabac miel sensuel." },
-      { id: "pocket-killian-intoxicated", title: "Killian Intoxicated", description: "Café cardamome envoûtant." },
-      { id: "pocket-killian-amber-oud", title: "Killian Amber Oud", description: "Oud ambré profond." },
-      { id: "pocket-killian-straight-to-heaven", title: "Killian Straight to Heaven", description: "Rhum boisé enveloppant." },
-      { id: "pocket-killian-good-girl-gone-bad-h", title: "Killian Good Girl Gone Bad", description: "Floral fruité magnétique." },
-      { id: "pocket-tom-ford-tuscan-leather", title: "Tom Ford Tuscan Leather", description: "Cuir framboise mythique." },
-      { id: "pocket-tom-ford-tobacco-oud", title: "Tom Ford Tobacco Oud", description: "Tabac oud épicé." },
-      { id: "pocket-tom-ford-noir-extreme", title: "Tom Ford Noir Extrême", description: "Gourmand boisé chaud." },
-      { id: "pocket-pegasus", title: "Parfums de Marly Pegasus", description: "Amande vanille élégant." },
-      { id: "pocket-creed-aventus", title: "Creed Aventus", description: "Ananas fumé iconique." },
-      { id: "pocket-nasomatto-black-afgano", title: "Nasomatto Black Afgano", description: "Boisé résineux intense." },
-      { id: "pocket-amouage-interlude", title: "Amouage Interlude", description: "Encens ambre puissant." },
-      { id: "pocket-amouage-reflection", title: "Amouage Reflection", description: "Floral vert raffiné." },
-      { id: "pocket-amouage-opus", title: "Amouage Opus", description: "Boisé oriental noble." },
-      { id: "pocket-mousuf", title: "Mousuf", description: "Oriental signature." },
-      { id: "pocket-byredo-mojave-ghost", title: "Byredo Mojave Ghost", description: "Boisé minéral aérien." },
-      { id: "pocket-byredo-bal-d-afrique", title: "Byredo Bal d’Afrique", description: "Vétiver agrumes solaire." },
-      { id: "pocket-killian-black-phantom", title: "Killian Black Phantom", description: "Café rhum gourmand." },
-      { id: "pocket-dsquared2-wood", title: "Dsquared2 Wood", description: "Boisé moderne dynamique." },
-      { id: "pocket-zara-oriental", title: "Zara Oriental", description: "Ambre vanille chaleureux." },
-      { id: "pocket-zara-orchid", title: "Zara Orchid", description: "Floral oriental vibrant." },
-    ],
-  },
-  {
-    title: "Unisex",
-    items: [
-      { id: "pocket-baccarat-rouge-540", title: "Baccarat Rouge 540", description: "MFK — ambré safrané iconique." },
-      { id: "pocket-kirke", title: "Kirke", description: "Tiziana Terenzi — fruité solaire." },
-      { id: "pocket-ex-nihilo-fleur-narcotique", title: "Ex Nihilo Fleur Narcotique", description: "Floral fruité poudré." },
-      { id: "pocket-nasomatto-narcotique", title: "Nasomatto Narcotique", description: "Floral envoûtant intense." },
-    ],
-  },
-  {
-    title: "Femme",
-    items: [
-      { id: "pocket-la-vie-est-belle", title: "La Vie Est Belle", description: "Lancôme — gourmand iris." },
-      { id: "pocket-la-vie-est-belle-floral", title: "La Vie Est Belle Floral", description: "Version florale lumineuse." },
-      { id: "pocket-gucci-bloom", title: "Gucci Bloom", description: "Tubéreuse jasmin opulent." },
-      { id: "pocket-coco-mademoiselle", title: "Coco Mademoiselle", description: "Patchouli rose chypré." },
-      { id: "pocket-chanel-chance", title: "Chanel Chance", description: "Floral pétillant joyeux." },
-      { id: "pocket-chanel-chance-eau-tendre", title: "Chanel Chance Eau Tendre", description: "Floral fruité doux." },
-      { id: "pocket-armani-si", title: "Armani Si", description: "Cassis ambré sensuel." },
-      { id: "pocket-ck-euphoria", title: "CK Euphoria", description: "Orchidée noire envoûtant." },
-      { id: "pocket-creed-aventus-for-her", title: "Creed Aventus for Her", description: "Floral fruité chic." },
-      { id: "pocket-212-sexy-women", title: "212 Sexy Women", description: "Vanille fleurs piquantes." },
-      { id: "pocket-212-vip-women", title: "212 VIP Women", description: "Rhum musc festif." },
-      { id: "pocket-hermes-jour", title: "Hermès Jour", description: "Floral lumineux frais." },
-      { id: "pocket-dior-jadore", title: "Dior J’adore", description: "Bouquet floral solaire." },
-      { id: "pocket-ck-eternity-femme", title: "Calvin Klein Eternity", description: "Floral blanc romantique." },
-      { id: "pocket-alien", title: "Alien", description: "Mugler — jasmin ambré hypnotique." },
-      { id: "pocket-killian-good-girl-gone-bad-f", title: "Killian Good Girl Gone Bad", description: "Tubéreuse rose magnétique." },
-      { id: "pocket-killian-liaisons-dangereuses", title: "Killian Liaisons Dangereuses", description: "Rose prune sensuelle." },
-      { id: "pocket-versace-crystal-noir", title: "Versace Crystal Noir", description: "Gardénia ambré mystérieux." },
-      { id: "pocket-dkny-be-delicious", title: "DKNY Be Delicious", description: "Pomme verte pétillante." },
-      { id: "pocket-bulgari-omnia", title: "Bulgari Omnia", description: "Épices musc raffiné." },
+      { id: "scentlab-match-naughty-rose", title: "Naughty rose", description: "Inspiré de Good Girl Gone Bad." },
+      { id: "scentlab-match-ambery-vanilla", title: "Ambery vanilla", description: "Inspiré de Black Opium." },
+      { id: "scentlab-match-floral-musk", title: "Floral musk", description: "Inspiré de Coco Mademoiselle." },
+      { id: "scentlab-match-golden-floral", title: "Golden floral", description: "Inspiré de J'adore." },
+      { id: "scentlab-match-fruity-gourmand", title: "Fruity gourmand", description: "Inspiré de La Vie Est Belle." },
+      { id: "scentlab-match-spicy-citrus", title: "Spicy citrus", description: "Inspiré de Chanel Chance." },
+      { id: "scentlab-match-orange-blossom", title: "Orange blossom", description: "Inspiré de Libre." },
+      { id: "scentlab-match-fruity-cyphere", title: "Fruity cyphere", description: "Inspiré de Si." },
+      { id: "scentlab-match-gardenia-jam", title: "Gardénia jam", description: "Inspiré de Scandal." },
+      { id: "scentlab-match-lush-gardenia", title: "Lush gardénia", description: "Inspiré de Gucci Bloom." },
+      { id: "scentlab-match-flirty-caramel", title: "Flirty caramel", description: "Inspiré de Good Girl." },
+      { id: "scentlab-match-exotic-vanilla", title: "Exotic vanilla", description: "Inspiré de My Way." },
+      { id: "scentlab-match-mystic-jasmine", title: "Mystic jasmine", description: "Inspiré d'Alien." },
+      { id: "scentlab-new-caramel-citrus", title: "Caramel citrus", description: "Inspiré de Xerjoff Casamorati Lira." },
+      { id: "scentlab-new-caramel-orange", title: "Caramel orange", description: "Inspiré de Killian Love Don't Be Shy." },
+      { id: "scentlab-new-rosy-hazelnut", title: "Rosy hazelnut", description: "Inspiré de Amouage Guidance." },
+      { id: "scentlab-new-creamy-almond", title: "Creamy Almond", description: "Inspiré d'Hypnotic Poison." },
+      { id: "scentlab-new-rosy-glow", title: "Rosy glow", description: "Inspiré de Lancôme Idôle." },
+      { id: "scentlab-new-vanilla-dream", title: "Vanilla dream", description: "Inspiré de Burberry Goddess." },
     ],
   },
 ];
@@ -261,58 +187,26 @@ const pocketSections: CoffretSection[] = [
 const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
   haqqi: haqqiSections.flatMap((section) => section.items),
   scentlab: scentlabSections.flatMap((section) => section.items),
-  pocket: pocketSections.flatMap((section) => section.items),
 };
 
-const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab", "pocket"];
-
-const collectionSections: Record<CoffretCollection, CoffretSection[]> = {
-  haqqi: haqqiSections,
-  scentlab: scentlabSections,
-  pocket: pocketSections,
-};
-
-const haqqiSideImages = [
-  { src: haqqiCollectionImage, alt: "Sélection de parfums Haqqi" },
-];
-
-const scentlabSideImages = [
-  { src: scentlabMarineCitrusImage, alt: "Visuel SCENTLAB Marine Citrus" },
-  { src: scentlabBoxesImage, alt: "Sélection de packs SCENTLAB" },
-];
-
-const pocketSideImages = [
-  { src: pocketHommeImage, alt: "Sélection de Parfums de poches Homme" },
-  { src: pocketFemmeImage, alt: "Sélection de Parfums de poches Femme" },
-];
-
-const collectionSideImages: Record<CoffretCollection, { src: string; alt: string }[]> = {
-  haqqi: haqqiSideImages,
-  scentlab: scentlabSideImages,
-  pocket: pocketSideImages,
-};
+const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab"];
 
 export const Route = createFileRoute("/coffret-signature")({
   head: () => ({
     meta: [
-      { title: "Compose ton Pack Parfums | 2M Parfumerie Sénégal" },
+      { title: "Compose ton pack — 2M Parfumerie Sénégal" },
       {
         name: "description",
         content:
-          "Créez votre coffret parfums sur-mesure au Sénégal. Pack Haqqi, SCENTLAB ou Parfums de poches. Livraison Dakar et partout au Sénégal.",
+          "Composez votre pack chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA ou 3 parfums SCENTLAB à 15 000 FCFA, à sélectionner vous-même.",
       },
-      { property: "og:title", content: "Compose ton Pack Parfums | 2M Parfumerie Sénégal" },
+      { property: "og:title", content: "Compose ton pack — 2M Parfumerie" },
       {
         property: "og:description",
         content:
-          "Créez votre coffret parfums sur-mesure au Sénégal. Pack Haqqi, SCENTLAB ou Parfums de poches.",
+          "3 parfums Haqqi à 10 000 FCFA ou 3 parfums SCENTLAB à 15 000 FCFA, à composer vous-même en quelques clics.",
       },
-      { property: "og:url", content: "https://www.2mparfumeriedk.com/coffret-signature" },
-      { property: "og:type", content: "website" },
-      { property: "og:locale", content: "fr_FR" },
-      { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://www.2mparfumeriedk.com/coffret-signature" }],
   }),
   component: CoffretSignaturePage,
 });
@@ -322,7 +216,6 @@ function CoffretSignaturePage() {
   const [selections, setSelections] = useState<Record<CoffretCollection, string[]>>({
     haqqi: [],
     scentlab: [],
-    pocket: [],
   });
 
   const currentOffer = coffretOffers[selectedCollection];
@@ -332,20 +225,9 @@ function CoffretSignaturePage() {
     () => currentOptions.filter((option) => selectedIds.includes(option.id)),
     [currentOptions, selectedIds],
   );
-  const requiredCount = currentOffer.selectionCount;
-  const remaining = requiredCount - selectedOptions.length;
-  const canSend = selectedOptions.length === requiredCount;
+  const remaining = 3 - selectedOptions.length;
+  const canSend = selectedOptions.length === 3;
   const whatsappMessage = buildWhatsAppMessage(selectedCollection, selectedOptions);
-  const validateRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (canSend && validateRef.current) {
-      const timeout = window.setTimeout(() => {
-        validateRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-      }, 150);
-      return () => window.clearTimeout(timeout);
-    }
-  }, [canSend, selectedCollection]);
 
   const toggleOption = (optionId: string) => {
     setSelections((current) => {
@@ -359,7 +241,7 @@ function CoffretSignaturePage() {
         };
       }
 
-      if (activeSelections.length >= coffretOffers[selectedCollection].selectionCount) {
+      if (activeSelections.length >= 3) {
         return current;
       }
 
@@ -373,38 +255,40 @@ function CoffretSignaturePage() {
   return (
     <SiteLayout>
       <section className="relative overflow-hidden border-b border-border bg-background pt-24 md:pt-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,211,102,0.12),transparent_36%),radial-gradient(circle_at_left,rgba(22,163,74,0.08),transparent_30%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(27,94,63,0.12),transparent_36%),radial-gradient(circle_at_left,rgba(27,94,63,0.08),transparent_30%)]" />
         <div className="section-shell relative grid gap-12 py-14 md:grid-cols-[1.1fr_0.9fr] md:py-20">
           <div>
             <Badge variant="outline" className="border-accent/30 bg-accent-muted text-accent">
-              Pack Signature
+              Compose ton pack
             </Badge>
             <h1 className="mt-6 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-foreground md:text-[64px]">
-              Compose ton pack en choisissant tes parfums sur la liste et on s’occupe du reste.
+              Compose ton coffret, coche tes 3 parfums, on s’occupe du reste.
             </h1>
             <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
-              Chez 2M Parfumerie, nous vous offrons la possibilité de tester différentes senteurs.
-              C’est la raison pour laquelle nous vous donnons l’opportunité de choisir vous-même les
-              parfums qui composent votre pack. Les packs sont composés de 3 à 5 parfums avec des
-              formats de 40 ou 50 ml.
-              <br />
-              <br />
-              Suis les étapes ci-dessous et envoie-nous ta commande ! Livraison rapide et immédiate !
+              Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
+              tu coches trois parfums, et ton coffret est préparé pour être offert ou porté tout de
+              suite.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Badge className="bg-accent text-primary-foreground">3 à 5 parfums au choix</Badge>
-              <Badge variant="secondary">Format 40 ou 50 ml</Badge>
-              <Badge variant="secondary">Livraison rapide</Badge>
+              <Badge className="bg-accent text-primary-foreground">3 parfums dans chaque coffret</Badge>
+              <Badge variant="secondary">Coffret prêt à offrir</Badge>
+              <Badge variant="secondary">Validation rapide sur WhatsApp</Badge>
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="whatsapp" size="lg">
-                <a href="#compose">Composer mon pack</a>
+                <a href="#compose">Composer mon coffret</a>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link to="/boutique" search={{}}>
+                <Link to="/boutique" search={{ collection: "all" }}>
                   Voir la boutique
                 </Link>
               </Button>
+            </div>
+            <div className="mt-8 flex items-center gap-3 text-accent md:mt-10">
+              <ArrowDown className="size-5 animate-bounce" aria-hidden="true" />
+              <p className="text-sm font-medium uppercase tracking-[0.14em]">
+                Choisis ton pack juste en dessous
+              </p>
             </div>
           </div>
 
@@ -412,6 +296,12 @@ function CoffretSignaturePage() {
             {collectionOrder.map((collection) => {
               const offer = coffretOffers[collection];
               const active = selectedCollection === collection;
+              const image =
+                collection === "haqqi"
+                  ? haqqiCollectionImage
+                  : collection === "scentlab"
+                    ? scentlabBoxesImage
+                    : pocketPerfumesHommeImage;
 
               return (
                 <button
@@ -424,9 +314,17 @@ function CoffretSignaturePage() {
                       : "w-full rounded-2xl border border-border bg-card p-6 text-left shadow-card transition-all hover:-translate-y-1 hover:border-accent md:max-w-md"
                   }
                 >
-                  <div className="flex items-center justify-between gap-4">
-                    <div>
-                      <h2 className="font-display text-2xl text-foreground">{offer.label}</h2>
+                  <div className="flex items-center gap-4">
+                    <div className="shrink-0 overflow-hidden rounded-xl border border-border bg-background/60">
+                      <img
+                        src={image}
+                        alt={offer.label}
+                        className="size-16 object-cover transition-transform duration-300 group-hover:scale-105 md:size-20"
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="caption-luxe text-accent">{offer.accent}</p>
+                      <h2 className="mt-2 font-display text-2xl text-foreground">{offer.label}</h2>
                     </div>
                     <Badge variant={active ? "default" : "secondary"}>
                       {formatPrice(offer.price)}
@@ -445,20 +343,11 @@ function CoffretSignaturePage() {
           <Card className="border-border bg-card shadow-card">
             <CardHeader>
               <CardTitle className="font-display text-[28px] text-foreground md:text-[34px]">
-                Compose ton pack en 3 étapes
+                Choisis ton univers, puis coche 3 parfums
               </CardTitle>
-              <CardDescription className="mt-3 space-y-2 text-base text-muted-foreground">
-                <span className="block">
-                  <strong className="text-foreground">Étape 1.</strong> Choisis parmi ces 3 collections :
-                  HAQQI, SCENTLAB ou PARFUMS DE POCHES.
-                </span>
-                <span className="block">
-                  <strong className="text-foreground">Étape 2.</strong> Coche tes parfums sur la liste.
-                </span>
-                <span className="block">
-                  <strong className="text-foreground">Étape 3.</strong> Valide ta commande sur le bouton
-                  WhatsApp en surbrillance vert !
-                </span>
+              <CardDescription className="mt-2 text-base text-muted-foreground">
+                Tu peux garder tes sélections Haqqi et SCENTLAB séparément. Une fois que tu as 3
+                choix dans l’univers actif, tu peux valider directement sur WhatsApp.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-5">
@@ -485,7 +374,7 @@ function CoffretSignaturePage() {
                             {offer.label}
                           </p>
                           <p className="mt-1 font-semibold text-foreground">
-                            {count}/{offer.selectionCount} sélectionné{count > 1 ? "s" : ""}
+                            {count}/3 sélectionné{count > 1 ? "s" : ""}
                           </p>
                         </div>
                         <Badge variant={active ? "default" : "secondary"}>
@@ -498,21 +387,8 @@ function CoffretSignaturePage() {
               </div>
 
               <div className="space-y-6">
-                {collectionSideImages[selectedCollection].length > 0 && (
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {collectionSideImages[selectedCollection].map((image) => (
-                      <img
-                        key={image.alt}
-                        src={image.src}
-                        alt={image.alt}
-                        loading="lazy"
-                        className="aspect-[4/3] w-full rounded-xl border border-border object-cover shadow-card"
-                      />
-                    ))}
-                  </div>
-                )}
-                <div className="space-y-6">
-                  {collectionSections[selectedCollection].map((section) => (
+                {selectedCollection === "haqqi" ? (
+                  haqqiSections.map((section) => (
                     <div key={section.title} className="space-y-3">
                       <div className="flex items-center justify-between gap-3">
                         <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
@@ -521,7 +397,7 @@ function CoffretSignaturePage() {
                       <div className="grid gap-4 md:grid-cols-2">
                         {section.items.map((option) => {
                           const checked = selectedIds.includes(option.id);
-                          const disabled = !checked && selectedOptions.length >= requiredCount;
+                          const disabled = !checked && selectedOptions.length >= 3;
 
                           return (
                             <label
@@ -544,7 +420,7 @@ function CoffretSignaturePage() {
                                 <div className="flex items-start justify-between gap-3">
                                   <div>
                                     <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                                      {collectionOffersLabel(selectedCollection)} {section.title}
+                                      Haqqi {section.title}
                                     </p>
                                     <h4 className="mt-1 font-display text-[22px] text-foreground">
                                       {option.title}
@@ -560,12 +436,62 @@ function CoffretSignaturePage() {
                         })}
                       </div>
                     </div>
-                  ))}
-                </div>
+                  ))
+                ) : (
+                  scentlabSections.map((section) => (
+                    <div key={section.title} className="space-y-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
+                        <Badge variant="secondary">{section.items.length} parfums</Badge>
+                      </div>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {section.items.map((option) => {
+                          const checked = selectedIds.includes(option.id);
+                          const disabled = !checked && selectedOptions.length >= 3;
+
+                          return (
+                            <label
+                              key={option.id}
+                              htmlFor={option.id}
+                              className={
+                                checked
+                                  ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
+                                  : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
+                              }
+                            >
+                              <Checkbox
+                                id={option.id}
+                                checked={checked}
+                                disabled={disabled}
+                                onCheckedChange={() => toggleOption(option.id)}
+                                className="mt-1"
+                              />
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-start justify-between gap-3">
+                                  <div>
+                                    <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                                      Scentlab {section.title}
+                                    </p>
+                                    <h4 className="mt-1 font-display text-[22px] text-foreground">
+                                      {option.title}
+                                    </h4>
+                                  </div>
+                                  {checked && (
+                                    <Check className="mt-1 size-5 text-accent" aria-hidden="true" />
+                                  )}
+                                </div>
+                              </div>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
 
               <p className="text-sm text-muted-foreground">
-                Tu dois cocher exactement {requiredCount} parfums. Si un choix n’est plus disponible, on te
+                Tu dois cocher exactement 3 parfums. Si un choix n’est plus disponible, on te
                 propose un remplacement proche avant validation.
               </p>
             </CardContent>
@@ -574,7 +500,7 @@ function CoffretSignaturePage() {
           <Card className="border-border bg-card shadow-card">
             <CardHeader>
               <CardTitle className="font-display text-[28px] text-foreground">
-                Ton pack en cours
+                Ton coffret en cours
               </CardTitle>
               <CardDescription>
                 Résumé rapide avant l’envoi du message.
@@ -591,7 +517,7 @@ function CoffretSignaturePage() {
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
                   <Sparkles className="size-4 text-accent" aria-hidden="true" />
-                  <span>{selectedOptions.length}/{requiredCount} parfums choisis</span>
+                  <span>{selectedOptions.length}/3 parfums choisis</span>
                 </div>
               </div>
 
@@ -608,26 +534,26 @@ function CoffretSignaturePage() {
                   </ul>
                 ) : (
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Choisis {requiredCount} parfums pour voir ton pack se construire ici.
+                    Choisis 3 parfums pour voir ton coffret se construire ici.
                   </p>
                 )}
               </div>
 
               <div className="rounded-2xl bg-accent-muted p-5">
-                <p className="caption-luxe text-accent">Prix du pack</p>
+                <p className="caption-luxe text-accent">Prix du coffret</p>
                 <p className="mt-3 font-display text-4xl text-foreground">
                   {formatPrice(currentOffer.price)}
                 </p>
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  Votre pack de {requiredCount} est prêt. Veuillez cliquer ci-dessous 👇 pour valider votre commande.
+                  Trois parfums, un seul coffret, et un échange humain pour finaliser la sélection.
                 </p>
               </div>
             </CardContent>
-            <CardFooter ref={validateRef} className="flex flex-col gap-3 scroll-mt-24">
+            <CardFooter className="flex flex-col gap-3">
               {canSend ? (
                 <Button asChild variant="whatsapp" size="lg" className="w-full">
                   <a href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
-                    <WhatsAppLogo tone="light" className="size-5" /> Valider mon pack
+                    <WhatsAppLogo tone="light" className="size-5" /> Valider mon coffret
                   </a>
                 </Button>
               ) : (
@@ -649,16 +575,16 @@ function CoffretSignaturePage() {
             {
               icon: WandSparkles,
               title: "1. Tu choisis l’univers",
-              text: "Haqqi & Parfums de poches à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style.",
+              text: "Haqqi à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style recherché.",
             },
             {
               icon: Check,
-              title: "2. Tu coches tes parfums",
+              title: "2. Tu coches 3 parfums",
               text: "La sélection se fait en quelques clics, avec un vrai sentiment de composition.",
             },
             {
               icon: Sparkles,
-              title: "3. On prépare ton pack",
+              title: "3. On prépare ton coffret",
               text: "Tu valides sur WhatsApp et on finalise la commande avec toi.",
             },
           ].map(({ icon: Icon, title, text }) => (
@@ -678,14 +604,12 @@ function CoffretSignaturePage() {
 }
 
 function collectionOffersLabel(collection: CoffretCollection) {
-  if (collection === "haqqi") return "Haqqi";
-  if (collection === "scentlab") return "SCENTLAB";
-  return "Parfums de poches";
+  return collection === "haqqi" ? "Haqqi" : "SCENTLAB";
 }
 
 function buildWhatsAppMessage(collection: CoffretCollection, options: CoffretOption[]) {
   const offer = coffretOffers[collection];
   const choiceLines = options.map((option) => `• ${option.title}`).join("\n");
 
-  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes ${offer.selectionCount} choix :\n${choiceLines}\n\nMerci de me préparer le pack.`;
+  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes 3 choix :\n${choiceLines}\n\nMerci de me préparer le coffret.`;
 }

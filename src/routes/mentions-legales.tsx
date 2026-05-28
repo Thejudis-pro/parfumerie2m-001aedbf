@@ -4,7 +4,12 @@ import { SiteLayout } from "@/components/commerce/SiteLayout";
 
 export const Route = createFileRoute("/mentions-legales")({
   head: () => ({
-    meta: [{ title: "Mentions Légales | 2M Parfumerie" }, { name: "robots", content: "noindex" }],
+    meta: [
+      { title: "Mentions Légales | 2M Parfumerie" },
+      { name: "robots", content: "noindex" },
+      { name: "description", content: "Mentions légales de 2M Parfumerie. Contact et informations légales pour la boutique de parfums au Sénégal." },
+      { name: "keywords", content: "Haqqi, Scentlab, Takeoff Fragance, Parfums authentique, Parfums Dubai" },
+    ],
   }),
   component: LegalPage,
 });
@@ -22,7 +27,7 @@ function LegalPage() {
               fragrances authentiques au Sénégal.
             </p>
             <p className="mt-2">
-              Contact : commande@2mparfumerie.com · Téléphone : +221 76 192 34 41 / +221 78 144 17
+              Contact : 2mparfumerie2025@gmail.com · Téléphone : +221 76 192 34 41 / +221 78 144 17
               66.
             </p>
           </section>
@@ -50,7 +55,7 @@ function LegalPage() {
             </p>
             <p className="mt-2">
               Vous pouvez demander l’accès, la rectification ou la suppression de vos informations
-              en écrivant à commande@2mparfumerie.com.
+              en écrivant à 2mparfumerie2025@gmail.com.
             </p>
           </section>
           <section>

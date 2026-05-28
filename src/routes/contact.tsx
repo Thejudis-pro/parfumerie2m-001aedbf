@@ -12,16 +12,31 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Contactez 2M Parfumerie au dakar. WhatsApp et appels disponibles 7j/7. Livraison partout au dakar. commande@2mparfumerie.com",
+          "Contactez 2M Parfumerie au dakar. WhatsApp et appels disponibles 7j/7. Livraison partout au dakar. 2mparfumerie2025@gmail.com",
       },
+      { name: "keywords", content: "Haqqi, Scentlab, Takeoff Fragance, Parfums authentique, Parfums Dubai, Parfums de poches" },
       { property: "og:title", content: "Contact — 2M Parfumerie dakar" },
       {
         property: "og:description",
         content: "WhatsApp et appels disponibles 7j/7. Livraison partout au dakar.",
       },
     ],
+    scripts: [
+      { type: "application/ld+json", children: contactLocalBusinessJson },
+    ],
   }),
   component: ContactPage,
+});
+
+// Add JSON-LD LocalBusiness for contact page
+const contactLocalBusinessJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "2M Parfumerie",
+  telephone: "+221761923441",
+  email: "2mparfumerie2025@gmail.com",
+  address: { "@type": "PostalAddress", addressCountry: "SN", addressLocality: "Dakar" },
+  sameAs: ["https://instagram.com/2mparfumeriesn", "https://www.facebook.com/profile.php?id=61551806734713"],
 });
 
 const schedules = [
