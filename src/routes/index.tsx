@@ -85,16 +85,19 @@ const featuredPackCards = [
     title: "Pack Haqqi",
     subtitle: "3 parfums",
     image: haqqiCollectionImage,
+    imageBase: "haqqi-collection",
   },
   {
     title: "Pack SCENTLAB",
     subtitle: "3 parfums",
     image: scentlabBoxesImage,
+    imageBase: "scentlab-boxes",
   },
   {
     title: "Parfums de poches",
     subtitle: "5 parfums",
     image: pocketPerfumesHommeImage,
+    imageBase: "pocket-perfumes-homme",
   },
 ] as const;
 
@@ -329,12 +332,24 @@ function Index() {
                 className="group mx-auto flex h-full w-full max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:border-accent"
               >
                 <div className="relative h-40 overflow-hidden bg-surface md:h-44">
-                  <img
-                    src={pack.image}
-                    alt={pack.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcSet={`/images/optimized/${pack.imageBase}-w800.avif 800w, /images/optimized/${pack.imageBase}-w1200.avif 1200w`}
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                    />
+                    <source
+                      type="image/webp"
+                      srcSet={`/images/optimized/${pack.imageBase}-w800.webp 800w, /images/optimized/${pack.imageBase}-w1200.webp 1200w`}
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                    />
+                    <img
+                      src={pack.image}
+                      alt={pack.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </picture>
                   <div className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent shadow-sm backdrop-blur">
                     Pack
                   </div>

@@ -1,6 +1,28 @@
 import fs from 'fs';
 import path from 'path';
 
+// Read catalog-data.ts and extract product name/ref pairs without importing TS
+const catalogSource = fs.readFileSync(path.join(process.cwd(), 'src', 'lib', 'catalog-data.ts'), 'utf8');
+
+// Match object literals that contain name: and ref: fields
+const objRe = /\{[^}]*?name:\s*["']([^"']+)["'][^}]*?ref:\s*["']([^"']*)["'][^}]*?\}/gs;
+const products = [];
+let m;
+while ((m = objRe.exec(catalogSource)) !== null) {
+  const name = m[1];
+  const ref = m[2] ?? '';
+  products.push({ name, ref });
+}
+
+function slugify(name, ref) {
+  const raw = `${name}-${ref || ''}`.toLowerCase();
+  return raw
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 const baseUrl = 'https://www.2mparfumeriedk.com';
 const routes = [
   '/',
@@ -13,7 +35,9 @@ const routes = [
   '/mentions-legales',
 ];
 
-const urls = routes.map((r) => `${baseUrl}${r}`).map((loc) => ({ loc }));
+const productUrls = products.map((p) => `${baseUrl}/boutique/${slugify(p.name, p.ref)}`);
+
+const urls = [...routes.map((r) => `${baseUrl}${r}`), ...productUrls].map((loc) => ({ loc }));
 
 const now = new Date().toISOString();
 
