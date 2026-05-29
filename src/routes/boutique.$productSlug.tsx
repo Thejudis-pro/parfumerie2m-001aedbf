@@ -10,6 +10,8 @@ import {
   collectionLabel,
   findProductBySlug,
   formatPrice,
+  optimizedProductImageSet,
+  optimizedProductImageUrl,
   productImages,
   slugifyProduct,
   type BoutiqueProduct,
@@ -28,7 +30,7 @@ export const Route = createFileRoute("/boutique/$productSlug")({
     const description = product
       ? `${product.name} par ${collectionLabel(product.collection)} : notes de ${product.notes}. ${formatPrice(product.price)}. Livraison au dakar. Commandez sur WhatsApp chez 2M Parfumerie.`
       : "Ce parfum n'est pas disponible dans la boutique 2M Parfumerie.";
-    const image = product?.image;
+    const image = product?.image ? optimizedProductImageUrl(product.image, 1200) : undefined;
     const meta: Array<Record<string, string>> = [
       { title },
       { name: "description", content: description },
@@ -65,7 +67,7 @@ export const Route = createFileRoute("/boutique/$productSlug")({
           "@type": "Product",
           name: product.name,
           description: product.description,
-          image: product.image,
+          image: image,
           brand: { "@type": "Brand", name: collectionLabel(product.collection) },
           offers: {
             "@type": "Offer",
@@ -159,12 +161,25 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
                       }`}
                       aria-label={`Afficher la photo ${index + 1} de ${product.name}`}
                     >
-                      <img
-                        src={image}
-                        alt={`${product.name} vue ${index + 1}`}
-                        className="h-full w-full object-contain"
-                        loading="lazy"
-                      />
+                      {(() => {
+                        const sources = optimizedProductImageSet(image);
+                        const fallback = optimizedProductImageUrl(image, 400);
+                        return (
+                          <picture>
+                            <source type="image/avif" srcSet={sources.avif} sizes="80px" />
+                            <source type="image/webp" srcSet={sources.webp} sizes="80px" />
+                            <img
+                              src={fallback}
+                              alt={`${product.name} vue ${index + 1}`}
+                              className="h-full w-full object-contain"
+                              loading="lazy"
+                              width={80}
+                              height={80}
+                              decoding="async"
+                            />
+                          </picture>
+                        );
+                      })()}
                       {!isSelected && (
                         <span className="pointer-events-none absolute inset-0 bg-background/55 opacity-0 transition-opacity group-hover:opacity-100" />
                       )}
@@ -174,11 +189,24 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
               </div>
             )}
             <div className="order-1 mx-auto flex aspect-square w-full max-w-lg items-center justify-center overflow-hidden rounded-xl bg-surface p-5 shadow-card md:order-2 md:p-8">
-              <img
-                src={selectedImage}
-                alt={`${product.name} chez 2M Parfumerie`}
-                className="h-full w-full rounded-lg object-contain"
-              />
+              {(() => {
+                const sources = optimizedProductImageSet(selectedImage);
+                const fallback = optimizedProductImageUrl(selectedImage, 1200);
+                return (
+                  <picture>
+                    <source type="image/avif" srcSet={sources.avif} sizes="(min-width: 1024px) 600px, 90vw" />
+                    <source type="image/webp" srcSet={sources.webp} sizes="(min-width: 1024px) 600px, 90vw" />
+                    <img
+                      src={fallback}
+                      alt={`${product.name} chez 2M Parfumerie`}
+                      className="h-full w-full rounded-lg object-contain"
+                      width={1200}
+                      height={1200}
+                      decoding="async"
+                    />
+                  </picture>
+                );
+              })()}
             </div>
           </div>
 
@@ -209,7 +237,7 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
                   name: product.name,
                   collection: label,
                   price: product.price,
-                  imageUrl: product.image,
+                  imageUrl: optimizedProductImageUrl(product.image, 1200),
                 }}
               />
             </div>
@@ -293,12 +321,25 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
         search={{}}
         className="image-zoom block aspect-square overflow-hidden bg-surface"
       >
-        <img
-          src={product.image}
-          alt={`${product.name} chez 2M Parfumerie`}
-          className="h-full w-full object-contain p-5 transition-transform duration-500 hover:scale-105"
-          loading="lazy"
-        />
+        {(() => {
+          const sources = optimizedProductImageSet(product.image);
+          const fallback = optimizedProductImageUrl(product.image, 800);
+          return (
+            <picture>
+              <source type="image/avif" srcSet={sources.avif} sizes="(min-width: 1024px) 25vw, 50vw" />
+              <source type="image/webp" srcSet={sources.webp} sizes="(min-width: 1024px) 25vw, 50vw" />
+              <img
+                src={fallback}
+                alt={`${product.name} chez 2M Parfumerie`}
+                className="h-full w-full object-contain p-5 transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+                width={800}
+                height={800}
+                decoding="async"
+              />
+            </picture>
+          );
+        })()}
       </Link>
       <div className="p-5">
         {product.collection !== "dubai" && product.collection !== "authentic" && (
@@ -324,7 +365,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
               name: product.name,
               collection: label,
               price: product.price,
-              imageUrl: product.image,
+              imageUrl: optimizedProductImageUrl(product.image, 800),
             }}
           />
         </div>

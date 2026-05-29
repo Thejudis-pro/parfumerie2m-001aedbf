@@ -1,4 +1,5 @@
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
+import { optimizedProductImageSet, optimizedProductImageUrl } from "@/lib/catalog-data";
 import { productPriceValue, type Product } from "@/lib/perfume-data";
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
@@ -8,12 +9,25 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       style={{ animationDelay: `${index * 80}ms` }}
     >
       <div className="image-zoom aspect-square overflow-hidden bg-surface-alt">
-        <img
-          src={product.image}
-          alt={`${product.name} édition ${product.edition}`}
-          className="h-full w-full object-cover"
-          loading="lazy"
-        />
+        {(() => {
+          const sources = optimizedProductImageSet(product.image);
+          const fallback = optimizedProductImageUrl(product.image, 800);
+          return (
+            <picture>
+              <source type="image/avif" srcSet={sources.avif} sizes="(min-width: 1024px) 25vw, 50vw" />
+              <source type="image/webp" srcSet={sources.webp} sizes="(min-width: 1024px) 25vw, 50vw" />
+              <img
+                src={fallback}
+                alt={`${product.name} édition ${product.edition}`}
+                className="h-full w-full object-cover"
+                loading="lazy"
+                width={800}
+                height={800}
+                decoding="async"
+              />
+            </picture>
+          );
+        })()}
       </div>
       <div className="space-y-5 p-5">
         <div>
@@ -42,7 +56,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
             name: product.name,
             collection: product.edition,
             price: productPriceValue(product.price),
-            imageUrl: product.image,
+            imageUrl: optimizedProductImageUrl(product.image, 800),
           }}
         />
       </div>

@@ -7,6 +7,8 @@ import { SiteLayout } from "@/components/commerce/SiteLayout";
 import {
   collectionLabel,
   formatPrice,
+  optimizedProductImageSet,
+  optimizedProductImageUrl,
   slugifyProduct,
   type BoutiqueProduct,
   type Collection,
@@ -85,12 +87,25 @@ export function CollectionPage({ collection, h1, eyebrow, intro, ctaLabel, ctaHr
                     aria-label={`Voir ${product.name}`}
                     className="block h-full w-full"
                   >
-                    <img
-                      src={product.image}
-                      alt={`${product.name} — ${label} chez 2M Parfumerie`}
-                      className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
+                    {(() => {
+                      const sources = optimizedProductImageSet(product.image);
+                      const fallback = optimizedProductImageUrl(product.image, 800);
+                      return (
+                        <picture>
+                          <source type="image/avif" srcSet={sources.avif} sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw" />
+                          <source type="image/webp" srcSet={sources.webp} sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw" />
+                          <img
+                            src={fallback}
+                            alt={`${product.name} — ${label} chez 2M Parfumerie`}
+                            className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                            width={800}
+                            height={800}
+                            decoding="async"
+                          />
+                        </picture>
+                      );
+                    })()}
                   </Link>
                 </div>
                 <div className="p-5">
@@ -112,7 +127,7 @@ export function CollectionPage({ collection, h1, eyebrow, intro, ctaLabel, ctaHr
                       name: product.name,
                       collection: label,
                       price: product.price,
-                      imageUrl: product.image,
+                      imageUrl: optimizedProductImageUrl(product.image, 800),
                     }}
                   />
                 </div>

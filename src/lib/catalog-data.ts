@@ -548,6 +548,25 @@ export function productImages(product: BoutiqueProduct) {
   return Array.from(new Set([product.image, ...(product.imageUrls ?? [])].filter(Boolean)));
 }
 
+export function optimizedProductImageBase(image: string) {
+  const fileName = image.split("/").pop() ?? "";
+  return fileName.replace(/-[a-zA-Z0-9_-]+(?=\.[a-zA-Z]+$)/, "");
+}
+
+export function optimizedProductImageUrl(image: string, width = 800) {
+  const base = optimizedProductImageBase(image);
+  return base ? `/images/optimized/${base}-w${width}.webp` : image;
+}
+
+export function optimizedProductImageSet(image: string) {
+  const base = optimizedProductImageBase(image);
+  if (!base) return { avif: "", webp: "" };
+  return {
+    avif: `/images/optimized/${base}-w1200.avif 1200w, /images/optimized/${base}-w800.avif 800w, /images/optimized/${base}-w400.avif 400w`,
+    webp: `/images/optimized/${base}-w1200.webp 1200w, /images/optimized/${base}-w800.webp 800w, /images/optimized/${base}-w400.webp 400w`,
+  };
+}
+
 export function formatPrice(price: number) {
   return `${new Intl.NumberFormat("fr-FR").format(price)} FCFA`;
 }
