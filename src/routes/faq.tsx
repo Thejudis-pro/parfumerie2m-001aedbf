@@ -27,6 +27,36 @@ export const Route = createFileRoute("/faq")({
   component: FaqPage,
 });
 
+// Add FAQ structured data for rich results
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  })),
+});
+
+// Extend head with scripts when route is used (router will pick this up)
+Route.head = (() => ({
+  meta: [
+    { title: "FAQ — Questions Fréquentes | 2M Parfumerie dakar" },
+    {
+      name: "description",
+      content:
+        "Toutes vos questions sur la livraison partout au dakar, l'authenticité, les paiements et les retours chez 2M Parfumerie.",
+    },
+    { property: "og:title", content: "FAQ — Questions Fréquentes | 2M Parfumerie dakar" },
+    {
+      property: "og:description",
+      content:
+        "Livraison partout au dakar, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie.",
+    },
+  ],
+  scripts: [{ type: "application/ld+json", children: faqJsonLd }],
+}));
+
 const faqs = [
   {
     question: "Les parfums sont-ils 100% authentiques ?",

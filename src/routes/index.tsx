@@ -29,8 +29,9 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "2M Parfumerie est spécialisée dans la vente de parfums de qualité et propose une sélection variée de fragrances inspirées des grandes maisons, adaptées à tous les styles et à toutes les occasions. Nous vendons les parfums et collections suivants : 1. Haqqi 2. Scentlab 3. Takeoff Fragance 4. Parfums authentique 5. Parfums Dubai 6. Parfums de poches 7. Collections privées 8. Fragance Library",
+          "2M Parfumerie — parfums de qualité au Sénégal. Collections : Haqqi, Scentlab, Takeoff Fragance, Dubai, Parfums de poches.",
       },
+      { name: "ai:summary", content: "2M Parfumerie vend des parfums de qualité (Haqqi, Scentlab, Takeoff), livraison au Sénégal." },
       { name: "keywords", content: "Haqqi, Scentlab, Takeoff Fragance, Parfums authentique, Parfums Dubai, Parfums de poches, Collections privées, Fragance Library" },
       { property: "og:title", content: "2M Parfumerie dakar | Parfums authentiques livrés à Dakar" },
       {
@@ -329,6 +330,7 @@ function Index() {
                   <img
                     src={pack.image}
                     alt={pack.title}
+                    loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent shadow-sm backdrop-blur">
