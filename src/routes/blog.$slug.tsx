@@ -1,10 +1,12 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, Clock3, Link2 } from "lucide-react";
 
-import { BoutiqueLink, WhatsAppBand } from "@/components/commerce/PageBlocks";
+import React, { Suspense } from "react";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
+const BoutiqueLink = React.lazy(() => import("@/components/commerce/PageBlocks").then((m) => ({ default: m.BoutiqueLink })));
+const WhatsAppBand = React.lazy(() => import("@/components/commerce/PageBlocks").then((m) => ({ default: m.WhatsAppBand })));
+import { supabase } from "@/integrations/supabase/client";
 import { estimateBlogReadTime, formatBlogDate, splitBlogContent } from "@/lib/blog-data";
 
 type BlogPostRow = Database["public"]["Tables"]["blog_posts"]["Row"];
@@ -118,13 +120,13 @@ function BlogArticlePage() {
           <p className="mt-4 max-w-md text-muted-foreground">
             Cette page n’existe pas encore. Retournez au blog pour découvrir les premiers contenus.
           </p>
-          <Link
-            to="/blog"
-            search={{}}
-            className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent/90"
-          >
-            Retour au blog <ArrowRight className="ml-2 size-4" aria-hidden="true" />
-          </Link>
+              <Link
+                to="/blog"
+                search={{}}
+                className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-accent/90"
+              >
+                Retour au blog <ArrowRight className="ml-2 size-4" aria-hidden="true" />
+              </Link>
         </section>
       </SiteLayout>
     );
@@ -236,11 +238,15 @@ function BlogArticlePage() {
           </div>
 
           <div className="text-center">
-            <BoutiqueLink />
+            <Suspense fallback={null}>
+              <BoutiqueLink />
+            </Suspense>
           </div>
         </div>
       </article>
-      <WhatsAppBand />
+      <Suspense fallback={null}>
+        <WhatsAppBand />
+      </Suspense>
     </SiteLayout>
   );
 }

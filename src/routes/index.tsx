@@ -8,9 +8,6 @@ const Ticker = React.lazy(() => import("@/components/commerce/PageBlocks").then(
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import homeHeroBottle from "@/assets/home-white-bottle.png";
-import haqqiCollectionImage from "@/assets/haqqi-collection.png";
-import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
-import pocketPerfumesHommeImage from "@/assets/pocket-perfumes-homme.png";
 import {
   catalog,
   collectionLabel,
@@ -81,24 +78,9 @@ const heroMessage =
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
 
 const featuredPackCards = [
-  {
-    title: "Pack Haqqi",
-    subtitle: "3 parfums",
-    image: haqqiCollectionImage,
-    imageBase: "haqqi-collection",
-  },
-  {
-    title: "Pack SCENTLAB",
-    subtitle: "3 parfums",
-    image: scentlabBoxesImage,
-    imageBase: "scentlab-boxes",
-  },
-  {
-    title: "Parfums de poches",
-    subtitle: "5 parfums",
-    image: pocketPerfumesHommeImage,
-    imageBase: "pocket-perfumes-homme",
-  },
+  { title: "Pack Haqqi", subtitle: "3 parfums", imageBase: "haqqi-collection" },
+  { title: "Pack SCENTLAB", subtitle: "3 parfums", imageBase: "scentlab-boxes" },
+  { title: "Parfums de poches", subtitle: "5 parfums", imageBase: "pocket-perfumes-homme" },
 ] as const;
 
 function pickFeaturedProducts(products: BoutiqueProduct[]) {
@@ -344,9 +326,11 @@ function Index() {
                       sizes="(min-width: 768px) 33vw, 100vw"
                     />
                     <img
-                      src={pack.image}
+                      src={`/images/optimized/${pack.imageBase}-w800.webp`}
                       alt={pack.title}
                       loading="lazy"
+                      width={800}
+                      height={400}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </picture>

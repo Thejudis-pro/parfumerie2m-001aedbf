@@ -1,8 +1,10 @@
 import { Outlet, createFileRoute, Link, useLocation } from "@tanstack/react-router";
 import { ArrowRight, CalendarDays, MessageCircle, Search, Sparkles, Tag } from "lucide-react";
+import React, { Suspense } from "react";
 import type { ComponentType } from "react";
 
-import { BoutiqueLink, WhatsAppBand } from "@/components/commerce/PageBlocks";
+const BoutiqueLink = React.lazy(() => import("@/components/commerce/PageBlocks").then((m) => ({ default: m.BoutiqueLink })));
+const WhatsAppBand = React.lazy(() => import("@/components/commerce/PageBlocks").then((m) => ({ default: m.WhatsAppBand })));
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
@@ -276,11 +278,15 @@ function BlogPage() {
           </div>
 
           <div className="text-center">
-            <BoutiqueLink />
+            <Suspense fallback={null}>
+              <BoutiqueLink />
+            </Suspense>
           </div>
         </div>
       </section>
-      <WhatsAppBand />
+      <Suspense fallback={null}>
+        <WhatsAppBand />
+      </Suspense>
     </SiteLayout>
   );
 }

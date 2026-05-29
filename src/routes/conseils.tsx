@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Droplets, Moon, Sun } from "lucide-react";
 
-import { BoutiqueLink, SectionHeader, WhatsAppBand } from "@/components/commerce/PageBlocks";
+import React, { Suspense } from "react";
+import { SectionHeader } from "@/components/commerce/PageBlocks";
+const BoutiqueLink = React.lazy(() => import("@/components/commerce/PageBlocks").then((m) => ({ default: m.BoutiqueLink })));
+const WhatsAppBand = React.lazy(() => import("@/components/commerce/PageBlocks").then((m) => ({ default: m.WhatsAppBand })));
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 
 export const Route = createFileRoute("/conseils")({
@@ -59,11 +62,15 @@ function AdvicePage() {
             ))}
           </div>
           <div className="text-center">
-            <BoutiqueLink />
+            <Suspense fallback={null}>
+              <BoutiqueLink />
+            </Suspense>
           </div>
         </div>
       </section>
-      <WhatsAppBand />
+      <Suspense fallback={null}>
+        <WhatsAppBand />
+      </Suspense>
     </SiteLayout>
   );
 }

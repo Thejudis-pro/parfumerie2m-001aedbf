@@ -296,12 +296,7 @@ function CoffretSignaturePage() {
             {collectionOrder.map((collection) => {
               const offer = coffretOffers[collection];
               const active = selectedCollection === collection;
-              const image =
-                collection === "haqqi"
-                  ? haqqiCollectionImage
-                  : collection === "scentlab"
-                    ? scentlabBoxesImage
-                    : pocketPerfumesHommeImage;
+              const imageBase = collection === "haqqi" ? "haqqi-collection" : collection === "scentlab" ? "scentlab-boxes" : "pocket-perfumes-homme";
 
               return (
                 <button
@@ -316,11 +311,26 @@ function CoffretSignaturePage() {
                 >
                   <div className="flex items-center gap-4">
                     <div className="shrink-0 overflow-hidden rounded-xl border border-border bg-background/60">
-                      <img
-                        src={image}
-                        alt={offer.label}
-                        className="size-16 object-cover transition-transform duration-300 group-hover:scale-105 md:size-20"
-                      />
+                      <picture>
+                        <source
+                          type="image/avif"
+                          srcSet={`/images/optimized/${imageBase}-w1200.avif 1200w, /images/optimized/${imageBase}-w800.avif 800w, /images/optimized/${imageBase}-w400.avif 400w`}
+                          sizes="(min-width: 768px) 160px, 80px"
+                        />
+                        <source
+                          type="image/webp"
+                          srcSet={`/images/optimized/${imageBase}-w1200.webp 1200w, /images/optimized/${imageBase}-w800.webp 800w, /images/optimized/${imageBase}-w400.webp 400w`}
+                          sizes="(min-width: 768px) 160px, 80px"
+                        />
+                        <img
+                          src={`/images/optimized/${imageBase}-w800.webp`}
+                          alt={offer.label}
+                          loading="lazy"
+                          width={160}
+                          height={160}
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </picture>
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="caption-luxe text-accent">{offer.accent}</p>

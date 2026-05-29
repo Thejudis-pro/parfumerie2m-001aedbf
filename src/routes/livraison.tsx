@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Clock, MapPinned } from "lucide-react";
 
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
-import { SectionHeader, WhatsAppBand } from "@/components/commerce/PageBlocks";
+import React, { Suspense } from "react";
+import { SectionHeader } from "@/components/commerce/PageBlocks";
+const WhatsAppBand = React.lazy(() => import("@/components/commerce/PageBlocks").then((m) => ({ default: m.WhatsAppBand })));
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 
 export const Route = createFileRoute("/livraison")({
@@ -61,7 +63,9 @@ function DeliveryPage() {
           </div>
         </div>
       </section>
-      <WhatsAppBand />
+      <Suspense fallback={null}>
+        <WhatsAppBand />
+      </Suspense>
     </SiteLayout>
   );
 }

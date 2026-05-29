@@ -16,11 +16,12 @@ import moscowImage from "@/assets/takeoff-moscow.png";
 import milanImage from "@/assets/takeoff-milan.png";
 import budapestImage from "@/assets/takeoff-budapest.png";
 import parisImage from "@/assets/takeoff-paris.png";
-import creamyAlmondImage from "@/assets/scentlab-creamy-almond-upload.png";
+// Use optimized public images for large assets to reduce bundle size
+const creamyAlmondImage = "/images/optimized/scentlab-creamy-almond-upload-w800.webp";
 import brightMandarinImage from "@/assets/scentlab-bright-mandarin.png";
 import caramelCitrusImage from "@/assets/scentlab-caramel-citrus.png";
 import fruityGourmandImage from "@/assets/scentlab-fruity-gourmand-upload.png";
-import fruityVanillaImage from "@/assets/scentlab-fruity-vanilla.png";
+const fruityVanillaImage = "/images/optimized/scentlab-fruity-vanilla-w800.webp";
 import leatherVioletImage from "@/assets/scentlab-leather-violet.png";
 import spicyCaramelImage from "@/assets/scentlab-spicy-caramel-upload.png";
 import spicyLeatherImage from "@/assets/scentlab-spicy-leather-upload.png";
@@ -30,9 +31,9 @@ import vanillaDreamImage from "@/assets/scentlab-vanilla-dream-upload.png";
 import savannaVetiverImage from "@/assets/scentlab-savanna-vetiver-upload.png";
 import cognacWhisperImage from "@/assets/scentlab-cognac-whisper-upload.png";
 import rosyGlowImage from "@/assets/scentlab-rosy-glow-upload.png";
-import haqqiCollectionImage from "@/assets/haqqi-collection.png";
-import pocketHommeImage from "@/assets/pocket-perfumes-homme.png";
-import pocketFemmeImage from "@/assets/pocket-perfumes-femme.png";
+const haqqiCollectionImage = "/images/optimized/haqqi-collection-w800.webp";
+const pocketHommeImage = "/images/optimized/pocket-perfumes-homme-w800.webp";
+const pocketFemmeImage = "/images/optimized/pocket-perfumes-femme-w800.webp";
 
 export const collectionValues = [
   "all",
