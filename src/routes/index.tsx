@@ -1,10 +1,10 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, Check, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
-import { Ticker } from "@/components/commerce/PageBlocks";
+const Ticker = React.lazy(() => import("@/components/commerce/PageBlocks").then((m) => ({ default: m.Ticker })));
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import homeHeroBottle from "@/assets/home-white-bottle.png";
@@ -246,7 +246,9 @@ function Index() {
         </div>
       </section>
 
-      <Ticker />
+      <Suspense fallback={null}>
+        <Ticker />
+      </Suspense>
 
       <section className="relative border-t-4 border-accent/20 bg-background py-16 md:py-24">
         <div className="section-shell text-center">
