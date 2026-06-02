@@ -292,7 +292,7 @@ function CoffretSignaturePage() {
             </div>
           </div>
 
-          <div className="grid gap-3 md:justify-items-end">
+          <div className="grid gap-2 md:justify-items-end">
             {collectionOrder.map((collection) => {
               const offer = coffretOffers[collection];
               const active = selectedCollection === collection;
@@ -305,8 +305,8 @@ function CoffretSignaturePage() {
                   onClick={() => setSelectedCollection(collection)}
                   className={
                     active
-                      ? "w-full rounded-xl border border-accent bg-accent-muted p-4 text-left shadow-card transition-all md:max-w-sm"
-                      : "w-full rounded-xl border border-border bg-card p-4 text-left shadow-card transition-all hover:-translate-y-1 hover:border-accent md:max-w-sm"
+                      ? "w-full rounded-xl border border-accent bg-accent-muted p-3 text-left shadow-card transition-all md:max-w-sm"
+                      : "w-full rounded-xl border border-border bg-card p-3 text-left shadow-card transition-all hover:-translate-y-1 hover:border-accent md:max-w-sm"
                   }
                 >
                   <div className="flex items-center gap-3">
@@ -315,38 +315,38 @@ function CoffretSignaturePage() {
                         <source
                           type="image/avif"
                           srcSet={`/images/optimized/${imageBase}-w1200.avif 1200w, /images/optimized/${imageBase}-w800.avif 800w, /images/optimized/${imageBase}-w400.avif 400w`}
-                          sizes="(min-width: 768px) 100px, 64px"
+                          sizes="(min-width: 768px) 80px, 64px"
                         />
                         <source
                           type="image/webp"
                           srcSet={`/images/optimized/${imageBase}-w1200.webp 1200w, /images/optimized/${imageBase}-w800.webp 800w, /images/optimized/${imageBase}-w400.webp 400w`}
-                          sizes="(min-width: 768px) 100px, 64px"
+                          sizes="(min-width: 768px) 80px, 64px"
                         />
                         <img
                           src={`/images/optimized/${imageBase}-w800.webp`}
                           alt={offer.label}
                           loading="lazy"
-                          width={100}
-                          height={100}
+                          width={80}
+                          height={80}
                           className="object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                       </picture>
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="caption-luxe text-accent">{offer.accent}</p>
-                      <h2 className="mt-1 font-display text-lg text-foreground">{offer.label}</h2>
+                      <h2 className="mt-1 font-display text-base text-foreground">{offer.label}</h2>
                     </div>
                     <Badge variant={active ? "default" : "secondary"}>
                       {formatPrice(offer.price)}
                     </Badge>
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{offer.subtitle}</p>
+                  <p className="mt-2 text-sm leading-5 text-muted-foreground">{offer.subtitle}</p>
                 </button>
               );
             })}
             <Link
               to="/collections/parfums-de-poches"
-              className="group w-full rounded-xl border border-border bg-card p-4 text-left shadow-card transition-all hover:-translate-y-1 hover:border-accent md:max-w-sm"
+              className="group w-full rounded-xl border border-border bg-card p-3 text-left shadow-card transition-all hover:-translate-y-1 hover:border-accent md:max-w-sm"
             >
               <div className="flex items-center gap-3">
                 <div className="shrink-0 overflow-hidden rounded-lg border border-border bg-background/60">
@@ -354,32 +354,32 @@ function CoffretSignaturePage() {
                     <source
                       type="image/avif"
                       srcSet={`/images/optimized/pocket-perfumes-homme-w1200.avif 1200w, /images/optimized/pocket-perfumes-homme-w800.avif 800w, /images/optimized/pocket-perfumes-homme-w400.avif 400w`}
-                      sizes="(min-width: 768px) 100px, 64px"
+                      sizes="(min-width: 768px) 80px, 64px"
                     />
                     <source
                       type="image/webp"
                       srcSet={`/images/optimized/pocket-perfumes-homme-w1200.webp 1200w, /images/optimized/pocket-perfumes-homme-w800.webp 800w, /images/optimized/pocket-perfumes-homme-w400.webp 400w`}
-                      sizes="(min-width: 768px) 100px, 64px"
+                      sizes="(min-width: 768px) 80px, 64px"
                     />
                     <img
                       src={`/images/optimized/pocket-perfumes-homme-w800.webp`}
                       alt="Compose ton pack Parfums de poches"
                       loading="lazy"
-                      width={100}
-                      height={100}
+                      width={80}
+                      height={80}
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </picture>
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="caption-luxe text-accent">Format nomade</p>
-                  <h2 className="mt-1 font-display text-lg text-foreground">
+                  <h2 className="mt-1 font-display text-base text-foreground">
                     Compose ton pack Parfums de poches
                   </h2>
                 </div>
                 <Badge variant="secondary">{formatPrice(10000)}</Badge>
               </div>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              <p className="mt-2 text-sm leading-5 text-muted-foreground">
                 5 parfums de poches à composer pour 10 000 FCFA, à glisser partout.
               </p>
             </Link>
