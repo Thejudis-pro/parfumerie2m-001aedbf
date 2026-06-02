@@ -256,25 +256,25 @@ function CoffretSignaturePage() {
     <SiteLayout>
       <section className="relative overflow-hidden border-b border-border bg-background pt-24 md:pt-32">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(27,94,63,0.12),transparent_36%),radial-gradient(circle_at_left,rgba(27,94,63,0.08),transparent_30%)]" />
-        <div className="section-shell relative grid gap-12 py-14 md:grid-cols-[1.1fr_0.9fr] md:py-20">
+        <div className="section-shell relative grid gap-6 py-8 md:grid-cols-[1.1fr_0.9fr] md:py-12">
           <div>
             <Badge variant="outline" className="border-accent/30 bg-accent-muted text-accent">
               Compose ton pack
             </Badge>
-            <h1 className="mt-6 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-foreground md:text-[64px]">
+            <h1 className="mt-3 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-foreground md:text-[64px]">
               Compose ton coffret, coche tes 3 parfums, on s’occupe du reste.
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
+            <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground md:text-lg">
               Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
               tu coches trois parfums, et ton coffret est préparé pour être offert ou porté tout de
               suite.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-4 flex flex-wrap gap-3">
               <Badge className="bg-accent text-primary-foreground">3 parfums dans chaque coffret</Badge>
               <Badge variant="secondary">Coffret prêt à offrir</Badge>
               <Badge variant="secondary">Validation rapide sur WhatsApp</Badge>
             </div>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
               <Button asChild variant="whatsapp" size="lg">
                 <a href="#compose">Composer mon coffret</a>
               </Button>
@@ -284,7 +284,7 @@ function CoffretSignaturePage() {
                 </Link>
               </Button>
             </div>
-            <div className="mt-8 flex items-center gap-3 text-accent md:mt-10">
+            <div className="mt-4 flex items-center gap-3 text-accent md:mt-5">
               <ArrowDown className="size-5 animate-bounce" aria-hidden="true" />
               <p className="text-sm font-medium uppercase tracking-[0.14em]">
                 Choisis ton pack juste en dessous
