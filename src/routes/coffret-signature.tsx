@@ -344,6 +344,45 @@ function CoffretSignaturePage() {
                 </button>
               );
             })}
+            <Link
+              to="/collections/parfums-de-poches"
+              className="group w-full rounded-2xl border border-border bg-card p-6 text-left shadow-card transition-all hover:-translate-y-1 hover:border-accent md:max-w-md"
+            >
+              <div className="flex items-center gap-4">
+                <div className="shrink-0 overflow-hidden rounded-xl border border-border bg-background/60">
+                  <picture>
+                    <source
+                      type="image/avif"
+                      srcSet={`/images/optimized/pocket-perfumes-homme-w1200.avif 1200w, /images/optimized/pocket-perfumes-homme-w800.avif 800w, /images/optimized/pocket-perfumes-homme-w400.avif 400w`}
+                      sizes="(min-width: 768px) 160px, 80px"
+                    />
+                    <source
+                      type="image/webp"
+                      srcSet={`/images/optimized/pocket-perfumes-homme-w1200.webp 1200w, /images/optimized/pocket-perfumes-homme-w800.webp 800w, /images/optimized/pocket-perfumes-homme-w400.webp 400w`}
+                      sizes="(min-width: 768px) 160px, 80px"
+                    />
+                    <img
+                      src={`/images/optimized/pocket-perfumes-homme-w800.webp`}
+                      alt="Compose ton pack Parfums de poches"
+                      loading="lazy"
+                      width={160}
+                      height={160}
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </picture>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="caption-luxe text-accent">Format nomade</p>
+                  <h2 className="mt-2 font-display text-2xl text-foreground">
+                    Compose ton pack Parfums de poches
+                  </h2>
+                </div>
+                <Badge variant="secondary">{formatPrice(10000)}</Badge>
+              </div>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                5 parfums de poches à composer pour 10 000 FCFA, à glisser partout.
+              </p>
+            </Link>
           </div>
         </div>
       </section>
