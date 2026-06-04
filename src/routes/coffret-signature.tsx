@@ -12,10 +12,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Checkbox } from "@/components/ui/checkbox";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
-import { formatPrice } from "@/lib/catalog-data";
+import { catalog, formatPrice, slugifyProduct } from "@/lib/catalog-data";
 import { whatsappUrl } from "@/lib/perfume-data";
 
-type CoffretCollection = "haqqi" | "scentlab";
+type CoffretCollection = "haqqi" | "scentlab" | "pocket";
 
 type CoffretOption = {
   id: string;
@@ -30,19 +30,25 @@ type CoffretSection = {
 
 const coffretOffers: Record<
   CoffretCollection,
-  { label: string; price: number; subtitle: string; accent: string }
+  { label: string; price: number; subtitle: string; requiredCount: number }
 > = {
   haqqi: {
     label: "Compose ton pack Haqqi",
     price: 10000,
     subtitle: "3 parfums à composer dans un esprit plus profond, chaud et élégant.",
-    accent: "Ambiance orientale",
+    requiredCount: 3,
   },
   scentlab: {
     label: "Compose ton pack SCENTLAB",
     price: 15000,
     subtitle: "3 parfums à composer dans une lecture plus moderne, fraîche ou gourmande.",
-    accent: "Esprit contemporain",
+    requiredCount: 3,
+  },
+  pocket: {
+    label: "Compose ton pack Parfums de poches",
+    price: 10000,
+    subtitle: "5 parfums à composer dans un format pratique et facile à emporter.",
+    requiredCount: 5,
   },
 };
 
@@ -184,12 +190,26 @@ const scentlabSections: CoffretSection[] = [
   },
 ];
 
+const pocketSections: CoffretSection[] = ["Homme", "Unisex", "Femme"]
+  .map((family) => ({
+    title: family,
+    items: catalog
+      .filter((product) => product.collection === "pocket" && product.family === family)
+      .map((product) => ({
+        id: slugifyProduct(product),
+        title: product.name,
+        description: product.description,
+      })),
+  }))
+  .filter((section) => section.items.length > 0);
+
 const coffretOptions: Record<CoffretCollection, CoffretOption[]> = {
   haqqi: haqqiSections.flatMap((section) => section.items),
   scentlab: scentlabSections.flatMap((section) => section.items),
+  pocket: pocketSections.flatMap((section) => section.items),
 };
 
-const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab"];
+const collectionOrder: CoffretCollection[] = ["haqqi", "scentlab", "pocket"];
 
 export const Route = createFileRoute("/coffret-signature")({
   head: () => ({
@@ -198,13 +218,13 @@ export const Route = createFileRoute("/coffret-signature")({
       {
         name: "description",
         content:
-          "Composez votre pack chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA ou 3 parfums SCENTLAB à 15 000 FCFA, à sélectionner vous-même.",
+          "Composez votre pack chez 2M Parfumerie : 3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 parfums de poches à 10 000 FCFA, à sélectionner vous-même.",
       },
       { property: "og:title", content: "Compose ton pack — 2M Parfumerie" },
       {
         property: "og:description",
         content:
-          "3 parfums Haqqi à 10 000 FCFA ou 3 parfums SCENTLAB à 15 000 FCFA, à composer vous-même en quelques clics.",
+          "3 parfums Haqqi à 10 000 FCFA, 3 parfums SCENTLAB à 15 000 FCFA ou 5 parfums de poches à 10 000 FCFA, à composer vous-même en quelques clics.",
       },
     ],
   }),
@@ -216,6 +236,7 @@ function CoffretSignaturePage() {
   const [selections, setSelections] = useState<Record<CoffretCollection, string[]>>({
     haqqi: [],
     scentlab: [],
+    pocket: [],
   });
 
   const currentOffer = coffretOffers[selectedCollection];
@@ -225,8 +246,8 @@ function CoffretSignaturePage() {
     () => currentOptions.filter((option) => selectedIds.includes(option.id)),
     [currentOptions, selectedIds],
   );
-  const remaining = 3 - selectedOptions.length;
-  const canSend = selectedOptions.length === 3;
+  const remaining = currentOffer.requiredCount - selectedOptions.length;
+  const canSend = selectedOptions.length === currentOffer.requiredCount;
   const whatsappMessage = buildWhatsAppMessage(selectedCollection, selectedOptions);
 
   const toggleOption = (optionId: string) => {
@@ -241,7 +262,7 @@ function CoffretSignaturePage() {
         };
       }
 
-      if (activeSelections.length >= 3) {
+      if (activeSelections.length >= currentOffer.requiredCount) {
         return current;
       }
 
@@ -262,7 +283,7 @@ function CoffretSignaturePage() {
               Compose ton pack
             </Badge>
             <h1 className="mt-3 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-foreground md:text-[64px]">
-              Compose ton coffret, coche tes 3 parfums, on s’occupe du reste.
+              Compose ton coffret, coche le bon nombre de parfums, on s’occupe du reste.
             </h1>
             <p className="mt-3 max-w-xl text-base leading-7 text-muted-foreground md:text-lg">
               Une expérience simple et plus personnelle qu’un achat classique: tu choisis ton univers,
@@ -270,7 +291,9 @@ function CoffretSignaturePage() {
               suite.
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
-              <Badge className="bg-accent text-primary-foreground">3 parfums dans chaque coffret</Badge>
+              <Badge className="bg-accent text-primary-foreground">
+                3 parfums Haqqi / SCENTLAB, 5 parfums de poches
+              </Badge>
               <Badge variant="secondary">Coffret prêt à offrir</Badge>
               <Badge variant="secondary">Validation rapide sur WhatsApp</Badge>
             </div>
@@ -333,7 +356,6 @@ function CoffretSignaturePage() {
                       </picture>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="caption-luxe text-accent">{offer.accent}</p>
                       <h2 className="mt-1 font-display text-base text-foreground">{offer.label}</h2>
                     </div>
                     <Badge variant={active ? "default" : "secondary"}>
@@ -344,45 +366,6 @@ function CoffretSignaturePage() {
                 </button>
               );
             })}
-            <Link
-              to="/collections/parfums-de-poches"
-              className="group w-full rounded-xl border border-border bg-card p-3 text-left shadow-card transition-all hover:-translate-y-1 hover:border-accent md:max-w-sm"
-            >
-              <div className="flex items-center gap-3">
-                <div className="shrink-0 overflow-hidden rounded-lg border border-border bg-background/60">
-                  <picture>
-                    <source
-                      type="image/avif"
-                      srcSet={`/images/optimized/pocket-perfumes-homme-w1200.avif 1200w, /images/optimized/pocket-perfumes-homme-w800.avif 800w, /images/optimized/pocket-perfumes-homme-w400.avif 400w`}
-                      sizes="(min-width: 768px) 80px, 64px"
-                    />
-                    <source
-                      type="image/webp"
-                      srcSet={`/images/optimized/pocket-perfumes-homme-w1200.webp 1200w, /images/optimized/pocket-perfumes-homme-w800.webp 800w, /images/optimized/pocket-perfumes-homme-w400.webp 400w`}
-                      sizes="(min-width: 768px) 80px, 64px"
-                    />
-                    <img
-                      src={`/images/optimized/pocket-perfumes-homme-w800.webp`}
-                      alt="Compose ton pack Parfums de poches"
-                      loading="lazy"
-                      width={80}
-                      height={80}
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </picture>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="caption-luxe text-accent">Format nomade</p>
-                  <h2 className="mt-1 font-display text-base text-foreground">
-                    Compose ton pack Parfums de poches
-                  </h2>
-                </div>
-                <Badge variant="secondary">{formatPrice(10000)}</Badge>
-              </div>
-              <p className="mt-2 text-sm leading-5 text-muted-foreground">
-                5 parfums de poches à composer pour 10 000 FCFA, à glisser partout.
-              </p>
-            </Link>
           </div>
         </div>
       </section>
@@ -392,11 +375,12 @@ function CoffretSignaturePage() {
           <Card className="border-border bg-card shadow-card">
             <CardHeader>
               <CardTitle className="font-display text-[28px] text-foreground md:text-[34px]">
-                Choisis ton univers, puis coche 3 parfums
+                Choisis ton univers, puis coche le bon nombre de parfums
               </CardTitle>
               <CardDescription className="mt-2 text-base text-muted-foreground">
-                Tu peux garder tes sélections Haqqi et SCENTLAB séparément. Une fois que tu as 3
-                choix dans l’univers actif, tu peux valider directement sur WhatsApp.
+                Tu peux garder tes sélections Haqqi, SCENTLAB et Parfums de poches séparément. Une
+                fois que tu as le bon nombre de choix dans l’univers actif, tu peux valider
+                directement sur WhatsApp.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-5">
@@ -423,7 +407,7 @@ function CoffretSignaturePage() {
                             {offer.label}
                           </p>
                           <p className="mt-1 font-semibold text-foreground">
-                            {count}/3 sélectionné{count > 1 ? "s" : ""}
+                            {count}/{offer.requiredCount} sélectionné{count > 1 ? "s" : ""}
                           </p>
                         </div>
                         <Badge variant={active ? "default" : "secondary"}>
@@ -446,7 +430,7 @@ function CoffretSignaturePage() {
                       <div className="grid gap-4 md:grid-cols-2">
                         {section.items.map((option) => {
                           const checked = selectedIds.includes(option.id);
-                          const disabled = !checked && selectedOptions.length >= 3;
+                          const disabled = !checked && selectedOptions.length >= currentOffer.requiredCount;
 
                           return (
                             <label
@@ -486,7 +470,7 @@ function CoffretSignaturePage() {
                       </div>
                     </div>
                   ))
-                ) : (
+                ) : selectedCollection === "scentlab" ? (
                   scentlabSections.map((section) => (
                     <div key={section.title} className="space-y-3">
                       <div className="flex items-center justify-between gap-3">
@@ -496,7 +480,7 @@ function CoffretSignaturePage() {
                       <div className="grid gap-4 md:grid-cols-2">
                         {section.items.map((option) => {
                           const checked = selectedIds.includes(option.id);
-                          const disabled = !checked && selectedOptions.length >= 3;
+                          const disabled = !checked && selectedOptions.length >= currentOffer.requiredCount;
 
                           return (
                             <label
@@ -536,12 +520,62 @@ function CoffretSignaturePage() {
                       </div>
                     </div>
                   ))
+                ) : (
+                  pocketSections.map((section) => (
+                    <div key={section.title} className="space-y-3">
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="font-display text-2xl text-foreground">{section.title}</h3>
+                        <Badge variant="secondary">{section.items.length} parfums</Badge>
+                      </div>
+                      <div className="grid gap-4 md:grid-cols-2">
+                        {section.items.map((option) => {
+                          const checked = selectedIds.includes(option.id);
+                          const disabled = !checked && selectedOptions.length >= currentOffer.requiredCount;
+
+                          return (
+                            <label
+                              key={option.id}
+                              htmlFor={option.id}
+                              className={
+                                checked
+                                  ? "group flex cursor-pointer items-start gap-4 rounded-xl border border-accent bg-accent-muted p-4 transition-all"
+                                  : "group flex cursor-pointer items-start gap-4 rounded-xl border border-border bg-background p-4 transition-all hover:border-accent"
+                              }
+                            >
+                              <Checkbox
+                                id={option.id}
+                                checked={checked}
+                                disabled={disabled}
+                                onCheckedChange={() => toggleOption(option.id)}
+                                className="mt-1"
+                              />
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-start justify-between gap-3">
+                                  <div>
+                                    <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                                      Parfums de poches {section.title}
+                                    </p>
+                                    <h4 className="mt-1 font-display text-[22px] text-foreground">
+                                      {option.title}
+                                    </h4>
+                                  </div>
+                                  {checked && (
+                                    <Check className="mt-1 size-5 text-accent" aria-hidden="true" />
+                                  )}
+                                </div>
+                              </div>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))
                 )}
               </div>
 
               <p className="text-sm text-muted-foreground">
-                Tu dois cocher exactement 3 parfums. Si un choix n’est plus disponible, on te
-                propose un remplacement proche avant validation.
+                Tu dois cocher exactement {currentOffer.requiredCount} parfums. Si un choix n’est
+                plus disponible, on te propose un remplacement proche avant validation.
               </p>
             </CardContent>
           </Card>
@@ -566,7 +600,9 @@ function CoffretSignaturePage() {
                 </div>
                 <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
                   <Sparkles className="size-4 text-accent" aria-hidden="true" />
-                  <span>{selectedOptions.length}/3 parfums choisis</span>
+                  <span>
+                    {selectedOptions.length}/{currentOffer.requiredCount} parfums choisis
+                  </span>
                 </div>
               </div>
 
@@ -583,7 +619,7 @@ function CoffretSignaturePage() {
                   </ul>
                 ) : (
                   <p className="mt-4 text-sm text-muted-foreground">
-                    Choisis 3 parfums pour voir ton coffret se construire ici.
+                    Choisis {currentOffer.requiredCount} parfums pour voir ton coffret se construire ici.
                   </p>
                 )}
               </div>
@@ -594,7 +630,8 @@ function CoffretSignaturePage() {
                   {formatPrice(currentOffer.price)}
                 </p>
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
-                  Trois parfums, un seul coffret, et un échange humain pour finaliser la sélection.
+                  {currentOffer.requiredCount} parfums, un seul coffret, et un échange humain pour
+                  finaliser la sélection.
                 </p>
               </div>
             </CardContent>
@@ -624,12 +661,12 @@ function CoffretSignaturePage() {
             {
               icon: WandSparkles,
               title: "1. Tu choisis l’univers",
-              text: "Haqqi à 10 000 FCFA ou SCENTLAB à 15 000 FCFA selon le style recherché.",
+              text: "Haqqi à 10 000 FCFA, SCENTLAB à 15 000 FCFA ou Parfums de poches à 10 000 FCFA selon le style recherché.",
             },
             {
               icon: Check,
-              title: "2. Tu coches 3 parfums",
-              text: "La sélection se fait en quelques clics, avec un vrai sentiment de composition.",
+              title: "2. Tu coches le bon nombre de parfums",
+              text: "3 parfums pour Haqqi ou SCENTLAB, 5 parfums pour les poches: la sélection se fait en quelques clics.",
             },
             {
               icon: Sparkles,
@@ -653,12 +690,12 @@ function CoffretSignaturePage() {
 }
 
 function collectionOffersLabel(collection: CoffretCollection) {
-  return collection === "haqqi" ? "Haqqi" : "SCENTLAB";
+  return collection === "haqqi" ? "Haqqi" : collection === "scentlab" ? "SCENTLAB" : "Parfums de poches";
 }
 
 function buildWhatsAppMessage(collection: CoffretCollection, options: CoffretOption[]) {
   const offer = coffretOffers[collection];
   const choiceLines = options.map((option) => `• ${option.title}`).join("\n");
 
-  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes 3 choix :\n${choiceLines}\n\nMerci de me préparer le coffret.`;
+  return `Bonjour 2M Parfumerie 👋 Je veux un ${offer.label} à ${formatPrice(offer.price)}.\n\nMes ${offer.requiredCount} choix :\n${choiceLines}\n\nMerci de me préparer le coffret.`;
 }
