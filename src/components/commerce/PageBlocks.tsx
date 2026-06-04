@@ -50,7 +50,7 @@ export function Ticker() {
   const items = [
     "✦ Livraison partout au dakar",
     "✦ +100 collections exclusives",
-    "✦ Paiement à la livraison",
+    "✦ Commande avec le gérant",
     "✦ Notes olfactives certifiées",
     "✦ SCENTLAB · DUBAI · TAKEOFF",
     "✦ Réponse WhatsApp en moins d'1h",

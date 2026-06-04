@@ -14,13 +14,13 @@ export const Route = createFileRoute("/faq")({
       {
         name: "description",
         content:
-          "Toutes vos questions sur la livraison partout au dakar, l'authenticité, les paiements et les retours chez 2M Parfumerie.",
+          "Toutes vos questions sur la livraison partout au dakar, l'authenticité, la commande avec le gérant et les retours chez 2M Parfumerie.",
       },
       { property: "og:title", content: "FAQ — Questions Fréquentes | 2M Parfumerie dakar" },
       {
         property: "og:description",
         content:
-          "Livraison partout au dakar, authenticité, paiements, retours et conseils parfum chez 2M Parfumerie.",
+          "Livraison partout au dakar, authenticité, commande avec le gérant, retours et conseils parfum chez 2M Parfumerie.",
       },
     ],
     scripts: [{ type: "application/ld+json", children: faqJsonLd }],
@@ -40,9 +40,9 @@ const faqs = [
       "Nous livrons partout au dakar. Pour toute commande passée avant 21h, nous faisons le maximum pour livrer le jour même selon votre zone. Passé 21h, livraison garantie le lendemain ou selon les délais de transport vers votre région. Contactez-nous sur WhatsApp ou par appel pour confirmer votre localité.",
   },
   {
-    question: "Quels sont les modes de paiement acceptés ?",
+    question: "Comment finaliser ma commande ?",
     answer:
-      "Nous acceptons le paiement à la livraison (espèces), Orange Money et Wave. Nous n’acceptons pas Free Money. Vous payez uniquement quand le parfum est entre vos mains — aucun risque de votre côté.",
+      "Vous passez par WhatsApp ou téléphone, puis vous convenez directement avec le gérant du règlement et des détails de livraison. Il n'y a plus de paiement en ligne à travers le site.",
   },
   {
     question: "Puis-je retourner un produit si je ne suis pas satisfait(e) ?",
@@ -81,7 +81,6 @@ const faqJsonLd = JSON.stringify({
     acceptedAnswer: { "@type": "Answer", text: f.answer },
   })),
 });
-
 function FaqPage() {
   const [openIndex, setOpenIndex] = useState(0);
 

@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, Check, ShieldCheck, Truck, Wallet, Quote } from "lucide-react";
+import { ArrowDown, Check, Handshake, ShieldCheck, Truck, Quote } from "lucide-react";
 import React, { Suspense, useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Achetez des parfums authentiques de luxe au dakar. Livraison partout au dakar, paiement à la livraison.",
+          "Achetez des parfums authentiques de luxe au dakar. Livraison partout au dakar, commande finalisée directement avec le gérant.",
       },
       { property: "og:url", content: "https://www.2mparfumeriedk.com/" },
       { property: "og:type", content: "website" },
@@ -116,9 +116,9 @@ const promises = [
     body: "Partout au Sénégal. Commandez avant 21h, nous confirmons le meilleur délai selon votre zone.",
   },
   {
-    icon: Wallet,
-    title: "Paiement à la livraison",
-    body: "Pas de carte, pas de risque. Vous payez quand le flacon est dans vos mains.",
+    icon: Handshake,
+    title: "Accord avec le gérant",
+    body: "La commande se finalise directement avec le gérant, sans système de paiement en ligne.",
   },
 ];
 
@@ -207,7 +207,7 @@ function Index() {
                 className="fade-up mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted-foreground"
                 style={{ animationDelay: "480ms" }}
               >
-                {["Livraison Sénégal", "Authenticité garantie", "Paiement à la livraison"].map(
+                {["Livraison Sénégal", "Authenticité garantie", "Commande avec le gérant"].map(
                   (item) => (
                     <span key={item} className="inline-flex items-center gap-1">
                       <Check className="size-3 text-accent" aria-hidden="true" /> {item}
