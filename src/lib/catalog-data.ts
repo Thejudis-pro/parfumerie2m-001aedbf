@@ -549,8 +549,9 @@ export function productImages(product: BoutiqueProduct) {
 }
 
 export function optimizedProductImageBase(image: string) {
+  if (!image.startsWith("/images/")) return "";
   const fileName = image.split("/").pop() ?? "";
-  return fileName.replace(/-[a-zA-Z0-9_-]+(?=\.[a-zA-Z]+$)/, "");
+  return fileName.replace(/-w\d+\.[a-zA-Z]+$/, "");
 }
 
 export function optimizedProductImageUrl(image: string, width = 800) {
