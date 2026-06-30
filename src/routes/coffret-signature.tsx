@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, Check, Sparkles, WandSparkles } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import haqqiCollectionImage from "@/assets/haqqi-collection.png";
 import scentlabBoxesImage from "@/assets/scentlab-boxes.png";
@@ -249,6 +249,15 @@ function CoffretSignaturePage() {
   const remaining = currentOffer.requiredCount - selectedOptions.length;
   const canSend = selectedOptions.length === currentOffer.requiredCount;
   const whatsappMessage = buildWhatsAppMessage(selectedCollection, selectedOptions);
+  const validateRef = useRef<HTMLAnchorElement | null>(null);
+
+  useEffect(() => {
+    if (!canSend) return;
+    const timer = window.setTimeout(() => {
+      validateRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 150);
+    return () => window.clearTimeout(timer);
+  }, [canSend, selectedCollection]);
 
   const toggleOption = (optionId: string) => {
     setSelections((current) => {
@@ -638,7 +647,7 @@ function CoffretSignaturePage() {
             <CardFooter className="flex flex-col gap-3">
               {canSend ? (
                 <Button asChild variant="whatsapp" size="lg" className="w-full">
-                  <a href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
+                  <a ref={validateRef} href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
                     <WhatsAppLogo tone="light" className="size-5" /> Valider mon coffret
                   </a>
                 </Button>
