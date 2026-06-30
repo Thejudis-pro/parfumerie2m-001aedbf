@@ -647,7 +647,7 @@ function CoffretSignaturePage() {
             <CardFooter className="flex flex-col gap-3">
               {canSend ? (
                 <Button asChild variant="whatsapp" size="lg" className="w-full">
-                  <a href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
+                  <a ref={validateRef} href={whatsappUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
                     <WhatsAppLogo tone="light" className="size-5" /> Valider mon coffret
                   </a>
                 </Button>
