@@ -21,10 +21,10 @@ import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/
 const navItems = [
   { label: "Accueil", to: "/" },
   { label: "Boutique", to: "/boutique" },
+  { label: "Takeoff", to: "/collections/takeoff" },
   { label: "Compose ton pack", to: "/coffret-signature" },
   { label: "Blog", to: "/blog" },
   { label: "À Propos", to: "/a-propos" },
-  { label: "FAQ", to: "/faq" },
   { label: "Contact", to: "/contact" },
 ] as const;
 
@@ -304,10 +304,10 @@ function FooterLink({
   to:
     | "/"
     | "/boutique"
+    | "/collections/takeoff"
     | "/coffret-signature"
     | "/blog"
     | "/a-propos"
-    | "/faq"
     | "/contact"
     | "/mentions-legales";
   children: React.ReactNode;

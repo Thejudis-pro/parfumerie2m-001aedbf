@@ -20,6 +20,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AProposRouteImport } from './routes/a-propos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollectionsTakeoffRouteImport } from './routes/collections.takeoff'
 import { Route as CollectionsScentlabRouteImport } from './routes/collections.scentlab'
 import { Route as CollectionsParfumsDePochesRouteImport } from './routes/collections.parfums-de-poches'
 import { Route as CollectionsHaqqiRouteImport } from './routes/collections.haqqi'
@@ -81,6 +82,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsTakeoffRoute = CollectionsTakeoffRouteImport.update({
+  id: '/collections/takeoff',
+  path: '/collections/takeoff',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CollectionsScentlabRoute = CollectionsScentlabRouteImport.update({
   id: '/collections/scentlab',
   path: '/collections/scentlab',
@@ -125,6 +131,7 @@ export interface FileRoutesByFullPath {
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
+  '/collections/takeoff': typeof CollectionsTakeoffRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -143,6 +150,7 @@ export interface FileRoutesByTo {
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
+  '/collections/takeoff': typeof CollectionsTakeoffRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
+  '/collections/takeoff': typeof CollectionsTakeoffRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -182,6 +191,7 @@ export interface FileRouteTypes {
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
     | '/collections/scentlab'
+    | '/collections/takeoff'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -200,6 +210,7 @@ export interface FileRouteTypes {
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
     | '/collections/scentlab'
+    | '/collections/takeoff'
   id:
     | '__root__'
     | '/'
@@ -218,6 +229,7 @@ export interface FileRouteTypes {
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
     | '/collections/scentlab'
+    | '/collections/takeoff'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -235,6 +247,7 @@ export interface RootRouteChildren {
   CollectionsHaqqiRoute: typeof CollectionsHaqqiRoute
   CollectionsParfumsDePochesRoute: typeof CollectionsParfumsDePochesRoute
   CollectionsScentlabRoute: typeof CollectionsScentlabRoute
+  CollectionsTakeoffRoute: typeof CollectionsTakeoffRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections/takeoff': {
+      id: '/collections/takeoff'
+      path: '/collections/takeoff'
+      fullPath: '/collections/takeoff'
+      preLoaderRoute: typeof CollectionsTakeoffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/collections/scentlab': {
       id: '/collections/scentlab'
       path: '/collections/scentlab'
@@ -391,6 +411,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollectionsHaqqiRoute: CollectionsHaqqiRoute,
   CollectionsParfumsDePochesRoute: CollectionsParfumsDePochesRoute,
   CollectionsScentlabRoute: CollectionsScentlabRoute,
+  CollectionsTakeoffRoute: CollectionsTakeoffRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

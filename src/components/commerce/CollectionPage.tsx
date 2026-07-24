@@ -23,9 +23,22 @@ export type CollectionPageProps = {
   intro: string;
   ctaLabel?: string;
   ctaHref?: "/coffret-signature";
+  heroImage?: string;
+  heroImageAlt?: string;
+  children?: React.ReactNode;
 };
 
-export function CollectionPage({ collection, h1, eyebrow, intro, ctaLabel, ctaHref }: CollectionPageProps) {
+export function CollectionPage({
+  collection,
+  h1,
+  eyebrow,
+  intro,
+  ctaLabel,
+  ctaHref,
+  heroImage,
+  heroImageAlt,
+  children,
+}: CollectionPageProps) {
   const [products, setProducts] = useState<BoutiqueProduct[]>([]);
   const [visibleCount, setVisibleCount] = useState(12);
 
@@ -46,25 +59,55 @@ export function CollectionPage({ collection, h1, eyebrow, intro, ctaLabel, ctaHr
   return (
     <SiteLayout>
       <section className="border-b border-border bg-surface pt-24 pb-10 md:pt-32 md:pb-14">
-        <div className="section-shell text-center">
-          <p className="caption-luxe text-accent">{eyebrow}</p>
-          <h1 className="mt-4 font-display text-3xl font-semibold text-foreground md:text-5xl">
-            {h1}
-          </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-left text-muted-foreground md:text-center">
-            {intro}
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Button asChild variant="outline">
-              <Link to="/boutique" search={{}}>Voir toute la boutique</Link>
-            </Button>
-            {ctaLabel && ctaHref && (
-              <Button asChild className="bg-accent text-primary-foreground hover:bg-accent/90">
-                <Link to={ctaHref}>{ctaLabel}</Link>
-              </Button>
-            )}
+        {heroImage ? (
+          <div className="section-shell grid gap-10 md:grid-cols-[55fr_45fr] md:items-center md:gap-12">
+            <div className="fade-up text-center md:text-left">
+              <p className="caption-luxe text-accent">{eyebrow}</p>
+              <h1 className="mt-4 font-display text-3xl font-semibold text-foreground md:text-5xl">
+                {h1}
+              </h1>
+              <p className="mx-auto mt-5 max-w-3xl text-muted-foreground md:mx-0">{intro}</p>
+              <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
+                <Button asChild variant="outline">
+                  <Link to="/boutique" search={{}}>Voir toute la boutique</Link>
+                </Button>
+                {ctaLabel && ctaHref && (
+                  <Button asChild className="bg-accent text-primary-foreground hover:bg-accent/90">
+                    <Link to={ctaHref}>{ctaLabel}</Link>
+                  </Button>
+                )}
+              </div>
+            </div>
+            <div className="fade-up mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-xl border border-border bg-card shadow-card md:max-w-none">
+              <img
+                src={heroImage}
+                alt={heroImageAlt ?? h1}
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="section-shell text-center">
+            <p className="caption-luxe text-accent">{eyebrow}</p>
+            <h1 className="mt-4 font-display text-3xl font-semibold text-foreground md:text-5xl">
+              {h1}
+            </h1>
+            <p className="mx-auto mt-5 max-w-3xl text-left text-muted-foreground md:text-center">
+              {intro}
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Button asChild variant="outline">
+                <Link to="/boutique" search={{}}>Voir toute la boutique</Link>
+              </Button>
+              {ctaLabel && ctaHref && (
+                <Button asChild className="bg-accent text-primary-foreground hover:bg-accent/90">
+                  <Link to={ctaHref}>{ctaLabel}</Link>
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="bg-background py-8 md:py-12">
@@ -148,6 +191,8 @@ export function CollectionPage({ collection, h1, eyebrow, intro, ctaLabel, ctaHr
           )}
         </div>
       </section>
+
+      {children}
     </SiteLayout>
   );
 }
