@@ -411,7 +411,7 @@ const haqqiProducts: { name: string; ref: string; family: string; notes: string 
   { name: "Imagination", ref: "Inspiration Louis Vuitton Imagination", family: "Homme", notes: "Frais · Lumineux · Moderne" },
   { name: "Terre d'Hermès", ref: "Inspiration Hermès Terre d'Hermès", family: "Homme", notes: "Boisé minéral · Sec · Raffiné" },
   { name: "CK Euphoria", ref: "Inspiration Calvin Klein Euphoria", family: "Homme", notes: "Rond · Propre · Facile" },
-  { name: "Krouss", ref: "Inspiration Krouss", family: "Homme", notes: "Direct · Expressif · Sans détour" },
+  { name: "Kouros", ref: "Inspiration YSL Kouros", family: "Homme", notes: "Direct · Expressif · Sans détour" },
   { name: "Burberry Classic", ref: "Inspiration Burberry Classic", family: "Homme", notes: "Classique · Doux · Élégant" },
   { name: "Pegasus", ref: "Inspiration Parfums de Marly Pegasus", family: "Homme", notes: "Crémeux · Élégant · Distinctif" },
   { name: "Creed Aventus", ref: "Inspiration Creed Aventus", family: "Homme", notes: "Frais · Noble · Signature" },

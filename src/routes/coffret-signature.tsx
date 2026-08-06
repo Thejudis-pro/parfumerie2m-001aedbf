@@ -64,7 +64,7 @@ const haqqiSections: CoffretSection[] = [
       { id: "haqqi-homme-imagination", title: "Imagination", description: "Frais lumineux, net et moderne." },
       { id: "haqqi-homme-terre-d-hermes", title: "Terre d Hermès", description: "Boisé minéral, sec et très raffiné." },
       { id: "haqqi-homme-ck-euphoria", title: "Ck Euphoria", description: "Plus rond, propre et facile à aimer." },
-      { id: "haqqi-homme-krouss", title: "Krouss", description: "Un choix direct, expressif et sans détour." },
+      { id: "haqqi-homme-kouros", title: "Kouros", description: "Un choix direct, expressif et sans détour." },
       { id: "haqqi-homme-burberry-classic", title: "Burberry classic", description: "Classique, doux et élégant." },
       { id: "haqqi-homme-pegasus", title: "Pegasus", description: "Crémeux, élégant et très distinctif." },
       { id: "haqqi-homme-creed-aventus", title: "Creed Aventus", description: "Frais, noble et très signature." },
