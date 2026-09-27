@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import takeoffPoster from "@/assets/poster takeoff.jpeg";
-import takeoffMoscow from "@/assets/takeoff-moscow-xerjoff-la-capitale.png.asset.json";
+import takeoffMoscow from "@/assets/takeoff-moscow.png";
 import { CollectionPage } from "@/components/commerce/CollectionPage";
 import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import { Button } from "@/components/ui/button";
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/collections/takeoff")({
       eyebrow="Collection Takeoff — Scent of Journey"
       h1="Takeoff — Scent of Journey, la collection voyage de 2M Parfumerie"
       intro="Takeoff est la collection signature de 2M Parfumerie : 18 parfums inspirés des grandes villes du monde — Los Angeles, Amsterdam, Dubai, Paris, Rome, Istanbul et bien d'autres. Chaque flacon (Eau de Parfum, 100 ml) est vendu à 40 000 FCFA l'unité — les 2 à 75 000 FCFA — et livré partout au dakar. Commandez sur WhatsApp et recevez votre Takeoff le jour même."
-      heroImage={takeoffMoscow.url}
+      heroImage={takeoffMoscow}
       heroImageAlt="Parfum Takeoff Moscow, inspiré de Xerjoff La Capitale"
     >
       <section className="border-t border-border bg-surface-alt py-14 md:py-20">
