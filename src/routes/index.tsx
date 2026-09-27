@@ -83,18 +83,34 @@ const featuredPackCards = [
   { title: "Parfums de poches", subtitle: "5 parfums", imageBase: "pocket-perfumes-homme" },
 ] as const;
 
-function pickFeaturedProducts(products: BoutiqueProduct[]) {
-  const featuredCollections: BoutiqueProduct["collection"][] = ["takeoff", "scentlab", "dubai"];
-  const featuredProducts = featuredCollections
-    .map((collection) => products.find((product) => product.collection === collection))
-    .filter((product): product is BoutiqueProduct => Boolean(product));
-  const yslYIntenseProduct = products.find(
-    (product) =>
-      product.collection === "authentic" &&
-      product.name.toLowerCase().includes("yves saint laurent y"),
-  );
+function currentWeekNumber(date = new Date()) {
+  const utcDate = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+  const day = utcDate.getUTCDay() || 7;
+  utcDate.setUTCDate(utcDate.getUTCDate() + 4 - day);
+  const yearStart = new Date(Date.UTC(utcDate.getUTCFullYear(), 0, 1));
+  return Math.ceil(((utcDate.getTime() - yearStart.getTime()) / 86_400_000 + 1) / 7);
+}
 
-  return yslYIntenseProduct ? [...featuredProducts, yslYIntenseProduct] : featuredProducts;
+function pickFeaturedProducts(products: BoutiqueProduct[], weekNumber = currentWeekNumber()) {
+  const featuredCollections: BoutiqueProduct["collection"][] = [
+    "takeoff",
+    "scentlab",
+    "dubai",
+    "authentic",
+  ];
+
+  return featuredCollections
+    .map((collection, collectionIndex) => {
+      const collectionProducts = products
+        .filter((product) => product.collection === collection)
+        .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+      if (collectionProducts.length === 0) return undefined;
+
+      const weeklyIndex = (weekNumber + collectionIndex * 7) % collectionProducts.length;
+      return collectionProducts[weeklyIndex];
+    })
+    .filter((product): product is BoutiqueProduct => Boolean(product));
 }
 
 const fallbackFeaturedProducts = pickFeaturedProducts(catalog);
