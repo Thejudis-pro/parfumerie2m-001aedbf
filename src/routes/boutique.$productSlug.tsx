@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import {
   catalog,
   collectionLabel,
@@ -13,6 +14,7 @@ import {
   optimizedProductImageSet,
   optimizedProductImageUrl,
   productImages,
+  productOrderUrl,
   slugifyProduct,
   type BoutiqueProduct,
 } from "@/lib/catalog-data";
@@ -230,7 +232,7 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
               ✓ En stock — Livraison partout au Sénégal
             </p>
 
-            <div className="mt-8">
+            <div className="mt-8 space-y-2">
               <AddToCartButton
                 item={{
                   id: slugifyProduct(product),
@@ -240,6 +242,11 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
                   imageUrl: optimizedProductImageUrl(product.image, 1200),
                 }}
               />
+              <Button asChild variant="whatsapp" className="min-h-11 w-full rounded-full">
+                <a href={productOrderUrl(product)} target="_blank" rel="noopener noreferrer">
+                  <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
+                </a>
+              </Button>
             </div>
             <a
               href="tel:+221761923441"
@@ -299,7 +306,7 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
           <h2 className="mb-12 text-center font-display text-[32px] text-foreground md:text-5xl">
             Vous aimerez aussi
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
             {similar.map((item) => (
               <SimilarCard key={slugifyProduct(item)} product={item} />
             ))}
@@ -358,7 +365,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
         <p className="mt-4 font-body text-xl font-semibold text-accent">
           {formatPrice(product.price)}
         </p>
-        <div className="mt-4">
+        <div className="mt-4 space-y-2">
           <AddToCartButton
             item={{
               id: slugifyProduct(product),
@@ -368,6 +375,11 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
               imageUrl: optimizedProductImageUrl(product.image, 800),
             }}
           />
+          <Button asChild variant="whatsapp" className="min-h-11 w-full rounded-full">
+            <a href={productOrderUrl(product)} target="_blank" rel="noopener noreferrer">
+              <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
+            </a>
+          </Button>
         </div>
       </div>
     </article>

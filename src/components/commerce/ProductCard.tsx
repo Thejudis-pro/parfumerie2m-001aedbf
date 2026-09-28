@@ -1,6 +1,8 @@
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
+import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
+import { Button } from "@/components/ui/button";
 import { optimizedProductImageSet, optimizedProductImageUrl } from "@/lib/catalog-data";
-import { productPriceValue, type Product } from "@/lib/perfume-data";
+import { productPriceValue, productWhatsappUrl, type Product } from "@/lib/perfume-data";
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
   return (
@@ -50,15 +52,30 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         <div className="flex items-center justify-between gap-3">
           <p className="font-body text-2xl font-bold text-accent">{product.price}</p>
         </div>
-        <AddToCartButton
-          item={{
-            id: product.id,
-            name: product.name,
-            collection: product.edition,
-            price: productPriceValue(product.price),
-            imageUrl: optimizedProductImageUrl(product.image, 800),
-          }}
-        />
+        <div className="space-y-2">
+          <AddToCartButton
+            item={{
+              id: product.id,
+              name: product.name,
+              collection: product.edition,
+              price: productPriceValue(product.price),
+              imageUrl: optimizedProductImageUrl(product.image, 800),
+            }}
+          />
+          <Button
+            asChild
+            variant="whatsapp"
+            className="min-h-11 w-full rounded-full"
+          >
+            <a
+              href={productWhatsappUrl(product)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
+            </a>
+          </Button>
+        </div>
       </div>
     </article>
   );

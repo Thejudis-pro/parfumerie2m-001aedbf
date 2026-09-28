@@ -12,6 +12,7 @@ import {
   catalog,
   collectionLabel,
   formatPrice,
+  productOrderUrl,
   slugifyProduct,
   type BoutiqueProduct,
 } from "@/lib/catalog-data";
@@ -78,9 +79,14 @@ const heroMessage =
 const finalMessage = "Bonjour 2M Parfumerie 👋 Je cherche un parfum. Pouvez-vous m'aider ?";
 
 const featuredPackCards = [
-  { title: "Pack Haqqi", subtitle: "3 parfums", imageBase: "haqqi-collection" },
-  { title: "Pack SCENTLAB", subtitle: "3 parfums", imageBase: "scentlab-boxes" },
-  { title: "Parfums de poches", subtitle: "5 parfums", imageBase: "pocket-perfumes-homme" },
+  { title: "Pack Haqqi", subtitle: "3 parfums", price: "10 000 FCFA", imageBase: "haqqi-collection" },
+  { title: "Pack SCENTLAB", subtitle: "3 parfums", price: "15 000 FCFA", imageBase: "scentlab-boxes" },
+  {
+    title: "Parfums de poches",
+    subtitle: "5 parfums",
+    price: "10 000 FCFA",
+    imageBase: "pocket-perfumes-homme",
+  },
 ] as const;
 
 function currentWeekNumber(date = new Date()) {
@@ -177,33 +183,17 @@ function Index() {
 
   return (
     <SiteLayout>
-      <section className="relative overflow-hidden bg-background pt-24 md:min-h-screen md:pt-32">
+      <section className="relative overflow-hidden bg-background pt-4 md:min-h-screen md:pt-32">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,oklch(0.36_0.096_160/0.08),transparent_36%),radial-gradient(circle_at_bottom_left,oklch(0.87_0.045_160/0.05),transparent_40%)]" />
         <div className="grid items-center relative z-10 md:min-h-[calc(100vh-96px)] md:grid-cols-[55fr_45fr]">
-          <div className="section-shell z-10 order-1 py-8 md:w-auto md:py-10 md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
+          <div className="section-shell z-10 order-1 py-4 md:w-auto md:py-10 md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
             <div className="max-w-2xl">
-              <p className="caption-luxe mb-6 text-accent fade-up">
-                Sénégal · Parfumerie Authentique
-              </p>
               <h1
                 className="fade-up font-display text-4xl font-semibold leading-[1.1] text-foreground md:text-7xl"
                 style={{ animationDelay: "120ms" }}
               >
                 Parfums authentiques de luxe au Sénégal — Livraison Dakar
               </h1>
-              <p
-                className="fade-up mt-4 max-w-lg font-display text-xl text-foreground md:text-2xl"
-                style={{ animationDelay: "180ms" }}
-              >
-                Votre signature olfactive, livrée au Sénégal.
-              </p>
-              <p
-                className="fade-up mt-6 max-w-lg text-base text-muted-foreground md:text-lg"
-                style={{ animationDelay: "240ms" }}
-              >
-                Le parfum n'est pas un luxe — c'est votre identité. +100 collections authentiques,
-                disponibles maintenant.
-              </p>
               <div
                 className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
                 style={{ animationDelay: "360ms" }}
@@ -257,7 +247,7 @@ function Index() {
             title="Nos parfums du moment"
             subtitle="Quelques de nos best sellers, choisis pour vous !"
           />
-          <div className="mx-auto grid max-w-6xl gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 text-left sm:gap-6 lg:grid-cols-4">
             {featuredProducts.map((product, index) => (
               <article
                 key={product.name}
@@ -287,15 +277,22 @@ function Index() {
                   <p className="mb-4 font-body text-xl font-semibold text-accent">
                     {formatPrice(product.price)}
                   </p>
-                  <AddToCartButton
-                    item={{
-                      id: slugifyProduct(product),
-                      name: product.name,
-                      collection: collectionLabel(product.collection),
-                      price: product.price,
-                      imageUrl: product.image,
-                    }}
-                  />
+                  <div className="space-y-2">
+                    <AddToCartButton
+                      item={{
+                        id: slugifyProduct(product),
+                        name: product.name,
+                        collection: collectionLabel(product.collection),
+                        price: product.price,
+                        imageUrl: product.image,
+                      }}
+                    />
+                    <Button asChild variant="whatsapp" className="min-h-11 w-full rounded-full">
+                      <a href={productOrderUrl(product)} target="_blank" rel="noopener noreferrer">
+                        <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </article>
             ))}
@@ -360,6 +357,7 @@ function Index() {
                       {pack.title}
                     </h3>
                     <p className="mt-2 text-sm text-muted-foreground">{pack.subtitle}</p>
+                    <p className="mt-1 font-body text-lg font-semibold text-accent">{pack.price}</p>
                   </div>
                   <div className="mt-auto">
                     <Button

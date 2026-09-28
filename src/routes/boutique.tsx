@@ -228,7 +228,7 @@ function BoutiquePage() {
               </Link>
             )}
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
             {visibleProducts.map((product, index) => (
               <CatalogCard
                 key={`${product.collection}-${product.name}-${index}`}
