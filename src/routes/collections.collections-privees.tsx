@@ -1,0 +1,46 @@
+import { createFileRoute } from "@tanstack/react-router";
+
+import { CollectionPage } from "@/components/commerce/CollectionPage";
+
+const URL = "https://www.2mparfumeriedk.com/collections/collections-privees";
+const TITLE = "Collections privées dakar | Parfums exclusifs — 2M Parfumerie";
+const DESC =
+  "Découvrez les Collections privées de 2M Parfumerie : une sélection exclusive de parfums rares, livrée partout au dakar. Commandez sur WhatsApp.";
+
+export const Route = createFileRoute("/collections/collections-privees")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:url", content: URL },
+      { property: "og:type", content: "website" },
+      { property: "og:locale", content: "fr_FR" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Accueil", item: "https://www.2mparfumeriedk.com/" },
+            { "@type": "ListItem", position: 2, name: "Collections", item: "https://www.2mparfumeriedk.com/boutique" },
+            { "@type": "ListItem", position: 3, name: "Collections privées", item: URL },
+          ],
+        }),
+      },
+    ],
+  }),
+  component: () => (
+    <CollectionPage
+      collection="privees"
+      eyebrow="Collections privées"
+      h1="Collections privées — Une sélection exclusive de parfums"
+      intro="Les Collections privées de 2M Parfumerie rassemblent une sélection exclusive de parfums, réservée à nos clients les plus exigeants. Livraison partout au dakar, avec confirmation directe avec le gérant."
+    />
+  ),
+});

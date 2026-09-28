@@ -43,6 +43,9 @@ export const collectionValues = [
   "pocket",
   "authentic",
   "haqqi",
+  "privees",
+  "coffrets",
+  "library",
 ] as const;
 export const priceValues = ["all", "under-10000", "10000-25000", "over-25000"] as const;
 
@@ -77,6 +80,9 @@ export const collectionFilters: { label: string; value: Collection }[] = [
   { label: "Parfums de poches", value: "pocket" },
   { label: "Parfums authentiques", value: "authentic" },
   { label: "Haqqi", value: "haqqi" },
+  { label: "Collections privées", value: "privees" },
+  { label: "Coffrets", value: "coffrets" },
+  { label: "Fragrance library", value: "library" },
 ];
 
 const collectionAliases: Record<string, Collection> = {
@@ -94,6 +100,15 @@ const collectionAliases: Record<string, Collection> = {
   "authentic perfumes": "authentic",
   haqqi: "haqqi",
   haqqui: "haqqi",
+  privees: "privees",
+  "collections privees": "privees",
+  "collections privées": "privees",
+  "collection privee": "privees",
+  "private collection": "privees",
+  coffrets: "coffrets",
+  coffret: "coffrets",
+  library: "library",
+  "fragrance library": "library",
 };
 
 export function normalizeCollectionValue(value: string | null | undefined): Collection {

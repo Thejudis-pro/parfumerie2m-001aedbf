@@ -34,6 +34,9 @@ const mixedCollectionOrder: Collection[] = [
   "pocket",
   "authentic",
   "haqqi",
+  "privees",
+  "coffrets",
+  "library",
 ];
 
 function mixProductsByCollection(products: BoutiqueProduct[]) {

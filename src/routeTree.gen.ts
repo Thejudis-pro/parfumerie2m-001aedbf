@@ -24,6 +24,9 @@ import { Route as CollectionsTakeoffRouteImport } from './routes/collections.tak
 import { Route as CollectionsScentlabRouteImport } from './routes/collections.scentlab'
 import { Route as CollectionsParfumsDePochesRouteImport } from './routes/collections.parfums-de-poches'
 import { Route as CollectionsHaqqiRouteImport } from './routes/collections.haqqi'
+import { Route as CollectionsFragranceLibraryRouteImport } from './routes/collections.fragrance-library'
+import { Route as CollectionsCollectionsPriveesRouteImport } from './routes/collections.collections-privees'
+import { Route as CollectionsCoffretsRouteImport } from './routes/collections.coffrets'
 import { Route as BoutiqueProductSlugRouteImport } from './routes/boutique.$productSlug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
@@ -103,6 +106,23 @@ const CollectionsHaqqiRoute = CollectionsHaqqiRouteImport.update({
   path: '/collections/haqqi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollectionsFragranceLibraryRoute =
+  CollectionsFragranceLibraryRouteImport.update({
+    id: '/collections/fragrance-library',
+    path: '/collections/fragrance-library',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CollectionsCollectionsPriveesRoute =
+  CollectionsCollectionsPriveesRouteImport.update({
+    id: '/collections/collections-privees',
+    path: '/collections/collections-privees',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CollectionsCoffretsRoute = CollectionsCoffretsRouteImport.update({
+  id: '/collections/coffrets',
+  path: '/collections/coffrets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BoutiqueProductSlugRoute = BoutiqueProductSlugRouteImport.update({
   id: '/$productSlug',
   path: '/$productSlug',
@@ -128,6 +148,9 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/coffrets': typeof CollectionsCoffretsRoute
+  '/collections/collections-privees': typeof CollectionsCollectionsPriveesRoute
+  '/collections/fragrance-library': typeof CollectionsFragranceLibraryRoute
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
@@ -147,6 +170,9 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/coffrets': typeof CollectionsCoffretsRoute
+  '/collections/collections-privees': typeof CollectionsCollectionsPriveesRoute
+  '/collections/fragrance-library': typeof CollectionsFragranceLibraryRoute
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
@@ -167,6 +193,9 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/boutique/$productSlug': typeof BoutiqueProductSlugRoute
+  '/collections/coffrets': typeof CollectionsCoffretsRoute
+  '/collections/collections-privees': typeof CollectionsCollectionsPriveesRoute
+  '/collections/fragrance-library': typeof CollectionsFragranceLibraryRoute
   '/collections/haqqi': typeof CollectionsHaqqiRoute
   '/collections/parfums-de-poches': typeof CollectionsParfumsDePochesRoute
   '/collections/scentlab': typeof CollectionsScentlabRoute
@@ -188,6 +217,9 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/blog/$slug'
     | '/boutique/$productSlug'
+    | '/collections/coffrets'
+    | '/collections/collections-privees'
+    | '/collections/fragrance-library'
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
     | '/collections/scentlab'
@@ -207,6 +239,9 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/blog/$slug'
     | '/boutique/$productSlug'
+    | '/collections/coffrets'
+    | '/collections/collections-privees'
+    | '/collections/fragrance-library'
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
     | '/collections/scentlab'
@@ -226,6 +261,9 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/blog/$slug'
     | '/boutique/$productSlug'
+    | '/collections/coffrets'
+    | '/collections/collections-privees'
+    | '/collections/fragrance-library'
     | '/collections/haqqi'
     | '/collections/parfums-de-poches'
     | '/collections/scentlab'
@@ -244,6 +282,9 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   LivraisonRoute: typeof LivraisonRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
+  CollectionsCoffretsRoute: typeof CollectionsCoffretsRoute
+  CollectionsCollectionsPriveesRoute: typeof CollectionsCollectionsPriveesRoute
+  CollectionsFragranceLibraryRoute: typeof CollectionsFragranceLibraryRoute
   CollectionsHaqqiRoute: typeof CollectionsHaqqiRoute
   CollectionsParfumsDePochesRoute: typeof CollectionsParfumsDePochesRoute
   CollectionsScentlabRoute: typeof CollectionsScentlabRoute
@@ -357,6 +398,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsHaqqiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collections/fragrance-library': {
+      id: '/collections/fragrance-library'
+      path: '/collections/fragrance-library'
+      fullPath: '/collections/fragrance-library'
+      preLoaderRoute: typeof CollectionsFragranceLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/collections-privees': {
+      id: '/collections/collections-privees'
+      path: '/collections/collections-privees'
+      fullPath: '/collections/collections-privees'
+      preLoaderRoute: typeof CollectionsCollectionsPriveesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/coffrets': {
+      id: '/collections/coffrets'
+      path: '/collections/coffrets'
+      fullPath: '/collections/coffrets'
+      preLoaderRoute: typeof CollectionsCoffretsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/boutique/$productSlug': {
       id: '/boutique/$productSlug'
       path: '/$productSlug'
@@ -408,6 +470,9 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   LivraisonRoute: LivraisonRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
+  CollectionsCoffretsRoute: CollectionsCoffretsRoute,
+  CollectionsCollectionsPriveesRoute: CollectionsCollectionsPriveesRoute,
+  CollectionsFragranceLibraryRoute: CollectionsFragranceLibraryRoute,
   CollectionsHaqqiRoute: CollectionsHaqqiRoute,
   CollectionsParfumsDePochesRoute: CollectionsParfumsDePochesRoute,
   CollectionsScentlabRoute: CollectionsScentlabRoute,

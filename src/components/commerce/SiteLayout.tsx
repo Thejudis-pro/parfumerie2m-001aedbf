@@ -35,6 +35,22 @@ const footerCollections = [
   { label: "Parfums de poches", collection: "pocket" },
   { label: "Parfums authentiques", collection: "authentic" },
   { label: "Haqqi", collection: "haqqi" },
+  { label: "Collections privées", collection: "privees" },
+  { label: "Coffrets", collection: "coffrets" },
+  { label: "Fragrance library", collection: "library" },
+] as const;
+
+const boutiqueCategories = [
+  { label: "All scents", to: "/boutique" as const },
+  { label: "Collections privées", to: "/collections/collections-privees" as const },
+  { label: "Coffrets", to: "/collections/coffrets" as const },
+  { label: "Fragrance library", to: "/collections/fragrance-library" as const },
+  { label: "SCENTLAB", to: "/collections/scentlab" as const },
+  { label: "TAKEOFF FRAGANCE", to: "/collections/takeoff" as const },
+  { label: "Dubai Perfumes", to: "/boutique" as const, collection: "dubai" },
+  { label: "Parfums de poches", to: "/boutique" as const, collection: "pocket" },
+  { label: "Parfums authentiques", to: "/boutique" as const, collection: "authentic" },
+  { label: "Haqqi", to: "/collections/haqqi" as const },
 ] as const;
 
 const facebookUrl = "https://www.facebook.com/profile.php?id=61551806734713";
@@ -72,18 +88,45 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             2M Parfumerie
           </Link>
           <div className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                activeOptions={{ exact: item.to === "/" }}
-                className="group nav-luxe relative min-h-11 content-center text-muted-foreground hover:text-accent transition-colors"
-                activeProps={{ className: "text-accent" }}
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 h-1 w-0 bg-accent rounded-full transition-all duration-300 group-hover:w-full group-data-[status=active]:w-full" />
-              </Link>
-            ))}
+            {navItems.map((item) =>
+              item.to === "/boutique" ? (
+                <div key={item.to} className="group/boutique relative">
+                  <Link
+                    to={item.to}
+                    className="group nav-luxe relative min-h-11 content-center text-muted-foreground hover:text-accent transition-colors"
+                    activeProps={{ className: "text-accent" }}
+                  >
+                    {item.label}
+                    <span className="absolute -bottom-1 left-0 h-1 w-0 bg-accent rounded-full transition-all duration-300 group-hover:w-full group-data-[status=active]:w-full" />
+                  </Link>
+                  <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover/boutique:visible group-hover/boutique:opacity-100">
+                    <div className="grid gap-1 rounded-lg border border-border bg-card p-3 shadow-elegant">
+                      {boutiqueCategories.map((category) => (
+                        <Link
+                          key={category.label}
+                          to={category.to}
+                          search={"collection" in category ? { collection: category.collection } : {}}
+                          className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-surface-alt hover:text-accent"
+                        >
+                          {category.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  activeOptions={{ exact: item.to === "/" }}
+                  className="group nav-luxe relative min-h-11 content-center text-muted-foreground hover:text-accent transition-colors"
+                  activeProps={{ className: "text-accent" }}
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 h-1 w-0 bg-accent rounded-full transition-all duration-300 group-hover:w-full group-data-[status=active]:w-full" />
+                </Link>
+              ),
+            )}
           </div>
           <button
             type="button"
