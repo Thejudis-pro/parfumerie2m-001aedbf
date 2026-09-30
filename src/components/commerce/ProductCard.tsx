@@ -65,7 +65,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           <Button
             asChild
             variant="whatsapp"
-            className="min-h-11 w-full rounded-full"
+            className="h-auto min-h-11 w-full whitespace-normal px-3 py-2.5 text-center text-[11px] leading-tight sm:px-5 sm:py-3 sm:text-sm"
           >
             <a
               href={productWhatsappUrl(product)}
