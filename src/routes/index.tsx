@@ -272,17 +272,21 @@ function Index() {
                   <img
                     src={product.image}
                     alt={`${product.name} TAKEOFF Fragrance chez 2M Parfumerie`}
-                    className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105 sm:p-5"
                     loading="lazy"
                   />
                 </Link>
-                <div className="p-5">
-                  <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
+                <div className="p-3 sm:p-5">
+                  <p className="mb-1 hidden text-[11px] uppercase tracking-[0.1em] text-muted-foreground sm:block">
                     {product.ref}
                   </p>
-                  <h3 className="mb-1 font-display text-[22px] text-foreground">{product.name}</h3>
-                  <p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p>
-                  <p className="mb-4 font-body text-xl font-semibold text-accent">
+                  <h3 className="mb-1 line-clamp-2 font-display text-sm text-foreground sm:text-[22px]">
+                    {product.name}
+                  </h3>
+                  <p className="mb-2 hidden text-xs italic text-muted-foreground sm:mb-4 sm:block">
+                    {product.notes}
+                  </p>
+                  <p className="mb-2 font-body text-base font-semibold text-accent sm:mb-4 sm:text-xl">
                     {formatPrice(product.price)}
                   </p>
                   <div className="space-y-2">

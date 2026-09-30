@@ -348,14 +348,14 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
           <img
             src={product.image}
             alt={`${product.name} chez 2M Parfumerie`}
-            className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105 sm:p-5"
             loading="lazy"
           />
         </Link>
       </div>
-      <div className="p-5">
+      <div className="p-3 sm:p-5">
         {product.collection !== "dubai" && product.collection !== "authentic" && product.ref && (
-          <p className="mb-1 text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
+          <p className="mb-1 hidden text-[11px] uppercase tracking-[0.1em] text-muted-foreground sm:block">
             {product.ref}
           </p>
         )}
@@ -363,12 +363,14 @@ function CatalogCard({ product, index }: { product: BoutiqueProduct; index: numb
           to="/boutique/$productSlug"
           params={{ productSlug: slugifyProduct(product) }}
           search={{}}
-          className="mb-1 block font-display text-[22px] text-foreground hover:text-accent"
+          className="mb-1 block line-clamp-2 font-display text-sm text-foreground hover:text-accent sm:text-[22px]"
         >
           {product.name}
         </Link>
-        <p className="mb-4 text-xs italic text-muted-foreground">{product.notes}</p>
-        <p className="mb-4 font-body text-xl font-semibold text-accent">
+        <p className="mb-2 hidden text-xs italic text-muted-foreground sm:mb-4 sm:block">
+          {product.notes}
+        </p>
+        <p className="mb-2 font-body text-base font-semibold text-accent sm:mb-4 sm:text-xl">
           {formatPrice(product.price)}
         </p>
         <AddToCartButton

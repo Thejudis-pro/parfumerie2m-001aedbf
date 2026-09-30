@@ -140,7 +140,7 @@ export function CollectionPage({
                           <img
                             src={fallback}
                             alt={`${product.name} — ${label} chez 2M Parfumerie`}
-                            className="h-full w-full object-contain p-5 transition-transform duration-500 group-hover:scale-105"
+                            className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105 sm:p-5"
                             loading="lazy"
                             width={800}
                             height={800}
@@ -151,17 +151,17 @@ export function CollectionPage({
                     })()}
                   </Link>
                 </div>
-                <div className="p-5">
+                <div className="p-3 sm:p-5">
                   <Link
                     to="/boutique/$productSlug"
                     params={{ productSlug: slugifyProduct(product) }}
                     search={{}}
-                    className="mb-1 block font-display text-xl text-foreground hover:text-accent"
+                    className="mb-1 block line-clamp-2 font-display text-sm text-foreground hover:text-accent sm:text-xl"
                   >
                     {product.name}
                   </Link>
-                  <p className="mb-3 text-xs italic text-muted-foreground">{product.notes}</p>
-                  <p className="mb-4 font-body text-lg font-semibold text-accent">
+                  <p className="mb-2 hidden text-xs italic text-muted-foreground sm:mb-3 sm:block">{product.notes}</p>
+                  <p className="mb-2 font-body text-base font-semibold text-accent sm:mb-4 sm:text-lg">
                     {formatPrice(product.price)}
                   </p>
                   <AddToCartButton
