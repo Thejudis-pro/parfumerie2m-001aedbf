@@ -140,10 +140,14 @@
   html {
     scroll-behavior: smooth;
     background-color: var(--color-background);
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   body {
     min-width: 320px;
+    max-width: 100%;
+    overflow-x: hidden;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
