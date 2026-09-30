@@ -377,7 +377,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
           />
           <Button asChild variant="whatsapp" className="min-h-11 w-full rounded-full">
             <a href={productOrderUrl(product)} target="_blank" rel="noopener noreferrer">
-              <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
+              <WhatsAppLogo tone="light" className="size-4" /> Commandez ici
             </a>
           </Button>
         </div>

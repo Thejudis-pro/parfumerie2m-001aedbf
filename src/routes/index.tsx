@@ -109,6 +109,8 @@ function pickFeaturedProducts(products: BoutiqueProduct[], weekNumber = currentW
     .map((collection, collectionIndex) => {
       const collectionProducts = products
         .filter((product) => product.collection === collection)
+        // Temporaire: image Vanilla Dream cassée côté base, à retirer une fois corrigée
+        .filter((product) => product.name !== "Vanilla Dream")
         .sort((a, b) => a.name.localeCompare(b.name, "fr"));
 
       if (collectionProducts.length === 0) return undefined;
@@ -183,17 +185,23 @@ function Index() {
 
   return (
     <SiteLayout>
-      <section className="relative overflow-hidden bg-background pt-4 md:min-h-screen md:pt-32">
+      <section className="relative overflow-hidden bg-background pt-4 md:h-screen md:min-h-[560px] md:pt-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,oklch(0.36_0.096_160/0.08),transparent_36%),radial-gradient(circle_at_bottom_left,oklch(0.87_0.045_160/0.05),transparent_40%)]" />
-        <div className="grid items-center relative z-10 md:min-h-[calc(100vh-96px)] md:grid-cols-[55fr_45fr]">
-          <div className="section-shell z-10 order-1 py-4 md:w-auto md:py-10 md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
+        <div className="grid items-center relative z-10 md:h-full md:grid-cols-[55fr_45fr]">
+          <div className="section-shell z-10 order-1 py-4 md:w-auto md:py-6 md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
             <div className="max-w-2xl">
               <h1
-                className="fade-up font-display text-4xl font-semibold leading-[1.1] text-foreground md:text-7xl"
+                className="fade-up font-display text-4xl font-semibold leading-[1.1] text-foreground md:text-5xl lg:text-6xl"
                 style={{ animationDelay: "120ms" }}
               >
-                Parfums authentiques de luxe au Sénégal — Livraison Dakar
+                Parfums authentiques à Dakar | 2M Parfumerie
               </h1>
+              <p
+                className="fade-up mt-4 text-lg text-muted-foreground md:text-xl"
+                style={{ animationDelay: "240ms" }}
+              >
+                Livraison partout au Sénégal
+              </p>
               <div
                 className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
                 style={{ animationDelay: "360ms" }}
@@ -223,7 +231,7 @@ function Index() {
               </div>
             </div>
           </div>
-            <div className="relative order-2 h-[38vh] min-h-[260px] overflow-hidden bg-surface-alt md:h-full md:min-h-[calc(100vh-144px)]">
+            <div className="relative order-2 h-[38vh] min-h-[260px] overflow-hidden bg-surface-alt md:h-full md:min-h-0">
               <video
                 src="/videos/authentic.mp4"
                 autoPlay
@@ -289,7 +297,7 @@ function Index() {
                     />
                     <Button asChild variant="whatsapp" className="min-h-11 w-full rounded-full">
                       <a href={productOrderUrl(product)} target="_blank" rel="noopener noreferrer">
-                        <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
+                        <WhatsAppLogo tone="light" className="size-4" /> Commandez ici
                       </a>
                     </Button>
                   </div>

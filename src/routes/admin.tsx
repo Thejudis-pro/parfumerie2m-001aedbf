@@ -517,8 +517,22 @@ function ProductsPanel({
         </Button>
       </div>
 
-      {showProductForm && (
-        <div className="mb-6">
+      <Dialog
+        open={showProductForm}
+        onOpenChange={(open) => {
+          if (!open) {
+            setShowProductForm(false);
+            setEditingProductId(null);
+          }
+        }}
+      >
+        <DialogContent className="max-h-[90vh] w-[calc(100%-2rem)] max-w-2xl overflow-y-auto border-0 bg-transparent p-0 shadow-none sm:rounded-lg">
+          <DialogTitle className="sr-only">
+            {editingProductId ? "Modifier produit" : "Ajouter produit"}
+          </DialogTitle>
+          <DialogDescription className="sr-only">
+            Formulaire de {editingProductId ? "modification" : "création"} de produit
+          </DialogDescription>
           <ProductForm
             form={productForm}
             setForm={setProductForm}
@@ -526,8 +540,8 @@ function ProductsPanel({
             editing={Boolean(editingProductId)}
             saving={saving}
           />
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
 
       <div className="mb-5 grid gap-3 lg:grid-cols-[1fr_240px]">
         <label className="relative block">

@@ -19,7 +19,6 @@ import { cn } from "@/lib/utils";
 import { displayPhone, email, instagram, secondPhone, whatsappUrl } from "@/lib/perfume-data";
 
 const navItems = [
-  { label: "Accueil", to: "/" },
   { label: "Boutique", to: "/boutique" },
   { label: "Takeoff", to: "/collections/takeoff" },
   { label: "Compose ton pack", to: "/coffret-signature" },

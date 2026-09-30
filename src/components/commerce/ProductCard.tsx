@@ -72,7 +72,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               target="_blank"
               rel="noopener noreferrer"
             >
-              <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
+              <WhatsAppLogo tone="light" className="size-4" /> Commandez ici
             </a>
           </Button>
         </div>
