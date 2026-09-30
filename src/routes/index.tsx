@@ -185,7 +185,7 @@ function Index() {
 
   return (
     <SiteLayout>
-      <section className="relative overflow-hidden bg-background pt-4 md:h-screen md:min-h-[560px] md:pt-24">
+      <section className="relative overflow-hidden bg-background pt-20 md:h-screen md:min-h-[560px] md:pt-24">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,oklch(0.36_0.096_160/0.08),transparent_36%),radial-gradient(circle_at_bottom_left,oklch(0.87_0.045_160/0.05),transparent_40%)]" />
         <div className="grid items-center relative z-10 md:h-full md:grid-cols-[55fr_45fr]">
           <div className="section-shell z-10 order-1 py-4 md:w-auto md:py-6 md:pl-[max(2rem,calc((100vw-1180px)/2))] md:pr-10">
