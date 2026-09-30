@@ -317,7 +317,7 @@ function SiteFooter() {
         <p>
           Fait avec ♥ au dakar · Site by{" "}
           <a
-            href="https://nextwave.sn"
+            href="https://www.nextwavesn.com"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-accent hover:underline"
