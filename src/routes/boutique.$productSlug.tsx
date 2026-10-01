@@ -242,13 +242,9 @@ function ProductTemplate({ product, products }: { product: BoutiqueProduct; prod
                   imageUrl: optimizedProductImageUrl(product.image, 1200),
                 }}
               />
-              <Button
-                asChild
-                variant="whatsapp"
-                className="h-auto min-h-11 w-full whitespace-normal px-3 py-2.5 text-center text-[11px] leading-tight sm:px-5 sm:py-3 sm:text-sm"
-              >
+              <Button asChild variant="whatsapp" size="lg" className="w-full">
                 <a href={productOrderUrl(product)} target="_blank" rel="noopener noreferrer">
-                  <WhatsAppLogo tone="light" className="size-4" /> WhatsApp
+                  <WhatsAppLogo tone="light" className="size-5" /> Commander sur WhatsApp
                 </a>
               </Button>
             </div>
@@ -369,7 +365,7 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
         <p className="mt-2 font-body text-base font-semibold text-accent sm:mt-4 sm:text-xl">
           {formatPrice(product.price)}
         </p>
-        <div className="mt-4 space-y-2">
+        <div className="mt-4">
           <AddToCartButton
             item={{
               id: slugifyProduct(product),
@@ -379,15 +375,6 @@ function SimilarCard({ product }: { product: BoutiqueProduct }) {
               imageUrl: optimizedProductImageUrl(product.image, 800),
             }}
           />
-          <Button
-            asChild
-            variant="whatsapp"
-            className="h-auto min-h-11 w-full whitespace-normal px-3 py-2.5 text-center text-[11px] leading-tight sm:px-5 sm:py-3 sm:text-sm"
-          >
-            <a href={productOrderUrl(product)} target="_blank" rel="noopener noreferrer">
-              <WhatsAppLogo tone="light" className="size-4" /> Commandez ici
-            </a>
-          </Button>
         </div>
       </div>
     </article>

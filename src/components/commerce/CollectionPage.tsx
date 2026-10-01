@@ -4,13 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AddToCartButton } from "@/components/commerce/AddToCartButton";
 import { SiteLayout } from "@/components/commerce/SiteLayout";
-import { WhatsAppLogo } from "@/components/commerce/WhatsAppLogo";
 import {
   collectionLabel,
   formatPrice,
   optimizedProductImageSet,
   optimizedProductImageUrl,
-  productOrderUrl,
   slugifyProduct,
   type BoutiqueProduct,
   type Collection,
@@ -165,26 +163,15 @@ export function CollectionPage({
                   <p className="mb-2 font-body text-base font-semibold text-accent sm:mb-4 sm:text-lg">
                     {formatPrice(product.price)}
                   </p>
-                  <div className="space-y-2">
-                    <AddToCartButton
-                      item={{
-                        id: slugifyProduct(product),
-                        name: product.name,
-                        collection: label,
-                        price: product.price,
-                        imageUrl: optimizedProductImageUrl(product.image, 800),
-                      }}
-                    />
-                    <Button
-                      asChild
-                      variant="whatsapp"
-                      className="h-auto min-h-11 w-full whitespace-normal px-3 py-2.5 text-center text-[11px] leading-tight sm:px-5 sm:py-3 sm:text-sm"
-                    >
-                      <a href={productOrderUrl(product)} target="_blank" rel="noopener noreferrer">
-                        <WhatsAppLogo tone="light" className="size-4" /> Commandez ici
-                      </a>
-                    </Button>
-                  </div>
+                  <AddToCartButton
+                    item={{
+                      id: slugifyProduct(product),
+                      name: product.name,
+                      collection: label,
+                      price: product.price,
+                      imageUrl: optimizedProductImageUrl(product.image, 800),
+                    }}
+                  />
                 </div>
               </article>
             ))}
