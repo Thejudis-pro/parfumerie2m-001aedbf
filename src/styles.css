@@ -141,7 +141,6 @@
     scroll-behavior: smooth;
     background-color: var(--color-background);
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   body {

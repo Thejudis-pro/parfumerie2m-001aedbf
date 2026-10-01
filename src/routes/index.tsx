@@ -283,9 +283,6 @@ function Index() {
                   <h3 className="mb-1 line-clamp-2 font-display text-sm text-foreground sm:text-[22px]">
                     {product.name}
                   </h3>
-                  <p className="mb-2 hidden text-xs italic text-muted-foreground sm:mb-4 sm:block">
-                    {product.notes}
-                  </p>
                   <p className="mb-2 font-body text-base font-semibold text-accent sm:mb-4 sm:text-xl">
                     {formatPrice(product.price)}
                   </p>
